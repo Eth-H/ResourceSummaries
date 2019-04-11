@@ -1,0 +1,269 @@
+
+How to Install CUDA on Ubuntu 18.04
+Updated May 23, 2018LINUX HOWTO
+
+CUDA aims at enabling a dramatic increase in computing performance by harnessing the power of the graphics processing unit (GPU) on your system. In this article, I'll show you how to Install CUDA on Ubuntu 18.04. CUDA is a parallel programming model and computing platform developed by NVIDIA.
+
+You can install CUDA on Ubuntu 18.04 using one of the following methods:
+
+    From distribution-independent package (runfile packages)
+    From distribution-specific packages (RPM and Deb packages)
+
+CUDA Pre-installation Checks
+
+Below are a number of checks that you need to perform before installing CUDA Toolkit and Driver on your Ubuntu system.
+Verify the system has CUDA-capable GPU
+
+You need to verify that your GPU can work with CUDA, run the following command to check:
+
+$ lspci | grep -i nvidia
+01:00.0 3D controller: NVIDIA Corporation GM206M [GeForce GTX 965M] (rev a1)
+
+If you just installed a driver card, you may need to manually update PCI database for above command to return valid output.
+
+# update-pciids
+
+Verify the system has gcc installed
+
+For development using the CUDA, you need to make sure gcc is installed. You can check if it's installed using the command:
+
+$ gcc --version
+
+If not installed, install it with apt-get as below:
+
+$ sudo apt install gcc-6 g++-6
+
+Verify the system has the correct kernel headers and development packages installed.
+
+The CUDA Driver requires that the kernel headers and development packages for the running version of the kernel be installed at the time of the driver installation, as well whenever the driver is rebuilt. You can install kernel headers and development tools using:
+
+$ sudo apt-get install linux-headers-$(uname -r)
+
+Install NVIDIA Driver
+
+CUDA needs Nvidia driver installed on your machine. Install it on Ubuntu 18.04 using the command:
+
+$ sudo apt install nvidia-384
+
+Once this has been installed, you can proceed to install Nvidia CUDA toolkit.
+Download the NVIDIA CUDA Toolkit
+
+Depending on your installation method of choice, you need to download equivalent package.  I prefer installing CUDA from a runfile on Ubuntu 18.04 since it is hard to encounter dependency issues.
+
+As of this writing, the latest release of CUDA is v9.2. Since the package size is above 1GB, I'll use wget command to download it so that I can resume easily if the connection gets broken. The CUDA Toolkit contains the CUDA driver and tools needed to create, build and run a CUDA application as well as libraries, header files, CUDA samples source code, and other resources.
+
+$ cd Dowloads
+$ wget -c https://developer.nvidia.com/compute/cuda/9.2/Prod/local_installers/cuda_9.2.88_396.26_linux
+
+Once the package has been downloaded locally, make it executable and install it.
+
+# chmod +x cuda_9.2.88_396.26_linux.run
+# ./cuda_9.2.88_396.26_linux.run --verbose --silent --toolkit --override
+
+You should get output similar to below on complete installation.
+
+===========
+= Summary =
+===========
+
+Toolkit: Installed in /usr/local/cuda-9.2
+Samples: Not Selected
+
+Please make sure that
+ - PATH includes /usr/local/cuda-9.2/bin
+ - LD_LIBRARY_PATH includes /usr/local/cuda-9.2/lib64, or, add /usr/local/cuda-9.2/lib64 to /etc/ld.so.conf and run ldconfig as root
+
+Modify your .bashrc file to include Cuda bin in its path:
+
+export PATH="$PATH:/usr/local/cuda-9.2/bin"
+
+Ensure CUDA library path is present.
+
+# echo "/usr/local/cuda-9.2/lib64" >> /etc/ld.so.conf
+# ldconfig
+
+Check https://developer.nvidia.com/cuda-downloads for available patches and download the .run file then install it.
+
+# wget https://developer.nvidia.com/compute/cuda/9.2/Prod/patches/1/cuda_9.2.88.1_linux
+# chmod +x cuda_9.2.88.1_linux.run
+# ./cuda_9.2.88.1_linux.run --silent --accept-eula
+
+Welcome to the CUDA Patcher.
+Installation complete!
+Installation directory: /usr/local/cuda-9.2
+
+Create symlinks to GCC6 in the CUDA bin folder:
+
+# ln -s /usr/bin/gcc-6 /usr/local/cuda-9.2/bin/gcc
+# ln -s /usr/bin/g++-6 /usr/local/cuda-9.2/bin/g++
+
+Read also :
+
+    How to Install Nvidia Drivers on Ubuntu 18.04
+
+You should now have CUDA toolkit ready. Start creating your projects and enjoy it.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+https://gist.github.com/alexlee-gk/76a409f62a53883971a18a11af93241b
+
+ Use integrated graphics for display and NVIDIA GPU for CUDA on Ubuntu 14.04
+configure_cuda_p70.md
+
+This was tested on a ThinkPad P70 laptop with an Intel integrated graphics and an NVIDIA GPU:
+
+lspci | egrep 'VGA|3D'
+00:02.0 VGA compatible controller: Intel Corporation Device 191b (rev 06)
+01:00.0 VGA compatible controller: NVIDIA Corporation GM204GLM [Quadro M3000M] (rev a1)
+
+A reason to use the integrated graphics for display is if installing the NVIDIA drivers causes the display to stop working properly. In my case, Ubuntu would get stuck in a login loop after installing the NVIDIA drivers. This happened regardless if I installed the drivers from the "Additional Drivers" tab in "System Settings" or the ppa:graphics-drivers/ppa in the command-line.
+
+The solution is described in the answer from this post.
+Install the NVIDIA drivers
+
+Download the driver installation runfile from their website (e.g. the 375.26 driver runfile). Run the script with the option --no-opengl-files:
+
+sudo ./NVIDIA-Linux-x86_64-375.26.run --no-opengl-files
+
+Reboot.
+Install CUDA
+
+Download the CUDA installation runfile from their website. It's important to download the "runfile (local)" file so that we can explicitly prevent from overwriting the driver that was just installed. Run the script:
+
+sudo ./cuda_8.0.44_linux.run 
+
+Respond "no" when asked "Install NVIDIA accelerated Graphics Driver for Linux-x86_65 375.26?".
+Configure xorg.conf
+
+Modify or create the file /etx/X11/xorg.conf to specify that the NVIDIA GPU should be used for a secondary screen so that it has entries in nvidia-settings. Mine looks like this:
+
+Section "ServerLayout"
+    Identifier "layout"
+    Screen 0 "intel"
+    Screen 1 "nvidia"
+EndSection
+
+Section "Device"
+    Identifier "intel"
+    Driver "intel"
+    BusID "PCI:0@0:2:0"
+    Option "AccelMethod" "SNA"
+EndSection
+
+Section "Screen"
+    Identifier "intel"
+    Device "intel"
+EndSection
+
+Section "Device"
+    Identifier "nvidia"
+    Driver "nvidia"
+    BusID "PCI:1@0:0:0"
+    Option "ConstrainCursor" "off"
+EndSection
+
+Section "Screen"
+    Identifier "nvidia"
+    Device "nvidia"
+    Option "AllowEmptyInitialConfiguration" "on"
+    Option "IgnoreDisplayDevices" "CRT"
+EndSection
+
+The BusID should match what the lspci command above returned.
+
+Reboot.
+Miscellaneous tips
+
+If installing the NVIDIA drivers messes up the OS (e.g. it gets stuck in a login loop or it shows a black screen before the login step), you can uninstall the drivers by openning a console with Ctrl-Alt-F1 and running:
+
+sudo apt-get remove --purge nvidia-*
+sudo apt-get autoremove
+echo "nouveau" | sudo tee -a /etc/modules
+
+Reboot.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+https://gist.github.com/lucasbrynte/9b2966460832522eb6c35b44ae768667
+
+ Manjaro multi-GPU setup intel integrated GPU + external nVidia GPUs
+20-multi-gpu-setup.conf
+# /etc/X11/xorg.conf.d/20-multi-gpu-setup.conf
+# Inspired by: https://gist.github.com/alexlee-gk/76a409f62a53883971a18a11af93241b
+
+Section "ServerLayout"
+    Identifier "layout"
+    Screen 0 "intel"
+    Screen 1 "nvidia1"
+    Screen 2 "nvidia2"
+EndSection
+
+Section "Device"
+    Identifier "intel"
+    Driver "intel"
+    BusID "PCI:0:2:0"
+EndSection
+
+Section "Screen"
+    Identifier "intel"
+    Device "intel"
+EndSection
+
+Section "Device"
+    Identifier "nvidia1"
+    Driver "nvidia"
+    BusID "PCI:1:0:0"
+EndSection
+
+Section "Screen"
+    Identifier "nvidia1"
+    Device "nvidia1"
+EndSection
+
+Section "Device"
+    Identifier "nvidia2"
+    Driver "nvidia"
+    BusID "PCI:2:0:0"
+EndSection
+
+Section "Screen"
+    Identifier "nvidia2"
+    Device "nvidia2"
+EndSection
+
+
+
+
+
+
+
+

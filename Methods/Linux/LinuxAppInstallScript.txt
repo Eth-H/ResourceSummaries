@@ -1,0 +1,15 @@
+sudo apt install steghide
+sudo apt install notepadqq
+sudo apt install clementine
+
+
+//Timeshift (if not installed by default)
+sudo apt-add-repository -y ppa:teejee2008/ppa
+sudo apt-get update
+sudo apt-get install timeshift
+
+//youtube-dl
+	sudo curl -L https://yt-dl.org/downloads/latest/youtube-dl -o /usr/local/bin/youtube-dl
+	sudo chmod a+rx /usr/local/bin/youtube-dl
+	//or
+	sudo -H pip install --upgrade youtube-dl

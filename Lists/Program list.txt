@@ -1,0 +1,63 @@
+Anti-virus>
+	adwcleaner
+	malwarebytes
+	
+Browsers>
+	brave
+	chrome
+	Firefox
+Communication>
+	Skype
+	Discord
+Compression>
+	7zFM
+	Infran view
+Media management>
+	Audacity
+	4k Video Downloader
+	Media Monkey
+	Windows Media Player
+	Spotify
+Miscellaneous>
+	dr.fone
+	WinX MediaTrans
+Technical>
+	Console Emulator>
+		Cmder
+	Console toolskits>
+		youtube-dl
+		Build files>
+			make
+			cmake
+		Windows package manager>
+			Chocolatey
+		
+	technolgies>
+		node.js
+		git
+		python
+		Qt-tools
+	IDEs>
+		IDLE
+		IntelliJ
+		PyCharm
+		NetBeans 8.2
+		Notepad++
+		Visual Studio 2017
+		Visual studio code
+		
+	DataBases>		
+		SQ Browser for SQLite
+		dbeaver
+		ESF DataBase migration toolkit
+		pgAdmin4
+		
+	Engines>
+		Epic Games Launcher (Unreal 4)
+		Oracle VM VirtualBox
+		Unity 2017.2.0f (64 bit)
+		
+Word Processign and notes>
+	Microsoft package
+	Notepad++
+	

@@ -1,0 +1,39 @@
+"//" Comments
+"" instructions
+"->" Process
+"<Ix>" Index "x"
+"{Ix}" Reference to index "x"
+
+//Heroku commands
+    //Core heroku
+        //Heroku workflow
+            //Create git local repo -> Login to heroku -> create heroku-app -> add assets -> deploy app (push to heroku git)
+
+    <I1>//Login to heroku
+        heroku login
+        //enter email and password
+
+    <I2>//Create app and heroku git remote repositary (associated with the local one)
+        heroku create weather-app-em-2018
+
+    <I3>//Add assets
+        heroku addons:create heroku-postgresql:hobby-dev --name=weather-db
+
+    <I4>//Deploy the app
+        //add all needed files to the local repo and commit them
+        //Then push to heroku-git-remote-repositary
+            git push heroku master
+        //Make sure one instance of the app is running
+            heroku ps:scale web=1
+        //Visit generated url
+            heroku open
+
+    <I>//Test locally
+        heroku local
+    <I>//Remove connected heroku-git-remote-repositary from local and remote origin repo's
+       git remote rm -a git remote rm https://git.heroku.com/guarded-fjord-34473.git
+    <I>//Check remote repo's
+       git remote -v
+    <I>//Change the connected heroku-git-remote-repositary
+       heroku git:remote -a weather-app-em-2018
+
