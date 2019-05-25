@@ -1,0 +1,58 @@
+() used to escape normal text
+
+cat CSE.txt | grep "[targetHeading/term]" -a30
+
+
+
+Registers>
+cat CSE.txt | grep "Registers>" -a30
+Email Spoofing, SPF and DKIM>
+cat CSE.txt | grep "Email Spoofing, SPF and DKIM>" -a13
+Open Systems Interconnection (OSI) Model>	
+cat CSE.txt | grep "Open Systems Interconnection (OSI) Model>" -a60
+Private IP Ranges>
+cat CSE.txt | grep "Private IP Ranges>" -a15
+TCP (Transmission Control Protocol)>
+cat CSE.txt | grep "TCP (Transmission Control Protocol)>" -a50
+DNS records>
+cat CSE.txt | grep "DNS records" -a10
+DNS server (Domain Name System)>
+cat CSE.txt | grep "DNS server (Domain Name System)" -a30
+Directory structure> & Significant files
+cat CSE.txt | grep "Directory structure>" -a40
+
+
+Hives
+Authentication>
+Access Control List 
+File permissions>
+Data Types>
+//String specifiers
+
+Critical security controls>
+Stages of an atk>
+metagoofil
+Robots>
+cewl
+DNS Recon>
+dnsmap
+Binary application flaws>
+(//Buffer overflow)
+Potential mitigations>
+Social engineering>	
+
+Exploiting SUID (Set user ID) and SGID (Set Group ID)>
+Target services>	
+Registry>
+Incident Response process>
+File System Forensics>
+Volatility>	
+
+
+
+Reconnaissance>	
+Exploitation> 
+Privilege Escalation>  
+Persistence> 	 
+Lateral Movement>	
+Exfiltration>

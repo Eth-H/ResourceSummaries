@@ -31,7 +31,7 @@
 					git init
 		
 		<I2>//Connect repositary to a remote one (only need to do once during setup)
-			git remote add origin https://github.com/Ethan1745/weather_app
+			git remote add origin https://github.com/Eth-H/NotepadTK
 			//Check if the connection exists
 			    git remote -v
 
@@ -108,3 +108,25 @@
 
 		//See old version:
 			-git show "file"
+			
+		//Head is checked out problem
+			//Create new branch and re-attach HEAD to it
+			git checkout -b temp
+			
+			//Check differences between branches before continuing
+				git log --graph --decorate --pretty=oneline --abbrev-commit master origin/master temp
+				git diff master temp
+				git diff origin/master temp
+			
+			//Update master branch to point to the new branch
+				git branch -f master temp
+				git checkout master
+			//Push it
+				git push origin master
+				
+				
+				
+		
+		
+		
+		

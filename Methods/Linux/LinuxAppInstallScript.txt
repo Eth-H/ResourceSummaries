@@ -1,12 +1,30 @@
 sudo apt install steghide
-sudo apt install notepadqq
-sudo apt install clementine
+sudo apt install Notepadqq
+sudo apt install shutter
+sudo apt install volatility
+sudo apt install firejail
+sudo apt install rkhunter
+sudo apt install gparted
+sudo apt install audacity
+sudo apt install sqlitebrowser
+
+//Python installs
+sudo apt install python3-pip
+sudo apt install python3-tk
+sudo apt-get install python-qt4 qt4-designer
+sudo apt install qt5-default qttools5-dev-tools qttools5-dev pyqt5-dev-tools
 
 
 //Timeshift (if not installed by default)
 sudo apt-add-repository -y ppa:teejee2008/ppa
 sudo apt-get update
 sudo apt-get install timeshift
+
+//Proton vpn (most packages already installed)
+sudo apt-get install openvpn
+sudo apt-get install dialog
+sudo wget -O protonvpn-cli.sh https://raw.githubusercontent.com/ProtonVPN/protonvpn-cli/master/protonvpn-cli.sh
+
 
 //youtube-dl
 	sudo curl -L https://yt-dl.org/downloads/latest/youtube-dl -o /usr/local/bin/youtube-dl

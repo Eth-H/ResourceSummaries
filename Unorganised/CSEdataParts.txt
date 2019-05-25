@@ -1,0 +1,201 @@
+Motherboard sizes>
+			E-ATX: Largest size (extended ATX); ATX: standard size; 
+			micro-ATX: Smaller than ATX; mini-ITX: Even smaller still.
+			
+General purpose registers>			
+	GPR that can be split into parts>
+		32-bit Intel CPU (x86): EAX, EBX, ECX, EDX
+			'AX' register: lower 16 bits of the full 32-bit EAX register.
+					'AL' register: lower 8 bits of the 'AX' register.
+					'AH' register: higher 8 bits of the 'AX' register.
+						EG	8 bits 	8 bits 	8 bits 	8 bits
+							EBX 	EBX 	EBX 	EBX
+											BX 		BX
+											BH 		BL
+		GPR that cant be split>
+								ESP, EBP, ESI, EDI
+								They can be addressed as SP, BP, SI, and DI to access the lower 16 bits, but you cannot split them further.
+		ESP (Stack Pointer Register) It contains a memory address, which points to the top of the current stack frame in RAM 
+		EBP is the Base Pointer. It contains a memory address, which points to the bottom of the current stack frame in RAM 
+		ESI (Source Index) is typically used to hold a memory address of data when that data is being used as a source in an operation (EG memory address of data to be copied )
+		EDI (Destination Index) is typically used to hold a destination memory address. (EG memory address of data to be copied over)
+
+		The CU 'fetches' the next instruction from RAM -> CU 'decodes' the instruction and retrieves the necessary data from memory to place into the ALU ->
+					 ALU 'executes' the instruction, and operates on the data provided in the previous step -> ALU stores ersult in memoery register or RAM (so 4 steps overall)
+					
+		Types of RAM:: DDR4 (double data rate fourth generation): New; DDR3 RAM: 2007 intro; 
+		Speed measured in MHz, EG DDR3-2133 RAM is DDR3 RAM with a maximum speed of 2133 MHz.
+		
+hard drive>
+	Size: 3.5 inch in desktop, 2.5 inch in laptops, maz capacity refers to Gb size
+		
+	FAT32>
+		Introduced with Windows 95. Uses a File Allocation Table to map each cluster. Doesnt support files > 4GB, doesnt store metadata (so doesnt suppport permissions and security features), suits USB
+		FAT 32 vs FAT
+		FAT 32 Works on drives up to 2TB nad has more efficient storage										
+	exFAT> 
+		file system designed for removable media (USB),  introduced in 2006,  file size limit is massive
+	ntfs>
+		Used by modern windows, advanced file system with many features (permissions, encryption support, shadow copies (backups)), can partly heal from data corruption, not cross-platform, proprietary
+		Master File Table (MFT) entries still contain info on deleted files, 
+		Index enteries use $FILE_NAME attribute to store info in an index 
+		EG full file name, creation and modification time, access time, MFT change time, file size and its parent directory
+						
+	EXT3 and EXT4>
+		Linux, introduced in 2001 (doesnt support shadow copy), EXT3 max file size is 2TB. Changes tracked in a journal, which can be used for data recovery
+		EXT4 2008, nmassive max file size, can optionally turn off journal and has a faster disk check processor
+		EXT2 is the most popular
+					
+	Apple proprietary file systems>
+		HFS+ & APFS: HFS+ (Hierarchical File System Plus) orignally used for MAC, similar to EXT4
+		APFS (Apple File System):  first used in Mac OS High Sierra, it is thought that duplicate files can be stored without using additional space, with changes to one copy of a file being saved as a delta  
+						
+		USB A/B/C, micro A/B, mini A/B
+			USB 1 - Transfer Speed: 1.5 Mbit/s
+			USB 2 - Transfer Speed: 480 Mbit/s
+			USB 3 - Transfer Speed: 4 Gbit/s (You can usually tell if a port is USB 3 compatible because the port will be coloured blue)
+			USB 3.1 - Transfer Speed: 10 Gbit/s (You can usually tell if a port is USB 3.1 compatible because the port will be coloured turquoise)
+		PS/2 older USB 
+		HID: Human interface device			
+			
+		VGA:  A/V video output, there are two slots into which thumb screws on the connector connect
+		DVI: Newer VGA
+		HDMI: Transmit video and audio
+		Standard A, dual-link B. mici C, micro D, automotive connection system 
+		Display port: Very modern HDMI
+		USB-C can output for some modern monitors
+		
+		Power Connectors: Four pin peripheral (fans), SATA (Hard drives), ATX (20-24 pins fro the motherboard), 12V (4 pins to motherboard), PCI-E (Graphics card, 6-8 pins)
+		 
+		  Bits>
+		1 byte is 8 bits.
+		1 kilobyte (kB) is 1000 bytes.
+		1 megabyte (MB) is 1000 kilobytes.
+		1 gigabyte (GB) is 1000 megabytes.
+		1 terabyte (TB) is 1000 gigabytes.
+		 4 bits (half a byte) is called a nibble...
+		 
+		1 byte is 8 bits.
+		1 kibibyte (KiB) is 1024 bytes.
+		1 mebibyte (MiB) is 1024 kebibytes.
+		1 gibibyte (GiB) is 1024 mebibytes.
+		1 tebibyte (TiB) is 1024 gebibytes.
+		
+		Subnet mask tells us how big the network and host identifiers are,
+		The more computers you want to connect to the larger the host identifier needs to be (255.0.0.0 ->  2^24  ,255.255.0.0. -> 26^16, )
+		 Classless Inter-Domain Routing (CIDR)>
+					shorthand way of writing a subnet mask.
+					 192.168.0.0, 255.0.0.0 -> 192.168.0.0/8. /x bits are used for the network identifier.
+		Private IP Ranges>
+			In IPv4, by common agreement, there are certain IP addresses which are private and should never be routed to the internet
+			    for 10.0.0.0/8 IP addresses: 10.0.0.0 -- 10.255.255.255
+				for 172.16.0.0/12 IP addresses: 172.16.0.0 -- 172.31.255.255
+				for 192.168.0.0/16 IP addresses: 192.168.0.0 - 192.168.255.255
+				127.0.0.1 always points back to the computer you are sending data from (localhost/loopback)
+			IPv6 does not need NAT and therefore doesn't need reserved addresses in the same way that IPv4 does
+				::1 is the IPv6 localhost 	
+				Ipv6 cause a problem to subnets: some subnets could have more potential addresses in them than the whole of the IPv4 address range,
+				 while on IPv4 you could scan the entire address range of your subnet looking for a device, that isn't practical on IPv6.
+		
+		typically you will see a maximum packet size of about 1500 bytes - 65535 bytes (64 KiB)
+		
+		TCP Handshake>
+				Summary (the first seq is random): CA -> CB: 63410 > 1337 [SYN] Seq=0 Len=0; CB -> CA: 1337 > 63410 [SYN, ACK] Seq=0 Ack=1 Len=0; CA -> CB: 63410 > 1337 [ACK] Seq=1 Ack=1 Len=0 
+				By monitoring the sequence and acknowledgement numbers, either side can tell if any data is missing and can ask for it to be re-transmitted.
+			TCP Transmission>
+				Once the connection is set up, data can be sent
+				EG Source 		Destination 	Prot 	Info
+				   Computer A 	Computer B 		TCP 	63410 > 1337 [PSH, ACK] Seq=1 Ack=1 Len=12 [Data = Hello World]
+				   Computer B 	Computer A 		TCP 	1337 > 63410 [ACK] Seq=1 Ack=13 Len=0
+				The data sent adds up to 12 characters (Including space and \n character)
+				Ack number is set to the number of bytes sent + 1, If CB doesnt send back an Ack of 13 then the packet needs to be retransmitted (During handshake and teardown we just increment Ack)
+			TCP Teardown>
+				The computer that wants to destroy the connection sends a 'fin' packet (finish) with the current sequence number.
+				Computer B responds with an 'ack' packet, contains a seq number and an ack number which is CA's seq number +1.
+				Computer B will send a 'fin/ack' packet. Contains seq number and an ack number which is CA's seq number +1 (still 14 because Computer A's sequence number didn't change).
+				Computer A responds with an 'ack' packet. Contains a ack number which is CB's seq number +1.
+					EG
+					CA -> CB: 63410 > 1337 [FIN, ACK] Seq=13 Ack=1 Len=0
+					CB -> CA: 1337 > 63410 [ACK] Seq=1 Ack=14 Len=0
+					CB -> CA: 1337 > 63410 [FIN, ACK] Seq=1 Ack=14 Len=0
+					CA -> CB: 63410 > 1337 [ACK] Seq=14 Ack=2 Len=0
+				
+				Reset: If the connection cannot be torn down gracefully, one part of the connection can terminate abruptly by sending an 'rst' (reset) packet
+				
+				
+			request types>
+						GET: Accessing a website and so asking to retrieve a file fro mthe server.
+						HEAD: Asks to receive the resposne header of a resource
+						POST: Send data without expecting data to be sent back
+						PUT: A PUT request is used to ask the web server to store the data sent in the request at the path requested. EG PUT 'h​ttps://some-fake-domain.fake/about.html' would store the data as about.html (if it exists it is overwritten)
+						DELETE: A DELETE request deletes a specified resource
+						
+						response>
+						HTTP response consists of two parts: the response header (metadata) and the response body (data retrieved)
+						Meta data examples: response length, date, name of the server, type of web server being used
+				
+			Open Systems Interconnection (OSI) Model>	
+				Layer 7: Application -> L6: Presentation -> L5: Session
+				L4: Transport -> L3: Network -> L2: Data Link -> L1: Physical
+		
+			People can perform email forging by changing the FROM address, as you only need to athenticate to the STMP server once
+				
+				
+				Authoritative name servers>
+			A name server that is authoritative for a domain is one that controls the mapping between the domain name and the 
+			IP address. EG domainName.com and we want IP 192.168.0.6, we go to the name server which is authoritative for that domain (the one .com directs us too)
+			and we edit the config to add the mapping domainName.com -> 192.168.0.6, any other name servers now needs to query our ANS because it has the final say on where the domain points 			
+				
+				
+				Forward and reverse lookups>
+			Forward lookup involves translating a domain name into an IP address.
+			A reverse lookup translates IP -> domain, though there is no authoritative name server for IP addresses
+			Convert IP address to a domain name: EG 192.168.0.1 -> 1.0.168.192.in-addr.arpa
+			By performing a DNS query on this domain, we can look up any domains which are linked to that IP address (these need to be configured for reverse DNS by adding a particular DNS pointer record to the authoritative name server.
+			
+		Recursive & Iterative Lookups>
+			DNS is a hierarchical protocol, which means you almost never get the answer you are looking for on the first query.
+			With a recursive lookup: Ask the DNS server a question and if the DNS server doesn't know, it will ask another DNS server and so on until it has the answer and then it passes on the answer to you (outdated, uncommon method) 
+			Iterative lookup>
+				If DNS server doesn't know the answer, it will respond with the IP address of a DNS server that does know, then you ask the next DNS server, it will answer or send you to the next DNS to ask 
+				This gives the host most of the work reducing the pressure on DNS servers.
+		
+		dock: saves frequently used applications, and running applications 
+		start menu: by clicking it we can bring up a Windows-like start menu, which lists all applications. Searchable
+		Systemn tray: shut down, reboot, update or access other settings such as volume, Bluetooth, notifications and network settings.
+		Terminal occupies first position on the dock by default			
+		
+		bin: The bin folder is typically used to store executable files (binary files), usually system files
+		boot: holds the files that Linux uses during the boot up process.
+		cdrom: The cdrom tray will usually be mapped to this folder, so if you have a cdrom plugged in you can access it's files.
+		dev: The dev folder will contain a folder and associated files for every hardware component on the system. EG /dev/cpu	
+		etc: The etc folder will usually contain configuration files for installed programs
+		home: The home folder contains the user directories for every user on the system (that a user can log into), except root
+		lib: The lib folder contains shared libraries and kernel modules. 
+		lost+found: If your hard drive has errors and files get lost the 'orphaned' files may get placed here.
+		media: The folders here can be used for mounting USB keys and floppy disks (load them)
+		mnt: The folders here can also be used for mounting external drives, USB keys and floppy disks. 
+		opt: Generally empty optional file, any user installed programs can go here
+		proc (process): Every running program will have an entry in the proc folder along with associated files.
+		root: The root folder is the home folder for the root user.
+		run: The run folder is a temporary file system which stores runtime information for programs that start early during the boot up process.
+		sbin: store binary executables (similar to /bin), normally they relate to administrative purposes.
+		srv: The srv folder usually holds data used by services running on the system, EG web server
+		sys: The sys folder contains information about devices on the system (as seen by the Linux kernel). 
+		tmp: temporary files that will be deleted periodically and after reboot.
+		usr: user-controlled files. It has its own folder structure, which maps to the root folder structure.
+		var: The var folder contains system files which tend to increase in size over time (hence it's a variable size folder), EG log files and mail directory
+		
+		
+		vim
+		// :q quit with saved changes, :q! quit while you have unsaved changes, :wq or :x save and quit, 
+		
+		
+		
+		Windows Registry> 
+				{check registry heading in windows section}
+				Subkeys can be used for analysis
+					Startup item lists (MRU lists) and runtimes can be found and used to find info on malicious applications
+						{Check persistence -> start-up items -> windows -> registry}
+					Obtain NTLM PW hashes
+						HKLM -> SAM and SYSTEM keys

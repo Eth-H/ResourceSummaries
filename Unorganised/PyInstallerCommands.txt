@@ -1,0 +1,33 @@
+
+PYinstaller commands:
+pyinstaller is the main command to build a bundled application. See Using PyInstaller.
+pyi-makespec is used to create a spec file. See Using Spec Files.
+pyi-archive_viewer is used to inspect a bundled application. See Inspecting Archives.
+pyi-bindepend is used to display dependencies of an executable. See Inspecting Executables.
+pyi-grab_version is used to extract a version resource from a Windows executable. See Capturing Windows Version Data.
+pyinstaller myscript.py Turn to executeable [First use cd to move command prompt to target file location]
+
+C:\Users\emera\AppData\Local\Programs\Python\Python36-32\Lib\site-packages\PyInstaller
+
+cd C:\Users\emera\Desktop\IT\Codeing\Python\PyInstaller
+
+C:\Users\emera\Desktop\IT\Codeing\Python\Jo_s_Pampered_Paws
+
+
+pyinstaller --workpath C:\Users\emera\Desktop\IT\Codeing\Python\Jo_s_Pampered_Paws\Complied-Code 
+--specpath C:\Users\emera\Desktop\IT\Codeing\Python\Jo_s_Pampered_Paws\Complied-Code 
+-n JJP 
+C:\Users\emera\Desktop\IT\Codeing\Python\Jo_s_Pampered_Paws
+
+
+
+pyinstaller --workpath C:\Users\emera\Desktop\IT\Codeing\Python\PyInstaller\JJP_Build\SpecPath_WorkPath ^ 
+--specpath C:\Users\emera\Desktop\IT\Codeing\Python\PyInstaller\JJP_Build\SpecPath_WorkPath ^ 
+-n JJP ^
+C:\Users\emera\Desktop\IT\Codeing\Python\Jo_s_Pampered_Paws
+
+
+--log-level=DEBUG
+
+//Causes unicode eror
+--icon= C:\Users\emera\Desktop\IT\Codeing\Python\Jo_s_Pampered_Paws\Pink_Dog_Face1.jpg ^

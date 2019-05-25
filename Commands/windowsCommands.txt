@@ -1,0 +1,127 @@
+<Windows command line>
+	Directories and files>
+		//Change drive 
+			D:	or	cd /D C:\Windows
+		//Get directory details, /A: show hidden files
+			dir {}
+		//Display contents of a file one page at a time
+			dir "c:\Windows" | more
+		
+		Edit directories and files>
+			//Make directory
+				mkdir {[pathname]}
+			//Copy
+				//Copy just files
+					copy [fileSourcePath] [directoryDestinationPath]
+				//Copy multiple files EG
+					copy *.txt [folderDestinationPath]
+				//Copy anything, /s: Copy entire directory tree, /e: Copy empty directories 
+					robocopy [folderSourceParh] [directoryDestinationPath] {}
+				//Get help
+					robocopy /?
+			//Move anything
+				move [sourceParh] [directoryDestinationPath]
+			//Delete files
+				del [filePath]
+				del *.txt
+			//Delete directories, command will fail if directory is not empty /S: override empty condition
+				rmdir [directoryPath] {}
+			//Rename stuff
+				ren [pathOne] [pathTwo]	
+		
+		Search files>
+			//Search files for text strings, hide error msgs
+				find C:\Users\User\* "hello" 2>nul		
+			//Get file path (linux which command), /R: Display a directory
+				where [fileName] {}
+	
+	Network>
+			//Get info
+				ipconfig
+			//Setting IP 
+				netsh interface ip set address [connection name] static [IP] [subnet] [gateway]
+			//Access files stored on a network
+				//List commands
+					net {[commandName]} /?
+				//Mount a network drive
+					net use x: \\DESKTOP-3VSCDO9\Share
+				//Remove mounted drive
+					net use x: /delete
+				//See network connections
+					netstat
+					//See open ports
+					netstat -a -b -o
+			
+			
+		User management>
+			//View current users
+				net user
+			//Add user, enter * inplace of PW to enter it in the next work
+				net user /add [username] [password]
+				net user /delete [username]
+			//View groups
+				net localgroup
+			//Check current user group memebership
+				net user [username]
+			//Add a user to a group
+				net localgroup [groupName] /add [userName]
+				
+<PowerShell>
+	/*
+		.NET framework with command line shell and scripting language
+		PowerShell Cmdlets: Powershell local lightweight command that does something and returns the result as a .NET object,
+		 use this with more cmdlets or by writing to a file/screen, no exe file relates to the cmdlets so they cant be accessed outside the PS
+		 Execution Policy restricts PS scripts that are allowed to run	
+		 cmdlets have a 'verb-noun' naming system
+	*/
+		 PowerShell Integrated Scripting Environment (ISE)>
+			Write/run/test PS scripts
+			Has tab completion and search commands,
+		//Get help
+			[command] -?
+		//Find commands	
+			Get-Command -Noun Computer
+			Get-Command -Verb Stop
+		//Format output to a table
+		Generate-Table
+		
+		//Global object, contains default search path for powershell modules.
+		env:psmodulepath
+		
+		Aliases>
+			//Generally ommands have longer names than Bash and CMD alternatives, though powershell comes with several aliases set up for common cmdlets
+			//Default aliases
+				//ls, dir
+					Get-ChildItem 
+				//cat (Get contents of a file)
+					Get-Content
+				//cd
+					Set-Location {targetDirectoryPath}
+				//rm (delete files and folders)
+					Remove-Item
+			//Blank: Get all set aliases, -Name [aliasName],  
+				Get-Alias {}
+			// -Name [alias_name], -Value [cmdlet_to_run]
+				Set-Alias {} {}
+		Processes>
+			//blank: List all running processes, -Name [processName]: get a specific process
+				Get-Process {}
+				Start-Process -FilePath ["exeName/activationCommand"]
+			//-Name {processName}, -ID {processID}; confirm: Good if stopping processes with names and wildcards 
+				Stop-Process {} {}  
+		Objects>
+		//cmdlets are designed to deal with objects, so outputs are more than text
+		//Each object contains properties (contain info about object (last access time, parent and root directories)) and  methods (manipulate object)	
+			//Check info stored inside the result of a command
+				Get-ChildItem | Get-Member
+			//EG concerning the above command, you could use the Delete Method to delete the directory that object repersents
+			//Store result of a command in a variable
+				$child_items = Get-ChildItem
+			//List names
+				$child_items.Name
+			//Access methods
+				$child_items.[methodName]()
+			
+	
+	
+				

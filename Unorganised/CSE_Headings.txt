@@ -1,0 +1,448 @@
+<Computer hardware>
+	Motherboard>
+	CPU>	
+		Further CPU>
+			Components>
+				Registers>
+					General purpose registers>
+						GPR that can be split into parts>
+						GPR that cant be split>
+						Special Purpose Registers>
+				The Fetch - Decode - Execute Cycle>
+	RAM>
+		Stack and heap>
+			Stack>	
+			Heap>
+		Instructions and data>
+	hard drive>
+		File systems>
+			Clusters>
+				Types of file systems>
+					FAT32>
+					exFAT> 
+					ntfs>
+					EXT3 and EXT4>
+					Apple proprietary file systems>
+	GPU>
+	Input>
+	Output>
+	Heat Sink>
+	Power supply>
+	Other stuff>
+	
+<Data>
+	 Bits>
+	 Alternate number bases>
+	 Hexadecimal>
+	 ASCII>
+	 File Headers>
+	 Boolean logic>
+	 Logic gate types>
+	 	 XOR>
+		 
+<Networking>
+	Topologies> 
+	Network Hardware>
+	IP addresses>
+		Network Address Translation>
+		Internet Protocol Version 6>
+		Subnets>
+			Classless Inter-Domain Routing (CIDR)>
+		Private IP Ranges>
+	MAC Addresses>
+	Packets>
+	Protocols>
+		TCP (Transmission Control Protocol)>
+	 		TCP Handshake>
+			TCP Transmission>
+			TCP Teardown>
+		UDP(User Datagram Protocol)> 
+	 	Ports> 
+	 		 	
+		Other protocols>
+			Application level protocols>
+				HTTP>
+					request types>
+					response>
+			Internet Control Message Protocol (ICMP)>
+			Dynamic Host Configuration Protocol (DHCP)>
+			Open Systems Interconnection (OSI) Model>	
+	 			 Layers>
+				 	Summary>
+					In depth>
+						Application> 
+						Presentation> 
+						Session> 
+						Transport> 
+						Network> 
+						Data link>
+						Physical Layer>
+			TCP/IP Model>				
+	 			Layer summary>
+	 			In depth>
+				EG>
+			Address Resolution Protocol (APR)>
+	Web languages>
+		HTML>
+		Javascript>
+		PHP>
+		FTP>
+	Web servers>	
+		Types>
+			Generic>
+			Custom>
+	Cookies and local storage>
+		Cookies>
+		Local storage>
+	Emails>
+		Email protocols>
+			SMTP (Simple Mail Transfer Protocol)>
+				Commands>
+			POP3, IMAP and Exchange>
+				POP3>
+				IMAP (Internet Message Access Protocol)>	
+				Microsoft Exchange>
+		Email Spoofing, SPF and DKIM>
+			Email spoofing>
+				Attempts to solve the problem>	
+					SPF (Sender Policy Framework)>
+					DKM>
+	DNS server (Domain Name System)>
+		TLD (Top level domain)>
+		Authoritative name servers>
+		Caching>
+		Forward and reverse lookups>
+		Recursive & Iterative Lookups>
+			Iterative lookup>
+		DNS records>
+			Record types>
+	Google>	
+	Troubleshooting>	
+	Alt search engines>		
+			
+<OS>			
+	Kernel>
+	Processes>
+	Interrupts>
+	BIOS (Basic Input Output System)>
+	Bootloaders>
+	Virtualisation>
+		Types>
+			Hypervisor>
+		Useage>
+		VM options>
+			
+<Linux>	
+	Components>
+	Configuring Networking with the GUI>
+	Terminal>
+	Superuser>
+	Directory structure>
+	Significant files>
+	Navigation in the Terminal>
+	File permissions>		
+	Packages>
+		Package managers>
+			apt-get>		
+			yum>
+		Packaged software>
+			dpkg>
+			rpm>
+			Building from source>
+	Hidden files>		
+	Environment variables>		
+		PATH EV>		
+	History>
+		Previous Commands>
+	Parameters>		
+	Tab completion>
+	Interrupts>
+	Operators>			
+	Other commands>			
+		Text editor>	
+	 		vim>
+	 	Processes>	
+	 		cron table>
+	 	print stuff>
+		Search for stuff>
+		Do stuff to files>
+		network>
+			SSH>
+<Windows>
+	WF Profiles> 
+	Registry>
+	Log files>
+	Authentication>
+		User accounts>
+			Groups>
+			User account control>
+				Configure UAC>
+			File permissions>
+				Files>
+				Folders>
+			Hidden files>
+	Windows command line>
+		General>
+			Move/edit folders/files>
+		Network>
+		User management>	
+	PowerShell>
+		PowerShell Integrated Scripting Environment (ISE)>
+		Aliases>
+			Default aliases>
+		Processes>
+		Objects>
+	
+<Encryption>		
+	Symmetric encryption>
+	Asymmetric Encryption>
+	HTTPS>
+	Hashing>
+<Scripting languages>
+	Converting human readable code to machine code>		
+	Python> 
+		Threads>
+		Port scanner>
+		PEP 8 style guide>
+		Defense programming>
+			Assertions> 
+		Programming Paradigms>
+			Procedural>
+			Object-oriented programming>
+	C>
+		Data Types>
+			Integer>	
+			Float>
+			Char>
+		Functions>
+		Conditionals>
+		Loops>
+		Lists>
+		Input>
+			Command line arguments>
+		Files>
+		Pointers and memory>
+		
+<Security>	
+	law>
+		Laws>
+		Penetration testers>
+		Practise>
+	Tatics>
+		Read and blue teams>
+		Defence in Depth>
+		Risk management>
+			 Areas of risk>
+		Critical security controls>
+		Stages of an atk>
+	Reconnaissance>		
+		Search engine reconnaissance>
+			Red team>
+				find info/files with search engine>
+				Get meta data info from found links>	
+				Above step automated>
+			Blue team>
+				Extract metadata from your PDF files>
+					Create a bash script that will make it harder to copy data>
+		Robots>
+			Red team>
+			Blue team>		
+		Public job offerings and data>
+			Job listings>
+			LinkedIn>
+			Companies house>
+			Wordlists & CeWL>
+				RT>	
+					Crawl a site and pull out common words>
+				BT>
+			Prior breaches>	
+				RT>
+					Process>
+				BT>
+			DNS info>
+				Whois>
+					DNS Recon>
+						RT>
+							Zone transfer>
+							enumerate DNS records using a wordlist>
+						BT>
+			Dirb>
+		NMap>
+			RT>
+				Scan types>
+			BT>
+	Exploitation>	
+		Developing exploits for common vulnerabilities>
+			Website exploitation 1>
+				Command injection>
+				Cross Site Scripting (XSS)>
+				File Inclusion>
+				SQL injection>	
+					RT>
+						Blind SQL injection>
+					BT>
+			Website exploitation 2>
+				Sessions guessing>
+				Clickjacking>
+				Cross Site Request Forgery (CSRF)>
+				Directory Traversal>
+				File Upload>
+				Vulnerability Scanners>	
+					RT>
+						Considerations>
+					BT>
+				Binary application flaws>
+					Analysing a file for a purpose>
+					Integer overflow>
+					Buffer overflow>
+						RT>
+							Identify overflow>
+							Exploit overflow>
+								Consider>
+							Create script to exploit>
+								Run a memory address>
+								Run shellcode>
+									New exploit script>
+						BT>
+							Potential mitigations>
+							Stack Protector / Stack Canary>
+							NX (No Execute (Linux)) / DEP (Data Execution Policy (Windows))>
+							ASLR (Address Space Layout Randomisation)>
+					Format string>
+		Existing exploits>
+			Exploiting an FTP Service>
+				Identify FTP service and find vulnerabilities>
+				Create exploit script>
+				Carry out the exploit>
+				Exploit a web service>
+				Metasploit framework>
+					Install>
+					Setup>
+					msf promt>
+			Patch Cycles and End of Support>
+			Social engineering>	
+			Pretexting>
+			Phishing>
+			Word Macros>			
+			PDFs>
+			Drive-by Download>
+			Credential Harvesting>  
+			CEO Fraud (whaling)>
+	Privilege Escalation> 
+		Linux>	
+			Exploiting Services>	
+			Exploiting the Kernel>
+			Wildcard Injection>
+			Exploiting SUID (Set user ID) and SGID (Set Group ID)>
+				SUID Files>
+			sudo>
+		Windows>
+			Bypass UAC>
+				Metasploit>
+					Ask the user>
+					bypassuac module>
+			Kernel exploits>
+			Stored Credentials>
+			Target services>			
+				Unquoted Service Paths>
+					What paths you can exploit>
+				Weak Registry Permissions>
+				Weak Folder Permissions>
+				AlwaysInstallElevated>
+	Persistence> 	
+		Indicators of Compromise (IoCs)>	
+	 		Ports>
+				Linux>
+				Windows>
+			Start-up Folder>
+				Linux>
+					Runlevels>
+					systemd>
+				Windows>
+					Registry>
+					Servcies>
+			Shortcuts>
+			Rootkits>
+				Bootkits>	
+				Recovering from a rootkit>
+			Word> 
+				Templates>
+				Add-ins>
+			Yara>
+	Lateral Movement>		
+		ARP (address resolution protocol) Cache>		
+		Port Scanning without nmap>		
+			powershell>		
+			Linux>	
+		Extracting Passwords from Memory>
+			Man in the Middle Attacks>
+			ARP Spoofing / Poisoning>
+			LLMNR, NBT-NS and MDNS Poisoning>
+		PSExec>
+	Exfiltration> 
+		HTTPS>		
+		SMTP>		
+		IRC (Internet Relay Chat)>
+		DNS>
+		ICMP>
+Forensics>
+	Forensics>
+	Evidence>
+	Chain of custody>
+	Steganography>
+		Detection>
+		Methods>
+			Least Significant Bit (LSB)>
+			Echo hiding>
+		Tools>
+		Find it>
+	Event Logs and Log Files>
+		Tools>
+	File Integrity and Hashes>
+		Hash Collisions and Forensics>
+	Incident Response process>
+		Preparation>
+		Identification>	
+		Containment>
+		Eradication>
+		Recovery>
+		Lessons Learned>
+		Conclusion>
+	Purple team>
+	File System Forensics>
+		How a file system works>
+		Disk captures>
+			Hard disk image file formats>
+			 Capture forensic images of HD>
+				Check if the disk in encrypted> 
+				Deleted Files>
+		 	Email Forensics>
+				PST (personal storage table) files>
+				Base 64>
+			Windows Registry> 
+			Prefetch algorithm>
+				Superfetch>	
+		Forensic Tools>
+			Memory forensics>
+			Automated parsing tools>
+		Anti Forensics>		
+		Memory Forensics>
+			Memory capture>
+			Volatility>		
+		Network Forensics>
+			Capture packets>
+			Analysis packets>
+				Wireshark>
+					network packet analyser>
+					Features>
+					Useful filters>
+				tcpdump>
+		File Headers and Hex>
+			File Headers>			
+			
+			
+		
+		
+		
+		
+

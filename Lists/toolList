@@ -1,0 +1,22 @@
+Metasploit>
+	Install>
+		curl https://raw.githubusercontent.com/rapid7/metasploit-omnibus/master/config/templates/metasploit-framework-wrappers/msfupdate.erb > msfinstall
+		chmod 755 msfinstall
+		sudo ./msfinstall 
+	Setup>
+		sudo chmod 775 /opt/metasploit-framework/apps/pro/ui/config/database.yml
+		service postgresql start
+		service metasploit start		
+		msfconsole		
+		db_status
+GDB> 
+	pwndbg extension>
+	git clone https://github.com/pwndbg/pwndbg
+			cd pwndbg
+			./setup.sh
+	pattern.py		
+		wget https://raw.githubusercontent.com/Svenito/exploit-pattern/master/pattern.py
+		
+
+
+

@@ -1,0 +1,61 @@
+//TODO Add commands for openssl hashes	
+			
+Encryption>
+	Symmetric encryption>
+		//Encrypt file with DES, enter PW after command
+			openssl enc -des -in [plainText.txt] -out [encryptedFile.enc]
+		//Decrypt, enter PW after command
+			openssl enc -des -d -in [encryptedFile.enc] -out [plainText.txt]
+	Asymmetric encryption>
+		//Key parts: public and private parts, known as a keypair
+		//Generate keypair
+			openssl genrsa -out private.pem 2048
+		//Extract public key
+			openssl rsa -in private.pem -outform PEM -pubout -out public.pem
+		//Encrypt
+			openssl rsautl -encrypt -in [plainText.txt] -pubin -inkey public.pem -out [cipher.txt]
+		//Decrypt
+			openssl rsautl -decrypt -in [ciper.txt] -inkey private.pem -out [plainText.txt]
+	Hashing>
+
+<Foresensics>		
+	Cryptography>
+		Stegnography>
+			Steghide
+				steghide extract -sf challenge-aperture-mountain-01.jpg -xf answer.txt 
+				//Steganography is the art of hiding the information's existence. At the most basic level, you could open another file (like an image) in a 
+				//text editor and hide a message inside of it. You would have to be careful to put it in exactly the right place to avoid corrupting the image, but it could work. There are more advanced forms of steganography too. EG pixel arrangement or audio file frequency  
+				//Steghide commad line tool
+					//Display information about a cover or stego file.
+					steghide info --info
+					//embed, extract
+					 //Embed file with msg: -ef, --embedfile, specify cover of file used to embed data: -cf, --coverfile, 
+					 //specify stego file: -sf, --stegofile, create file and write extracted embedded data to it: -xf, --extractfile 
+					steghide {} {} [filename]
+					//EG steghide extract -sf [fileName] -xf --flag.txt			
+								
+								
+	Disk Forensics and the File System>		
+		//Different file-storage types: EG FAT (12/16/32), NTFS, HFS, ext2/3/4, UNIX
+			//FAT and UNIX store info in a flat file
+			//ntfs provides indexing and efficient storage, can use to identify files that once existed with Master File Table entries (MFT),
+			// directory index includes a $FILE_NAME attribute to store info   
+		Memory forensics>
+			//Methods: investigating metadata, listing protocols and ports used and keyword searching.
+			//Volatility 
+				//Tool for memory forensics, extract a .pst file out of memory for outlook info and then use a tool to browse them EG pffexport
+				//Find OS related to extracted .mem file 
+				visibility -f [filename] imageinfo 
+				//high-level view of running processes: pslist, Scans memory for EPROCESS blocks: psscan, Display parent-process relationships: pstree, 
+				// Scan memory for FILE_OBJECT handles: filescan, Extract FILE_OBJECTS from memory: dumpfiles	
+				volatility -f [filename] –profile=[Profile abtained from imageinfo] {}
+								
+	File extensions>
+		//Rename file to see it anouther format works
+		//Edit a file in a hex editor (EG ghex) to find info
+		//File header
+			//Signiture made up of bytes near the start of a file, give infomation on type of file (magic bytes/numbers) 
+			//Get info on file header
+				file [filename]
+			//Check for ASCII 
+				strings [file]
