@@ -167,7 +167,85 @@ System>
 		reboot
 		//Start the X system
 			startx
+	Permissions>
+		Superuser permissions>
+			//Swap to root user
+				su root
+				sudo su
+				sudo bash
+			//Use sudo to enter admin PW for temporay root privillages, note when piping commands sudo may needed to be prefixed for both commands
+				sudo [command]
+			//Get a root shell with sudo
+				sudo find /etc -exec sh -i \;
+		chmod>
+			//Edit a programs permissions, +x: Give execute permissions, -x: Take	 execute permissions, +w: Give write permissions	
+			//or 
+			//set all permissions: 755 (Each number repersents 1 of user/user group/others; Think of the number as binary for there effect, 111 = 7 so means +rwx, or Read = 4 Write = 2 Execute = 1 then add)
+				chmod {} [filePath]
+		whoami>
+			//Get current user
+		chown>
+			//Change ownership of a file, EG
+			sudo chown root:root ./demo
+		stat>
+			//Get the owner of a file
+			stat -c %U file
+		//Create new user
+			adduser [accountname] 
+		//Give account a new password
+			passwd [accountname] 
 		
+		Signing>
+			//List apt keys
+				sudo apt-key list
+			//Remove
+				sudo apt-key del [keyName] 
+		
+	Processes>
+		//See running processes using the most resources
+			top	
+		//List running processes
+			ps auxf
+			ps auxf | less
+			ps aux | grep [processName]
+			ps aux | grep bash | grep -v grep	
+		//Print current user running processes, See more info: -u, See all processes (not only for your user): -ax
+			ps {}
+		Services>
+			//See status of all services
+				service --status-all
+			//All
+				systemctl list-unit-files --type=service
+			//Stop service auto starting
+				sudo systemctl disable [serviceName]
+
+		//Get PID
+			pgrep
+		//Kill process: -9: kill 
+			kill -{signal} [PID]	
+		//less: scroll through, grep [processName]: find stuff, grep bash | grep -v grep: find stuff and ignore grep process
+			ps auxf | {} 
+		//Add space to run new jobs
+			//Send paused task to the background
+				bg
+			//Bring paused task back to the foreground
+				fg
+		//Stop all running processes
+			halt
+		cron table>
+			//Schedule commands to run at regular time intervals
+			//Open crontab to edit tasks
+				crontab -u [user]  [filePath]
+			//Can edit /tmp/crontab
+				minute(0-59) hour(0-23) day(1-31) month(1-12) weekday(0-6) command
+			//EG
+				0,14,29,44 * * * * /usr/bin/example2
+				runs /usr/bin/example2 at the 15-minute mark on every hour, every day. Make sure you add each new task on a new line.
+		//Find out what files the process is using
+			lsof -p [processID]
+		//Get all programs connecting to port 80
+			lsof -i tcp:80 -P -R
+			
 		
 Directories and files>
 	List file directories>
@@ -297,76 +375,7 @@ Help>
 	//-h, --help 		
 		[binName] {}		
 			
-Permissions>
-	Superuser permissions>
-		//Swap to root user
-			su root
-			sudo su
-			sudo bash
-		//Use sudo to enter admin PW for temporay root privillages, note when piping commands sudo may needed to be prefixed for both commands
-			sudo [command]
-		//Get a root shell with sudo
-			sudo find /etc -exec sh -i \;
-	chmod>
-		//Edit a programs permissions, +x: Give execute permissions, -x: Take	 execute permissions, +w: Give write permissions	
-		//or 
-		//set all permissions: 755 (Each number repersents 1 of user/user group/others; Think of the number as binary for there effect, 111 = 7 so means +rwx, or Read = 4 Write = 2 Execute = 1 then add)
-			chmod {} [filePath]
-	whoami>
-		//Get current user
-	chown>
-		//Change ownership of a file, EG
-		sudo chown root:root ./demo
-	stat>
-		//Get the owner of a file
-		stat -c %U file
-	//Create new user
-		adduser [accountname] 
-	//Give account a new password
-		passwd [accountname] 
-	
-	
-Processes>
-	//See running processes using the most resources
-		top	
-	//List running processes
-		ps auxf
-		ps auxf | less
-		ps aux | grep [processName]
-		ps aux | grep bash | grep -v grep	
-	//Print current user running processes, See more info: -u, See all processes (not only for your user): -ax
-		ps {}
-	//See status of all services
-		service --status-all
-	//Get PID
-		pgrep
-	//Kill process: -9: kill 
-		kill -{signal} [PID]	
-	//Use pipe operator to: scroll through, find stuff, find stuff and ignore grep process
-		ps auxf | less
-		ps aux | grep [processName]
-		ps aux | grep bash | grep -v grep
-	//Add space to run new jobs
-		//Send paused task to the background
-			bg
-		//Bring paused task back to the foreground
-			fg
-	//Stop all running processes
-		halt
-	cron table>
-		//Schedule commands to run at regular time intervals
-		//Open crontab to edit tasks
-			crontab -u [user]  [filePath]
-		//Can edit /tmp/crontab
-			minute(0-59) hour(0-23) day(1-31) month(1-12) weekday(0-6) command
-		//EG
-			0,14,29,44 * * * * /usr/bin/example2
-			runs /usr/bin/example2 at the 15-minute mark on every hour, every day. Make sure you add each new task on a new line.
-	//Find out what files the process is using
-		lsof -p [processID]
-	//Get all programs connecting to port 80
-		lsof -i tcp:80 -P -R
-		
+
 History>
 	//Show history
 		history	
@@ -453,6 +462,13 @@ Packages>
 				aptitude show [packageName]
 			//Search for a package
 				sudo apt search [packageName]
+			//Clean
+				//Remove half-installed packages
+				sudo apt-get autoclean
+				//Remove apt cache
+				sudo apt-get clean
+				//Remove uneccessary software dependancies
+				 sudo apt-get autoremove
 			
 		yum>
 			//Fedora package manager
@@ -486,6 +502,17 @@ Packages>
 					cd [pathToSourceCode]
 					make [sourceCode]
 					make install 
+					
+				git clone [url]
+				cd [projectBin]
+				mkdir build
+				cd build
+				cmake ..
+				//Raise number after j relative to PC hardware
+				make -j8
+				sudo make install		
+
+
 	
 <Scripting languages>
 	python>
@@ -562,6 +589,17 @@ General applications>
 		sudo protonvpn-cli -disconnect
 		
 		protonvpn-cli --ip
+		
+	mocp>
+	//cli music player	
+		//install 
+		sudo apt-get install moc moc-ffmpeg-plugin
+		//run
+		mocp
+		p: plat music, b: previous track, n: next track, q: hide MOC interface
+	
+		
+		
 		
 
 Cyber security Security>

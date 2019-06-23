@@ -1,0 +1,4 @@
+mkdir ~/virtualenvironment
+virtualenv ~/virtualenvironment/my_new_app
+cd ~/virtualenvironment/my_new_app/bin
+source activate

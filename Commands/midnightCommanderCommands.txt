@@ -1,0 +1,7 @@
+Switch column: tab
+Bottum repersents F1 – F10 
+Move mc to background ctrl+o
+select multiple files: insert on each file
+Change default editor: select file -> F2 -> 1 -> select-editor
+	//or naviage to .selected_editor in homes file
+Change file permissions: F9 -> File -> chown -> select category -> r, w, x

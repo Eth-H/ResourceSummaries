@@ -14,6 +14,11 @@ sudo apt install python3-tk
 sudo apt-get install python-qt4 qt4-designer
 sudo apt install qt5-default qttools5-dev-tools qttools5-dev pyqt5-dev-tools
 
+//Command lind programs
+sudo apt install links2
+sudo apt install moc moc-ffmpeg-plugin
+sudo apt install mc
+
 
 //Timeshift (if not installed by default)
 sudo apt-add-repository -y ppa:teejee2008/ppa
@@ -31,3 +36,80 @@ sudo wget -O protonvpn-cli.sh https://raw.githubusercontent.com/ProtonVPN/proton
 	sudo chmod a+rx /usr/local/bin/youtube-dl
 	//or
 	sudo -H pip install --upgrade youtube-dl
+
+//Laptop power management
+	//TLP power management tool
+		sudo add-apt-repository ppa:linrunner/tlp
+		sudo apt-get update
+		sudo apt-get install tlp tlp-rdw
+		sudo tlp start
+	//Laptop mode tools
+		sudo add-apt-repository ppa:ubuntuhandbook1/apps
+	    sudo apt-get update
+	    sudo apt-get install laptop-mode-tools
+		//GUI for additional personalisation
+		sudo gksu lmt-config-gui
+
+		
+//More codecs
+	sudo apt-get install mint-meta-codecs
+
+
+//Software to review
+	//Mind forger
+		sudo add-apt-repository ppa:ultradvorka/productivity
+		sudo apt update
+		sudo apt install mindforger
+	//Media player
+		//Lollypop
+			sudo add-apt-repository ppa:gnumdk/lollypop
+			sudo apt update
+			sudo apt install lollypop
+		//sayonara
+			sudo apt-add-repository ppa:lucioc/sayonara
+			sudo apt-get update
+			sudo apt-get install sayonara
+		//qmmo
+			sudo add-apt-repository ppa:forkotov02/ppa
+			sudo apt-get update
+			sudo apt-get install qmmp qmmp-plugin-pack
+			//or
+			sudo apt-get update && sudo apt-get install qmmp-qt4 qmmp-plugin-pack-qt4
+	//copy Q
+		sudo add-apt-repository ppa:hluk/copyq
+		sudo apt update
+		sudo apt install copyq
+		
+	//Text editors
+		//cli
+			//kakoune
+				sudo apt update && sudo apt install build-essential libncurses5-dev libncursesw5-dev asciidoc
+				cd Downloads/
+				git clone http://github.com/mawww/kakoune.git
+				cd kakoune/src
+				make
+				make man
+				sudo make install
+				//run
+				kak getpubip.sh 
+			//Micro
+				curl https://getmic.ro | bash
+				//or
+				go get -d github.com/zyedidia/micro/cmd/micro
+				cd $GOPATH/src/github.com/zyedidia/micro
+				make install
+	//email
+		//cli
+			//mutt
+			//alpine
+			//sup
+			//not much
+			
+			
+			
+
+
+
+
+
+		

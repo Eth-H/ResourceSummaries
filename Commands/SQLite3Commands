@@ -1,0 +1,31 @@
+
+//Import csv file to database 3
+	.mode csv
+	//Here create teh table with columns names
+	.import OutlineTable.csv Cartoons
+    .output fileName
+	.save output.db
+
+
+apt-cache search name
+
+
+
+CREATE TABLE `Manga` (
+	`ID`	INTEGER,
+	`Name`	TEXT,
+	`Overall score`	TEXT,
+	`Current progress`	TEXT,
+    `Author`	TEXT,
+    `Genre`	TEXT,
+    PRIMARY KEY(`ID`)
+);
+
+
+"name","type"
+"ID","INT"
+"Name(SK)","VARCHAR(29)"
+"Overall Score","VARCHAR(3)"
+"Current status", 
+"Author","VARCHAR(8)"
+"Genre","VARCHAR(22)"
