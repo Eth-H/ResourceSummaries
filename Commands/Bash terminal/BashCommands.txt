@@ -458,6 +458,11 @@ Packages>
 			//Download/remove software
 				sudo apt install [packageName]
 				sudo apt remove [packageName]
+				//Fix installation problems
+					//Force package installation
+					sudo apt-get install -f
+					//try to remove problomatic package or run CLean commands
+				
 			//Get info on a package
 				aptitude show [packageName]
 			//Search for a package
@@ -487,6 +492,8 @@ Packages>
 					sudo dpkg -r cowsay
 				//List packages installed
 					dpks -l
+				//RE-configure package database (fix dpkg corruption problems)
+					sudo dpkg --configure -a
 			rpm>
 				//Generated for Fedora-based distros
 				//Install

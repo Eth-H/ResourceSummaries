@@ -36,8 +36,8 @@
 				where [fileName] {}
 	
 	Network>
-			//Get info
-				ipconfig
+			//Get info, /all: more info, 
+				ipconfig {}
 			//Setting IP 
 				netsh interface ip set address [connection name] static [IP] [subnet] [gateway]
 			//Access files stored on a network
@@ -65,7 +65,12 @@
 				net user [username]
 			//Add a user to a group
 				net localgroup [groupName] /add [userName]
-				
+	Scripting languages>
+		java>
+			java -version
+			
+	
+	
 <PowerShell>
 	/*
 		.NET framework with command line shell and scripting language

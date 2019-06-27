@@ -1,30 +1,30 @@
 Anti-virus>
-	adwcleaner
-	malwarebytes
-	
+    Aggressive>
+        Norton power eraser
+        KVRT
+        McAfee GetSusp & Stinger
+    PUP>    
+	    adwcleaner
+    Generic>
+	    malwarebytes
 Browsers>
 	brave
-	chrome
-	Firefox
+	firefox
 Communication>
-	Skype
 	Discord
+    kik
 Compression>
 	7zFM
-	Infran view
 Media management>
+    Infran view
 	Audacity
-	4k Video Downloader
-	Media Monkey
 	Windows Media Player
-	Spotify
 Miscellaneous>
-	dr.fone
-	WinX MediaTrans
+    Microsoft package
 Technical>
 	Console Emulator>
 		Cmder
-	Console toolskits>
+	GitHub>
 		youtube-dl
 		Build files>
 			make
@@ -33,7 +33,7 @@ Technical>
 			Chocolatey
 		
 	technolgies>
-		node.js
+		Node.js
 		git
 		python
 		Qt-tools
@@ -41,23 +41,23 @@ Technical>
 		IDLE
 		IntelliJ
 		PyCharm
-		NetBeans 8.2
-		Notepad++
+		NetBeans 
 		Visual Studio 2017
 		Visual studio code
-		
+	Text editor
+        Atom
+        Notepad++
 	DataBases>		
 		SQ Browser for SQLite
-		dbeaver
 		ESF DataBase migration toolkit
 		pgAdmin4
 		
 	Engines>
 		Epic Games Launcher (Unreal 4)
-		Oracle VM VirtualBox
 		Unity 2017.2.0f (64 bit)
-		
-Word Processign and notes>
-	Microsoft package
-	Notepad++
+	VM>
+        VMware
+        Oracle VirtualBox
+
+	
 	
