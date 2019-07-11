@@ -8,11 +8,18 @@ sudo apt install gparted
 sudo apt install audacity
 sudo apt install sqlitebrowser
 
+
+//development installs
 //Python installs
 sudo apt install python3-pip
 sudo apt install python3-tk
+//qt
 sudo apt-get install python-qt4 qt4-designer
 sudo apt install qt5-default qttools5-dev-tools qttools5-dev pyqt5-dev-tools
+
+sudo apt install npm
+sudo apt install git
+
 
 //Command lind programs
 sudo apt install links2
@@ -29,6 +36,13 @@ sudo apt-get install timeshift
 sudo apt-get install openvpn
 sudo apt-get install dialog
 sudo wget -O protonvpn-cli.sh https://raw.githubusercontent.com/ProtonVPN/protonvpn-cli/master/protonvpn-cli.sh
+
+//Brave
+    curl -s https://brave-browser-apt-release.s3.brave.com/brave-core.asc | sudo apt-key --keyring /etc/apt/trusted.gpg.d/brave-browser-release.gpg add -
+    source /etc/os-release
+    echo "deb [arch=amd64] https://brave-browser-apt-release.s3.brave.com/ $UBUNTU_CODENAME main" | sudo tee /etc/apt/sources.list.d/brave-browser-release-${UBUNTU_CODENAME}.list
+    sudo apt update
+    sudo apt install brave-browser    
 
 
 //youtube-dl

@@ -7,6 +7,11 @@
         Change default editor: select file -> F2 -> 1 -> select-editor
 	        //or naviage to .selected_editor in homes file
         Change file permissions: F9 -> File -> chown -> select category -> r, w, x
+		
+		Simulate F keys
+		F10: Esc + 0
+		F1-10: Esc + 1-10
+		
 //moc
     //music player
     //run
@@ -45,6 +50,205 @@
 	    l
     //Edit volumn: -1%, +1%, -5%, +5%,
 	    <, >, (,), .
+		
+	//Edit options
+		mkdir ~/.moc
+		cp /usr/share/doc/moc/examples/config.example.gz ~/.mocp
+		//Change options you wan, change theme to Theme = /usr/share/moc/themes/nightly_theme & XTermTheme = /usr/share/moc/themes/nightly_theme
+		nano config.example
+		
+//Sandbox
+	//fire jail		
+		//Default options
+			/boot – blacklisted, /bin – read-only, /dev – read-only; similar to the home directory, only a skeleton filesystem is available
+			/etc – read-only; /etc/passwd and /etc/group have been modified to reference only the current user, /home – only the current user is visible
+			/lib, /lib32, /lib64 – read-only, /proc, /sys – re-mounted to reflect the new PID namespace; only processes started by the browser are visible
+			/sbin – blacklisted, /selinux – blacklisted, /usr – read-only; /usr/sbin blacklisted, /var – read-only; similar to the home directory, only a skeleton filesystem is available
+
+		// --appimage: sandbox an AppImage application, 
+		// --blacklist=[filename]: blacklist directory or file, --noblacklist=[filename]: disable blacklist for file or directory .
+		//--whitelist=[fileName]
+		// --chroot=[dirname]: chroot into directory, --private=[dirPath]: temporary home directory.
+		// --hostname=[name]: set sandbox hostname, --hosts-file=[file]: use file as /etc/hosts, --dns=[address]: set DNS server.
+		// --ip=[address]: set interface IP address.
+		// --netstats: monitor network statistics, 
+		// --noroot: install a user namespace with only the current user, --nosound: disable sound system, --novideo: disable video devices
+		//--net=eth0: new network space, --ip=[custom IP]: 192.168.1.155
+		//  --tree: print a tree of all sandboxed processes, --list: List all running sandboxes
+		// --trace: trace open, access and connect system calls, --tracelog: add a syslog message for every access to files or directoires blacklisted by the security profile.
+		// --x11: enable X11 sandboxing. The software checks first if Xpra is installed, then it checks if Xephyr is installed. If all fails, it will attempt to use X11 security extension.
+		// -no-remote
+		// --profile=[fileName] - use a custom profile, --profile.print=name|pid - print the name of profile file, --profile-path=directory - use this directory to look for profile files.	
+		fire jail {} [programName]
+
+		//firejail all programs running by a user by changing default share
+			chsh shell /usr/bin/firejail
+
+
+		//EG
+			firejail --blacklist=/home/emera;/mnt;/media --noroot --netstats --private=/home/virtualHome [programName] 
+		
+	//chroot
+	//move root somewhere else	
+		sudo apt-get update
+		sudo apt-get install dchroot debootstrap
+		sudo mkdir /test
+
+		sudo nano /etc/schroot/schroot.conf
+		//modify
+			[saucy]
+				description=Ubuntu Saucy
+				location=/test
+				priority=3
+				users=demouser
+				groups=sbuild
+				root-groups=root
+		//Setup with just certain files
+			mkdir /chroot
+			//add wanted directories -> copy wanted files and needed liabaries
+				//Get wanted executables
+					mkdir /chroot/{bin}
+					cp -v /bin/{bash, ls} /chroot/bin
+				//Get needed liabraries	
+					mkdir /chroot/{lib, lib64}
+					//Check libraries needed to run the wanted executable
+						ldd /bin/bash
+						ldd /bin/ls
+					cp -v /{lib/bib64} /chroot/{lib/lib64}
+			//enter chroot
+				sudo chroot /chroot/ /bin/bas
+			//exit
+				exit	
+		//Setup with full system 
+			//Generate skeleton OS, add --foreign if architectures dont rematch
+				debootstrap --arch=amd64 unstable my_deb/
+			//Setup process mangagement and add temp home thats lost on exit
+				sudo mount -o bind /proc my_deb/proc
+				mount -t tmpfs -o size=100m tmpfs /home/user
+			//Setup internet
+				cp /etc/hosts /chroot/etc/hosts
+				sudo cp /etc/resolv.conf /var/chroot/etc/resolv.conf	
+			//enter chroot env
+				chroot my_deb/ /bin/bash
+			//setup graphical applications
+				//run outside chroot
+					xhost
+				export DISPLAY=:0.0
+				
+			//custom chroot service
+				[Unit]
+				Description=my_chroot_Service
+				[Service]
+				RootDirectory=/chroot/foobar
+				ExecStartPre=/usr/local/bin/pre.sh
+				ExecStart=/bin/my_program
+				RootDirectoryStartOnly=yes
+				systemctl start my_chroot_Service.service
+				
+		
+			//alt setup
+				//Generate skeleton OS, add --foreign if architectures dont rematch
+					sudo debootstrap --variant=buildd --arch amd64 saucy /test/ http://mirror.cc.columbia.edu/pub/linux/ubuntu/archive/
+					sudo chroot /test /debootstrap/debootstrap --second-stage
+
+
+				sudo nano /etc/fstab
+						//edit
+							proc /test/proc proc defaults 0 0
+							sysfs /test/sys sysfs defaults 0 0	
+				//mount within guest
+					sudo mount proc /test/proc -t proc
+					sudo mount sysfs /test/sys -t sysfs
+				//unmount proc filesystems
+					sudo umount /test/proc
+					sudo umount /test/sys
+				//del after use
+					rm -rf /test/
+	//Ip-netns
+	//Directly uses network namespace to create virtual interfaces
+		//Create network namespace
+			ip netns add netns1
+		//Check interfaces inside
+			ip netns exec netns ip addr
+		//Execute shell in it
+			ip netns exec netns /bin/bash	
+		//Bring up loop interface
+			ip netns exec netns ip link set dev lo up
+		//Setup ethernet
+			ip link add veth0 type veth peer name veth1
+			ip link set veth1 netns netns1
+		//Set IP
+			ip netns exec netns1 ifconfig veth1 10.1.1.1/24 up
+			ifconfig veth0 10.1.1.2/24 up
+	//Unshare
+	//Create isolated environment and run program, can combine different created namspaces
+		//--net: different network stack, create user namespace environment
+		//--user: create a user namespace 
+		//--pid --fork: setup PID namespace
+		unshare {} [programToRun]
+	//Containers
+		//System-nspawn
+		//Creates isolated containers, has separate mount point, process tree
+			debootstrap --arch=amd64 unstable my_deb/
+			//Get in container, --network-bridge=br0: Add network set
+				systemd-nspawn -D my_deb {}
+			//Boot into container, remember change root pw in passwd, 
+				systemd-nspawn -bD my_deb
+		//machinectl
+		//Control state of systemd based VM
+			//-a: status of all running containers
+			machinectl {} 
+			status: status of specific container, login: login, switchoff: poweroff, -s kill: kill forcefully, -M: View logs
+			machinectl {} {[containerName]}
+		
+		//Docker
+			//Start daemon
+			service docker start
+			//Download base image
+				docker pull kalilinux/kali-linux-docker
+				//or get them from https://hub.docker.com/
+			//Run program inside container
+				docker run -i -t kalilinux/kali-linux-docker [programName]		
+			//images: see avaliable images and get details (EG containerID), ps: List running containers	
+			//commit [containerID] [imageName]:	Save current state as image
+			//rmi [imageName]: remove image
+				docker {}
+			//stop [containerID]: Stop container, rm [containerID]: del files created on host node by that server
+				docker {} 
+			//Run apps on docker instance
+				//Mount external host system 
+					docker run -it -v /temp/:/home/ kalilinux/kali-linux-docker /bin/bash
+				//Attach docker port to external system port
+					docker run -it -v /temp/:/home/ -p 4567:80 kalilinux/kali-linux-docker /bin/bash
+				//Mount x server file
+					docker run -it -v -e DISPLAY=$DISPLAY -v /tmp/.X11-unix:/tmp/.X11-unix \ kalilinux/kali-linux-docker /bin/bash
+			//Move image
+				//push [imageName]: Push it on the docker online repo, export [imageName]: export as archive
+					docker {} 				
+			
+				
+				
+				
+
+		
+		
+//wine 
+	//install
+		apt install wine winetricks
+
+	mkdir wine, cd wine
+	//Set architecture, win32:, win64:,
+		WINEARCH={} WINEPREFIX=~/wine/[bottleName] winetricks
+	//In GUI: Select default wine prefix -> install dll or component: what u want, dotnet34 and dotnet 452, tahoma -> run wine.cfg -> drop applications into drive_c
+	
+	//alt route
+	mkdir wine
+	//move exe to location
+		//Set architecture, win32:, win64:,
+			WINEARCH={} WINEPREFIX=~/wine/[bottleName] winecfg
+
+
+
 //vim commands
 	Global
 		:help keyword - open help for keyword

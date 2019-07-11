@@ -182,18 +182,26 @@ System>
 			//or 
 			//set all permissions: 755 (Each number repersents 1 of user/user group/others; Think of the number as binary for there effect, 111 = 7 so means +rwx, or Read = 4 Write = 2 Execute = 1 then add)
 				chmod {} [filePath]
-		whoami>
-			//Get current user
 		chown>
 			//Change ownership of a file, EG
 			sudo chown root:root ./demo
 		stat>
 			//Get the owner of a file
 			stat -c %U file
-		//Create new user
-			adduser [accountname] 
-		//Give account a new password
-			passwd [accountname] 
+		//users
+			//list users
+				cut -d: -f1 /etc/passwd
+			//Get current user
+				whoami
+			//Create new user
+				adduser [accountname] 
+			//Give account a new password
+				passwd [accountname] 
+			//Create user directory (if it doesnt exist already)
+				mkhomedir_helper username
+			//del user
+				sudo userdel username
+				sudo rm -r /home/username
 		
 		Signing>
 			//List apt keys
@@ -218,6 +226,8 @@ System>
 				systemctl list-unit-files --type=service
 			//Stop service auto starting
 				sudo systemctl disable [serviceName]
+			//start:, stop:
+				sudo service postgresql {}		
 
 		//Get PID
 			pgrep
@@ -551,30 +561,6 @@ General applications>
 		sudo ufw reject in from 173.194.55.0/24
 		sudo ufw reject in from 206.111.0.0/16
 		sudo ufw status verbose
-	postgresql
-		//other
-			https://www.postgresql.org/docs/9.6/auth-pg-hba-conf.html
-			/etc/postgresql/10/main/
-		//setup
-			sudo apt install postgresql		
-			//Only postgres user can run psql
-				//Change password
-					sudo -u postgres psql postgres
-					\password postgres
-				//or
-					sudo passwd postgres
-		su postgres
-		//List DB
-			psql -l	
-		//Drop to psql shell
-			psql postgres
-		//Create DB
-			createdb linuxhint
-		//modify the pg_hba.conf to add authentication for new database
-		//Reload config files
-		 	service postgresql reload
-		 
-		
 		
 	proton vpn>
 		sudo protonvpn-cli -init

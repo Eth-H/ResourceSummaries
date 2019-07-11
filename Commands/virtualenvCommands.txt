@@ -2,3 +2,40 @@ mkdir ~/virtualenvironment
 virtualenv ~/virtualenvironment/my_new_app
 cd ~/virtualenvironment/my_new_app/bin
 source activate
+
+//install, unlock, lock
+pip {}
+
+pipenv
+    Initialise virtual environment (create project), can create with other commands, can use pipenv shell or instal
+        //--three: system py 3, --two: system py 2, --python: provided interpretor        
+        pipenv {}
+    //workflow
+        cd myproject
+        //       
+            //none: If pip file exists install from it, converts requirements.txt if it exists
+             //-r [path/to/requirements.txt]: Specify path, --dev: Install dev and default Pipfile packages            
+            //[packageName]: Install package into local VE, create Pipfile if it doesnt exist
+             //--system: Use system pip, accepts intialise VE params
+            pipenv install {} {}
+        //
+            //pipenv install parameters, --all:, --all-dev:
+            pipenv uninstall {}
+                   
+        //spawn shell subservice (activate VE)
+            pipenv shell
+        //Exit virtual environment
+            exit
+    //Upgrade packages
+        //none: all pkg, --outdated:, [pkgName]:,
+        pipenv update {}
+
+    //Dependancy graph
+        pipenv graph
+    //run commands from virtualenv, //python
+        pipenv run [commandName]
+    //Locate
+        //--venv: VE, --py: interpretor, --where: project
+        pipenv {}
+    //Instal package from git
+        [vcs_type]+[scheme]://[location]/[user_or_organization]/[repository]@[branch_or_tag]#[package_name]

@@ -1,14 +1,14 @@
 Reconnaissance>
-	meta data 
-		farming
-			Manual
+	meta data> 
+		farming>
+			Manual>
 				//Download url of found file
 					cd ~/Downloads
 					wget https://www.sans.org/training/mgt512/paag.xls
 				//Find meta data, look for creator and other info
 					apt install exiftool
 					exiftool paag.xls
-			Automated
+			Automated>
 				metagoofil
 				//Use google to search for files on a certain domain
 				 //Install
@@ -20,7 +20,7 @@ Reconnaissance>
 					metagoofil {} {} {} {}
 					//EG
 						metagoofil -d sans.org -t doc,pdf,xls -l 200 -o sans_files -f sans_results.html
-		removing
+		removing>
 			//Extract metadata from your PDF files
 			//Display metadata
 				exiftool OrganizationsCoreAssignment.pdf	
@@ -36,7 +36,7 @@ Reconnaissance>
 					mv ./clean_pdf /usr/bin/clean_pdf	
 				//Run script (as it now exists in path)
 					clean_pdf OrganizationsCoreAssignment.pdf	
-	Crack passwords
+	Crack passwords>
 		Wordlists & CeWL>
 		//After intercepting PW hashes going over a network
 		//Crawl a site and pull out common words
@@ -47,7 +47,7 @@ Reconnaissance>
 					cewl {} {} {} [targetSite]
 				//EG
 					cewl -v -d 1 -w words.txt https://www.sans.org
-	DNS
+	DNS>
 		//Get info on a domain name
 			whois sans.org
 		//Zone transfer
@@ -55,11 +55,11 @@ Reconnaissance>
 		//enumerate DNS records using a wordlist
 			//Guess valid sub domains, blank: Use default worldist, -W [wordListName]: 3rd party wordList, can use Kali Linux /usr/share wordlists
 				dnsmap [domainName] {}	
-	Find hidden directories in a website
+	Find hidden directories in a website>
 		//Armed with a list of websites, you could start to find directories that are not linked directly in the public areas of the site.
 		//Use a wordList to craft HTTP requests
 			dirb http://myfakedomain.local /usr/share/wordlists/dirb/small.txt
-	Port scan
+	Port scan>
 		//Aim to find ports which have a vulnerable service listening
 		//Scan for open ports
 			//Connect scan (dont need root permissions, obvious scan that firewalls/IDS systems will flag)

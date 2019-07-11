@@ -7,21 +7,39 @@ Anti-virus>
 	    adwcleaner
     Generic>
 	    malwarebytes
+    Rescue CD iso>
+        Avira
+        Norton        
+        Dr Web
+        Trend micro
+        F-secure
+        eset sysrescue
+    Ransomware decrypters>
+        Kasperskies
+        Trend micro
+        Individual decryptors
+    Rootkit scanners>
+        Malwarebytes Anti-rootkit beta
+        TDSS Killer   
+        McAfee Labs RootkitRemover
+        
 Browsers>
 	brave
 	firefox
+
 Communication>
 	Discord
-    kik
+   
 Compression>
 	7zFM
+
 Media management>
     Infran view
 	Audacity
 	Windows Media Player
-Miscellaneous>
-    Microsoft package
+
 Technical>
+
 	Console Emulator>
 		Cmder
 	GitHub>
@@ -31,7 +49,6 @@ Technical>
 			cmake
 		Windows package manager>
 			Chocolatey
-		
 	technolgies>
 		Node.js
 		git
@@ -44,20 +61,25 @@ Technical>
 		NetBeans 
 		Visual Studio 2017
 		Visual studio code
-	Text editor
+	Text editor>
         Atom
         Notepad++
 	DataBases>		
 		SQ Browser for SQLite
 		ESF DataBase migration toolkit
-		pgAdmin4
-		
+		pgAdmin4		
 	Engines>
 		Epic Games Launcher (Unreal 4)
 		Unity 2017.2.0f (64 bit)
 	VM>
-        VMware
-        Oracle VirtualBox
+        Type 2
+            VMware
+            Oracle VirtualBox
+	    Type 1
+            Proxmox
+            VMware vSphere
+            
 
-	
-	
+	Miscellaneous>
+    Microsoft package
+

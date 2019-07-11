@@ -7,6 +7,8 @@
 		--STRING_AGG(), concatenates a list of strings and places a separator between them
 			STRING_AGG ( expression, separator [ORDER BY expression1 {ASC | DESC}, [...]] )
 			STRING_AGG (first_name || ' ' || last_name, ',' ORDER BY first_name, last_name) actors
+	--postgres Functions
+		pg_typeof([columnName])
 	--Utility operators
 		OR, IS, IN, NOT, 
 	--Value operators
@@ -49,6 +51,16 @@
 				geometric data
 					--rectangular box, set of points, geometric pair of numbers, line segment, closed geometric 
 					box, line, point, lseg, polygon
+--Create DB
+    CREATE DATABASE name
+    [ [ WITH ] [ OWNER [=] user_name ]
+           [ TEMPLATE [=] template ]
+           [ ENCODING [=] encoding ]
+           [ LC_COLLATE [=] lc_collate ]
+           [ LC_CTYPE [=] lc_ctype ]
+           [ TABLESPACE [=] tablespace ]
+           [ CONNECTION LIMIT [=] connlimit ] ]
+    CREATE DATABASE JPP OWNER postgres 
 					
 		
 		
