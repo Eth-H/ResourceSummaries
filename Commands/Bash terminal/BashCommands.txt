@@ -91,17 +91,17 @@ Utility>
 			"World"	
 	Scripting>
 		//Create a text file and enter ->
-		#! /bin/bash
-		echo "This is my first bash script..."
-		cd ~/Desktop
-		ls -halt
-		touch somefile
-		ls -halt
-		echo "Pretty cool, right?"
-		//Make that text file an executable ->
-		chmod +x myscript.sh
+			#! /bin/bash
+			echo "This is my first bash script..."
+			cd ~/Desktop
+			ls -halt
+			touch somefile
+			ls -halt
+			echo "Pretty cool, right?"
+			//Make that text file an executable ->
+			chmod +x myscript.sh
 		//Run script
-		./myscript.sh
+			./myscript.sh
 	Compression>
 		tar>
 			//Extract -> create
@@ -227,7 +227,7 @@ System>
 			//Stop service auto starting
 				sudo systemctl disable [serviceName]
 			//start:, stop:
-				sudo service postgresql {}		
+				sudo service [serviceName] {}		
 
 		//Get PID
 			pgrep

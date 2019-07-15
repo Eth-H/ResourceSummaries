@@ -40,6 +40,8 @@ References>
 		https://www.simplifiedpython.net/run-python-on-android/
 		https://kivy.org/doc/stable/guide/packaging-android-vm.html
 		https://en.wikipedia.org/wiki/List_of_JavaScript_libraries
+		https://reactgo.com/tutorial-reactlazy-react-suspense/
+		https://stackoverflow.com/questions/53290095/react-passing-fetched-data-from-api-as-props-to-components
 	OS>
 		https://en.wikipedia.org/wiki/Comparison_of_boot_loaders
 		https://forum.manjaro.org/t/manjaro-as-guest-in-virtualbox-shared-folder/41675/8
@@ -99,7 +101,8 @@ References>
 		
 		Javascript>
 			https://stackoverflow.com/questions/5619202/converting-a-string-to-a-date-in-javascript
-		
+			
+			
 	Programming
 		Website templates>
 			https://pixelarity.com
@@ -123,6 +126,7 @@ Resources>
 	https://developer.mozilla.org/en-US/docs/Mozilla/Add-ons/WebExtensions
 	https://towelroot.com/
 	https://www.vulnhub.com/
+	https://caniuse.com/
 	Cyber security>
 		https://haveibeenpwned.com/ 
     	https://www.exploit-db.com/	
@@ -160,6 +164,7 @@ Resources>
 		https://stackoverflow.com/jobs
 		Qualifications>
             https://blk-box.co.uk	
+			https://www.cisco.com/c/en/us/training-events/
 		Prep>
 			http://blog.codingforinterviews.com/
 			https://grindreel.academy

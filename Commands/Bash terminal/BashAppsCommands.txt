@@ -11,7 +11,6 @@
 		Simulate F keys
 		F10: Esc + 0
 		F1-10: Esc + 1-10
-		
 //moc
     //music player
     //run
@@ -56,7 +55,18 @@
 		cp /usr/share/doc/moc/examples/config.example.gz ~/.mocp
 		//Change options you wan, change theme to Theme = /usr/share/moc/themes/nightly_theme & XTermTheme = /usr/share/moc/themes/nightly_theme
 		nano config.example
-		
+//virtual box
+	//install
+		sudo apt install virtualbox virtualbox-qt virtualbox-guest-additions-iso
+		//Extra virtual box drivers (mostly for guest additions features)
+		sudo apt-get install virtualbox-guest-utils virtualbox-guest-x11 virtualbox-dkms virtualbox-guest-dkms     
+	//Setup guest additions
+		//run machine and insert CD additions
+		./autorun.sh
+		//reset machine
+	
+
+
 //Sandbox
 	//fire jail		
 		//Default options

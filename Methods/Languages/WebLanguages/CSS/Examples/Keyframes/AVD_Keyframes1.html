@@ -1,0 +1,23 @@
+<style>
+/*KEYFRAMES*/
+div {
+    height: 40px;
+    width: 70%;
+    background: black;
+    margin: 50px auto;
+    border-radius: 5px;
+    position: relative;    
+  }
+  /*Animation name needs to be linked to keyframes for the animation properties to work*/  
+#rect {animation-name: rainbow; 
+        animation-duration: 4s;
+        /*Loop animation infinitly*/
+        animation-iteration-count: infinite; }
+@keyframes rainbow {
+  0% {background-color: blue;  top: 0px;  left: 0px;}  
+  /*Transitions to green 50% through the animation duration*/
+  50% {background-color: green;  top: 50px;  left: 25px;}
+  100% {background-color: yellow;  top: 0px;  left: -25px;}
+}
+</style>
+<div id="rect"></div>

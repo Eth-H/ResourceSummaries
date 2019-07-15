@@ -1,0 +1,88 @@
+<style>
+        /*Stars example*/
+      .stars {
+        background-color: white;
+        height: 30px;
+        width: 30px;
+        border-radius: 50%;
+        animation-iteration-count: infinite;
+      }
+    
+      .star-1 {
+        margin-top: 2.5%; 
+        margin-left: 60%;
+        animation-duration: 1s;
+        animation-name: twinkle;
+    
+      }
+    
+      .star-2 {
+        margin-top: 5%;
+        margin-left: 25%;
+        animation-duration: 0.9s;
+        animation-name: twinkle;
+        /*Controls how quickly an animated element changes over the duration of the animation*/
+        animation-timing-function:linear ;
+      }
+    
+      .star-3 {
+        margin-top: 10%;
+        margin-left: 50%;
+        animation-duration: 1.1s;
+        animation-name: twinkle;
+       /*Shape of the curve repersents how the animation will be played out,
+       (x1, y1, x2, y2), x axis is the duration of the animation, y is the change in animation,
+       They sit on a 1 by 1 grid, p0 p1 p2 p3 are set already  they are the beginning and end 
+       points which are always located respectively at the origin (0, 0) and (1, 1).
+        the otehr two x and y values map the anchor the points from the first coord to the second*/
+       animation-timing-function: cubic-bezier(0.25, 0.25, 0.75, 0.75);
+      }
+      
+      @keyframes twinkle {
+        20% {
+          transform: scale(0.5);
+          opacity: 0.5;
+        }
+      }
+    
+      @keyframes shooting{
+        0% {transform: translatex(0px) translatey(0px);}
+        50% {transform: translatex(100px) translatey(100px);}
+        100% {transform: translatex(0px) translatey(0px);}
+        }
+      
+      .star-4{
+          margin-top:20%;
+          margin-left:20%;
+          animation-duration:5s;
+          animation-name: shooting;
+          /*Moves graphic with the bezier curve, mimics the ease-out style*/
+          animation-timing-function: cubic-bezier(0, 0, 0.58, 1);
+        }   
+        .star-5{
+          margin-top:25%;
+          margin-left:30%;
+          animation-duration:5.1s;
+          animation-name: shooting;
+          /*Animation mimics natural movement, y values can be set >1*/
+          animation-timing-function: cubic-bezier(0.311, 0.441, 0.444, 1.649);
+        }
+      
+      #back {
+        position: fixed;
+        padding: 0;
+        margin: 0;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(black, #000099, #66c2ff, #ffcccc, #ffeee6);
+      }
+    </style>
+    
+    <div id="back"></div>
+    <div class="star-1 stars"></div>
+    <div class="star-2 stars"></div>
+    <div class="star-3 stars"></div>
+    <div class="star-4 stars"></div>
+    <div class="star-5 stars"></div>

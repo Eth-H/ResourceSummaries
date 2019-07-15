@@ -1,0 +1,19 @@
+<style>
+        /*Apply to hover and chamge proeprties after completion of time period*/
+        button:hover {
+            animation-name: background-color;
+            animation-duration: 500ms;
+            /*Specifies style after animation is complete*/
+            animation-fill-mode: forwards;
+          }
+          @keyframes background-color{
+              100%{
+                background-color:green;
+                /*Make it fade*/
+                opacity:0.1;
+              }
+        
+          }
+        </style>
+        <button>Register</button>
+      

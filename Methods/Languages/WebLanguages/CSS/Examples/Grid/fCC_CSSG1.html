@@ -1,0 +1,91 @@
+
+<style>
+    .container {
+      font-size: 40px;
+      width: 100%;
+      background: LightGray;
+      /*Activate grid layout*/
+      display:grid;
+      /*Gives two columns 50px wide,  fr=fraction of the avliable space, auto sets column or width to the height of it's content automatically.*/
+      grid-template-columns: 100px 10em 100fr auto 10% ;
+      grid-template-rows:50px 50px;
+      /*Limit item size when grid container changes size*/
+      grid-template-columns: 100px minmax(50px, 200px);
+      /*100 columns of second parameter width*/
+      grid-template-rows: repeat(100, 50px);
+      grid-template-columns: repeat(2, 1fr 50px) 20px;
+      /*Auto-fill inserts as many rows as possible at the desired size relative to container size*/
+      grid-template-columns: repeat(auto-fill, minmax(60px, 1fr));
+      /*Above, The only difference is that when the container's size exceeds the size of all the items combined, auto-fill keeps inserting
+       empty rows or columns and pushes your items to the side, while auto-fit collapses those empty rows or columns and stretches your items 
+       to fit the size of the container.*/
+      grid-template-columns: repeat(auto-fit, minmax(60px, 1fr));
+      grid-column-gap:10px;
+      grid-row-gap:5px;
+      /*First one sets a gap inbetween rows and the second column, can assign both with one value*/
+      grid-gap: 20px 50px;
+      grid-gap: 30px;
+      /*justify-self but effects all items*/
+      justify-items:center; 
+      align-items:end;
+      /*Groups cells together into an area and gives a custom name, quotation marks repersent a row and each value a cell
+      to designate an empty cell use .*/
+      grid-template-areas:
+        "header header header"
+        "advert content content"
+        ". footer footer";
+      }
+      /*Use media queries to create reponsive layouts*/
+      @media (min-width: 300px){
+    .container{
+      grid-template-columns: auto 1fr;
+      grid-template-rows: auto 1fr auto;
+      grid-template-areas:
+        "advert header"
+        "advert content"
+        "advert footer";
+    }
+  }
+    
+    .item1{
+        background:LightSkyBlue;
+    /*Adds this class to area named header, since the header area takes up an entire row the item will grow to fit the entire row*/
+        grid-area: header;
+        }
+    .item2{
+        background:LightSalmon;
+        /* Horizontally allign to part of a cell, default is stretch (fill cell)*/
+        justify-self: center; /*start; (left) end;*/
+        /*Above but vertiacally aligns*/
+        align-self:end;
+        /*  Create a grid area on the fly*/
+        grid-area:1/1/2/4;       /*horizontal line start, vertical line start, horizontal line end, vertical line end*/
+    }
+    .item3{
+        background:PaleTurquoise;
+        /*A gridded element only effects it's direct desendants hence the desendants themselfs can have grids */
+        display: grid;
+        grid-template-columns: auto 1fr;
+        }
+    .subItem1{background:yellow;}
+    .subItem2{background:purple;}  
+    .item4{background:LightPink;}
+    .item5{background:PaleGreen;
+/*The hypothetical lines that make up the grid are referred to as lines (column lines and row lines).
+To control teh amount of columns an item will consume use grid-column
+with numbers you want the item to start and stop at*/
+      grid-column: 2/4;
+      grid-row:2/4;
+      }
+</style>
+    
+  <div class="container">
+    <div class="item1">1</div>
+    <div class="item2">2</div>
+    <div class="item3">3
+        <div class="subItem1">
+        <div class="subItem2">
+    </div>
+    <div class="item4">4</div>
+    <div class="item5">5</div>
+  </div>

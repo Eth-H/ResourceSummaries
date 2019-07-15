@@ -1,0 +1,79 @@
+    <style>
+        #box-container {
+          height: 500px;
+          /*Turns it into a flex container (can apply flex properties)*/
+          display: flex;
+          /*Can allign children elements into rows or columns*/
+          /*Vertically stacks*/
+          flex-direction:column;   /*row; row-reverse; column; */
+          /*Places flex items along the main axis */
+          justify-content:center; /*Other options:*/
+          /*flex-start; 
+          ( aligns items to the start of the flex container. For a row, this pushes the items to the left of the container. 
+          For a column, this pushes the items to the top of the container.) 
+          flex-end; (move but right and bottom insted)
+          space-between; (Alligns to the centre with extra space (pushes first and last elements to the edge of the container) 
+          space-around; (above but first and last items are not locked to the edges of the container, teh space is distributed around all the items)
+          */
+          /*Places flex items along the cross axis (opposite of main axis (row=column) */
+          align-items: center; /*Other options:*/
+          /*flex-start; flex-end; center; 
+          stretch; (Stretch items to fill the flex container) 
+          baseline; (Alligns items to their baseline (the line that text sits on))
+          */
+          /*Splits a flex item into multiple rows */
+         flex-wrap: wrap; /*nowrap, wrap (left to right), wrap-reverse (right to left)*/
+        }
+        #box-1 {
+          background-color: dodgerblue;
+          width: 50%;
+          height: 50%;
+          /*Specifies the size of the item before CSS adjustments (flex-grow/shrink)*/
+          flex-basis:20em;
+          /*Higher the number the more it will shrink compared to other items in the container*/
+          flex-shrink: 1;
+          /*Adjust alignment individually, can use align-items values and overrides valeus set by the align-items property*/
+          align-self:flex-end;
+        }
+      
+        #box-2 {
+          background-color: orangered;
+          width: 50%;
+          height: 50%;
+          flex-shrink: 2;
+          /*Change the order items appear in the flex container*/
+          order: 1;
+        }
+        #box-3 {
+            background-color: violet;
+            width: 25%;
+            height: 50%;
+            flex-grow: 1;
+        }
+        #box-4 {
+            background-color: yellow;
+            width: 25%;
+            height: 50%;
+            flex-grow: 2;
+        }
+        #box-5 {
+            background-color: green;
+            width: 25%;
+            height: 50%;
+            /*Short hand for flex-grow -> flex-shrink -> flex-basis */
+            flex: 0 1 auto;
+        }
+        #box-6 {
+            background-color: black;
+            width: 25%;
+            height: 50%;
+        }
+      </style>
+      <div id="box-container">
+            <div id="box-1"></div>
+            <div id="box-2"></div>
+            <div id="box-3"></div>
+            <div id="box-4"></div>
+            <div id="box-5"></div>
+            <div id="box-6"></div>
+      </div>

@@ -34,7 +34,15 @@
 				find C:\Users\User\* "hello" 2>nul		
 			//Get file path (linux which command), /R: Display a directory
 				where [fileName] {}
-	
+		Fixing computer>
+			Check key
+				wmic path softwarelicensingservice get OA3xOriginalProductKey    
+			check disk
+				chkdsk
+				wmic diskdrive get status
+				sfc /scannow
+			//check drivers
+				verifier
 	Network>
 			//Get info, /all: more info, 
 				ipconfig {}
@@ -126,7 +134,18 @@
 				$child_items.Name
 			//Access methods
 				$child_items.[methodName]()
-			
-	
-	
-				
+		Execution policy>
+			Set-ExecutionPolicy -ExecutionPolicy RemoteSigned
+			set-executionpolicy unrestricted
+			Get-ExecutionPolicy -List
+		Package managers>
+			Scoop>
+				//Install scoop
+					iex (new-object net.webclient).downloadstring('https://get.scoop.sh')
+				//Install programs
+					scoop install sudo
+					sudo scoop install 7zip git openssh --global
+					scoop install aria2 curl grep sed less touch
+					scoop install python ruby go perl	
+
+
