@@ -64,8 +64,11 @@
 		//run machine and insert CD additions
 		./autorun.sh
 		//reset machine
-	
 
+//Images
+	//magic
+		sudo apt install magic
+			convert sample.png sample.jpg
 
 //Sandbox
 	//fire jail		

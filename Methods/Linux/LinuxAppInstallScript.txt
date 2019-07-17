@@ -7,7 +7,8 @@ sudo apt install rkhunter
 sudo apt install gparted
 sudo apt install audacity
 sudo apt install sqlitebrowser
-
+sudo apt install evolution
+sudo apt install magic
 
 //development installs
 //Python installs
