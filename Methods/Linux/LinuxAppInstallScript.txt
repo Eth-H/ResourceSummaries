@@ -21,7 +21,6 @@ sudo apt install qt5-default qttools5-dev-tools qttools5-dev pyqt5-dev-tools
 sudo apt install npm
 sudo apt install git
 
-
 //Command lind programs
 sudo apt install links2
 sudo apt install moc moc-ffmpeg-plugin

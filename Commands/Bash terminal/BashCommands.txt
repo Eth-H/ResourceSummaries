@@ -30,7 +30,7 @@ Shortcuts>
 	Ctrl + T – Swap the two characters before the cursor (you can actually use this to transport a character from the left to the right, try it!)
 	Ctrl + W – Delete the word / argument left of the cursor in the current line
 	Ctrl + D – Log out of current session, similar to exit
-
+	
 Operators>
 	//Combine commands with pipe
 		[commandOne] | [commandTwo]
@@ -156,8 +156,6 @@ Utility>
 			time []
 
 
-		
-		
 System>
 	Edit machine state>
 		shutdown
@@ -231,8 +229,10 @@ System>
 
 		//Get PID
 			pgrep
-		//Kill process: -9: kill 
+		//Kill process, -9: kill 
 			kill -{signal} [PID]	
+			//run command to get PID first
+			kill -9 `lsof -t -u [userName]`
 		//less: scroll through, grep [processName]: find stuff, grep bash | grep -v grep: find stuff and ignore grep process
 			ps auxf | {} 
 		//Add space to run new jobs
@@ -251,12 +251,19 @@ System>
 			//EG
 				0,14,29,44 * * * * /usr/bin/example2
 				runs /usr/bin/example2 at the 15-minute mark on every hour, every day. Make sure you add each new task on a new line.
-		//Find out what files the process is using
-			lsof -p [processID]
-		//Get all programs connecting to port 80
-			lsof -i tcp:80 -P -R
-			
-		
+		//get info on running processes
+			// -p [processID]: Find out what files the process is using
+			//-r: read access, -w: write access
+			//-u [userName]: process owned by specific user, -u^[userName]: not owned
+			//-t: just get process PID
+				lsof {}
+				
+			//-i: Check for IPv files 
+			 //tcp:[portName], 4: IPv4, 6: IPv6
+				lsof {} {}
+				//EG get all tcp port 80 traffic 
+					lsof -i tcp:80 -P -R
+					
 Directories and files>
 	List file directories>
 		ls
@@ -268,14 +275,9 @@ Directories and files>
 			pwd
 	Change directories>
 		cd
-			//Back one
-				cd ..
-			//Forward one
-				cd .
-			//Go to home directory
-				cd ~
-			//Go to specific location
-				cd /home/agent/Desktop
+			//..: Back one, .:curretn directory, ~: home, /home/agent/Desktop: specific path
+				cd {}
+			
 	Edit file contents>
 		
 		Text editor>
@@ -318,18 +320,16 @@ Directories and files>
 			 //-e: Execute commands, exploitable by wildcard injection 
 				Rsync {} [firstFolder] [secondFolder] {}
 				
-				
 	Display contents of a location>
-		Chnage amount of contents displayed
-		//Gradually load program into memory
-			less [filePath]	
-		//Output first twenty characters	
-			head -20 [file] 
-		//Output last 20
-			tail -20 [file]
-		//Output contents of file as it grows starting from last ten lines
-			tail -f file
-			
+		//Chnage amount of contents displayed
+			//Gradually load program into memory
+				less [filePath]	
+			//Output first twenty characters	
+				head -20 [file] 
+			//Output last 20
+				tail -20 [file]
+			//Output contents of file as it grows starting from last ten lines
+				tail -f file
 		cat>
 			//Print text file contents to console
 				cat filename
@@ -345,36 +345,31 @@ Directories and files>
 		strings>
 			//Get all strings in a file
 				strings [filePath]		
-	Search files>
+	Search filesystem>
 		grep>
-			grep [searchquery] [filename]
-			grep Ethan usernames.txt
-			//Operators
-				//Add the pipe operator, this changes the output of one command to anouther
+			//use * and "" in queries, "" can contain regex expressions
+			//none:, -i: ignore case, -r: recursive search, -s: supress error msg, -v: search for lines without searchQuery
+			//-n: line number, -a[numberOfLines]: return numberOfLines surrounding found results 
+			//-E: use extended regular expression, can also use egrep, use if using any advanced RE patturns
+			grep {} [searchquery] [filename]
+			//EG
 				//Search for a filename
 					ls | grep [filename]
-				//Ignore case: -i and recursive search: -r
-					grep {} "bob" filename
-			//Print a files contents and filter to a certain number of lines around target string
-				cat securityEventFile | grep -a[numberOfLines] [targetString]
-			
-				
+				//Print a files contents and filter to a certain number of lines around target string
+					cat securityEventFile | grep -a[numberOfLines] [targetString]	
+							
 		find>
 			//-name:, can use wildcards in file name EG "*myfile*"
 			find [searchDirectory] {searchMethod} [searchQuery]
-			//Search entire filesystem for files called passwords
-				find / -name "passwords"
-			//Redirect errors to a certain file 
+			//EG Search entire file systen and redirect errors to a certain file 
 				find / -name "passwords" 2> /dev/null
-			//find files in the last 30 days: -mtime: -30, find files > 10 MB in size: -size +10M, find files that start with media then have some letters with a .exe extension: -name media*.exe
+			//-mtime -[num]: find files in the last 30 days, -size +[num]M: find files > 10 MB in size
 			//-perm -[permissionsValuable], -user [user]
 				find [path] {} {}cd home
-				
 				
 		whereis>
 			//Find all the locations of a program
 				whereis gimp
-	
 	
 Help>
 	man>
@@ -384,7 +379,6 @@ Help>
 			apropos ["keyword"]	
 	//-h, --help 		
 		[binName] {}		
-			
 
 History>
 	//Show history
@@ -419,11 +413,10 @@ Network>
 		//Connect to a port
 			nc 192.168.33.2 1337
 		//Transfer files
-			//Listen on port and send any output recevied content to myfile
-				nc -l 1337 > myfile
+			//Listen on port and send any output recevied content to [filename]
+				nc -l 1337 > [filename]
 			//Connect to computer and send the content of myfile
-			
-			nc 192.168.33.2 1337 < myfile
+				nc 192.168.33.2 1337 < [localFilename]
 	SSH>
 		//  /etc/passwd /etc/shadow /etc/passwd.
 		//Connect
@@ -438,17 +431,20 @@ Network>
 		//Close connection
 			exit
 	curl>
-		//Perform HTTPS tasks
-			curl https://example.com/index.php --data "username=luffy&loggedin=true"			
+		//Perform HTTPS tasks, none: get request, --data "username=luffy&loggedin=true": post data, 
+			curl https://example.com/index.php {} 			
 	wget>
 		//Blank: Download webpages, -c: Continue stopped download
 			wget {} [url/file]
 			
 	netstat>
-		//Check listening ports
-			netstat -pultn
-		//Check tcp ports including those only avaliable to root
-			sudo netstat -antlp
+		//Check listening ports, -a: all sockets, -u: udp, -t: tcp 
+		//-l: listening sockets, -p: PID and program name, -n: dont resolve names 
+		//-A [addressFamilyName]: address families, inet, inet6, ax25, netrom, ipx, ddp, x25
+			netstat {}
+			
+			netstat -lptu
+			netstat -lpta
 		//	
 			sudo netstat -A inet -p
 	//Get info on domain
