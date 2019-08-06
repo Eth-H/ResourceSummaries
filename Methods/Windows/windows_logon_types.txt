@@ -1,3 +1,8 @@
+Event IDs 528 and 540 signify a successful logon, event ID 538 a logoff and all the other events in this category identify different reasons for a logon failure. However, just knowing about a successful or failed logon attempt doesn’t fill in the whole picture. Because of all the services Windows offers, there are many different ways you can logon to a computer such as interactively at the computer’s local keyboard and screen, over the network through a drive mapping or through terminal services (aka remote desktop) or through IIS. Thankfully, logon/logoff events specify the Logon Type code which reveals the type of logon that prompted the event.
+
+
+
+
 Logon Type 2 – Interactive
 
 This is what occurs to you first when you think of logons, that is, a logon at the console of a computer. You’ll see type 2 logons when a user attempts to log on at the local keyboard and screen whether with a domain account or a local account from the computer’s local SAM. To tell the difference between an attempt to logon with a local or domain account look for the domain or computer name preceding the user name in the event’s description. Don’t forget that logon’s through an KVM over IP component or a server’s proprietary “lights-out” remote KVM feature are still interactive logons from the standpoint of Windows and will be logged as such.

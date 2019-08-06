@@ -9,25 +9,16 @@ pyinstaller myscript.py Turn to executeable [First use cd to move command prompt
 
 C:\Users\emera\AppData\Local\Programs\Python\Python36-32\Lib\site-packages\PyInstaller
 
-cd C:\Users\emera\Desktop\IT\Codeing\Python\PyInstaller
-
-C:\Users\emera\Desktop\IT\Codeing\Python\Jo_s_Pampered_Paws
-
-
-pyinstaller --workpath C:\Users\emera\Desktop\IT\Codeing\Python\Jo_s_Pampered_Paws\Complied-Code 
---specpath C:\Users\emera\Desktop\IT\Codeing\Python\Jo_s_Pampered_Paws\Complied-Code 
+pyinstaller --workpath ...\Python\Jo_s_Pampered_Paws\Complied-Code 
+--specpath ...\Python\Jo_s_Pampered_Paws\Complied-Code 
 -n JJP 
-C:\Users\emera\Desktop\IT\Codeing\Python\Jo_s_Pampered_Paws
 
 
-
-pyinstaller --workpath C:\Users\emera\Desktop\IT\Codeing\Python\PyInstaller\JJP_Build\SpecPath_WorkPath ^ 
---specpath C:\Users\emera\Desktop\IT\Codeing\Python\PyInstaller\JJP_Build\SpecPath_WorkPath ^ 
+pyinstaller --workpath ...\Python\PyInstaller\BuildDir\SpecPath_WorkPath ^ 
+--specpath ...\Python\PyInstaller\BuildDir\SpecPath_WorkPath ^ 
 -n JJP ^
-C:\Users\emera\Desktop\IT\Codeing\Python\Jo_s_Pampered_Paws
-
 
 --log-level=DEBUG
 
 //Causes unicode eror
---icon= C:\Users\emera\Desktop\IT\Codeing\Python\Jo_s_Pampered_Paws\Pink_Dog_Face1.jpg ^
+--icon= ...\Python\project\image.jpg ^

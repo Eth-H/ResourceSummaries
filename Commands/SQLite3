@@ -1,16 +1,21 @@
 
 //Import csv file to database 3
 	.mode csv
-	//Here create teh table with columns names
+	//Here create the table with columns names
 	.import OutlineTable.csv Cartoons
     .output fileName
 	.save output.db
 
 
-apt-cache search name
 
 
 
+
+
+
+
+
+/* syntax
 CREATE TABLE `Manga` (
 	`ID`	INTEGER,
 	`Name`	TEXT,
@@ -29,3 +34,4 @@ CREATE TABLE `Manga` (
 "Current status", 
 "Author","VARCHAR(8)"
 "Genre","VARCHAR(22)"
+*/

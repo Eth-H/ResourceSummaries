@@ -1,0 +1,34 @@
+This file describes the syntax used in most command files, this language is specifically desgined to store CLI commands so that they can quickly be understood and applied.
+
+
+Title
+titleName>
+
+Comments, used to show infomation
+//
+Multi-line comments
+/* */
+Square brackets, used to reference something that could be anything, generally used in ELF/EXE/bin paramters EG [fileName]
+[] 
+Curly brackets, a place where multipe parameters can be inserted, generally the parameters are explained above, also can be a reference to an index
+{}
+Elipsis, indicating one or more things could be entered
+...
+	Insertion space for one or more parameters
+	{}... 
+
+Arrows, show a movement between steps in a process, or visually show something
+->
+
+Functions, used to contain commands or text that is used often, normally placed under a heading where there are lots of redundant sequences of commands
+functionName = () => { 
+	redundant commands/text 
+}
+
+TextSyntax
+<> Master title
+> Sub title
+// comment
+[]  Generic keyword, EG username
+{} Insertion space, above there will be an indication of what values to insert into the brackets	
+{}... Insertion space for one or more parameters

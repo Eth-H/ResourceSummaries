@@ -1,9 +1,0 @@
-Tool to search stack overflow from the command line
-
-https://github.com/gleitz/howdoi
-
-pip install howdoi
-
-howdoi -h or --help 
-
-howdoi [query] -[commands]

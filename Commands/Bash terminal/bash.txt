@@ -1,11 +1,3 @@
-
-TextSyntax
-<> Master title
-> Sub title
-// comment
-[]  Generic keyword, EG username
-{} Insertion space, above there will be an indication of what values to insert into the brackets	 	 
-
 Linux kernel
 
 Argument passing>
@@ -360,12 +352,12 @@ Directories and files>
 							
 		find>
 			//-name:, can use wildcards in file name EG "*myfile*"
-			find [searchDirectory] {searchMethod} [searchQuery]
-			//EG Search entire file systen and redirect errors to a certain file 
-				find / -name "passwords" 2> /dev/null
 			//-mtime -[num]: find files in the last 30 days, -size +[num]M: find files > 10 MB in size
 			//-perm -[permissionsValuable], -user [user]
-				find [path] {} {}cd home
+			find [searchDirectoryPath] {searchMethod}... [searchQuery]
+			//EG Search entire file system and redirect errors to a certain file 
+				find / -name "passwords" 2> /dev/null
+				find [path] {} {}
 				
 		whereis>
 			//Find all the locations of a program
@@ -579,14 +571,7 @@ General applications>
 		
 		protonvpn-cli --ip
 		
-	mocp>
-	//cli music player	
-		//install 
-		sudo apt-get install moc moc-ffmpeg-plugin
-		//run
-		mocp
-		p: plat music, b: previous track, n: next track, q: hide MOC interface
-	
+
 		
 		
 		
