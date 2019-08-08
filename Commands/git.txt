@@ -1,7 +1,7 @@
-"//" Comments
+"//"
 "" instructions
 "->" Process
-"//(Ix)" DEclaration of Index "x"
+"//(Ix)" Declaration of Index "x"
 "{Ix}" Reference to index "x"
 
 //GIT COMMANDS

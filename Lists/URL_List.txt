@@ -36,12 +36,16 @@ References>
 	Cyber security>
 		https://www.hackingloops.com/creating-malicious-word-macros-tutorial-autorun-stub-via-word-document/
 		https://blk-box.co.uk/GettingStarted
+		https://www.tutonics.com/2012/11/gpg-encryption-guide-part-1.html
 	Development>
 		https://www.simplifiedpython.net/run-python-on-android/
 		https://kivy.org/doc/stable/guide/packaging-android-vm.html
 		https://en.wikipedia.org/wiki/List_of_JavaScript_libraries
 		https://reactgo.com/tutorial-reactlazy-react-suspense/
 		https://stackoverflow.com/questions/53290095/react-passing-fetched-data-from-api-as-props-to-components
+		https://www.atlassian.com/git/tutorials/comparing-workflows
+		
+		
 	OS>
 		https://en.wikipedia.org/wiki/Comparison_of_boot_loaders
 		https://forum.manjaro.org/t/manjaro-as-guest-in-virtualbox-shared-folder/41675/8
@@ -119,6 +123,7 @@ References>
 Social media/blog>
     https://nicoblog.org/
     https://www.xda-developers.com
+	https://www.f-secure.com/en/web/business_global/our-approach/cyber-security-sauna
 	
 Resources>
 	//Tools that can be made use of
@@ -190,3 +195,8 @@ Download links>
         https://readcomiconline.to/
 	ROMS>
 		https://theromdepot.com		
+		https://vimm.net
+		http://www.portalroms.com/en
+		
+		
+		

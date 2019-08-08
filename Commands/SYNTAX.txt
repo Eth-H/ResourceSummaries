@@ -1,21 +1,33 @@
-This file describes the syntax used in most command files, this language is specifically desgined to store CLI commands so that they can quickly be understood and applied.
+This file describes the syntax used in most command files, this language is specifically desgined to store CLI commands so that they can quickly be understood and applied
+This file is idented 
 
 
 Title
-titleName>
+	titleName>
 
 Comments, used to show infomation
 //
+second line of the comment follows the first one
+//
+ //
 Multi-line comments
 /* */
 Square brackets, used to reference something that could be anything, generally used in ELF/EXE/bin paramters EG [fileName]
 [] 
 Curly brackets, a place where multipe parameters can be inserted, generally the parameters are explained above, also can be a reference to an index
 {}
-Elipsis, indicating one or more things could be entered
-...
-	Insertion space for one or more parameters
-	{}... 
+	Declaration of index "x"
+	//(Ix)
+	Reference to index "x" 
+	{Ix} 
+	Elipsis, indicating one or more things could be entered
+	...
+		Insertion space for one or more parameters
+		{}... 
+	Questionmark, optional parameter preceeds
+	[]?
+	{}? 
+	
 
 Arrows, show a movement between steps in a process, or visually show something
 ->
@@ -25,10 +37,11 @@ functionName = () => {
 	redundant commands/text 
 }
 
-TextSyntax
-<> Master title
-> Sub title
-// comment
-[]  Generic keyword, EG username
-{} Insertion space, above there will be an indication of what values to insert into the brackets	
-{}... Insertion space for one or more parameters
+
+syntax example
+--param1: param1 description, param2: param2 description
+ --param3: param3 description 
+ 	executableName {} {} [fileName]
+
+
+
