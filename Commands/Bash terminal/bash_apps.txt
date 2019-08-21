@@ -9,10 +9,66 @@
 		./autorun.sh
 		//reset machine
 
-//Images
-	//magic
-		sudo apt install magic
-			convert sample.png sample.jpg
+//Media
+	//Images
+		//magic
+			sudo apt install magic
+			//-quality: [percentageQuality]: How much to compress by, -resize [WidthxHeight]: CHnage dimensaions of the image, use [WidthxHeight]! to force exact size and ignore aspect ratio
+			//-rotate [degrees]:, -charcoal 2: apply characoal effect
+				convert sample.png {}... sample.jpg
+			//batch process
+				for file in *.png; do convert $file -rotate 90 rotated-$file; done
+	//music
+		//audacity
+			audacity [fileName]
+			//if anouther version of audacity is runnin error occurs				
+				sudo rm -r /var/tmp/audacity-$USER/audacity-lock-$USER
+
+		//moc
+			//music player
+			//run
+				mocp
+			//quit
+				q    
+			//Play
+				//pause
+					p, SPACE
+				//Next song
+					n
+				//Previous
+					bb
+				//Change play order
+					//toggle repeat
+						R
+					//toggle suffle
+						S
+					//toggle autonext
+						X
+			//playlist
+				//Move to playlist
+					TAB
+				//Edit playlist
+					//Add file/directory
+						a
+					//Recuresively add directory 
+						A
+					//Del item
+						d
+					//clear playlist
+						C
+					//Save playlist
+						V
+			//Switch layout 
+				l
+			//Edit volumn: -1%, +1%, -5%, +5%,
+				<, >, (,), .
+
+			//Edit options
+				mkdir ~/.moc
+				cp /usr/share/doc/moc/examples/config.example.gz ~/.mocp
+				//Change options you wan, change theme to Theme = /usr/share/moc/themes/nightly_theme & XTermTheme = /usr/share/moc/themes/nightly_theme
+				nano config.example
+		
 //security
 	//GnuPG
 		//note: throughout use can redirect (>) or pipe (|) outputs rather than using -o
@@ -344,50 +400,7 @@
 		Simulate F keys
 		F10: Esc + 0
 		F1-10: Esc + 1-10
-//moc
-    //music player
-    //run
-        mocp
-    //quit
-        q    
-    //Play
-    	//pause
-    		p, SPACE
-	    //Next song
-		    n
-	    //Previous
-		    bb
-	    //Change play order
-		    //toggle repeat
-			    R
-		    //toggle suffle
-			    S
-		    //toggle autonext
-			    X
-    //playlist
-	    //Move to playlist
-		    TAB
-	    //Edit playlist
-		    //Add file/directory
-			    a
-		    //Recuresively add directory 
-			    A
-		    //Del item
-			    d
-		    //clear playlist
-			    C
-		    //Save playlist
-			    V
-    //Switch layout 
-	    l
-    //Edit volumn: -1%, +1%, -5%, +5%,
-	    <, >, (,), .
-		
-	//Edit options
-		mkdir ~/.moc
-		cp /usr/share/doc/moc/examples/config.example.gz ~/.mocp
-		//Change options you wan, change theme to Theme = /usr/share/moc/themes/nightly_theme & XTermTheme = /usr/share/moc/themes/nightly_theme
-		nano config.example
+
 
 //vim commands
 	Global

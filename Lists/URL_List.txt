@@ -85,29 +85,32 @@ References>
     	https://developers.google.com/youtube/1.0/developers_guide_python
     Forum answers>
         https://reverseengineering.stackexchange.com/questions/1935/how-to-handle-stripped-binaries-with-gdb-no-source-no-symbols-and-gdb-only-sho#1936
-        https://askubuntu.com/questions/160036/how-do-i-disable-acpi-when-booting
-        https://askubuntu.com/questions/55224/a-common-home-partition-for-multiple-linux-distributions
-		https://help.ubuntu.com/community/BasicChroot
-    	https://www.digitalocean.com/community/tutorials/how-to-configure-chroot-environments-for-testing-on-an-ubuntu-12-04-vps
-		https://lifehacker.com/top-10-command-line-tools-399468
-		https://www.howtogeek.com/school/sysinternals-pro/lesson5/
+    	https://www.howtogeek.com/school/sysinternals-pro/lesson5/
 		https://www.laptopmag.com/articles/create-keyboard-shortcuts-windows-10
-		https://medium.com/@manujarvinen/setting-up-a-multi-boot-of-5-linux-distributions-ca1fcf8d502
 		https://dev.to/jacobherrington/awesome-list-of-developer-podcasts-22io
 		https://lifehacker.com/top-10-command-line-tools-399468
 		https://superuser.com/questions/267599/auto-mounting-shared-folders-in-virtualbox
 		https://lifehacker.com/format-encrypted-drives-as-exfat-to-make-them-play-nice-1778982194
 		https://techsviewer.com/install-macos-sierra-virtualbox-windows/
-		https://itsfoss.com/manjaro-architect-review/
 		https://blog.codota.com/21-best-intellij-plugins-for-2019-100-free/
-		https://forum.manjaro.org/t/installation-with-manjaro-architect-iso/20429
 		https://ithitman.blogspot.com/2015/04/what-are-tcp-spurious-retransmissions.html
+		
 		
 		Javascript>
 			https://stackoverflow.com/questions/5619202/converting-a-string-to-a-date-in-javascript
-			
-			
-	Programming
+		Linux>
+			setup>
+				http://segfault.linuxmint.com/2015/08/configuring-the-mdm-login-screen-for-multiple-monitors/
+				https://askubuntu.com/questions/160036/how-do-i-disable-acpi-when-booting
+        		https://askubuntu.com/questions/55224/a-common-home-partition-for-multiple-linux-distributions
+				https://medium.com/@manujarvinen/setting-up-a-multi-boot-of-5-linux-distributions-ca1fcf8d502
+				https://forum.manjaro.org/t/installation-with-manjaro-architect-iso/20429
+				https://itsfoss.com/manjaro-architect-review/
+			bash>
+				https://www.digitalocean.com/community/tutorials/how-to-configure-chroot-environments-for-testing-on-an-ubuntu-12-04-vps
+				https://help.ubuntu.com/community/BasicChroot
+					
+	Programming>
 		Website templates>
 			https://pixelarity.com
 			https://templated.co/
@@ -135,6 +138,7 @@ Resources>
 	Cyber security>
 		https://haveibeenpwned.com/ 
     	https://www.exploit-db.com/	
+		https://www.nomoreransom.org
 		
     Hosting>
         https://unhosted.org

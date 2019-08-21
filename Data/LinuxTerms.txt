@@ -1,0 +1,6 @@
+Windowing system:  software that manages separately different parts of display screens, type of GUI that implements WIMP
+	X-windows system (X): Windowing system, basic framework for GUI environment, newest core protocol version is x11
+		Display server: Control input and output of clients (running software) to the OS and hardware, the display server protocol can operate over networks 
+		XFree86: Outdated display server for X
+		X.Org: Display server for X
+		window manager: controls the placement and appearance of windows within a windowing system in a graphical user interface

@@ -1,37 +1,8 @@
-Linux kernel
+nux vs Linux kernel
 
-Argument passing>
-	In the linux kernel one word arguments are passed with -, multiple single letter arguments can be chained
-	A word argument needs a -- prefix
-	//BSD syntax uses no dashes before a parameter
-Shortcuts>
-	Up Arrow – Show the previous command
-	Ctrl + R – Allows you to type a part of the command you're looking for and finds it
-	Ctrl + Z – Stops the current command, resume with fg in the foreground or bg in the background
-	Ctrl + C – Halts the current command, cancel the current operation and/or start with a fresh new line
-	Ctrl + L – Clear the screen
-	command | less – Allows the scrolling of the bash command window using Shift + Up Arrow and Shift + Down Arrow
-	!! – Repeats the last command
-	command  !$ – Repeats the last argument of the previous command
-	Esc + . (a period) – Insert the last argument of the previous command on the fly, which enables you to edit it before executing the command
-	Ctrl + A – Return to the start of the command you're typing
-	Ctrl + E – Go to the end of the command you're typing
-	Ctrl + U – Cut everything before the cursor to a special clipboard, erases the whole line
-	Ctrl + K – Cut everything after the cursor to a special clipboard
-	Ctrl + Y – Paste from the special clipboard that Ctrl + U and Ctrl + K save their data to
-	Ctrl + T – Swap the two characters before the cursor (you can actually use this to transport a character from the left to the right, try it!)
-	Ctrl + W – Delete the word / argument left of the cursor in the current line
-	Ctrl + D – Log out of current session, similar to exit
+
 	
-Operators>
-	//Combine commands with pipe
-		[commandOne] | [commandTwo]
-		//Redirect output to a file, >: overwrite target entirely or create file, >>: Append output to file or create file
-	//Use wildcard to auto fill things
-		cat fileNa*
-	//Use "" to use something in that exact way
-		//EG to find an exact word
-			find -name "exactFileName"
+
 Others>
 	Unknown>
 		readlink -f /proc/{PID of process}/exe
@@ -41,6 +12,7 @@ Others>
 				chmod 755 ./clean_pdf
 			//Move to path, so script can be directly run from the command line anywhere on the filesystem
 				mv ./clean_pdf /usr/bin/clean_pdf
+				
 Local info gathering>
 		System info>
 			List hardware>
@@ -57,43 +29,31 @@ Local info gathering>
 					df -h
 				//Directory space useage
 					du
-
-
 			//Get kernel version
 				uname -a
 			//OS version
 				lsb_release
+			Displays>
+				//no param: list display info, --output [displayName]: select display 
+				 //--mode [widthxheight]:, --primary: set selected display to primary, --same-as [displayName]: mirror output from selected display to passed display 
+				xrandr {}? {}?...
+				//EGs
+					xrandr --output [display1Name]  --same-as [display2Name]
+					xrandr --output HDMI-1-1 --same-as eDP-1
+					xrandr --ouput LVDS --pos 0x0 --output HDMI-0 --pos 0x0
+				Xorg display server
+					//run server
+						startx
+					//Run test server and generate config
+						Xorg -configure
+					
+					
 		Time>
 			data
 			cal
 			uptime
 			
 Utility>
-	Basics>
-		Path>
-			//Run something in the current folder
-			./programname
-			//Run via path starting from the root folder 
-			/directory/programname
-		Line formatting>
-			//Run two commands on a line
-				echo "Hello"; echo "World"
-			//Write a command on two lines
-				echo "Hello "\
-			"World"	
-	Scripting>
-		//Create a text file and enter ->
-			#! /bin/bash
-			echo "This is my first bash script..."
-			cd ~/Desktop
-			ls -halt
-			touch somefile
-			ls -halt
-			echo "Pretty cool, right?"
-			//Make that text file an executable ->
-			chmod +x myscript.sh
-		//Run script
-			./myscript.sh
 	Compression>
 		tar>
 			//Extract -> create
@@ -140,15 +100,19 @@ Utility>
 		//Display additional info from a wireless network interface that is not displayed by iwconfig
 			iwlist 
 		
-
 	General>
 		//Convert file to pdf
 			ps2pdf
 		//Time command
 			time []
 
-
 System>
+	terminal>
+		//none: open new terminal window, -e: [commandName]: open new terminal windows and execute command, --tab: open new tab, to run command in new tab pass it afterwards
+			x-terminal-system {}?...
+		//EG
+			xfce4-terminal --geometry 80x40 -e mocp --tab -e mc
+			
 	Edit machine state>
 		shutdown
 		//Similar parameters in windows and linux, prefix with / in windows and - in linux
@@ -167,8 +131,10 @@ System>
 				sudo [command]
 			//Get a root shell with sudo
 				sudo find /etc -exec sh -i \;
+			//run last command as root
+				sudo !!
 		chmod>
-			//Edit a programs permissions, +x: Give execute permissions, -x: Take	 execute permissions, +w: Give write permissions	
+			//Edit a programs permissions, +x: Give execute permissions, -x: Take	 execute permissions, +w: Give write permissions, u+[permissionLetter]: permissions only apply for the user	
 			//or 
 			//set all permissions: 755 (Each number repersents 1 of user/user group/others; Think of the number as binary for there effect, 111 = 7 so means +rwx, or Read = 4 Write = 2 Execute = 1 then add)
 				chmod {} [filePath]
@@ -204,10 +170,9 @@ System>
 			top	
 		//List running processes
 			ps auxf
-			ps auxf | less
-			ps aux | grep [processName]
-			ps aux | grep bash | grep -v grep	
-		//Print current user running processes, See more info: -u, See all processes (not only for your user): -ax
+			//less: scroll through, grep [processName]: find stuff, grep bash | grep -v grep: find stuff and ignore grep process
+			ps auxf | {}
+		//Print current user running processes, See more info: -u, See all processes (not only for your user): -ax, -o [processName]:,
 			ps {}
 		Services>
 			//See status of all services
@@ -224,9 +189,8 @@ System>
 		//Kill process, -9: kill 
 			kill -{signal} [PID]	
 			//run command to get PID first
-			kill -9 `lsof -t -u [userName]`
-		//less: scroll through, grep [processName]: find stuff, grep bash | grep -v grep: find stuff and ignore grep process
-			ps auxf | {} 
+				kill -9 `lsof -t -u [userName]`
+	 
 		//Add space to run new jobs
 			//Send paused task to the background
 				bg
@@ -257,14 +221,72 @@ System>
 					lsof -i tcp:80 -P -R
 					
 Directories and files>
-	List file directories>
-		ls
-			//-l: Long form list of folders, -t: Sort by modification time, -a: Hidden files, -alt: Combination of previosu commands
-			ls {}
-			//Specific file/folder/path
-			ls [filePath]
-		//List working directory
-			pwd
+	Info gathering>
+		List file directories>
+			ls
+				//-l: Long form list of folders, -t: Sort by modification time, -a: Hidden files, -alt: Combination of previosu commands
+				ls {}
+				//Specific file/folder/path
+				ls [filePath]
+			//List working directory
+				pwd
+		Compare directories/files>
+			//-q: Only report on differences, -r: recursive
+				diff {}? [dir1] [dir2]
+			
+		Display contents of a location>
+			//Change amount of contents displayed
+				//Gradually load program into memory
+					less [filePath]	
+				//Output first twenty characters	
+					head -20 [file] 
+				//Output last 20
+					tail -20 [file]
+				//Output contents of file as it grows starting from last ten lines
+					tail -f file
+			cat>
+				//Print text file contents to console
+					cat filename
+				//Join two files
+					cat filename1 filename2
+				//Redirect file output
+					//Overwrite it
+						cat filename1 filename2 > new_file
+					//Append to it	
+						cat filename1 filename2 >> appended_file
+				//Use wildcard operator, match any files: *, match all txt files: *.txt, match files starting with pass: pass*
+					cat {}
+			strings>
+				//Get all strings in a file
+					strings [filePath]		
+		Search filesystem>
+			grep>
+				//use * and "" in queries, "" can contain regex expressions
+				//none:, -i: ignore case, -r: recursive search, -s: supress error msg, -v: search for lines without searchQuery
+				//-n: line number, -a[numberOfLines]: return numberOfLines surrounding found results, -b: byte offset with output lines 
+				//-E: use extended regular expression, can also use egrep, use if using any advanced RE patturns
+				grep {} [searchquery] [filename]
+				//EG piping commands
+					//Search for a filename
+						ls | grep [filename]
+					//Print a files contents and filter to a certain number of lines around target string
+						cat securityEventFile | grep -a[numberOfLines] [targetString]	
+
+			find>
+				//-name:, can use wildcards in file name EG "*myfile*"
+				//-mtime -[num]: find files in the last 30 days, -size +[num]M: find files > 10 MB in size
+				//-perm -[permissionsValuable], -user [user]
+				find [searchDirectoryPath] {searchMethod}... [searchQuery]
+				//EG Search entire file system and redirect errors to a certain file 
+					find / -name "passwords" 2> /dev/null
+					find [path] {} {}
+
+			whereis>
+				//Find all the locations of a program
+					whereis gimp
+
+		
+		
 	Change directories>
 		cd
 			//..: Back one, .:curretn directory, ~: home, /home/agent/Desktop: specific path
@@ -288,7 +310,7 @@ Directories and files>
 			echo "[text]" > [newFilePath]
 		//Check if a file exists, if it doesnt create it
 			touch [filename]	
-		
+	
 	Edit directories and files>
 		move>
 			//blank: no parameters, -n: Dont overwrite, -u: overwrite if timestamp is newer 
@@ -312,56 +334,7 @@ Directories and files>
 			 //-e: Execute commands, exploitable by wildcard injection 
 				Rsync {} [firstFolder] [secondFolder] {}
 				
-	Display contents of a location>
-		//Chnage amount of contents displayed
-			//Gradually load program into memory
-				less [filePath]	
-			//Output first twenty characters	
-				head -20 [file] 
-			//Output last 20
-				tail -20 [file]
-			//Output contents of file as it grows starting from last ten lines
-				tail -f file
-		cat>
-			//Print text file contents to console
-				cat filename
-			//Join two files
-				cat filename1 filename2
-			//Redirect file output
-				//Overwrite it
-					cat filename1 filename2 > new_file
-				//Append to it	
-					cat filename1 filename2 >> appended_file
-			//Use wildcard operator, match any files: *, match all txt files: *.txt, match files starting with pass: pass*
-				cat {}
-		strings>
-			//Get all strings in a file
-				strings [filePath]		
-	Search filesystem>
-		grep>
-			//use * and "" in queries, "" can contain regex expressions
-			//none:, -i: ignore case, -r: recursive search, -s: supress error msg, -v: search for lines without searchQuery
-			//-n: line number, -a[numberOfLines]: return numberOfLines surrounding found results 
-			//-E: use extended regular expression, can also use egrep, use if using any advanced RE patturns
-			grep {} [searchquery] [filename]
-			//EG
-				//Search for a filename
-					ls | grep [filename]
-				//Print a files contents and filter to a certain number of lines around target string
-					cat securityEventFile | grep -a[numberOfLines] [targetString]	
-							
-		find>
-			//-name:, can use wildcards in file name EG "*myfile*"
-			//-mtime -[num]: find files in the last 30 days, -size +[num]M: find files > 10 MB in size
-			//-perm -[permissionsValuable], -user [user]
-			find [searchDirectoryPath] {searchMethod}... [searchQuery]
-			//EG Search entire file system and redirect errors to a certain file 
-				find / -name "passwords" 2> /dev/null
-				find [path] {} {}
-				
-		whereis>
-			//Find all the locations of a program
-				whereis gimp
+	
 	
 Help>
 	man>
@@ -571,11 +544,7 @@ General applications>
 		
 		protonvpn-cli --ip
 		
-
 		
-		
-		
-
 Cyber security Security>
 	Start up items>
 		runlevels>

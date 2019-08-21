@@ -1,0 +1,147 @@
+//This document explains how to use bash
+//page 19
+
+Argument passing>
+	In the linux kernel one word arguments are passed with -, multiple single letter arguments can be chained
+	A word argument needs a -- prefix
+	//BSD syntax uses no dashes before a parameter
+Shortcuts>
+	Up Arrow – Show the previous command
+	Ctrl + R – Allows you to type a part of the command you're looking for and finds it
+	Ctrl + Z – Stops the current command, resume with fg in the foreground or bg in the background
+	Ctrl + C – Halts the current command, cancel the current operation and/or start with a fresh new line
+	Ctrl + L – Clear the screen
+	command | less – Allows the scrolling of the bash command window using Shift + Up Arrow and Shift + Down Arrow
+	!! – Repeats the last command
+	command  !$ – Repeats the last argument of the previous command
+	Esc + . (a period) – Insert the last argument of the previous command on the fly, which enables you to edit it before executing the command
+	Ctrl + A – Return to the start of the command you're typing
+	Ctrl + E – Go to the end of the command you're typing
+	Ctrl + U – Cut everything before the cursor to a special clipboard, erases the whole line
+	Ctrl + K – Cut everything after the cursor to a special clipboard
+	Ctrl + Y – Paste from the special clipboard that Ctrl + U and Ctrl + K save their data to
+	Ctrl + T – Swap the two characters before the cursor (you can actually use this to transport a character from the left to the right, try it!)
+	Ctrl + W – Delete the word / argument left of the cursor in the current line
+	Ctrl + D – Log out of current session, similar to exit
+
+syntax>
+	Operators>
+		//Combine commands with pipe
+			[commandOne] | [commandTwo]
+			//Redirect output to a file, >: overwrite target entirely or create file, >>: Append output to file or create file
+		//Use wildcard to auto fill things
+			cat fileNa*
+		//Use "" to use something in that exact way, use '' if they dont work (some symbols aren't covered)
+			//EG to find an exact word
+				find -name "exactFileName"
+		//escape a character
+			\# 
+			"#"
+		//redirection operators
+			//redirect ouput and overwrite if existing filename
+				scriptname >filename
+			//	//redirect ouput and append if existing filename
+				scriptname >>filename
+			//redirects both the stdout and the stderr of command to filename.
+				command &>filename
+				//EG redirect errors
+					type bogus_command &>/dev/null
+			//redirects stdout of command to stderr		
+				>&2	
+			
+		Line formatting>
+			//Run two commands on a line,
+				echo "Hello"; echo "World"				
+			//Write a command on two lines
+				echo "Hello "\
+				"World"	
+			//Run command in the background, freeing up terminal to run commands
+				echo "Hello" &			
+				
+		operators used mostly in scripting>
+			//comma
+				//link series of arithemtic equations (only the last one is returned)
+					let "t2 = ((a = 9, 15 / 3))"
+				//concatenate strings
+					/{,usr/}bin/
+			//null command
+				:
+			//!
+				not 
+			//?
+				//in (())	construct can act as c-style trinary operator		
+				//condition?result-if-true:result-if-false
+					(( var0 = var1<98?9:21 ))
+			//()
+				//command group, acts as a subshell that cant be read by the rest of the script	
+					(a=hello; echo $a)
+				//declare array
+					Array=(element1 element2 element3)
+				//integer expansion, expand and evaluate contained integer expression
+					(($a + $b))
+				
+			//{}
+				//extended brace expansion
+					echo {a..z} # a b c d e f g h i j k l m n o p q r s t u v w x y z
+					echo {0..3} # 0 1 2 3
+				//anonymous function, but with globally visible variables
+					{ local a; a=123; }
+				//insert variable at specific time
+					Array[1]=slot_1
+					echo ${Array[1]}
+				
+		
+	Path>
+		//Run something in the current folder
+			./programname
+		//Run via path starting from the root folder 
+			/directory/programname
+variables>
+	noteable preset variables
+	//home directory
+		$HOME
+	//last command
+		$?
+	//path
+		$PATH
+	//current running script PPID
+		$$
+		
+
+
+Loops>
+	for item in [criteria]; do [commandInvolvingItem, $Item]; done
+
+Scripting>
+	//Tell system what compilier/interpretor to use
+		//sha-bang  (#! is a two byte magic number) followed by path to the interpretor program for that script
+			//EGs
+			#!/bin/sh
+			#!/bin/bash
+			#!/usr/bin/perl
+			#!/usr/bin/tcl
+			#!/bin/sed -f
+			#!/usr/awk -f
+			//since the sha-bang is always run first, below causes a self-deleting script
+				#!/bin/rm
+	//EG script
+		#! /bin/bash
+		echo "This is my first bash script..."
+		cd ~/Desktop
+		ls -halt
+		touch somefile
+		ls -halt
+		echo "Pretty cool, right?"
+	//use script
+		//Make that text file an executable, can give more permissions if needed
+			chmod +x myscript.sh
+		//run it
+			./myscript.sh
+		//move to a directory listed in path for global use
+			/usr/local/bin
+			
+		//Run script
+			./myscript.sh
+			
+			
+			
