@@ -1,5 +1,12 @@
 //This document explains how to use bash
-//page 19
+//page 50
+Terminology>
+	data streams
+		// stdin = input
+		// stdout = output
+	exit/return status
+		//all commands return a exit/return status, where 0 is successful and other values match a specific error code, in a script the last command run determines the scripts exit status
+		
 
 Argument passing>
 	In the linux kernel one word arguments are passed with -, multiple single letter arguments can be chained
@@ -31,12 +38,9 @@ syntax>
 			//Redirect output to a file, >: overwrite target entirely or create file, >>: Append output to file or create file
 		//Use wildcard to auto fill things
 			cat fileNa*
-		//Use "" to use something in that exact way, use '' if they dont work (some symbols aren't covered)
+		//Use "" to use something in that exact way (escape its alt meaning), '' act as a stronger version, EG '' is needed to escape the escape character '\'  
 			//EG to find an exact word
 				find -name "exactFileName"
-		//escape a character
-			\# 
-			"#"
 		//redirection operators
 			//redirect ouput and overwrite if existing filename
 				scriptname >filename
@@ -48,11 +52,29 @@ syntax>
 					type bogus_command &>/dev/null
 			//redirects stdout of command to stderr		
 				>&2	
-			
+			//|, Passes the stdout of a previous command to the stdin of the next one
+			//-, redirection from/to stdin or stdout
+				//EG pipe to the end of a command
+				bunzip2 -c linux-2.6.16.tar.bz2 | tar xvf -
+		//tidle, ~, home direcotory
+			//~+, current working direcotry (pwd, $PWD)
+			//=~, previous working direcotry ($OLDPWD)
+		// \, escape, give characters their literal meaning
+			echo "The book cost \$7.98."
+			//special escaped characheters
+				\n //newline, \r //return, \t //tab, \v //vertical tab, \b //backspace
+				\a //alert
+		//!
+			//negate a condition
+				true //gives exit status 0
+				! true //gives exit status 1
+			//invoke history
+				...
+		
 		Line formatting>
 			//Run two commands on a line,
 				echo "Hello"; echo "World"				
-			//Write a command on two lines
+			//Write a command on two lines (escapes whitespace)
 				echo "Hello "\
 				"World"	
 			//Run command in the background, freeing up terminal to run commands
@@ -86,31 +108,49 @@ syntax>
 					echo {0..3} # 0 1 2 3
 				//anonymous function, but with globally visible variables
 					{ local a; a=123; }
-				//insert variable at specific time
-					Array[1]=slot_1
-					echo ${Array[1]}
-				
-		
+					
 	Path>
 		//Run something in the current folder
 			./programname
 		//Run via path starting from the root folder 
 			/directory/programname
 variables>
-	noteable preset variables
-	//home directory
-		$HOME
-	//last command
-		$?
-	//path
-		$PATH
-	//current running script PPID
-		$$
+	//noteable present variables
+		//home directory
+			$HOME
+		//last commands exit status
+			$?
+		//path
+			$PATH
+		//current running script PPID
+			$$
+		//script name
+			$0
+	//custom
+		variableName=value variableName2 = value2
+		$value, ${value}
+		numbers="1 2 3"
+		//remove variable value
+			unset variableName
+		//declare variable and perform arithemtic caluclation
+			let "uninitialized += 5"
+		//assign command result
+			a=`ls -l`
+			//or
+			a=$(ls -l)
+	
+		
+		
+Decision>
+	case "$key" in
+		$'\x1b\x5b\x32\x7e') # Insert
+		echo Insert Key
+		;;
+		$'\x1b\x5b\x33\x7e') # Delete
+		echo Delete Key
+		;;
 		
 
-
-Loops>
-	for item in [criteria]; do [commandInvolvingItem, $Item]; done
 
 Scripting>
 	//Tell system what compilier/interpretor to use
@@ -142,6 +182,57 @@ Scripting>
 			
 		//Run script
 			./myscript.sh
+	//script params
+		./scriptname 1 2 3 4 5 6 7 8 9 10
+		#!/bin/sh
+		MINPARAMS=10
+		args=$#    # Number of args passed.
+		lastarg=${!#}
+		echo
+			if [ -n "$1" ]
+				then
+					echo "Parameter #1 is $1"
+			fi
+			if [ -n "$args" ] # Parameters > $9 must be enclosed in {brackets}.
+				then
+					echo "Parameter #10 is ${10}"
+			fi	
 			
+			if [ $# -lt "$MINPARAMS" ]
+				then
+					echo "This script needs at least $MINPARAMS command-line arguments!"
+			fi
+		//avoid errors if params aren't passed
+			variable1_=$1_ # Rather than variable1=$1
+			critical_argument01=$variable1_
+			//or
+			if [ -z $1 ]
+				then
+					exit $E_MISSING_POS_PARAM
+			fi
+		//move value from one positional parameter to anouther	
+			$1 <--- $2
+	Loops>
+		for item in [criteria]; do [commandInvolvingItem, $Item]; done
+		for i in 1 2 3 4 5 6 7 8 9 10; do; echo -n "$i "; done &
+		while true; do  [thing] [if statement to terminate]
+	Decision>
+		//if/then constructs test if a commmands exit status is 0, so 0 = true and 1 = false
+		//[], test, it considers arguments as comprison expressions/file tests, then it returns 0 or 1 relative to coparison exit status
+		//[[ ... ]], extended test, acts more like scripting languages
+		//arithemetic constructs
+			//(( ... )), returns  exit status relative to arithemtic espressions expand to a non-zero value (=0 ES=1, <0 >0 = ES=0) 
+			//EGs
+				(( 0 && 1 )) //$? = 1
+				//return result directly with $ (without assigning a variable)
+					echo $(( 7 + 7 ))
+				//nest and assign variables half way through
+					echo $(( myvar = 7 + $(( vartwo = 4 + 4 )) )
+			//let ... assigns the result of an equation to a value, however the exit status acts similarly to (( ... )), returns exit status relative to result (=0 ES=1, <0 >0 ES=0)
+				//EG
+					let x=-1 ; echo x=$x \$?=$? // x=-1 $?=0
 			
-			
+		
+		
+		
+		

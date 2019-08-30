@@ -259,7 +259,7 @@
 		Subnets>
 			Sub-network (a way of splitting up a network into segments)
 			 IP address actually consists of two parts: network identifier and host identifier. These parts are variable within an IP so we need a subnet mask to tell us how big each one is. 
-			  EG 255.255.0.0. Means first two bytes are network identifier. The more computers you want to connect to the larger the host identifier needs to be (255.0.0.0 ->  2^24 amount of hosts, 255.255.0.0. -> 26^16, )
+			  EG 255.255.0.0. Means first two bytes are network identifier. The more computers you want to connect to the larger the host identifier needs to be ((255.0.0.0 -> 2^8 networks, 2^24 hosts), 255.255.0.0. -> 26^16, )
 				Classless Inter-Domain Routing (CIDR)>
 					shorthand way of writing a subnet mask.
 					 192.168.0.0, 255.0.0.0 -> 192.168.0.0/8. /x bits are used for the network identifier.

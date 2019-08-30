@@ -1,0 +1,72 @@
+//Point to point conenction between two nodes, encapsulate packets in IP packets and send over IP infrastructure 
+	//uses: exchange traffic over protocol different to IPv4, traffic directed to private LAN using non-globally valid IP, carry normal IPv4 traffic through a non-cooperating transit network
+	
+//create tunnel	
+	//connecting two IPv6 nodes through an IPv4-only network, these build an IPv6-in-IPv4 tunnel pretending to have a real direct point-to-point IPv6 connection
+		//set is the protocol used to tunnel IPv6 through an IPv4 connection
+		//Name and create tunnel, pass remote endpoint
+			ip tunnel add foo mode sit remote 192.168.1.42
+	//or, to carry normal IPv4 traffic through a non-cooperating transit network, use gre protocol
+		ip tunnel add foo4 mode gre remote 192.168.1.42
+	//explicity force kernel to use specific IP
+		ip tunnel add foo mode sit local 192.168.0.1 remote 192.168.1.42 dev eth0		
+		
+//view tunnels
+	ip tunnel show
+	//list all avaliable interfaces, this should show that the tunnel is inactive
+		ip link show
+	
+//manage tunnel
+	//activate tunnel
+		ip link set foo up
+	//deactivate
+		ip link set foo down	
+	//discard it	
+		ip tunnel del foo
+
+//changing a tunnels ttl (time-to-live)
+	//many uses, in terms of packets
+		//initial value set by server that reduces by one everytime a packet passes through a network device, if it hits zero the packet is discarded, stop packets endless looping
+	//stop accidental loops by setting low TTL value
+		 ip tunnel add foo mode sit remote 192.168.1.42 ttl 64
+		 
+			
+//edit ip addresses
+	//can give a tunnel multiple ip addresses
+		//set main IP address, interface needs to be up to set IP 
+			ip addr add 3ffe:9001:210:3::42/64 dev foo  
+			ip addr add 10.20.30.40/8 dev eth0
+			//Aliasing
+				//with older commands adding IP addresses generates fictitious interfaces (EG eth0:1, eth0:2)
+				//ifconfig does not always recognise multiple IP addresses added by ip addr show, so for backwards compatibility its good to add a label
+					ip addr add 192.168.0.11/24 label eth0:1 dev eth0
+		//del IP
+			ip addr del 3ffe:9001:210:3::42/64 dev foo
+	//list all ip addresses
+		ip addr show 
+
+//route traffic
+	//specify traffic to send through active tunnel
+		//EG all IPv6 traffic going to addresses starting with 3 bits equal to 001 (that is, all global unicast IPv6 address space) is redirected through the foo interface
+			ip route add 2000::/3 dev foo
+	//output routing tables
+		ip route
+		ip -6 route
+	//If you need to specify a gateway (this is not for tunnels), add via param
+		ip route add 192.168.1.0/24 via 192.168.0.254 dev eth0
+	//del route
+		 ip route del
+		 ip route del default
+		 ip -6 route del default
+		 
+//examples
+	//This is a typical IPv6 tunnel for 6bone:
+		ip tunnel add $TUNNEL mode sit local any remote $V4_REMOTEADDR ttl 64
+		ip link   set $TUNNEL up
+		ip addr   add $V6_LOCALADDR dev $TUNNEL
+		ip route  add 2000::/3      dev $TUNNEL
+
+
+
+
+	

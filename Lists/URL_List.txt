@@ -33,10 +33,16 @@ References>
   	https://support.microsoft.com/en-gb/help/140365/default-cluster-size-for-ntfs-fat-and-exfat
 	https://developer.gnome.org/gnome-devel-demos/unstable/tutorial.py.html.en
     https://www.videolan.org/developers/vlc/doc/doxygen/html/group__libvlc__core.html
+	Fitness>
+		https://www.bodybuilding.com/exercises/
+		
 	Cyber security>
 		https://www.hackingloops.com/creating-malicious-word-macros-tutorial-autorun-stub-via-word-document/
-		https://blk-box.co.uk/GettingStarted
 		https://www.tutonics.com/2012/11/gpg-encryption-guide-part-1.html
+		challenges
+			https://blk-box.co.uk/GettingStarted
+		https://attack.mitre.org
+		
 	Development>
 		https://www.simplifiedpython.net/run-python-on-android/
 		https://kivy.org/doc/stable/guide/packaging-android-vm.html
@@ -109,7 +115,10 @@ References>
 			bash>
 				https://www.digitalocean.com/community/tutorials/how-to-configure-chroot-environments-for-testing-on-an-ubuntu-12-04-vps
 				https://help.ubuntu.com/community/BasicChroot
-					
+				https://www.techonia.com/1400/create-tunnel-interface-linux
+				https://www.deepspace6.net/docs/iproute2tunnel-en.html
+				
+				
 	Programming>
 		Website templates>
 			https://pixelarity.com

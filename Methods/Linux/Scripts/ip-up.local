@@ -1,0 +1,87 @@
+#!/usr/bin/perl
+####################################################################
+# Auto-setup script for NGNET's Tunnel Broker.
+####################################################################
+
+# Configuration, fill with your values
+# ------------------------------------
+my $username  = '';
+my $password  = '';
+my $interface = '';
+my $v6hname   = '';
+
+# Don't touch anything below this line
+# ------------------------------------
+
+my $ngnet_tb  = '163.162.170.173';
+my $ipv6_pref = '2001:06b8:0000:0400::/64';
+my $url       = 'https://tb.ngnet.it/cgi-bin/tb.pl';
+
+use strict;
+use IO::File;
+use LWP::UserAgent;
+
+# Get our IPv4 address
+my $lines;
+my $f = IO::File->new();
+$f->open("/sbin/ip addr show dev $interface|") or die("$!\n");
+$f->read($lines, 4096);
+$f->close();
+$lines =~ /(\d+\.\d+\.\d+\.\d+)/ or die('Impossible condition');
+my $v4addr = $1;
+
+# Logging in
+my $ua = LWP::UserAgent->new(keep_alive => 5);
+my $resp = $ua->post($url, { 
+	oper     => 'reg_accesso',
+	username => $username,
+	password => $password,
+	submit   => 'Submit'
+});
+$resp->is_success() or die('Failed reg_accesso: '.$resp->message);
+$resp->as_string =~ /name=sid.*value=\"([^\"]+)\"/i or die('Missing sid');
+my $sid = $1;
+
+# Retrieve IPv6 addresses
+my $myipv6;
+my $ipv6end;
+$resp = $ua->post($url, {
+	oper        => 'tunnel_info',
+	sid         => $sid,
+	username    => $username,
+	submit      => 'Submit'
+});
+$resp->is_success() or die('Failed tunnel_info: '.$resp->message);
+$resp->as_string =~ /name=ipv6client.*value=\"([^\"]+)\"/i and $myipv6 = $1;
+$resp->as_string =~ /name=ipv6server.*value=\"([^\"]+)\"/i and $ipv6end = $1;
+die("missing IPv6 endpoints") unless ($myipv6 and $ipv6end);
+
+# Extend tunnel lifetime
+$resp = $ua->post($url, {
+	oper        => 'tunnel_extend',
+	sid         => $sid,
+	username    => $username,
+	submit      => 'Submit'
+});
+$resp->is_success() or die('Failed tunnel_extend: '.$resp->message);
+
+# Update parameters on the remote side
+$resp = $ua->post($url, {
+	oper        => 'update_parameter',
+	sid         => $sid,
+	os_type     => 'Linux',
+	ipv4client  => $v4addr,
+	fl_entry    => $v6hname,
+	username    => $username,
+	ipv6_pref   => $ipv6_pref,
+	submit      => 'Submit'
+});
+$resp->is_success() or die('Failed update_parameter: '.$resp->message);
+
+# Set up tunnel on our side
+system("/sbin/modprobe ipv6");
+system("/sbin/ip tunnel add ngnet mode sit local any remote $ngnet_tb ttl 64");
+system("/sbin/ip link set ngnet up");
+system("/sbin/ip addr add $myipv6 dev ngnet");
+system("/sbin/ip route add 2000::/3 dev ngnet");
+

@@ -4,3 +4,28 @@ Windowing system:  software that manages separately different parts of display s
 		XFree86: Outdated display server for X
 		X.Org: Display server for X
 		window manager: controls the placement and appearance of windows within a windowing system in a graphical user interface
+
+networking
+	ttl (time-to-live)
+		many uses
+			packets
+				initial value set by server that reduces by one everytime a packet passes through a network device, if it hits zero the packet is discarded, stop packets endless looping
+			dns servers
+				it determines the lifetime of dns records, this speeds up connections because the dns server knows how long to cache the IP address	
+
+Python interpretor
+	all functions, lists, objects are python code objects
+	bytecode is an attribute of the code object (foo.func_code.co_code)
+	this is a series of bytes that translates into numbers, translate with the dis module
+	import dis
+	dis.dis(foo.func_code)
+	offset in the bytecode (index position)-> byte names (for human benefit) -> argument (repersented as an index into other attributes of the code object) -> actual argument fetched by dis
+	byte names stored as keys in a dictionary with the byte values as values
+		def_op('LOAD_CONST', 100)       # Index in const list
+		def_op('BUILD_TUPLE', 102)      # Number of tuple items
+		def_op('BUILD_LIST', 103)       # Number of list items
+		def_op('BUILD_SET', 104)        # Number of set items
+	python compiler generates bytecode -> python interpretor -> make sense of bytecode via the virtual machine
+
+
+

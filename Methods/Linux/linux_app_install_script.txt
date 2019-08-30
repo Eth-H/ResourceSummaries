@@ -10,6 +10,10 @@ sudo apt install sqlitebrowser
 sudo apt install evolution
 sudo apt install magic
 
+sudo apt install geany
+git clone https://github.com/codebrainz/geany-themes
+mv ./geany-themes-master/colorschemes/* ~/.config/geany/colorschemes/
+
 //development installs
 //Python installs
 sudo apt install python3-pip

@@ -1,18 +1,8 @@
-nux vs Linux kernel
-
-
-	
-
 Others>
 	Unknown>
 		readlink -f /proc/{PID of process}/exe
 	Command combinations>
-		Setup custom executable>
-			//Give executable permissions
-				chmod 755 ./clean_pdf
-			//Move to path, so script can be directly run from the command line anywhere on the filesystem
-				mv ./clean_pdf /usr/bin/clean_pdf
-				
+		
 Local info gathering>
 		System info>
 			List hardware>
@@ -46,8 +36,6 @@ Local info gathering>
 						startx
 					//Run test server and generate config
 						Xorg -configure
-					
-					
 		Time>
 			data
 			cal
@@ -93,12 +81,7 @@ Utility>
 		//Start X printer setup interface
 			printtool
 	Network>
-		//List ip adddresses
-			ifconfig
-		//Set the params of the network interface which are specific to the wireless operation
-			iwconfig
-		//Display additional info from a wireless network interface that is not displayed by iwconfig
-			iwlist 
+	
 		
 	General>
 		//Convert file to pdf
@@ -112,6 +95,16 @@ System>
 			x-terminal-system {}?...
 		//EG
 			xfce4-terminal --geometry 80x40 -e mocp --tab -e mc
+		//Exit shell, 
+		//none: Leave the shell, [integer, 0 or 1-255]: change the scripts exit return status (instead of leaving it to the last command), EG exit 0 
+			exit {}?
+	kernel modules>
+		//show status of modules in the linux kernel
+			lsmod 
+			lsmod | grep [moduleName]
+		//Add and remove modules from the Linux Kernel
+			modprobe {}?
+			
 			
 	Edit machine state>
 		shutdown
@@ -334,8 +327,6 @@ Directories and files>
 			 //-e: Execute commands, exploitable by wildcard injection 
 				Rsync {} [firstFolder] [secondFolder] {}
 				
-	
-	
 Help>
 	man>
 		//Get help with ls command
@@ -401,24 +392,54 @@ Network>
 	wget>
 		//Blank: Download webpages, -c: Continue stopped download
 			wget {} [url/file]
-			
-	netstat>
-		//Check listening ports, -a: all sockets, -u: udp, -t: tcp 
-		//-l: listening sockets, -p: PID and program name, -n: dont resolve names 
-		//-A [addressFamilyName]: address families, inet, inet6, ax25, netrom, ipx, ddp, x25
-			netstat {}
-			
-			netstat -lptu
-			netstat -lpta
-		//	
-			sudo netstat -A inet -p
-	//Get info on domain
+	Get info on domain>
 		whois domain
 		//DNS info
 			dig [domain]
 		//Reverse lookup host
-			dig -x host 	
-Packages>		
+			dig -x host
+	 net-tools>
+	 	//considered deprecated, but widely avaliable
+		netstat>
+			//Check listening ports, -a: all sockets, -u: udp, -t: tcp 
+			//-l: listening sockets, -p: PID and program name, -n: dont resolve names 
+			//-A [addressFamilyName]: address families, inet, inet6, ax25, netrom, ipx, ddp, x25
+				netstat {}...
+				netstat -lptu
+				netstat -lpta
+				netstat -A inet -p
+		
+		//List ip adddresses
+			ifconfig
+		//Set the params of the network interface which are specific to the wireless operation
+			iwconfig
+		//Display additional info from a wireless network interface that is not displayed by iwconfig
+			iwlist 
+		//Protocol used to ask the router for infomation of other connected devices on the network
+		//none: list arp table
+			arp {}...
+		//Point to point conenction between two nodes, encapsulate packets in IP packets and send over IP infrastructure
+			iptunnel {}...
+		//
+			nameif
+			
+	iproute2>
+		//n: arp, route: netstat -r, maddr: netstat -g
+		//a: addresses, link: netstat -i, -s: ip stats (these 3 act as ifconfig)
+			ip {}...
+		//iwconfig
+			iw
+		//nameif
+			ip link
+			ifrename
+		//-t: tcp connections not in listen mode (servers), -u: udp not in LM, -x: unix sockets pipe connections,
+		//-a: all connections EG -ta for all tcp connections, -l: listening connections, -n: dont resolve service names, -o: options
+		//-s: prints statstics, --ipv4: ip version 4  
+			ss {}...
+			
+			
+			
+Packages>	
 	Package manager>
 		apt-get>
 		//Debian package manager, apt or apt-get

@@ -1,8 +1,8 @@
 "//"
 "" instructions
 "->" Process
-"//(Ix)" Declaration of Index "x"
-"{Ix}" Reference to index "x"
+"//(x)" Declaration of Index "x"
+"{x}" Reference to index "x"
 
 //GIT COMMANDS
 	//CORE GIT
@@ -139,7 +139,11 @@
             git commit -m 'Removing node_modules from git history'
             git gc
             git push origin master --force
-
+		//remove folder from repo but not local
+			git rm -r --cached FolderName
+			git commit -m "Removed folder from repository"
+			git push origin master
+		
 	//Git workflow in industry
 		//Centralized Workflow
 			//uses a central repository to serve as the single point-of-entry for all changes to the project		
