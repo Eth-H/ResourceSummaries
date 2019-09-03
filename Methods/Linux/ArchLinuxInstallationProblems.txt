@@ -1,0 +1,129 @@
+https://forum.manjaro.org/t/kernel-panic-not-syncing-vfs-unable
+https://forum.manjaro.org/t/kernel-panic-not-syncing-vfs-unable-to-mount-root-fs-on/21226
+https://forum.manjaro.org/t/restore-manjaro-boot/3350
+https://forum.manjaro.org/t/grub-boot-not-working-with-efi/44329
+https://forum.manjaro.org/t/creating-a-new-os-independent-grub-2-bootloader/3150/2
+https://forum.manjaro.org/t/unable-to-set-manjaro-grub-as-default/50611/4
+
+debian/ubuntu grub cannot boot arch linux, but arch linux grub can boot both
+after linux grub-updates, the arch boot loader can get replaced, we aim to fix this
+	option 1
+		add custom entry to all other OS bootloaders to multiboot to or configfile from manjaro grub.cfg
+			nano /boot/grub/custom.cfg
+				#!/bin/sh
+				exec tail -n +3 $0
+				# This file provides an easy way to add custom menu entries.  Simply type the
+				# menu entries you want to add after this comment.  Be careful not to change
+				# the 'exec tail' line above.
+				menuentry 'Manjaro GNOME    menu' {
+				insmod part_gpt 
+				insmod fat
+				search --no-floppy --fs-uuid --set=root CF2E-B0AD
+				chainloader /EFI/manjaro/grubx64.efi 
+				}
+				
+	option 2 
+		 set all other OS’s grub to its own partition so that whenever there’s an update in the other OS’s it won’t 
+		 become default system grub (make majaro grub default first). But remember to update-grub in Manjaro to incorporate new update in other OS new kernel
+		
+		//log into manjaro from debian grub
+			//press c in grub menu
+			grub> search.file /boot/intel-ucode.img root
+			grub> configfile /boot/grub/grub.cfg
+			run commands
+				sudo grub-install /dev/sda --force
+				sudo update-grub
+
+			//EG sda7 = Ubuntu, sda10 = Kubuntu
+			boot into ubuntu and run
+			sudo grub-install --force /dev/sda7
+			
+			boot into kubuntu and run
+			sudo grub-install --force /dev/sda10
+			
+problem where arch grub or specific installation needs to be run from debian grub
+nano /boot/grub/custom.cfg
+	menuentry "Manjaro - multiboot " {
+		insmod part_gpt
+		insmod ext2
+		search --no-floppy  --fs-uuid --set=root [manjaro root partition UUID]
+		chainloader /boot/grub/x86_64-efi/core.efi
+	}
+
+	menuentry "Manjaro - chainload " {
+	  	insmod part_gpt
+		insmod fat
+		search --no-floppy  --fs-uuid --set=root [esp_partition UUID]
+		chainloader /EFI/Manjaro/grubx64.efi
+	}
+
+	menuentry "Manjaro - configfile "  {
+		insmod part_gpt
+		insmod ext2
+		search --no-floppy  --fs-uuid --set=root [manjaro root partition UUID]
+		configfile /boot/grub/grub.cfg
+	}
+
+	menuentry "Manjaro - vmlinuz " {
+		insmod part_gpt
+		insmod ext2
+		search --no-floppy  --fs-uuid --set=root [manjaro root partition UUID]
+		linux	/boot/vmlinuz-4.19-x86_64 root=UUID=[manjaro root partition UUID] rw
+		initrd	/boot/intel-ucode.img /boot/initramfs-4.19-x86_64.img
+	}				
+
+
+
+
+
+
+commands to get infomation
+	efibootmgr -v
+	sudo parted -l
+	sudo blkid
+	findmnt -s
+	findmnt /boot/efi
+	
+results
+	emera@emeraPC:/$ sudo blkid
+	/dev/sdb1: UUID="8596-E6CC" TYPE="vfat" PARTUUID="7013a2a8-6dc1-41eb-abd3-77dc667ef913"
+	/dev/sdb2: UUID="1228014a-4355-4670-863b-fcde7c599931" TYPE="ext4" PARTUUID="f00b9cf3-6b7e-402c-9daa-e3e12214296e"
+	/dev/sdb3: UUID="0c7b667f-7f77-4cde-88cb-9e96b9ea181b" TYPE="swap" PARTUUID="1093d077-8146-4642-b58d-07f3f781de27"
+	/dev/sdb4: UUID="7d7ac8fa-6753-4ef9-913f-e7559a8bf60c" TYPE="ext4" PARTUUID="9b166021-76c2-5345-8070-8586ce06309c"
+	/dev/sdb5: UUID="11497ede-7d2f-49c3-adf7-1fa7bbe271db" TYPE="ext4" PARTUUID="f025967e-c77a-4f97-8d6c-9d674a16bcfb"
+	/dev/sdb8: UUID="31914BDA093D9451" TYPE="ntfs" PTTYPE="dos" PARTUUID="aa4e03fd-2a2a-4914-9f77-74dba996c056"
+	
+	emera@emeraPC:/$ efibootmgr  -v
+	BootCurrent: 0001
+	Timeout: 0 seconds
+	BootOrder: 0001,000A,0004,0002,000B,000D,000E
+	Boot0000* Windows Boot Manager	HD(1,GPT,418133d6-c9d2-4a65-91e3-3e7ac8cb31b5,0x800,0xfa000)/File(\EFI\Microsoft\Boot\bootmgfw.efi)WINDOWS.........x...B.C.D.O.B.J.E.C.T.=.{.9.d.e.a.8.6.2.c.-.5.c.d.d.-.4.e.7.0.-.a.c.c.1.-.f.3.2.b.3.4.4.d.4.7.9.5.}....f...............
+	Boot0001* ubuntu	HD(1,GPT,418133d6-c9d2-4a65-91e3-3e7ac8cb31b5,0x800,0xfa000)/File(\EFI\ubuntu\shimx64.efi)
+	Boot0002* debian	HD(1,GPT,418133d6-c9d2-4a65-91e3-3e7ac8cb31b5,0x800,0xfa000)/File(\EFI\debian\shimx64.efi)
+	Boot0003* UEFI: WDC WD5000BEVT-00A0RT0, Partition 1	HD(1,GPT,13b5fafc-b5ef-4442-a404-b4f6ff781c2c,0x800,0x1dc800)/File(EFI\Microsoft\Boot\bootmgfw.efi)..BO
+	Boot0004* parrot	HD(1,GPT,418133d6-c9d2-4a65-91e3-3e7ac8cb31b5,0x800,0xfa000)/File(\EFI\parrot\grubx64.efi)
+	Boot0005* Diskette Drive	BBS(Floppy,Diskette Drive,0x0)..BO
+	Boot0006* Internal HDD	BBS(HD,P1: WDC WD5000BEVT-00A0RT0,0x0)..BO
+	Boot0007* USB Storage Device	BBS(USB,VendorCoProductCode,0x0)..BO
+	Boot0008* CD/DVD/CD-RW Drive	BBS(CDROM,CD/DVD/CD-RW Drive,0x0)..BO
+	Boot0009* Onboard NIC	BBS(Network,Realtek PXE B02 D00,0x0)..BO
+	Boot000A* manjaro	HD(1,GPT,418133d6-c9d2-4a65-91e3-3e7ac8cb31b5,0x800,0x1dc000)/File(\EFI\manjaro\grubx64.efi)
+	Boot000B* UEFI: SK hynix SC308 SATA 256GB, Partition 1	HD(1,GPT,418133d6-c9d2-4a65-91e3-3e7ac8cb31b5,0x800,0xfa000)/File(EFI\Microsoft\Boot\bootmgfw.efi)..BO
+	Boot000D* UEFI: WDC WD5000BEVT-00A0RT0, Partition 1	HD(1,GPT,7013a2a8-6dc1-41eb-abd3-77dc667ef913,0x800,0x1dc000)/File(EFI\boot\bootx64.efi)..BO
+	Boot000E* UEFI: VendorCoProductCode, Partition 1	PciRoot(0x0)/Pci(0x14,0x0)/USB(2,0)/HD(1,MBR,0x0,0x3d26e8,0x2000)..BO
+	
+	emera@emeraPC:/$ findmnt -s
+	TARGET    SOURCE                                    FSTYPE OPTIONS
+	/         UUID=1228014a-4355-4670-863b-fcde7c599931 ext4   errors=remount-ro
+	/boot/efi UUID=6A6D-CA6A                            vfat   umask=0077
+	none      UUID=1af52412-f963-4b7e-949f-36977bb80548 swap   sw
+	
+	emera@emeraPC:/$ findmnt /boot/efi
+	TARGET    SOURCE    FSTYPE OPTIONS
+	/boot/efi /dev/sda1 vfat   rw,relatime,fmask=0077,dmask=0077,codepage=437,iocharset=iso8859-1,shortname=mixed,errors=remount-ro
+
+	
+
+
+
+

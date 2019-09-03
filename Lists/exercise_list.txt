@@ -1,107 +1,128 @@
-https://www.bodybuilding.com/exercises/
+source
+	https://www.bodybuilding.com/exercises/
+notes
+	within each muscle grouping, the most conveniant and beneficial exercises are organised first	
+	generally can use a barbell in place of an EZ bar or vice-vesa
+	extra equipment is optional, but beneficial if you can use them
+	
+	
 best overall 
 	by muscle
 		neck
-			Lying Face Up/Down Plate Neck Resistance
-			Isometric Neck Exercise 
-		Traps (trapezius)
-			Standing Dumbbell Upright Row
-			Dumbbell Shrug
-			Scapular Pull-Up
-			
-			Smith Machine Shrug
-		Shoulders (deltoids)
-			Single-Arm Linear Jammer 
-			Side Laterals to Front Raise
-			Standing Palm-In One-Arm Dumbbell Press
-			Standing Palms-In Dumbbell Press
-			Clean and Press
-		Chest (pectoralis)
-			Dumbbell Bench Press
-			Incline Dumbbell Press
+			lying face up/down plate neck resistance
+			isometric neck exercise 
+		traps (trapezius)
+			standing dumbbell upright row
+			dumbbell shrug
+			lacking equipment
+				scapular pull-up
+			extra equipment
+				smith machine shrug
+		shoulders (deltoids)
+			single-arm linear jammer 
+			standing palms-in dumbbell press
+				standing palm-in one-arm dumbbell press
+			clean and press
+			side laterals to front raise
+		chest (pectoralis)
+			dumbbell bench press
+				incline dumbbell press
+			dumbbell flyes
 			pushups
-			Dumbbell Flyes
-			Dips - Chest Version
-			Bodyweight Flyes
-		Biceps (biceps brachii)
-			Incline Hammer Curls
-			Wide-Grip Standing Barbell Curl
-			Zottman Curl
-				
-			Hammer Curls
-			Close-Grip EZ Bar Curl
-		Forearm (brachioradialis)
-			Wrist Rotations with Straight Bar
-			Standing Palms-Up Barbell Behind The Back Wrist Curl
-			Finger Curls
-		Abs (rectus abdominis)
-			One-Arm Medicine Ball Slam
-			Landmine 180's
+			extra equipment
+				bodyweight flyes
+				dips - chest version
+		biceps (biceps brachii)
+			standing hammer curls
+				bench hammer curls
+				incline hammer curls
+			zottman curl
+			wide-grip standing barbell curl
+				barbell curl
+			dont have a barbell
+				close-grip EZ bar curl 
+					EZ-bar curl
+		forearm (brachioradialis)
+			wrist rotations with straight bar
+			palms-up/down wrist curl over a bench
+			finger curls
+			no bench
+				standing palms-up barell behind the back wrist curl
+		abs (rectus abdominis)
+			landmine 180's
 			body only
 				plank
-				Bottoms Up
+				bottoms Up
+				cross-body crunch
+				cacoon
 				spider crawl
-				Cross-Body Crunch
-			Spell Caster
+			spell caster
+			extra equipment
+				one-arm medicine ball slam	
+		quads (quadriceps)
+			barbell full squat
+			snatch
+			bar elevation
+				clean from blocks
+		calves (gastrocnemius)
+			standing dumbbell calf raise
+				standing calf raises
+			extra equipment
+				smith machine calf raise
 				
-		Quads (quadriceps)
-			Clean from Blocks
-			Barbell Full Squat
-			Snatch
-		Calves (gastrocnemius)
-			Standing Calf Raises
-			Standing Dumbbell Calf Raise
-			Smith Machine Calf Raise
+				
 	by equipment
 		body only
-			Lying Face Up/Down Plate Neck Resistance
-			Isometric Neck Exercise
-			
+			lying face up/down plate neck resistance
+			isometric neck exercise
 			pushups
 			plank
-			Bottoms Up
+			bottoms up
+			cross-body crunch
+			cacoon
 			spider crawl
-			Cross-Body Crunch
-			
-			Standing Calf Raises
+			standing calf raises
 		
 		dumbell
-			Standing Dumbbell Upright Row
-			Dumbbell Shrug
-			Side Laterals to Front Raise
-			Standing Palm-In One-Arm Dumbbell Press
-			Standing Palms-In Dumbbell Press
-			Dumbbell Bench Press
-			Incline Dumbbell Press
-			Dumbbell Flyes
-			Incline Hammer Curls
-			Zottman Curl
-			Hammer Curls
-			Spell Caster
-			Standing Dumbbell Calf Raise
+			standing dumbbell upright row
+			dumbbell shrug
+			side laterals to front raise
+			standing palms-in dumbbell press
+				standing palm-in one-arm dumbbell press
+			dumbbell bench press
+				incline dumbbell press
+			dumbbell flyes
+			zottman curl
+			standing hammer curls
+				bench hammer curls
+				incline hammer curls
+			spell caster
+			standing dumbbell calf raise
 			
-		horizontal over-head bar
-			Scapular Pull-Up
-		double horizontal body-level bar
-			Dips - Chest Version
 		barbell 
-			Clean and Press
-			Wide-Grip Standing Barbell Curl
-			Wrist Rotations with Straight Bar
-			Standing Palms-Up Barbell Behind The Back Wrist Curl
-			Finger Curls
-			Landmine 180's
-			Clean from Blocks
-			Barbell Full Squat
-			Snatch
+			clean and press
+			wide-grip standing barbell curl
+			wrist rotations with straight bar
+			standing palms-up barbell behind the back wrist curl
+			finger curls
+			landmine 180's
+			barbell full squat
+			snatch
+			boxes (elevation)
+				clean from blocks
 		barbell half loaded
-			Single-Arm Linear Jammer 
-		EZ bar (smaller barbell)
-			Close-Grip EZ Bar Curl
+			single-arm linear jammer 
+		EZ bar (smaller barbell with curled grips)
+			close-grip EZ bar curl
+				EZ bar curl
 		2 EZ bars
-			Bodyweight Flyes
+			bodyweight flyes
 		medicine balls
-			One-Arm Medicine Ball Slam
+			one-arm medicine ball slam
 		smith machine
-			Smith Machine Shrug
-			Smith Machine Calf Raise
+			smith machine shrug
+			smith machine calf raise
+		horizontal over-head bar
+			scapular pull-up
+		double horizontal body-level bar
+			dips - chest version

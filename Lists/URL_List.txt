@@ -42,6 +42,7 @@ References>
 		challenges
 			https://blk-box.co.uk/GettingStarted
 		https://attack.mitre.org
+		https://docs.parrotlinux.org/library/start/
 		
 	Development>
 		https://www.simplifiedpython.net/run-python-on-android/
@@ -210,6 +211,11 @@ Download links>
 		https://theromdepot.com		
 		https://vimm.net
 		http://www.portalroms.com/en
+	Linux>
+		debian
+			https://cdimage.debian.org/images/unofficial/non-free/images-including-firmware/10.0.0-live+nonfree/amd64/iso-hybrid/
+			
+		
 		
 		
 		

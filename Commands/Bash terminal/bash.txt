@@ -104,7 +104,11 @@ System>
 			lsmod | grep [moduleName]
 		//Add and remove modules from the Linux Kernel
 			modprobe {}?
-			
+	Partitions>
+		//output mounted partitions
+			cat /etc/fstab
+		//output all partitions
+			blkid
 			
 	Edit machine state>
 		shutdown
