@@ -3,6 +3,7 @@ https://forum.manjaro.org/t/kernel-panic-not-syncing-vfs-unable-to-mount-root-fs
 https://forum.manjaro.org/t/restore-manjaro-boot/3350
 https://forum.manjaro.org/t/grub-boot-not-working-with-efi/44329
 https://forum.manjaro.org/t/creating-a-new-os-independent-grub-2-bootloader/3150/2
+
 https://forum.manjaro.org/t/unable-to-set-manjaro-grub-as-default/50611/4
 
 debian/ubuntu grub cannot boot arch linux, but arch linux grub can boot both

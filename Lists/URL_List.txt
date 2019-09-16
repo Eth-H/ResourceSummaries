@@ -35,6 +35,8 @@ References>
     https://www.videolan.org/developers/vlc/doc/doxygen/html/group__libvlc__core.html
 	Fitness>
 		https://www.bodybuilding.com/exercises/
+	Privacy>
+		https://freedomhouse.org
 		
 	Cyber security>
 		https://www.hackingloops.com/creating-malicious-word-macros-tutorial-autorun-stub-via-word-document/
@@ -64,11 +66,11 @@ References>
 			https://www.tecmint.com/install-ubuntu-16-04-alongside-with-windows-10-or-8-in-dual-boot/
 			https://forums.nexusmods.com/index.php?/topic/2110829-modding-skyrim-with-wine-playonlinux-in-linux-ubuntu/
 			https://wiki.manjaro.org/index.php/Installation_Guides
-			https://forum.manjaro.org/t/installation-with-manjaro-architect-iso/20429
 			https://arstechnica.com/information-technology/2014/02/how-to-run-your-own-e-mail-server-with-your-own-domain-part-1/
 			https://arstechnica.com/series/web-served/
 			https://www.digitalocean.com/community/tutorials/how-to-set-up-a-node-js-application-for-production-on-ubuntu-16-04#prerequisites
 			https://www.phusionpassenger.com/library/walkthroughs/deploy/nodejs/
+
     Vim>
 		https://vim.rtorr.com
 		https://vim-adventures.com
@@ -106,19 +108,23 @@ References>
 		Javascript>
 			https://stackoverflow.com/questions/5619202/converting-a-string-to-a-date-in-javascript
 		Linux>
-			setup>
+			generic setup>
 				http://segfault.linuxmint.com/2015/08/configuring-the-mdm-login-screen-for-multiple-monitors/
 				https://askubuntu.com/questions/160036/how-do-i-disable-acpi-when-booting
-        		https://askubuntu.com/questions/55224/a-common-home-partition-for-multiple-linux-distributions
+        			https://askubuntu.com/questions/55224/a-common-home-partition-for-multiple-linux-distributions
 				https://medium.com/@manujarvinen/setting-up-a-multi-boot-of-5-linux-distributions-ca1fcf8d502
-				https://forum.manjaro.org/t/installation-with-manjaro-architect-iso/20429
-				https://itsfoss.com/manjaro-architect-review/
+			
 			bash>
 				https://www.digitalocean.com/community/tutorials/how-to-configure-chroot-environments-for-testing-on-an-ubuntu-12-04-vps
 				https://help.ubuntu.com/community/BasicChroot
 				https://www.techonia.com/1400/create-tunnel-interface-linux
 				https://www.deepspace6.net/docs/iproute2tunnel-en.html
-				
+			manjaro>
+				https://forum.manjaro.org/t/options-for-nvidia-optimus-graphics/75185	
+				https://forum.manjaro.org/t/how-to-permanently-enable-user-namespaces-in-manjaro-linux/71614/5
+				https://forum.manjaro.org/t/unable-to-set-manjaro-grub-as-default/50611/4
+				https://forum.manjaro.org/t/installation-with-manjaro-architect-iso/20429
+
 				
 	Programming>
 		Website templates>
@@ -187,6 +193,8 @@ Resources>
 		Prep>
 			http://blog.codingforinterviews.com/
 			https://grindreel.academy
+		schooling>
+			https://www.ucas.com/ucas/tariff-calculator
 		
 Unchecked>
     https://www.google.com/search?q=shodan+safari&rlz=1C1CHBF_en-gbGB754GB755&oq=Shodan+safari&aqs=chrome.0.0.4175j0j7&sourceid=chrome&ie=UTF-8

