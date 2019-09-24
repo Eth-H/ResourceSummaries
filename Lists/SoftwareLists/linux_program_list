@@ -39,6 +39,8 @@ appplication type -> possbile further sub-categories -> program name
 			xed
 		db
 			sqlitebrowser
+		hand draw
+			Xournal
 	PDF
 		Epdfview
 		Evince
@@ -91,7 +93,7 @@ appplication type -> possbile further sub-categories -> program name
 		thunar
 		midnight commander (mc)
 	file sharing
-		bittoerent
+		bittorent
 			deluge
 			qBittorent
 			transmission CLI, GTK
@@ -136,6 +138,6 @@ appplication type -> possbile further sub-categories -> program name
 		nmap
 		volatility
 		steghide
-
+	
 
 

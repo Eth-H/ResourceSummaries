@@ -149,8 +149,18 @@ Decision>
 		$'\x1b\x5b\x33\x7e') # Delete
 		echo Delete Key
 		;;
-		
-
+functions>
+	functionName(){
+		#print passed parameter
+		echo $1
+	}
+	#function call
+	functionName "parameter"
+	#pass function as parameter, with its paramters
+		function x()      { echo "x(): Passed $1 and $2";  }
+		function around() { echo before; "$@"; echo after; }
+		around x 1st 2nd
+	
 
 Scripting>
 	//Tell system what compilier/interpretor to use

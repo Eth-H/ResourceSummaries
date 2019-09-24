@@ -1,8 +1,20 @@
 //where the references to partitions are containd, use to mount partitions or to refer to them
-/dev/
-
+/dev (llinks/info on devices)
+	//references to drives
+		/dev/sdax /dev/sdbx
+	//reference to virtual consoles
+		/dev/ttyx
+	//pseudo-devices (device nodes that dont correspond to physical devices)
+		//discard written input, provides EOF when read
+			/dev/null
+		//discard written input, provides null characters (0 value bytes) when read
+			/dev/zero
+		//generates a disk full error when attempting to write to it, provides null characters on read
+			/dev/full
+		//provides variable-length stream of numbers on read
+			/dev/random
 //where binaries are stored, move binary apps here to give the terminal global access to them
-//generally /bin binaries are needed earily in teh boot process or are more important
+//generally /bin binaries are needed earily in the boot process or are more important
 /bin
 /usr/bin
 
@@ -18,6 +30,10 @@
 
 //contain user home directories, can be a different partition
 /home
+/home/$USER
+	//config files
+	~/.config
+	~/.local/share
 
 //contains libraries (msotly shared)
 /lib
@@ -70,4 +86,8 @@
 	//configeration files, EG grub, ufw
 	/etc/default
 		
-
+/usr
+	/usr/share/doc
+	
+	
+	

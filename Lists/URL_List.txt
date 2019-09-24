@@ -54,7 +54,6 @@ References>
 		https://stackoverflow.com/questions/53290095/react-passing-fetched-data-from-api-as-props-to-components
 		https://www.atlassian.com/git/tutorials/comparing-workflows
 		
-		
 	OS>
 		https://en.wikipedia.org/wiki/Comparison_of_boot_loaders
 		https://forum.manjaro.org/t/manjaro-as-guest-in-virtualbox-shared-folder/41675/8
@@ -108,12 +107,16 @@ References>
 		Javascript>
 			https://stackoverflow.com/questions/5619202/converting-a-string-to-a-date-in-javascript
 		Linux>
+			info>
+				bootloaders
+					https://wiki.archlinux.org/index.php/Arch_boot_process#Boot_loader
+					http://rodsbooks.com/refind/using.html#legacy
 			generic setup>
 				http://segfault.linuxmint.com/2015/08/configuring-the-mdm-login-screen-for-multiple-monitors/
 				https://askubuntu.com/questions/160036/how-do-i-disable-acpi-when-booting
         			https://askubuntu.com/questions/55224/a-common-home-partition-for-multiple-linux-distributions
 				https://medium.com/@manujarvinen/setting-up-a-multi-boot-of-5-linux-distributions-ca1fcf8d502
-			
+				https://wiki.archlinux.org/index.php/Dual_boot_with_Windows	
 			bash>
 				https://www.digitalocean.com/community/tutorials/how-to-configure-chroot-environments-for-testing-on-an-ubuntu-12-04-vps
 				https://help.ubuntu.com/community/BasicChroot
@@ -124,7 +127,7 @@ References>
 				https://forum.manjaro.org/t/how-to-permanently-enable-user-namespaces-in-manjaro-linux/71614/5
 				https://forum.manjaro.org/t/unable-to-set-manjaro-grub-as-default/50611/4
 				https://forum.manjaro.org/t/installation-with-manjaro-architect-iso/20429
-
+			
 				
 	Programming>
 		Website templates>

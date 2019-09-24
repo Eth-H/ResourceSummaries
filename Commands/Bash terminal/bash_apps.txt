@@ -383,28 +383,43 @@
 			up: previous link down: select next link
 			left: prev doc right: follow current link
 
-//Midnight commander
-    //File manager
-        Switch column: tab
-        Bottum repersents F1 – F10 
-        Move mc to background ctrl+o
-        select multiple files: insert on each file
-        Change default editor: select file -> F2 -> 1 -> select-editor
-	        //or naviage to .selected_editor in homes file
-        Change file permissions: F9 -> File -> chown -> select category -> r, w, x
-	 	Toggle hidden files: Alt + .
-		
-		Simulate F keys
-		F10: Esc + 0
-		F1-10: Esc + 1-10
-		
-		//get installation paths
-		mc -F
-		//make your own skins
-			mkdir ~/.local/share/mc/skins 
-			cp /usr/share/mc/skins/default.ini ~/.local/share/mc/skins/
-			sed -i -E 's/^(.* = (gray|brightred|brightgreen|yellow|brightblue|brightmagenta|brightcyan|white);.*)$/\0;bold/' ~/.local/share/mc/skins/default.ini
-		//generall settings
-		nano /home/emera/.config/mc/ini
-			//line 85 is skin-default
-			//line 122 is hidden files
+//File manager
+	//Midnight commander
+
+			Switch column: tab
+			Bottum repersents F1 – F10 
+			Move mc to background ctrl+o
+			select multiple files: insert on each file
+			Change default editor: select file -> F2 -> 1 -> select-editor
+				//or naviage to .selected_editor in homes file
+			Change file permissions: F9 -> File -> chown -> select category -> r, w, x
+			Toggle hidden files: Alt + .
+
+			Simulate F keys
+			F10: Esc + 0
+			F1-10: Esc + 1-10
+
+			//get installation paths
+			mc -F
+			//make your own skins
+				mkdir ~/.local/share/mc/skins 
+				cp /usr/share/mc/skins/default.ini ~/.local/share/mc/skins/
+				sed -i -E 's/^(.* = (gray|brightred|brightgreen|yellow|brightblue|brightmagenta|brightcyan|white);.*)$/\0;bold/' ~/.local/share/mc/skins/default.ini
+			//general settings
+			nano /home/emera/.config/mc/ini
+				//line 85 is skin-default
+				//line 122 is hidden files
+	//vifm 
+		//setup
+			//colours
+				rm -rf ~/.config/vifm/colors
+				git clone https://github.com/vifm/vifm-colors ~/.config/vifm/colors
+				//update
+					cd ~/.config/vifm/colors
+					git pull
+				//set
+					nano ~/.config/vifm/vifmrc
+					//go to line 67, (or for vim /\<colorscheme\> )
+					colorscheme [theme-name]
+					
+					

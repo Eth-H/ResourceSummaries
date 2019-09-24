@@ -1,9 +1,18 @@
 Windowing system:  software that manages separately different parts of display screens, type of GUI that implements WIMP
 	X-windows system (X): Windowing system, basic framework for GUI environment, newest core protocol version is x11
 		Display server: Control input and output of clients (running software) to the OS and hardware, the display server protocol can operate over networks 
-		XFree86: Outdated display server for X
-		X.Org: Display server for X
+			XFree86: Outdated display server for X
+			X.Org: Display server for X
+			RandR (resize and rotate) is a communications protocol written as an extension to the X11[31] protocol, allows to manipulate a screens root window
 		window manager: controls the placement and appearance of windows within a windowing system in a graphical user interface
+virtual console: conceptual combination of the keyboard and display for a computer user interface
+	tty: text-only terminals, (can access computer without loading a potentially corrupted desktop)
+		< ubuntu 17, 1-6 cli only, 7 runs x session
+		> ubuntu 17, 1 - GUI login screen, 2 - GUI desktop, 3-7 command lines
+		access them (use F2 or F7 (relative to OS) to get back to desktop)
+			ctrl+alt+[F1 to F6]
+
+Device/special file: interface to a device driver that appears in a file system as if it were an ordinary file. Used for partitions and tty virtual consoles in /dev/
 
 networking
 	ttl (time-to-live)
