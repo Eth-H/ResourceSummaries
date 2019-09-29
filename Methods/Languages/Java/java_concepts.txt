@@ -1,0 +1,39 @@
+//Constuctors  
+	//same name as class
+	//can have two constuctors (one needs a different num of params)
+	//auto generated if not produced 
+	
+	Public class MyClass {
+	   Int num;
+	   MyClass() {
+	      num = 100;
+	   }
+	}
+
+//Java data types
+	//Primitive Data Types
+		//unsigned and sign size differences
+			//unsigned: -2^7 = -128, 2^7-1 = 127, signed: 2^7  = 255,
+		//sizes
+			2^15 = 65535, 2^31 = 4294967296, 2^63 = 2*9,223,372,036,854,775,807+1  
+	 
+		//byte
+			//8 bit signed two's complement (TC) int, -2^7 to 2^7-1
+			//save space in arrays
+		//short, 16 bit signed TC int, 2^7
+		//int, 32 bit signed TC int, 2^31
+		//long, 64 bit signed TC, 2^63, Default value (DV) = 0L  	
+float,single-precision 32-bit IEEE 754 floating point, DV = 0.0f 
+double, double-precision 64-bit IEEE 754 floating point, DV = 0.0d  
+		//boolean, 1 bit, DF = false
+		//char, 16 bit unicode character, \u0000 to \uffff
+		int decimal = 100; int octal = 0144; int hexa =  0x64;
+
+
+
+
+
+
+
+
+ 

@@ -1,0 +1,29 @@
+change active java version on archlinux
+	archlinux-java
+variables setup
+	export JAVA_HOME= /usr/java/jdk1.7.0_05/
+	export PATH=${PATH}:/usr/java/jdk1.7.0_05/bin
+	//enable variables without restart
+	source /root/.bash_profile	
+	% CLASSPATH = /home/jack/java/classes; export CLASSPATH
+run java code
+	compile java files (.java)
+		//-d: specify .class file location, 
+		//-g: gen all debug info, -noware: gen no warnings  
+		javac {}...
+	interprete java bytecode files 
+		java {}			
+
+creating packages
+	put a package statement on the first line
+	to use a class in the same package you dont need a package prefix 
+	package packageName;
+		compile java programs with package statements
+		javac -d Destination_folder file_name.java
+	file name = public class name
+	directory name = name of package
+
+
+
+
+

@@ -14,6 +14,17 @@ virtual console: conceptual combination of the keyboard and display for a comput
 
 Device/special file: interface to a device driver that appears in a file system as if it were an ordinary file. Used for partitions and tty virtual consoles in /dev/
 
+data flows
+	STDIN - /proc/<processID>/fd/0
+	STDOUT - /proc/<processID>/fd/1
+	STDERR - /proc/<processID>/fd/2
+	//system shortcuts
+		STDIN - /dev/stdin or /proc/self/fd/0
+		STDOUT - /dev/stdout or /proc/self/fd/1
+		STDERR - /dev/stderr or /proc/self/fd/2
+		//fd = file descriptor
+
+
 networking
 	ttl (time-to-live)
 		many uses

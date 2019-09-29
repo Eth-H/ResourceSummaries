@@ -101,6 +101,20 @@ System>
 		//Exit shell, 
 		//none: Leave the shell, [integer, 0 or 1-255]: change the scripts exit return status (instead of leaving it to the last command), EG exit 0 
 			exit {}?
+		commands>
+			//get info on commands
+				//none: run command, -v: command description, -V: verbose command description
+				command {}? [commandName]	
+				//man pages
+					man [commandName]
+				//Search man pages for key words, use "" to make sure its isolated
+					apropos ["keyword"]	
+				//-h, --help 		
+					[binName] {}
+			
+		shell>
+			//change shell
+				chsh {}
 	kernel modules>
 		//show status of modules in the linux kernel
 			lsmod 
@@ -356,7 +370,7 @@ Directories and files>
 			vim
 				//More powerful CLI text editor
 					vim [filePath]
-				//use i for insert/interactive mode and CTRL C to exit
+				//use i for insert/interactive mode
 				// :q quit with saved changes, :q! quit while you have unsaved changes, :wq or :x save and quit
 				
 	Create file>
@@ -387,16 +401,7 @@ Directories and files>
 		//Sync two folders
 			//
 			 //-e: Execute commands, exploitable by wildcard injection 
-				Rsync {} [firstFolder] [secondFolder] {}
-				
-Help>
-	man>
-		//Get help with ls command
-			man ls
-		//Search man pages for key words, use "" to make sure its isolated
-			apropos ["keyword"]	
-	//-h, --help 		
-		[binName] {}		
+				Rsync {} [firstFolder] [secondFolder] {}				
 
 History>
 	//Show history
