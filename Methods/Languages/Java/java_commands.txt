@@ -1,19 +1,37 @@
-change active java version on archlinux
-	archlinux-java
-variables setup
-	export JAVA_HOME= /usr/java/jdk1.7.0_05/
-	export PATH=${PATH}:/usr/java/jdk1.7.0_05/bin
-	//enable variables without restart
-	source /root/.bash_profile	
-	% CLASSPATH = /home/jack/java/classes; export CLASSPATH
+setup
+	install java
+		//open source java 
+			sudo pacman -S jdk11-openjdk
+		//open source java fx
+			sudo pacman -S java11-openjfx
+			//paths 
+				/usr/lib/jvm/java-11-openjdk/jmods/
+				/usr/lib/jvm/java-11-openjdk/lib/
+	change active java version on archlinux
+		archlinux-java
+	variables setup
+		//some systems
+			export JAVA_HOME= /usr/java/jdk1.7.0_05/
+			export PATH=${PATH}:/usr/java/jdk1.7.0_05/bin
+		//arch linux
+			export JAVA_HOME=/usr/lib/jvm/java-11-openjdk/
+			export PATH=${PATH}:/usr/lib/jvm/java-11-openjdk/bin
+			
+		//enable variables without restart
+		source /root/.bash_profile	
+		% CLASSPATH = /home/jack/java/classes; export CLASSPATH
 run java code
 	compile java files (.java)
 		//-d: specify .class file location, 
 		//-g: gen all debug info, -noware: gen no warnings  
 		javac {}...
 	interprete java bytecode files 
-		java {}			
-
+		java {}
+run java files
+	java fileName.java
+	java -jar jarName.jar
+	
+	
 creating packages
 	put a package statement on the first line
 	to use a class in the same package you dont need a package prefix 

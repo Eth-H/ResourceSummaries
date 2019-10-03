@@ -1,5 +1,31 @@
+//where boot files are stored
+//boot
+	//contains kernel in object form
+	vmlinuz-[kernel version]x[architecture]
+	//initrd and initramfs, loads temp root file system into memory
+	//contains boot laoder execcutables
+	/boot/efi/
+	//contains boot loader configuration files
+	/boot/grub/
+        /boot/grub/grub.cfg
+
+
+/home
+    //contain user home directories, can be a different partition
+    /home/$USER
+        //config files
+        ~/.config
+        ~/.local/share
+		~/.ssh
+		~/.[individualConfigFileName]
+		
+		
+/root	
+	//home directory for root user
+
 //where the references to partitions are containd, use to mount partitions or to refer to them
-/dev (llinks/info on devices)
+
+//dev (llinks/info on devices)
 	//references to drives
 		/dev/sdax /dev/sdbx
 	//reference to virtual consoles
@@ -13,40 +39,26 @@
 			/dev/full
 		//provides variable-length stream of numbers on read
 			/dev/random
-//where binaries are stored, move binary apps here to give the terminal global access to them
-//generally /bin binaries are needed earily in the boot process or are more important
 /bin
-/usr/bin
+    //where binaries are stored, move binary apps here to give the terminal global access to them
+    //generally /bin binaries are needed earily in the boot process or are more important
+    /bin
+    /usr/bin
 
-//where boot files are stored
-/boot
-	//contains kernel in object form
-	vmlinuz-[kernel version]x[architecture]
-	//initrd and initramfs, loads temp root file system into memory
-	//contains boot laoder execcutables
-	/boot/efi/
-	//contains boot loader configuration files
-	/boot/grub/
 
-//contain user home directories, can be a different partition
-/home
-/home/$USER
-	//config files
-	~/.config
-	~/.local/share
-
-//contains libraries (msotly shared)
 /lib
 /lib64
-
+	//contains libraries (mostly shared)
+	
 //contains mounted paritions
-/media
-/mnt
-
+	/media
+		//pernement mounts (may need to make yourself)
+	/mnt
+		//temp mounts
 /opt
 
-//virtual file system, each numbered directory repersents a PID and contain a command that occ
-/proc
+/proc (processess)
+	//virtual file system, each numbered directory repersents a PID and contain a command that occ
 	//some proc files
 	/proc/meminfo - system memory
 	/proc/cmdline – Kernel command line information.
@@ -69,25 +81,28 @@
 	/proc/swap – Information about swap space.
 	/proc/uptime – Uptime information (in seconds).
 	/proc/version – Kernel version, gcc version, and Linux distribution installed.	
-	
-//home directory for root user
-/root	
 
-//storage of transient state files (these contain run-time information that may or may not need to be written early in the boot process and which does not require preserving across reboots)
-//distribtuion specifc files, some distros mount partitions here
 /run
-// /run predecesor (didnt allow earily writing into the boot process), generally now symlinks to /run
-/var/run
+	//storage of transient state files (these contain run-time information that may or may not need to be written early in the boot process and which does not require preserving across reboots)
+	//distribtuion specifc files, some distros mount partitions here
+		/run/media
+	// /run predecesor (didnt allow earily writing into the boot process), generally now symlinks to /run
+		/var/run
+		
 
-//temporay files, these are cleany up in a certain amount of time
 /tmp
+	//temporay files, these are cleany up in a certain amount of time
 
 /etc
-	//configeration files, EG grub, ufw
+	//global configeration files, EG grub, ufw	
 	/etc/default
+	//Contains items to be automounted on boot 
+	/etc/fstab
 		
-/usr
+/usr (unix system resources)
+	//config files
 	/usr/share/doc
 	
-	
+/var
+	//variables
 	

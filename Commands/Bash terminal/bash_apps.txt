@@ -421,6 +421,9 @@
 					nano ~/.config/vifm/vifmrc
 					//go to line 67, (or for vim /\<colorscheme\> )
 					colorscheme [theme-name]
+			//set settings for all users
+				/usr/share/vifm/vifmrc - edit vifm settings
+				
 		//commands
 			//panes
 				Ctrl-W h - switch to left pane (vifm-CTRL-W_h), Ctrl-W j - switch to pane below               
@@ -432,8 +435,9 @@
 				:ex - 
 				:visual - 
 				:view - change to view mode (get preview of file in one pane)
-			
-			cw - change word is used to rename a file or files.
+			:! [programToRunWith] [fileName] & - run graphical program but keep vifm running
+		
+			cw - rename a file or files.
 			o - change file owner.                        
 			cg - change file group.                        
 			ga: calculate directory size

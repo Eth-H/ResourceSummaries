@@ -199,9 +199,7 @@ System>
 			//Use sudo to enter admin PW for temporay root privillages, note when piping commands sudo may needed to be prefixed for both commands
 				sudo [command]
 			//Get a root shell with sudo
-				sudo find /etc -exec sh -i \;
-			//run last command as root
-				sudo !!
+				sudo find /etc -exec sh -i \;	
 		chmod>
 			//Edit a programs permissions, +x: Give execute permissions, -x: Take	 execute permissions, +w: Give write permissions, u+[permissionLetter]: permissions only apply for the user	
 			//or 
@@ -220,6 +218,8 @@ System>
 				whoami
 			//Create new user
 				adduser [accountname] 
+                //add new user and new group
+                useradd -G [groupName] [userName] 
 			//Give account a new password
 				passwd [accountname] 
 			//Create user directory (if it doesnt exist already)
@@ -227,7 +227,16 @@ System>
 			//del user
 				sudo userdel username
 				sudo rm -r /home/username
-		
+            //groups
+                //list a users group
+                    group [userName]
+                    id [userName]
+                //-a [username]: add user
+                 //-G [group name]: group
+                -g [groupName] [userName]
+                    usermod	{}...       
+                //add new group
+                    sudo groupadd mynewgroup	        
 		Signing>
 			//List apt keys
 				sudo apt-key list
@@ -633,7 +642,17 @@ Packages>
 		//Specify processor arcitechure
 			gcc -m32 -o hello hello.c
 		//Use MinGW cross-complier to compile for windows
-
+	java>
+		//archlinux java management
+			//status: list all installed java JDKs, set [javaFromStatus], fix: fix invalid jre links
+			archlinux-java {}
+			//EG java-11-openjdk/bin
+				archlinux-java set java-8-openjdk
+			//run program with a different java version
+			#!/bin/sh
+			export PATH=/usr/lib/jvm/java-8-openjdk/jre/bin/:$PATH
+			exec /path/to/application "$@"	
+			
 Domestic Security tools>
 	ClamAV>
 		clamscan -r -i [pathToScan]
