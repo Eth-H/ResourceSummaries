@@ -53,6 +53,8 @@ References>
 		https://reactgo.com/tutorial-reactlazy-react-suspense/
 		https://stackoverflow.com/questions/53290095/react-passing-fetched-data-from-api-as-props-to-components
 		https://www.atlassian.com/git/tutorials/comparing-workflows
+		https://microsoft.github.io/language-server-protocol/implementors/servers/
+		https://code.visualstudio.com/api/language-extensions/language-server-extension-guide
 		
 	OS>
 		https://en.wikipedia.org/wiki/Comparison_of_boot_loaders
@@ -158,10 +160,13 @@ Resources>
 		https://haveibeenpwned.com/ 
     	https://www.exploit-db.com/	
 		https://www.nomoreransom.org
+	
+	Dev>	
+		Hosting>
+			https://unhosted.org
+			https://www.heroku.com
+		https://www.npmtrends.com/
 		
-    Hosting>
-        https://unhosted.org
-		https://www.heroku.com
 		
 	Convert stuff>
 	    https://www.binaryhexconverter.com/

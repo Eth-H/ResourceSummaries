@@ -16,10 +16,10 @@
 				console.log("Hello commander! what can I do for you today?"); break;
 		   case "Captain":
 				console.log("Hello captain! I will do anything you wish."); break;
-		   case "what?"
+		   case "what?":
 				console.log("Lets try again"); continue;
 		   default:
-				console.log("I don't know what your rank is."); break;
+				console.log("I don't know what your rank is."); break 
 		}
 	//terinary operator, condition ? true : false
 		(num>0) ? "positive" : (num<0) ? "negative" : "zero";
@@ -30,9 +30,9 @@ while (i > 0){i -= 1; console.log(i)}
 
 //objects
 	//iterate object
-		for (var member in personObject){console.log personObject[member]}
+		for (var member in personObject){console.log (personObject[member])}
     //Checks that a property belongs to a object.
-		personObject.hasOwnProperty(propertyName)) 
+		personObject.hasOwnProperty((propertyName)) 
 	//del
 		delete cat.name;
 	//Get property names
@@ -211,11 +211,11 @@ while (i > 0){i -= 1; console.log(i)}
 	import * as name from "moduleName";
 	import { exportList } from "./file_path"
 	import { export1 , export2 as alias2 , [...] } from "moduleName";
-	import defaultExport, { export [ , [...] ] } from "moduleName";
-	import defaultExport, * as name from "moduleName";
-
-//Maths module
+	//Maths module
 import "Math";
+import defaultExport, { export } from [, [...]];
+} from "moduleName";
+	
 	//absolute value of a number
 	Math.abs 
 	//e to the power of a number
@@ -337,7 +337,6 @@ import "Math";
 						   
 						   
 						   
-
 
 
 

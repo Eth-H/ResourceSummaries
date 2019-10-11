@@ -43,8 +43,9 @@
     //where binaries are stored, move binary apps here to give the terminal global access to them
     //generally /bin binaries are needed earily in the boot process or are more important
     /bin
+	//other binary locations
     /usr/bin
-
+	/home/emera/.local/bin
 
 /lib
 /lib64
