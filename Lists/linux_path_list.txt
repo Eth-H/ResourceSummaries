@@ -99,11 +99,14 @@
 	/etc/default
 	//Contains items to be automounted on boot 
 	/etc/fstab
-		
+    		
 /usr (unix system resources)
 	//config files
 	/usr/share/doc
-	
+	//data
+    /usr/share
+    //libraries
+    /
 /var
 	//variables
 	

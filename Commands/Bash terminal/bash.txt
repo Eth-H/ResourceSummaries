@@ -55,11 +55,14 @@ Utility>
 				//Bzip2
 					tar cjf file.tar.bz2 [files]
 					tar xjf file.tar.bz2 – Extract a tar using Bzip2
-		zip>
+		gzip>
 			//Compresses file and renames it to file.gz
 				gzip file
 			//Decompresses file.gz back to file
 				gzip -d file.gz 
+        zip>
+            zip -r zippedFolderName.zip folderToZip 
+        
 	Print>
 		//Print demon
 			/etc/rc.d/init.d/lpd start 

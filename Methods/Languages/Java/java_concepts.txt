@@ -4,11 +4,81 @@
 	//auto generated if not produced 
 	
 	Public class MyClass {
-	   Int num;
-	   MyClass() {
-	      num = 100;
-	   }
+	   
+        private int num;
+        private int width;
+        private String theString;
+
+        MyClass(int width, String theString) {
+            //attribute not passed as a param, so not used by this classes new objects
+            num = 100;
+            //if passing parameter to class instance with a different name, no this.
+prefex needed
+            newWidth = width
+            this.theString = theString            
+            //declare new variable
+            int gaya = yaya
+        }
+        //second constructor has different number of parameters
+        MyClass(){
+            num = 100;
+        }
+    }
+
+    //If class isn't present in current package import it
+    import [packagePath].ExternalClass
+    Public class MyClass2 {
+        //create external objects using the constructor
+	    private ExternalClass externalObject1;
+        private ExternalClass externalObject2;
+	    MyClass2(){
+            //if new instance variable is the same
+            externalObject1 = new ExternalClass()
+	        
+	    }
+        //declare object outside constructor
+        public void method(){
+            ExternalClass localVariableExternalObject = new ExternalClass()
+        } 
 	}
+    
+//arrays
+public class ArrayClass(){
+    
+    public void static main(){  
+    int arraySize = 8 
+    //declare array variable, then create array and assign
+    int[] intList = new int[arraySize]        
+    //or
+    String[] stringList = {"element0", "element2"}     
+    
+    //accessArray
+    //get last element
+    system.out.println(stringList[stringList.length-1])            
+    
+    }
+
+    
+//loops
+    loopMethod(stringList){
+        double total = 0;
+        //equal to i<=(stringList.length-1)
+        for (int i = 0; i < stringList.length; i++) {
+            total += stringList[i];
+        }   
+        //foreach version
+        for (int i: stringList){
+            total += stringList[i];
+        }
+                    
+    }
+
+
+
+}
+     
+
+
 
 //Java data types
 	//Primitive Data Types

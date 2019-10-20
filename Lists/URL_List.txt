@@ -37,8 +37,8 @@ References>
 		https://www.bodybuilding.com/exercises/
 	Privacy>
 		https://freedomhouse.org
-		
-	Cyber security>
+        	
+    Cyber security>
 		https://www.hackingloops.com/creating-malicious-word-macros-tutorial-autorun-stub-via-word-document/
 		https://www.tutonics.com/2012/11/gpg-encryption-guide-part-1.html
 		challenges
@@ -46,16 +46,7 @@ References>
 		https://attack.mitre.org
 		https://docs.parrotlinux.org/library/start/
 		
-	Development>
-		https://www.simplifiedpython.net/run-python-on-android/
-		https://kivy.org/doc/stable/guide/packaging-android-vm.html
-		https://en.wikipedia.org/wiki/List_of_JavaScript_libraries
-		https://reactgo.com/tutorial-reactlazy-react-suspense/
-		https://stackoverflow.com/questions/53290095/react-passing-fetched-data-from-api-as-props-to-components
-		https://www.atlassian.com/git/tutorials/comparing-workflows
-		https://microsoft.github.io/language-server-protocol/implementors/servers/
-		https://code.visualstudio.com/api/language-extensions/language-server-extension-guide
-		
+	
 	OS>
 		https://en.wikipedia.org/wiki/Comparison_of_boot_loaders
 		https://forum.manjaro.org/t/manjaro-as-guest-in-virtualbox-shared-folder/41675/8
@@ -72,12 +63,6 @@ References>
 			https://www.digitalocean.com/community/tutorials/how-to-set-up-a-node-js-application-for-production-on-ubuntu-16-04#prerequisites
 			https://www.phusionpassenger.com/library/walkthroughs/deploy/nodejs/
 
-    Vim>
-		https://vim.rtorr.com
-		https://vim-adventures.com
-		https://www.linode.com/docs/tools-reference/tools/introduction-to-vim-customization/
-		https://vim.fandom.com/wiki/Best_Vim_Tips
-		http://www.viemu.com
     Anti-malware>
         https://blog.malwarebytes.com/security-world/2013/12/malwarebytes-2013-threat-report/
         https://threats.kaspersky.com/en/vulnerability/KLA11397/
@@ -105,20 +90,22 @@ References>
 		https://blog.codota.com/21-best-intellij-plugins-for-2019-100-free/
 		https://ithitman.blogspot.com/2015/04/what-are-tcp-spurious-retransmissions.html
 		
-		
-		Javascript>
-			https://stackoverflow.com/questions/5619202/converting-a-string-to-a-date-in-javascript
 		Linux>
+                            
 			info>
 				bootloaders
 					https://wiki.archlinux.org/index.php/Arch_boot_process#Boot_loader
 					http://rodsbooks.com/refind/using.html#legacy
+                kernel                 
+                    https://www.lifewire.com/modprobe-linux-command-4095944
 			generic setup>
 				http://segfault.linuxmint.com/2015/08/configuring-the-mdm-login-screen-for-multiple-monitors/
 				https://askubuntu.com/questions/160036/how-do-i-disable-acpi-when-booting
         			https://askubuntu.com/questions/55224/a-common-home-partition-for-multiple-linux-distributions
 				https://medium.com/@manujarvinen/setting-up-a-multi-boot-of-5-linux-distributions-ca1fcf8d502
 				https://wiki.archlinux.org/index.php/Dual_boot_with_Windows	
+                https://github.com/lutris/lutris/wiki/Installing-drivers
+
 			bash>
 				https://www.digitalocean.com/community/tutorials/how-to-configure-chroot-environments-for-testing-on-an-ubuntu-12-04-vps
 				https://help.ubuntu.com/community/BasicChroot
@@ -129,21 +116,69 @@ References>
 				https://forum.manjaro.org/t/how-to-permanently-enable-user-namespaces-in-manjaro-linux/71614/5
 				https://forum.manjaro.org/t/unable-to-set-manjaro-grub-as-default/50611/4
 				https://forum.manjaro.org/t/installation-with-manjaro-architect-iso/20429
-			
-				
-	Programming>
-		Website templates>
-			https://pixelarity.com
-			https://templated.co/
-		
+            generic software
+                virtualizaion            
+                    https://wiki.manjaro.org/index.php?title=VirtualBox
+                filemanager
+                    vifm 
+                        https://vifm.info/cheatsheets.shtml
+
+	Development>
+		https://www.simplifiedpython.net/run-python-on-android/
+		https://kivy.org/doc/stable/guide/packaging-android-vm.html
+		https://en.wikipedia.org/wiki/List_of_JavaScript_libraries
+		https://reactgo.com/tutorial-reactlazy-react-suspense/
+		https://stackoverflow.com/questions/53290095/react-passing-fetched-data-from-api-as-props-to-components
+		https://www.atlassian.com/git/tutorials/comparing-workflows
+		https://microsoft.github.io/language-server-protocol/implementors/servers/
+		https://code.visualstudio.com/api/language-extensions/language-server-extension-guide
+
 		GitHub repos>
 			https://github.com/Yara-Rules/rules
 			https://github.com/google/gdata-python-client
 			https://github.com/scottwoodall/django-react-template
 			https://github.com/bromite/bromite/releases/download/72.0.3626.81/x86_ChromeModernPublic.apk
 			https://codebutler.github.io/firesheep/
+            dotfiles>
+                https://github.com/xros/dotfiles
+                https://medium.com/@webprolific/getting-started-with-dotfiles-43c3602fd789
+                https://github.com/dikiaap/dotfiles
+                https://dotfiles.github.io
 
+        text editors>
+            Vim>
+                https://vim.rtorr.com
+                https://vim-adventures.com
+                https://www.linode.com/docs/tools-reference/tools/introduction-to-vim-customization/
+                https://vim.fandom.com/wiki/Best_Vim_Tips
+                http://www.viemu.com
+                https://thoughtbot.com/blog/vim-splits-move-faster-and-more-naturally 
+                http://blog.joncairns.com/2014/03/using-vim-as-a-multi-language-ide/
 
+                plugins>
+                    https://github.com/junegunn/fzf.vim
+                    https://github.com/ctrlpvim/ctrlp.vim               
+                    https://langserver.org
+                    https://github.com/joonty/vim-sauce
+
+	Programming>
+		Website templates>
+			https://pixelarity.com
+			https://templated.co/
+		
+        c>	
+            libraries>
+                ncurses>
+                    https://www.cyberciti.biz/faq/linux-install-ncurses-library-headers-on-debian-ubuntu-centos-fedora/ 
+                    http://www.ibiblio.org/pub/Linux/docs/HOWTO/other-formats/html_single/NCURSES-Programming-HOWTO.html
+
+        Javascript>
+            https://stackoverflow.com/questions/5619202/converting-a-string-to-a-date-in-javascript
+        python>
+            libraries>
+                https://docs.python.org/2/library/curses.html 
+             https://realpython.com/pipenv-guide/
+        
 Social media/blog>
     https://nicoblog.org/
     https://www.xda-developers.com
@@ -160,14 +195,26 @@ Resources>
 		https://haveibeenpwned.com/ 
     	https://www.exploit-db.com/	
 		https://www.nomoreransom.org
-	
+        https://www.grc.com/shieldsup 
+        https://www.grc.com/passwords.htm
+
+	Anti virus>
+		https://www.hybrid-analysis.com
+		https://www.virustotal.com/
+		https://www.maltiverse.com/search
+        https://id-ransomware.malwarehunterteam.com/
+		https://metadefender.opswat.com
+
 	Dev>	
 		Hosting>
 			https://unhosted.org
 			https://www.heroku.com
 		https://www.npmtrends.com/
-		
-		
+        text editors
+            setup    		
+                https://vim-bootstrap.com	
+                https://vimawesome.com
+
 	Convert stuff>
 	    https://www.binaryhexconverter.com/
 	    https://www.miniwebtool.com/hex-calculator/
@@ -177,12 +224,6 @@ Resources>
 	    https://anagram-solver.net/
 	    http://www.unit-conversion.info/texttools/ascii/
 	    https://www.onlinehashcrack.com/hash-generator.php#results
-    Anti virus>
-		https://www.hybrid-analysis.com
-		https://www.virustotal.com/
-		https://www.maltiverse.com/search
-        https://id-ransomware.malwarehunterteam.com/
-		https://metadefender.opswat.com
     Jobs>
         https://www.gchq-careers.co.uk/recruitment-process.html
         https://www.cybersecuritychallenge.org.uk -> https://www.cybersecuritychallenge.org.uk/careers/jobs-internships#
@@ -195,6 +236,7 @@ Resources>
 		https://firebrand.training/uk/apprenticeships/
 		https://www.getmyfirstjob.co.uk/discover/
 		https://stackoverflow.com/jobs
+
 		Qualifications>
             https://blk-box.co.uk	
 			https://www.cisco.com/c/en/us/training-events/
@@ -211,6 +253,9 @@ Unchecked>
 		https://github.com/ssdeep-project/ssdeep
 		https://www.sciencedirect.com/science/article/pii/S1742287606000764?via%3Dihub
 		
+	https://remotise.com
+    https://github.com/superhen/Automated-Job-Resume-Matching-Solution
+
 
 Download links>
 	//Links to download sepcific files

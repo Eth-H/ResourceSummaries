@@ -1,0 +1,117 @@
+//Abstracted vim commands
+
+nomral mode
+	editing
+		r - replace a single character
+		u - undo
+		Ctrl + r - redo	
+	Cursor movement	
+h - move cursor left, j - move cursor down, k - move cursor up, l - move cursor right
+			H - move to top of screen, M - move to middle of screen, L - move to bottom of screen
+
+
+w - jump forwards to the start of a word
+b - jump backwards to the start of a word
+
+0 - jump to the start of the line, $ - jump to the end of the line
+
+gg - go to the first line of the document, G - go to the last line of the document
+			
+fx - jump to next occurrence of character x
+Fx - jump to previous occurence of character x
+
+
+Cut and paste (uses the unamed (local vim) clipboard)
+yy - yank (copy) a line
+			2yy - yank (copy) 2 lines
+
+P - put (paste) before cursor
+
+dd - delete (cut) a line
+			2dd - delete (cut) 2 lines
+D - delete (cut) to the end of the line
+			
+
+Marking text (visual mode)
+		v - start visual mode, mark lines, then do a command (like y-yank)
+
+		o - move to other end of marked area
+
+	Visual commands
+		> - shift text right
+		< - shift text left
+		y - yank (copy) marked text
+		d - delete marked text
+		~ - switch case		
+		//recomended to be manually remapped	
+		Ctrl + c - copy text to global clipboard
+
+Insert mode - inserting/appending text
+	i - insert before the cursor
+	I - insert at the beginning of the line
+	o - append (open) a new line below the current line
+		
+Command mode	
+	Saving and exiting
+	:saveas file - save file as
+	:w - write (save) the file, but don't exit
+	:wa - save all
+	:wqa - write (save) and quit on all tabs
+	:w !sudo tee % - write out the current file using sudo
+	:wq, :x, ZZ - write (save) and quit
+	:q - quit (fails if there are unsaved changes)
+	:q!, ZQ - forced quit
+
+	Search and replace
+		/pattern - search for pattern, ?pattern - search backward for pattern
+		:%s/old/new/g - replace all old with new throughout file		
+
+	Working with multiple file
+		:e file - edit a file in a new buffer
+		:bn - go to the next buffer, :bp - go to the previous buffer
+		:bd - delete a buffer (close a file)
+		:ls - list all open buffers
+		:sp file - open a file in a new buffer and split window, :vsp file - open a file in a new buffer and vertically split window
+
+Tabs
+	:tabnew, :tabnew file - open a file in a new tab
+	Ctrl + wT - move the current split window into its own tab
+	gt, :tabn - move to the next tab, gT, :tabp - move to the previous tab
+	#gt - move to tab number #
+	:tabmove # - move current tab to the #th position (indexed from 0)
+	:tabc - close the current tab and all its windows
+	:tabo - close all tabs except for the current one
+	:tabdo command - run the command on all tabs (e.g. :tabdo q - closes all opened tabs)
+
+plugins
+		vundle (plugin manager) 
+			:PluginInstall - install packages in vimrc
+		fugitive (git interface)
+			:G - git status
+			:fugitive help
+		nerd (file explorer)
+			ctrl E - open file explorer (need to add this binding yourself)
+			ctrl N - basic autocomplete on current selected keyword
+		ctrlpvim (file finder)
+			ctrl p - open file finder
+			:help ctrlp-mappings - get key bindings
+			//in file finder
+				ctrl-f, ctrl-b - navigate between modes
+		flake8
+			<F7> - run flake8 on current python file
+		syntastic (generic syntax checker)
+			relies on externel syntax checkers
+				:SyntasticInfo - see avaliable checkers
+		YCM (multi-language code complete)
+			trigger jedi (python autocomplete)
+				ctrl + space
+		SimpylFold
+			zc - close a fold
+			zo - open a fold
+		
+		Ropevim (refractor, code-assits, extra commands)
+			contains lots of commands to do different things
+			recommended to disable, may use later if more keyboard functionality is required
+			because there are so many commands some may need to be remapped (EG <C-Space> )
+			see external file for all keymaps and commands
+			see https://github.com/python-rope/ropevim/blob/master/doc/ropevim.txt for more info

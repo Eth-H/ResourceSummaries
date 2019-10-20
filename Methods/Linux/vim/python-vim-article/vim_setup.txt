@@ -1,0 +1,149 @@
+vim setup
+	https://spacevim.org/use-vim-as-a-javascript-ide/
+	https://github.com/Shadowsith/TheVimIDE
+	https://github.com/amacgregor/dot-files
+	
+	//full manual setup (includes explanation of packages to put in vimrc)
+	https://realpython.com/vim-and-python-a-match-made-in-heaven/
+		vim >7.3, +python
+		//extension manager
+			git clone https://github.com/gmarik/Vundle.vim.git ~/.vim/bundle/Vundle.vim
+			//add file to user home directory
+			touch ~/.vimrc
+			//add
+				set nocompatible              " required
+				filetype off                  " required
+
+				" set the runtime path to include Vundle and initialize
+				set rtp+=~/.vim/bundle/Vundle.vim
+				call vundle#begin()
+
+				" alternatively, pass a path where Vundle should install plugins
+				"call vundle#begin('~/some/path/here')
+
+				" let Vundle manage Vundle, required
+				Plugin 'gmarik/Vundle.vim'
+
+				" add all your plugins here (note older versions of Vundle
+				" used Bundle instead of Plugin)
+
+				" ...
+
+				" All of your Plugins must be added before the following line
+				call vundle#end()            " required
+				filetype plugin indent on    " required
+			//in vim run
+				:PluginInstall
+		//split layouts
+			//split vertically
+			:sp [fileName]
+			//split horizontally
+			:vs [fileName]
+			
+			//change split screen occurance
+				set splitbelow
+				set splitright
+			//move between splits (remaps default key combos)
+				"split navigations
+				nnoremap <C-J> <C-W><C-J>
+				nnoremap <C-K> <C-W><C-K>
+				nnoremap <C-L> <C-W><C-L>
+				nnoremap <C-H> <C-W><C-H>
+		//buffers (recently opened file, can use quick access to buffers instead of tabs)
+			//can use after :ls
+			:b [buffer name or number]
+		//code folding
+			//
+			" Enable folding
+			set foldmethod=indent
+			set foldlevel=99
+			" Enable folding with the spacebar
+			nnoremap <space> za
+			//optional plugin to change default amount of folds
+			//.vimrc
+			Plugin 'tmhedberg/SimpylFold'
+			//command to see docstrings for folded code
+				let g:SimpylFold_docstring_preview=1
+		//indentation
+			//PEP 8 indentation
+			au BufNewFile,BufRead *.py
+				\ set tabstop=4
+				\ set softtabstop=4
+				\ set shiftwidth=4
+				\ set textwidth=79
+				\ set expandtab
+				\ set autoindent
+				\ set fileformat=unix
+			//full stack idents
+				au BufNewFile,BufRead *.js, *.html, *.css
+					\ set tabstop=2
+					\ set softtabstop=2
+					\ set shiftwidth=2
+			//if auto indent gets in the way
+				Plugin 'vim-scripts/indentpython.vim'
+			//flag uneccessary whitespace
+				au BufRead,BufNewFile *.py,*.pyw,*.c,*.h match BadWhitespace /\s\+$/
+		//utf-8 support, .vimrc
+			set encoding=utf-8	
+		//auto-complete support
+			Bundle 'Valloric/YouCompleteMe'
+		//tell vim and YouComplete that a virtualenv is running
+			"python with virtualenv support
+			py << EOF
+			import os
+			import sys
+			if 'VIRTUAL_ENV' in os.environ:
+			  project_base_dir = os.environ['VIRTUAL_ENV']
+			  activate_this = os.path.join(project_base_dir, 'bin/activate_this.py')
+			  execfile(activate_this, dict(__file__=activate_this))
+			EOF
+		//syntax checking
+			Plugin 'vim-syntastic/syntastic'
+		//PEP 8 checking
+			Plugin 'nvie/vim-flake8'
+		//syntax highlighting
+			let python_highlight_all=1
+			syntax on
+		//colour schemes for each mode
+			Plugin 'jnurmine/Zenburn'
+			Plugin 'altercation/vim-colors-solarized'
+			
+			if has('gui_running')
+			  set background=dark
+			  colorscheme solarized
+			else
+			  colorscheme zenburn
+			endif
+			
+			//add key to switch between solarized light and dark themes
+				call togglebg#map("<F5>")
+		//file tree
+			Plugin 'scrooloose/nerdtree'
+			//optional tabs
+				Plugin 'jistr/vim-nerdtree-tabs'
+			//die .pyc files
+				let NERDTreeIgnore=['\.pyc$', '\~$'] "ignore files in NERDTree
+		//search for things
+			Plugin 'kien/ctrlp.vim'
+		//turn on line numbers
+			set nu
+		//line integration
+			Plugin 'tpope/vim-fugitive'
+		//Powerline, status bar with: current virtualenv, git branch, files being edited, ...
+			Plugin 'Lokaltog/powerline', {'rtp': 'powerline/bindings/vim/'}
+		//use system clipboard (only tested on OSX)
+			set clipboard=unnamed
+		//use vim in the shell
+			// ~/.inputrc:
+			set editing-mode vi
+			
+				
+			
+			
+			
+				
+				
+			
+			
+			
+			

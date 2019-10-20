@@ -440,10 +440,11 @@
 			cw - rename a file or files.
 			o - change file owner.                        
 			cg - change file group.                        
-			ga: calculate directory size
-			za: Toggle showing hidden files
-			zo: Show hidden files
-			zm: Hide hidden files			
+			ga - calculate directory size
+			za - Toggle showing hidden files
+			zo - Show hidden files
+			zm - Hide hidden files			
 			gu, u - make names of selected files lowercase.
 			gU, U - make names of selected files uppercase.
+            s - open shell with current pwd
 

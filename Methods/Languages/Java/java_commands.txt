@@ -13,18 +13,25 @@ setup
 		//some systems
 			export JAVA_HOME= /usr/java/jdk1.7.0_05/
 			export PATH=${PATH}:/usr/java/jdk1.7.0_05/bin
+            export CLASSPATH=/home/jack/java/classes
 		//arch linux
 			export JAVA_HOME=/usr/lib/jvm/java-11-openjdk/
 			export PATH=${PATH}:/usr/lib/jvm/java-11-openjdk/bin
-			
+            //Dont pollute path constantly, as it is called alot
+            export CLASSPATH=${CLASSPATH}:/usr/lib/jvm/java-11-openjdk/lib/[wantedFile.jar]
 		//enable variables without restart
-		source /root/.bash_profile	
-		% CLASSPATH = /home/jack/java/classes; export CLASSPATH
+            source /root/.bash_profile	
+        //maven
 run java code
 	compile java files (.java)
 		//-d: specify .class file location, 
 		//-g: gen all debug info, -noware: gen no warnings  
 		javac {}...
+        //run with a specifc file, list jar files via :
+            javac -classpath /path/to/json.jar:. YourClass.java 
+            //EG run Junit tests
+            javac -classpath /usr/lib/jvm/java-11-openjdk/lib/junit.jar:. TestRunner.java 
+
 	interprete java bytecode files 
 		java {}
 run java files
