@@ -183,6 +183,13 @@
 			Ctrl + wj - move cursor to the window below (horizontal split)
 			Ctrl + wk - move cursor to the window above (horizontal split)
 			Ctrl + wn - new split with new file
+            //current working dir
+                :pwd
+                //change cwd to dir of currently open file (sets the cwd for all windows in Vim):
+                :cd %:p:h
+                //change cwd to dir only for the current window 
+                :lcd %:p:h
+                                
 		Sessions
 			//specific path
 				//create

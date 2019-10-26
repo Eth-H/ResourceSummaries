@@ -41,25 +41,8 @@ prefex needed
             ExternalClass localVariableExternalObject = new ExternalClass()
         } 
 	}
-    
-//arrays
-public class ArrayClass(){
-    
-    public void static main(){  
-    int arraySize = 8 
-    //declare array variable, then create array and assign
-    int[] intList = new int[arraySize]        
-    //or
-    String[] stringList = {"element0", "element2"}     
-    
-    //accessArray
-    //get last element
-    system.out.println(stringList[stringList.length-1])            
-    
-    }
 
-    
-//loops
+ //loops
     loopMethod(stringList){
         double total = 0;
         //equal to i<=(stringList.length-1)
@@ -67,16 +50,81 @@ public class ArrayClass(){
             total += stringList[i];
         }   
         //foreach version
-        for (int i: stringList){
-            total += stringList[i];
+        for (String stringItem: stringList){
+            System.out.println(stringItem)
         }
-                    
+        stringList.forEach((stringItem) -> {
+                System.out.println(stringItem);
+        });
+        //while
+            int index = 0;
+            while(index < files.size()) {
+                String filename = files.get(index);
+                System.out.println(filename);
+                index++;
+            }           
     }
 
+   
+//arrays
+    public class ArrayClass(){
+        public void static main(){  
+        int arraySize = 8 
+        //declare array variable, then create array and assign
+        int[] intList = new int[arraySize]        
+        //or
+        String[] stringList = {"element0", "element2"}     
+        
+        //accessArray
+        //get last element
+        system.out.println(stringList[stringList.length-1])                
+        }
+    }
+    //utility methods
+        list.size()
+        list.get(index)
+            list.indexOf(element)
+        list.remove(index)
+            list.remove(element)
+        list.add(itemName)
+            //insert at specific index, (after that index, doesnt replace)
+            list.add(index, element)                
+            //add all elements in a list (not as a nested list)
+            list.addAll(list2)    
+                list.addAll(index, list2)
+            list.set(index, element)
+        list.clear()       
+        list.isEmpty()
 
+    //lists for obj (collections) 
+        //using java.util.ArrayList
+           import java.util.ArrayList;
+            public class MusicOrganizer{
+                //If java >=7 can omit the class data type and get it automatically
+                private ArrayList<String> files;
+                public MusicOrganizer(){
+                    files = new ArrayList<>();
+                }
+            } 
 
-}
-     
+        //iterate collections
+            //use generic for, foreach, while loop
+                
+            //iterator obj, java.util.Iterator (provides sequential obj access) 
+                Iterator<Track> it = files.iterator();
+                while(it.hasNext()) {
+                    Track tk = it.next();
+                    System.out.println(tk.getDetails());
+                }
+
+//further generic implimencations
+    //anonymous obj
+        Lot furtherLot = new Lot(…);
+        lots.add(furtherLot); 
+        //obj immediately used, so name is unecessary
+        lots.add(new Lot(…)); 
+    //chaining method calls, immediatey call method on returned obj
+        lot.getHighestBid().getBidder() 
 
 
 
@@ -98,7 +146,9 @@ double, double-precision 64-bit IEEE 754 floating point, DV = 0.0d
 		//boolean, 1 bit, DF = false
 		//char, 16 bit unicode character, \u0000 to \uffff
 		int decimal = 100; int octal = 0144; int hexa =  0x64;
-
+        
+        //null, indicates no object
+        null
 
 
 

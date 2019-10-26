@@ -67,8 +67,7 @@
 				mkdir ~/.moc
 				cp /usr/share/doc/moc/config.example ~/.mocp/config
 				//Change options you wan, change theme to Theme = /usr/share/moc/themes/nightly_theme & XTermTheme = /usr/share/moc/themes/nightly_theme, theme = line 222, xterm theme = line 228
-				nano config
-		
+				vim config	
 //security
 	//GnuPG
 		//note: throughout use can redirect (>) or pipe (|) outputs rather than using -o
@@ -222,7 +221,7 @@
 		sudo apt-get install dchroot debootstrap
 		sudo mkdir /test
 
-		sudo nano /etc/schroot/schroot.conf
+		sudo vim /etc/schroot/schroot.conf
 		//modify
 			[saucy]
 				description=Ubuntu Saucy
@@ -280,7 +279,7 @@
 					sudo chroot /test /debootstrap/debootstrap --second-stage
 
 
-				sudo nano /etc/fstab
+				sudo vim /etc/fstab
 						//edit
 							proc /test/proc proc defaults 0 0
 							sysfs /test/sys sysfs defaults 0 0	
@@ -406,7 +405,7 @@
 				cp /usr/share/mc/skins/default.ini ~/.local/share/mc/skins/
 				sed -i -E 's/^(.* = (gray|brightred|brightgreen|yellow|brightblue|brightmagenta|brightcyan|white);.*)$/\0;bold/' ~/.local/share/mc/skins/default.ini
 			//general settings
-			nano /home/emera/.config/mc/ini
+			vim /home/emera/.config/mc/ini
 				//line 85 is skin-default
 				//line 122 is hidden files
 	//vifm 
@@ -418,7 +417,7 @@
 					cd ~/.config/vifm/colors
 					git pull
 				//set
-					nano ~/.config/vifm/vifmrc
+					vim ~/.config/vifm/vifmrc
 					//go to line 67, (or for vim /\<colorscheme\> )
 					colorscheme [theme-name]
 			//set settings for all users

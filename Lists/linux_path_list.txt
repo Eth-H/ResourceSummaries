@@ -99,7 +99,14 @@
 	/etc/default
 	//Contains items to be automounted on boot 
 	/etc/fstab
-    		
+    //system infomation
+        //multi-platform
+           /etc/os-release
+        //debian based, debian:, ubuntu:, mint:
+            /etc/{}-release
+        //arch based
+            /etc/arch-release	
+
 /usr (unix system resources)
 	//config files
 	/usr/share/doc
