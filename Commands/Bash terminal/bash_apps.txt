@@ -446,4 +446,12 @@
 			gu, u - make names of selected files lowercase.
 			gU, U - make names of selected files uppercase.
             s - open shell with current pwd
+//terminal multiplexers
+    //GNU screen
+    //tmux
+        //list-keys: list all bound keys, list-commands: list every tmux
+command
+        //info: list every session/window/pane/pid, source-file ~/.tmux.conf: reload config
+            tmux {}
+        
 

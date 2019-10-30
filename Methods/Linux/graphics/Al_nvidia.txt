@@ -14,11 +14,12 @@ https://docs.xfce.org/xfce/xfce4-settings/display
 https://wiki.archlinux.org/index.php/NVIDIA_Optimus
 https://github.com/dglt1/optimus-switch
 
-inxi -Fxxxz
-mhwd -li
-ls -laR /etc/X11 ; cat /etc/X11/xorg.conf.d/*.conf
+//listing hardware
+    inxi -Fxxxz
 
-optimus switcher arch linux solution
+optimus switcher
+//add a command that swaps activate GPU and drivers on reboot
+//force display manager to detect unrecognised screens
 	//fix process, no reboot till the end
 		//prep drivers
 			sudo systemctl disable bumblebeed --now
