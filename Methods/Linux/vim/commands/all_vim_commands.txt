@@ -137,7 +137,6 @@
 			:q - quit (fails if there are unsaved changes)
 			:q! or ZQ - quit and throw away unsaved changes
 			:wqa - write (save) and quit on all tabs
-			:w !sudo tee % - save a read only file
 			
 		Registers
 			:reg - show registers content

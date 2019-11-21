@@ -126,7 +126,7 @@
 		//Show every session, window, pane, etc...
 			tmux info
 		//Show shortcuts
-			[prefix] ?
-			
-			
-			
+			[prefix] ?			
+	    //show key bindings
+            tmux --list-keys | grep [commandName|keyName]
+        		

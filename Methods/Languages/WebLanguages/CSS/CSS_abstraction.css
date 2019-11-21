@@ -60,8 +60,7 @@ Second properties
 	z-index: 2;	
 	/*scale(2): size, skewX(-32deg): skew along coord axis, skewY(-32deg):, rotate(-45deg):, */
 	transform: {};
-	padding: 4px;
-	
+	padding: 4px 
 }
 
 .general{
@@ -90,6 +89,42 @@ img {
 /*Retina image for higher resolution displays
 One way to optimise images for retina displays is to define their width and height values as 1/2 of of the original file */
 
+/* * selects all elements */
+*, *:before, *:after {
+		-moz-box-sizing: border-box;
+		-webkit-box-sizing: border-box;
+		box-sizing: border-box;
+	}
 
+/*selecting descendants*/
+    /*select all li desecendants */
+    <ul>
+      <li>Item 1</li>
+      <li>
+        <ol>
+          <li>Sub-item 2A</li>
+          <li>Sub-item 2B</li>
+        </ol>
+      </li>
+    </ul>
+    ul li{} /*desendant selector: match an li elements with ul as an ancestor*/
+    ul * li{} /*same as above*/ 
+    /*child selector: only selects immediate descendants (first 2 li's)*/
+    ul > li {}
+    /*TODO add :only-child, :nth-child*/
 
+/*to allow using invalid char in css headers, you can escape numbers so they are interpretd as their hex value in ASCII*/
+.container.\31 25\25 {
+		width: 100%;
+		max-width: 100em;
+		min-width: 80em;
+    }
 
+/*use u to refer to percentage of a row a column takes up */
+/*will wrap to new line (new row) after 12, or can force with a terminator (EG
+ * 6u$)*/
+<div class="row">  
+  <div class="6u"> Big Div Here. </div>
+  <div class="3u"> Small Div Here. </div>
+  <div class="3u"> Small Div here (same size as the other small div)> </div>
+</div>  (This ends the row).

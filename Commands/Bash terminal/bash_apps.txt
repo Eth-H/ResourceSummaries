@@ -1,3 +1,9 @@
+//qpdfview
+    qpdfview [fileName]
+//libreoffice
+    libreoffice [fileName]
+    //convert docx to pdf
+    lowriter --headless --convert-to pdf *.docx 
 
 //virtual box
 	//install

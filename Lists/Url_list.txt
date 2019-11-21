@@ -49,20 +49,12 @@ References>
 	
 	OS>
 		https://en.wikipedia.org/wiki/Comparison_of_boot_loaders
+        https://archcheatsheet.com/cheatsheet/bootloader.html#refind
 		https://forum.manjaro.org/t/manjaro-as-guest-in-virtualbox-shared-folder/41675/8
-		Linux>
-			https://www.fossmint.com/awesome-linux-software/
-				https://www.fossmint.com/awesome-linux-software/#audioplayers
-			https://www.tecmint.com/setup-ufw-firewall-on-ubuntu-and-debian/
-			http://www.linuxandubuntu.com/home/make-your-very-own-customized-linux-distro-from-your-current-installation/
-			https://www.tecmint.com/install-ubuntu-16-04-alongside-with-windows-10-or-8-in-dual-boot/
-			https://forums.nexusmods.com/index.php?/topic/2110829-modding-skyrim-with-wine-playonlinux-in-linux-ubuntu/
-			https://wiki.manjaro.org/index.php/Installation_Guides
-			https://arstechnica.com/information-technology/2014/02/how-to-run-your-own-e-mail-server-with-your-own-domain-part-1/
-			https://arstechnica.com/series/web-served/
-			https://www.digitalocean.com/community/tutorials/how-to-set-up-a-node-js-application-for-production-on-ubuntu-16-04#prerequisites
-			https://www.phusionpassenger.com/library/walkthroughs/deploy/nodejs/
-
+        phone>
+            https://wiki.lineageos.org/devices/herolte/#get-lineageos-for-the-samsung-galaxy-s7
+            https://wiki.lineageos.org/devices/herolte/install
+		    
     Anti-malware>
         https://blog.malwarebytes.com/security-world/2013/12/malwarebytes-2013-threat-report/
         https://threats.kaspersky.com/en/vulnerability/KLA11397/
@@ -91,44 +83,84 @@ References>
 		https://ithitman.blogspot.com/2015/04/what-are-tcp-spurious-retransmissions.html
 		
 		Linux>
-                            
 			info>
 				bootloaders
 					https://wiki.archlinux.org/index.php/Arch_boot_process#Boot_loader
 					http://rodsbooks.com/refind/using.html#legacy
                 kernel                 
                     https://www.lifewire.com/modprobe-linux-command-4095944
+                x-window-system
+                    https://en.wikipedia.org/wiki/Display_server
+
 			generic setup>
+                https://www.infofuge.com/how-to-install-kali-linux-on-dell-inspiron-13-5000/
 				http://segfault.linuxmint.com/2015/08/configuring-the-mdm-login-screen-for-multiple-monitors/
 				https://askubuntu.com/questions/160036/how-do-i-disable-acpi-when-booting
         			https://askubuntu.com/questions/55224/a-common-home-partition-for-multiple-linux-distributions
 				https://medium.com/@manujarvinen/setting-up-a-multi-boot-of-5-linux-distributions-ca1fcf8d502
 				https://wiki.archlinux.org/index.php/Dual_boot_with_Windows	
                 https://github.com/lutris/lutris/wiki/Installing-drivers
+            graphics>
+
+				https://forum.manjaro.org/t/options-for-nvidia-optimus-graphics/75185	
+                https://github.com/Witko/nvidia-xrun
+                https://www.reddit.com/r/linux_gaming/comments/6ftq10/the_ultimate_guide_to_setting_up_nvidia_optimus/
 
 			bash>
-				https://www.digitalocean.com/community/tutorials/how-to-configure-chroot-environments-for-testing-on-an-ubuntu-12-04-vps
-				https://help.ubuntu.com/community/BasicChroot
-				https://www.techonia.com/1400/create-tunnel-interface-linux
-				https://www.deepspace6.net/docs/iproute2tunnel-en.html
+                tools
+                    https://www.digitalocean.com/community/tutorials/how-to-configure-chroot-environments-for-testing-on-an-ubuntu-12-04-vps
+                    https://help.ubuntu.com/community/BasicChroot
+                    https://www.techonia.com/1400/create-tunnel-interface-linux
+                    https://www.deepspace6.net/docs/iproute2tunnel-en.html
+                    https://thoughtbot.com/blog/migrating-from-screen-to-tmux
+                    https://www.freecodecamp.org/news/tmux-in-practice-integration-with-system-clipboard-bcd72c62ff7b/
+                scripting
+                    https://unix.stackexchange.com/questions/6345/how-can-i-get-distribution-name-and-version-number-in-a-simple-shell-script
+
+
 			manjaro>
-				https://forum.manjaro.org/t/options-for-nvidia-optimus-graphics/75185	
 				https://forum.manjaro.org/t/how-to-permanently-enable-user-namespaces-in-manjaro-linux/71614/5
 				https://forum.manjaro.org/t/unable-to-set-manjaro-grub-as-default/50611/4
 				https://forum.manjaro.org/t/installation-with-manjaro-architect-iso/20429
+
+            tiling window manager>
+                https://www.maketecheasier.com/install-use-i3-window-manager-ubuntu/ 
+                https://www.addictivetips.com/ubuntu-linux-tips/guide-awesomewm-windows-manager/
+                https://www.addictivetips.com/ubuntu-linux-tips/beginners-guide-i3-window-manager/
+                https://linoxide.com/gui/install-i3-window-manager-linux/
+                https://i3wm.org/docs/userguide.html
+
             generic software
                 virtualizaion            
                     https://wiki.manjaro.org/index.php?title=VirtualBox
                 filemanager
                     vifm 
                         https://vifm.info/cheatsheets.shtml
+            guides
+                https://www.fossmint.com/awesome-linux-software/
+                    https://www.fossmint.com/awesome-linux-software/#audioplayers
+                https://www.tecmint.com/setup-ufw-firewall-on-ubuntu-and-debian/
+                http://www.linuxandubuntu.com/home/make-your-very-own-customized-linux-distro-from-your-current-installation/
+                https://www.tecmint.com/install-ubuntu-16-04-alongside-with-windows-10-or-8-in-dual-boot/
+                https://forums.nexusmods.com/index.php?/topic/2110829-modding-skyrim-with-wine-playonlinux-in-linux-ubuntu/
+                https://arstechnica.com/information-technology/2014/02/how-to-run-your-own-e-mail-server-with-your-own-domain-part-1/
+                https://arstechnica.com/series/web-served/
+                https://www.digitalocean.com/community/tutorials/how-to-set-up-a-node-js-application-for-production-on-ubuntu-16-04#prerequisites
+                https://www.phusionpassenger.com/library/walkthroughs/deploy/nodejs/
 
 	Development>
-		https://www.simplifiedpython.net/run-python-on-android/
-		https://kivy.org/doc/stable/guide/packaging-android-vm.html
-		https://en.wikipedia.org/wiki/List_of_JavaScript_libraries
-		https://reactgo.com/tutorial-reactlazy-react-suspense/
-		https://stackoverflow.com/questions/53290095/react-passing-fetched-data-from-api-as-props-to-components
+        py
+
+            https://www.simplifiedpython.net/run-python-on-android/
+        java
+            https://stackoverflow.com/questions/18093928/what-does-could-not-find-or-load-main-class-mean#18093929
+        c
+            https://gstreamer.freedesktop.org/documentation/tutorials/basic/index.html?gi-language=c
+        js
+            https://en.wikipedia.org/wiki/List_of_JavaScript_libraries
+            https://reactgo.com/tutorial-reactlazy-react-suspense/
+            https://stackoverflow.com/questions/53290095/react-passing-fetched-data-from-api-as-props-to-components
+
 		https://www.atlassian.com/git/tutorials/comparing-workflows
 		https://microsoft.github.io/language-server-protocol/implementors/servers/
 		https://code.visualstudio.com/api/language-extensions/language-server-extension-guide
@@ -160,6 +192,9 @@ References>
                     https://github.com/ctrlpvim/ctrlp.vim               
                     https://langserver.org
                     https://github.com/joonty/vim-sauce
+                configuration
+                    https://clang.llvm.org/extra/clangd/Installation.html
+                    https://howchoo.com/g/ztmyntqzntm/how-to-install-vim-plugins-without-a-plugin-manager
 
 	Programming>
 		Website templates>
@@ -186,6 +221,8 @@ Social media/blog>
 	
 Resources>
 	//Tools that can be made use of
+    real world locations>
+        https://branchlocator.santander.com/?view=gb&defaultLanguage=en
 
 	https://developer.mozilla.org/en-US/docs/Mozilla/Add-ons/WebExtensions
 	https://towelroot.com/
@@ -197,7 +234,8 @@ Resources>
 		https://www.nomoreransom.org
         https://www.grc.com/shieldsup 
         https://www.grc.com/passwords.htm
-
+        pen testing
+            https://www.vulnhub.com/entry/basic-pentesting-1,216/ 
 	Anti virus>
 		https://www.hybrid-analysis.com
 		https://www.virustotal.com/
@@ -214,6 +252,7 @@ Resources>
             setup    		
                 https://vim-bootstrap.com	
                 https://vimawesome.com
+        https://yeoman.io
 
 	Convert stuff>
 	    https://www.binaryhexconverter.com/
@@ -243,6 +282,9 @@ Resources>
 		Prep>
 			http://blog.codingforinterviews.com/
 			https://grindreel.academy
+            https://leetcode.com
+            https://www.algoexpert.io/questions
+            https://medium.com/@rachit138/how-i-cleared-the-amazon-sde-2-interview-f82a33706ff4
 		schooling>
 			https://www.ucas.com/ucas/tariff-calculator
 		
@@ -252,7 +294,7 @@ Unchecked>
 		https://ssdeep-project.github.io/ssdeep/index.html
 		https://github.com/ssdeep-project/ssdeep
 		https://www.sciencedirect.com/science/article/pii/S1742287606000764?via%3Dihub
-		
+    https://portableapps.com/apps	
 	https://remotise.com
     https://github.com/superhen/Automated-Job-Resume-Matching-Solution
 

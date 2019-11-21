@@ -1,0 +1,86 @@
+//search collection without hasNext
+    int index = 0;
+    boolean searching = true;
+    while(index < files.size() && searching) {
+        String file = files.get(index);
+        if(file.equals(searchString)) {
+            // We don't need to keep looking.
+            searching = false;
+        }
+        else {
+            index++;
+        }
+    }
+
+//while loop setup
+boolean finished = false;
+while(!finished) {
+    do something
+    if(exit condition) {
+        finished = true;
+    }
+    else {
+        do something more
+    }
+}
+
+
+//tokenising strings
+public HashSet<String> getInput() 
+{
+    System.out.print("> "); 
+    String inputLine = 
+           reader.nextLine().trim().toLowerCase();
+
+    Scanner splitter = new Scanner(inputLine);
+    HashSet<String> words = new HashSet<>();
+    while(splitter.hasNext()) {
+        String word = splitter.next();
+        words.add(word);
+    }
+    return words;
+}
+
+public String generateResponse(HashSet<String> words)
+{
+    Iterator<String> it = words.iterator();
+    String response = null;
+    while(response == null && it.hasNext()){
+        String word = it.next();
+        response = responseMap.get(word);
+    }
+        
+    if(response == null) {
+        response = pickDefaultResponse();
+    }
+    return response;
+}
+
+//hash map methods
+    private HashMap<String, String> contactsList = new HashMap<>();
+    //add
+    hashMap.put(key, value);
+    //get keys or values  
+    hashMap.keySet()
+    hashMap.values()
+//get keys that match a specific value
+for (String name: contactsList.keySet()){
+    if (searchNum.equals(contactsList.get(name))){
+        collectionName.add(name)
+    }
+}
+
+//java.util.Collections 
+    //sort alphanumerically
+    Collections.sort(arrayList);
+//java.util.Map
+    //entrySet, get set view of mappings into HashMap
+    Iterator it = map.entrySet().iterator();
+    while (it.hasNext()) {
+        Map.Entry pair = (Map.Entry)it.next();
+        System.out.println(pair.getKey() + " = " + pair.getValue());
+        it.remove(); // avoids a ConcurrentModificationException
+    } 
+    map.isEmpty();
+    map.containsKey(); map.containsValue();
+

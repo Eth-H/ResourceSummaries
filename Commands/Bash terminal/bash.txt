@@ -2,130 +2,90 @@ Others>
 	Unknown>
 		readlink -f /proc/{PID of process}/exe
 	Command combinations>
-		
-Local info gathering>
-		System info>
-			List hardware>
-				//gpu drivers
-					lshw -numeric -C display
-				//CPU
-					cat /proc/cpuinfo
-				//Memory
-					//All
-						cat /proc/meminfo
-					//Memory and swap useage
-						free
-				//Disk useage
-					df -h
-				//Directory space useage
-					du
+
+hardware>
+    info>	
+        List hardware>
+            //graphics
+                //gpu drivers
+                    lshw -numeric -C display
+				//list x11 display server files, 
+                    ls -laR /etc/X11 ; cat /etc/X11/xorg.conf.d/*.conf
+				//check blacklisted modules (modprobe cant load them into the kernel)
+                    ls -la /etc/modprobe.d ; cat /etc/modprobe.d/*.conf
+				//gpu modules loaded at boot
+                    ls -la /etc/modules-load.d ; cat /etc/modules-load.d/*.conf
+                //debug info
+                    hwinfo --short
+            //CPU
+                cat /proc/cpuinfo
+            //Memory
+                //All
+                    cat /proc/meminfo
+                //Memory and swap useage
+                    free
+			//system, machine, battery, CPU, Graphics, Audio, network, drives, RAID, partition, sensors, runtime info
+                inxi -Fxxxz
+            //Disk useage
+                df -h
+            //Directory space useage
+                du
 			//Get kernel version
 				uname -a
 			//OS version
 				lsb_release
-			Displays>
-				//no param: list display info, --output [displayName]: select display 
-				 //--mode [widthxheight]:, --primary: set selected display to primary, --same-as [displayName]: mirror output from selected display to passed display 
-				xrandr {}? {}?...
-				//EGs
-					xrandr --output [display1Name]  --same-as [display2Name]
-					xrandr --output HDMI-1-1 --same-as eDP-1
-					xrandr --ouput LVDS --pos 0x0 --output HDMI-0 --pos 0x0
-				Xorg display server
-					//run server
-						startx
-					//Run test server and generate config
-						Xorg -configure
-						
-		Time>
-			data
-			cal
-			uptime
+    configure    
+        Displays>
+            //no param: list display info, --output [displayName]: select display 
+             //--mode [widthxheight]:, --primary: set selected display to primary, --same-as [displayName]: mirror output from selected display to passed display 
+            xrandr {}? {}?...
+            //EGs
+                xrandr --output [display1Name]  --same-as [display2Name]
+                xrandr --output HDMI-1-1 --same-as eDP-1
+                xrandr --ouput LVDS --pos 0x0 --output HDMI-0 --pos 0x0
+            Xorg display server
+                //run server
+                    startx
+                //Run test server and generate config
+                    Xorg -configure
 			
-Utility>
-	Compression>
-		tar>
-			//Extract -> create
-				//Normal
-					tar cf file.tar [files] 
-					tar xf file.tar 
-				//Gzip
-					tar czf file.tar.gz [files]
-					tar xzf file.tar.gz
-				//Bzip2
-					tar cjf file.tar.bz2 [files]
-					tar xjf file.tar.bz2 – Extract a tar using Bzip2
-		gzip>
-			//Compresses file and renames it to file.gz
-				gzip file
-			//Decompresses file.gz back to file
-				gzip -d file.gz 
-        zip>
-            zip -r zippedFolderName.zip folderToZip 
-        
-	Print>
-		//Print demon
-			/etc/rc.d/init.d/lpd start 
-			/etc/rc.d/init.d/lpd stop
-			/etc/rc.d/init.d/lpd status
-		//Print queue
-			//Display jobs in queue
-				lpq
-			//Remove jobs from queue	
-				lprm
-		//Print a file
-			lpr
-		//Printer control tool
-			lpc
-		//Manual
-			//Print as plain text
-				man [subject] | lpr 
-			//Print as Postscript output
-				man -t [subject] | lpr 
-		//Start X printer setup interface
-			printtool
-	Network>
-	
-		
-	General>
-		//Convert file to pdf
-			ps2pdf
-		//Time command
-			time []
+            //manjaro only tool, configure graphics drivers
+                //get info
+                    //-l: list video drivers, -li: list installed video drivers
+                     //-d: detailed info, --pci:  PCI connection (check unforeseen consequences or problems upon removing a driver)
+                        mhwd {} {}?...
+                //remove driver	
+                    sudo mhwd -r [pci_orUSB] [nameOfDriver]
 
-System>
-	boot>
-		efibootmgr -v
-	terminal>
-		//none: open new terminal window, -e: [commandName]: open new terminal windows and execute command, --tab: open new tab, to run command in new tab pass it afterwards
-			x-terminal-system {}?...
-		//EG
-			xfce4-terminal --geometry 80x40 -e mocp --tab -e mc
-		//Exit shell, 
-		//none: Leave the shell, [integer, 0 or 1-255]: change the scripts exit return status (instead of leaving it to the last command), EG exit 0 
-			exit {}?
-		commands>
-			//get info on commands
-				//none: run command, -v: command description, -V: verbose command description
-				command {}? [commandName]	
-				//man pages
-					man [commandName]
-				//Search man pages for key words, use "" to make sure its isolated
-					apropos ["keyword"]	
-				//-h, --help 		
-					[binName] {}
-			
-		shell>
-			//change shell
-				chsh {}
-	kernel modules>
-		//show status of modules in the linux kernel
-			lsmod 
-			lsmod | grep [moduleName]
-		//Add and remove modules from the Linux Kernel
-			modprobe {}?
-        //Add modules to the kernel via path
-            ismod [pathToModule]
+			nvidia cards>
+				//-q 
+				 //all: display all options, gpucoretemp:, CUDACores:, GPUMemoryInterface:, GPUCurrentClockFreqs:
+				nvidia-settings {} {}  
+				nvidia-smi -q -d temperature
+				//constant report
+					watch -n 1 nvidia-smi --query-gpu=temperature.gpu --format=csv,noheader
+					nvidia-smi -l 10			
+        printer>
+            //Print demon
+                /etc/rc.d/init.d/lpd start 
+                /etc/rc.d/init.d/lpd stop
+                /etc/rc.d/init.d/lpd status
+            //Print queue
+                //Display jobs in queue
+                    lpq
+                //Remove jobs from queue	
+                    lprm
+            //Print a file
+                lpr
+            //Printer control tool
+                lpc
+            //Start X printer setup interface
+                printtool
+
+system>
+    system setup or maintenance>
+        boot>
+            efibootmgr -v
 	Partitions>
 		//info gathering
 			//output mounted partitions
@@ -136,7 +96,6 @@ System>
 				sudo parted -l
 			//output all partitions, includes each partitions UUID, PARTUUID, file system type
 				sudo blkid
-		
         //mount partition
             sudo mount /dev/[partitionName] [pathWhereToMount]
             sudo mount /dev/sdb3 /mnt/partition3
@@ -144,47 +103,32 @@ System>
 			sudo mount -o remount,uid=1000,gid=1000,rw /dev/[partitionName]
 		//check a ntfs drive for errors (generally windows problems), otherwise run chkdik on windows then shutdown /s
 			sudo ntfsfix /dev/sdXY
-		
-		iso files>
-			//burn iso to usb
-				sudo dd bs=4M if=/path/to/manjaro.iso of=/dev/sd[drive letter] status=progress oflag=sync
-				//dd: writing to '/dev/sdc' : input/output error, change to  of=/dev/sdc1
-			//transfer is to iso hybrid
-				//add bios
-					isohybrid -v /path/to/name.iso
-				//add uefi
-					isohybrid --uefi -v output.iso
-				
-	Hardware>
-		display infomation>
-			//system, machine, battery, CPU, Graphics, Audio, network, drives, RAID, partition, sensors, runtime info
-			inxi -Fxxxz
-			//gpu card
-				//list x11 display server files, 
-				ls -laR /etc/X11 ; cat /etc/X11/xorg.conf.d/*.conf
-				//check blacklisted modules (modprobe cant load them into the kernel)
-				ls -la /etc/modprobe.d ; cat /etc/modprobe.d/*.conf
-				//gpu modules loaded at boot
-				ls -la /etc/modules-load.d ; cat /etc/modules-load.d/*.conf
-				//manjaro only tool, configure graphics drivers
-					//get info
-						//-l: list video drivers, -li: list installed video drivers
-						 //-d: detailed info, --pci:  PCI connection (check unforeseen consequences or problems upon removing a driver)
-							mhwd {} {}?...
-					//remove driver	
-						sudo mhwd -r [pci_orUSB] [nameOfDriver]
-			//debug info
-				hwinfo --short
-				
-			nvidia cards>
-				//-q 
-				 //all: display all options, gpucoretemp:, CUDACores:, GPUMemoryInterface:, GPUCurrentClockFreqs:
-				nvidia-settings {} {}  
-				nvidia-smi -q -d temperature
-				//constant report
-					watch -n 1 nvidia-smi --query-gpu=temperature.gpu --format=csv,noheader
-					nvidia-smi -l 10
+	kernel modules>
+		//show status of modules in the linux kernel
+			lsmod 
+			lsmod | grep [moduleName]
+		//Add and remove modules from the Linux Kernel
+			modprobe {}?
+        //Add modules to the kernel via path
+            ismod [pathToModule]
 	
+    info gathering
+        Time>
+            data
+            cal
+            uptime
+	
+    commands>
+        //get info on commands
+            //none: run command, -v: command description, -V: verbose command description
+            command {}? [commandName]	
+            //man pages
+                man [commandName]
+            //Search man pages for key words, use "" to make sure its isolated
+                apropos ["keyword"]	
+            //-h, --help 		
+                [binName] {}
+			
 	Edit machine state>
 		shutdown
 		//Similar parameters in windows and linux, prefix with / in windows and - in linux
@@ -300,9 +244,52 @@ System>
 				lsof {} {}
 				//EG get all tcp port 80 traffic 
 					lsof -i tcp:80 -P -R
+    desktop specific
+        terminal>
+            //none: open new terminal window, -e: [commandName]: open new terminal windows and execute command, --tab: open new tab, to run command in new tab pass it afterwards
+                x-terminal-system {}?...
+            //EG
+                xfce4-terminal --geometry 80x40 -e mocp --tab -e mc
+            //Exit shell, 
+            //none: Leave the shell, [integer, 0 or 1-255]: change the scripts exit return status (instead of leaving it to the last command), EG exit 0 
+                exit {}?
+file utils>
+    file conversions>
+        //Convert file to pdf
+            ps2pdf	
+    iso files>
+			//burn iso to usb
+				sudo dd bs=4M if=/path/to/manjaro.iso of=/dev/sd[drive letter] status=progress oflag=sync
+				//dd: writing to '/dev/sdc' : input/output error, change to  of=/dev/sdc1
+			//transfer is to iso hybrid
+				//add bios
+					isohybrid -v /path/to/name.iso
+				//add uefi
+					isohybrid --uefi -v output.iso
+	Compression>
+		tar>
+			//Extract -> create
+				//Normal
+					tar cf file.tar [files] 
+					tar xf file.tar 
+				//Gzip
+					tar czf file.tar.gz [files]
+					tar xzf file.tar.gz
+				//Bzip2
+					tar cjf file.tar.bz2 [files]
+					tar xjf file.tar.bz2 – Extract a tar using Bzip2
+		gzip>
+			//Compresses file and renames it to file.gz
+				gzip file
+			//Decompresses file.gz back to file
+				gzip -d file.gz 
+        zip>
+            zip -r zippedFolderName.zip folderToZip 
+            unzip folderToUnzip.zip     
 					
-Directories and files>
-	Info gathering>
+GNU core-utils>
+    //some tools may behave differently on BSD based systems (generally more minimalistic)
+	manage files and filesystem>
 		List file directories>
 			ls
 				//-l: Long form list of folders, -t: Sort by modification time, -a: Hidden files, -alt: Combination of previosu commands
@@ -352,7 +339,6 @@ Directories and files>
 						ls | grep [filename]
 					//Print a files contents and filter to a certain number of lines around target string
 						cat securityEventFile | grep -a[numberOfLines] [targetString]	
-
 			find>
 				//-name:, can use wildcards in file name EG "*myfile*"
 				//-mtime -[num]: find files in the last 30 days, -size +[num]M: find files > 10 MB in size
@@ -360,86 +346,90 @@ Directories and files>
 				find [searchDirectoryPath] {searchMethod}... [searchQuery]
 				//EG Search entire file system and redirect errors to a certain file 
 					find / -name "passwords" 2> /dev/null
-					find [path] {} {}
+					find [path] {} {}?
 
 			whereis>
 				//Find all the locations of a program
 					whereis gimp
 
-		
-		
-	Change directories>
-		cd
-			//..: Back one, .:curretn directory, ~: home, /home/agent/Desktop: specific path
-				cd {}
+        Change directories>
+            cd
+                //..: Back one, .:curretn directory, ~: home, /home/agent/Desktop: specific path
+                    cd {}
 			
-	Edit file contents>
-		
-		Text editor>
-		//Either will create file if it doesnt exist
-			nano
-				nano [filePath]
-			vim
-				//More powerful CLI text editor
-					vim [filePath]
-				//use i for insert/interactive mode
-				// :q quit with saved changes, :q! quit while you have unsaved changes, :wq or :x save and quit
-				
-	Create file>
-		//Note for any commands to effect hidden files add a . before the file name
-		//Create a file with text, can use that operator to output anything to a file
-			echo "[text]" > [newFilePath]
-		//Check if a file exists, if it doesnt create it
-			touch [filename]	
-	
-	Edit directories and files>
-		move>
-			//blank: no parameters, -n: Dont overwrite, -u: overwrite if timestamp is newer 
-				mv {} [filePath] [targetFilePath]
-			//Rename file
-				mv [filePath] [filePathEndingInADifferentName]
-		Copy>
-			//blank: no parameters, -r or -R: use recursive parameter to copy directories (and contents)
-				cp {} [filePath] [filePath]	
-		Remove> 
-			//blank: no parameters, -r: recursive, allows to remove folders
-				rm {} [filePath]
-		Make directory>
-			mkdir [directoryPath]
-			//Make multiple directories
-				mkdir -p [folderName]/[subFolderName]/[subFolder2Name]
-			//Set permissions
-				mkdir -m 777 dirname
-		//Sync two folders
-			//
-			 //-e: Execute commands, exploitable by wildcard injection 
-				Rsync {} [firstFolder] [secondFolder] {}				
+        Edit file contents>
+            Text editor>
+            //Either will create file if it doesnt exist
+                nano
+                    nano [filePath]
+                vim
+                    //More powerful CLI text editor
+                        vim [filePath]
+                    //use i for insert/interactive mode, v for visual mode (select
+    stuff), esc to return to normal mode
+                    // :q quit with saved changes, :q! quit while you have unsaved changes, :wq save and quit
+        Create file>
+            //Note for any commands to effect hidden files add a . before the file name
+            //Create a file with text, can use that operator to output anything to a file
+                echo "[text]" > [newFilePath]
+            //Check if a file exists, if it doesnt create it
+                touch [filename]	
+        Edit directories and files>
+            move>
+                //blank: no parameters, -n: Dont overwrite, -u: overwrite if timestamp is newer 
+                    mv {} [filePath] [targetFilePath]
+                //Rename file
+                    mv [filePath] [filePathEndingInADifferentName]
+            Copy>
+                //blank: no parameters, -r or -R: use recursive parameter to copy directories (and contents)
+                    cp {} [filePath] [filePath]	
+            Remove> 
+                //blank: no parameters, -r: recursive, allows to remove folders
+                    rm {} [filePath]
+            Make directory>
+                mkdir [directoryPath]
+                //Make multiple directories
+                    mkdir -p [folderName]/[subFolderName]/[subFolder2Name]
+                //Set permissions
+                    mkdir -m 777 dirname
+            //Sync two folders
+                //
+                 //-e: Execute commands, exploitable by wildcard injection 
+                    Rsync {} [firstFolder] [secondFolder] {}				
+    //Manual
+            //Print as plain text
+                man [subject] | [targetInfo]
+    
+    //Time command
+        time []
 
-History>
-	//Show history
-		history	
-	//Delete history
-		history -c
-	//For a reverse-command-search use CTRL + R, then type in part of a previous command, CTRL + R again to go further back
-	
-	//Hide commands
-		//Prefix each command with a 'space'
-		//or
-			set +o history
-	
-Environment variables>
-	//Data is ephemeral (disapears when you close the terminal window)
-		//Print a EV. /home/user
-			echo $HOME
-		//Change the value of a EV temporarily
-			export HOME=/tmp
-		//Get all EV
-			printenv
-		PATH> 
-			//Get the path of EV
-			which [EV name]
-			//When you open a bash shell it runs the script .bashrc, so you can add an export statement here to set PATH permanently
-			export PATH=$PATH:/mycustomfolder
+    shell features>
+		//change shell
+			chsh {}
+        History>
+            //Show history
+                history	
+            //Delete history
+                history -c
+            //For a reverse-command-search use CTRL + R, then type in part of a previous command, CTRL + R again to go further back
+            
+            //Hide commands
+                //Prefix each command with a 'space'
+                //or
+                    set +o history
+    Environment variables>
+        //Data is ephemeral (disapears when you close the terminal window)
+            //Print a EV. /home/user
+                echo $HOME
+            //Change the value of a EV temporarily
+                export HOME=/tmp
+            //Get all EV
+                printenv
+            PATH> 
+                //Get the path of EV
+                which [EV name]
+                //When you open a bash shell it runs the script .bashrc, so you can add an export statement here to set PATH permanently
+                export PATH=$PATH:/mycustomfolder
 
 Network>
 	Netcat>
@@ -545,52 +535,51 @@ Packages>
 				//Remove uneccessary software dependancies
 				 sudo apt-get autoremove
 			
-		yum>
-			//Fedora package manager
-				//Automatically updates sources	
-				//Upgrade isntalled software, blank: Update all software, [packageName]
-					sudo yum update {}
-				//Download/remove software
-					sudo yum install [packageName]
-					sudo yum remove [packageName]
         pacman>
-            //arc linux package manager
+            //arch linux package manager
             //-S: sync packages
-	     //[packageName]: install package, -u: upgrade installed packages, y: download fresh pacakges, --noconfirm: dont ask, --ignore: ignore a packages upgrade
-	      //[packageName]: apply previous option to selected package 				    					    
-	    //-R [packageName]: remove software
-	    //-Q: query packages
-	     //-u: list outdated packages, -i: view package info, -l: list packages
-              //[packageName]: apply previous option to selected package 
-		//-U [packageName]: upgrade specific package
-                sudo pacman {} {}?...
-				
-	    //EG Upgrade all packages 
-		sudo pacman -Syu
-         AUR (arch user repositary)>
-		//first install base level package group
-			pacman -S --needed base-devel
-			//download package
-				git clone https://aur.archlinux.org/package_name.git
-			//or go to the AUR website and download snapshot, then extract
-				tar -xvf package_name.tar.gz
-			//download from link, extract afterwards
-				curl -L -O https://aur.archlinux.org/cgit/aur.git/snapshot/package_name.tar.gz
-		   cd package_name
-		   //check contents
-		      	less package
-		   //--s: resolves and installs dependancies, -i: installs package
-		   		makepkg -si
-			//or run makepkg -s adn then instal yourself
-				pacman -U package_name.pkg.tar.xz
-			yaourt>
-				wrapper for pacman that includes support for AUR
-				//install
-					
-				//can use all pamac commands
-					//[package name]: search AUR for package (then type its number), --stats: package installation stats, 
-					yaourt {}...
-		
+             //[packageName]: install package, -u: upgrade installed packages, y: download fresh pacakges, --noconfirm: dont ask, --ignore: ignore a packages upgrade
+              //[packageName]: apply previous option to selected package 				    					    
+            //-R [packageName]: remove software
+            //-Q: query packages
+             //-u: list outdated packages, -i: view package info, -l: list packages
+                  //[packageName]: apply previous option to selected package 
+            //-U [packageName]: upgrade specific package
+                    sudo pacman {} {}?...
+                    
+            //EG Upgrade all packages 
+            sudo pacman -Syu
+             AUR (arch user repositary)>
+            //first install base level package group
+                pacman -S --needed base-devel
+                //download package
+                    git clone https://aur.archlinux.org/package_name.git
+                //or go to the AUR website and download snapshot, then extract
+                    tar -xvf package_name.tar.gz
+                //download from link, extract afterwards
+                    curl -L -O https://aur.archlinux.org/cgit/aur.git/snapshot/package_name.tar.gz
+               cd package_name
+               //check contents
+                    less package
+               //--s: resolves and installs dependancies, -i: installs package
+                    makepkg -si
+                //or run makepkg -s adn then instal yourself
+                    pacman -U package_name.pkg.tar.xz
+                yaourt>
+                    wrapper for pacman that includes support for AUR
+                    //install
+                        
+                    //can use all pamac commands
+                        //[package name]: search AUR for package (then type its number), --stats: package installation stats, 
+                        yaourt {}...
+		yum>
+			//Fedora package manager, automatically updates sources	
+            //Upgrade installed software, blank: Update all software, [packageName]
+                sudo yum update {}
+            //Download/remove software
+                sudo yum install [packageName]
+                sudo yum remove [packageName]
+        
 		
 	Packaged software>
 		dpkg>
@@ -603,14 +592,14 @@ Packages>
 					dpks -l
 				//RE-configure package database (fix dpkg corruption problems)
 					sudo dpkg --configure -a
-			rpm>
-				//Generated for Fedora-based distros
-				//Install
-					rpm -Uvh /home/user/cowsay.rpm
-				//Remove
-					rpm -e cowsay
-				//List packages
-					rpm -qa
+        rpm>
+            //Generated for Fedora-based distros
+            //Install
+                rpm -Uvh /home/user/cowsay.rpm
+            //Remove
+                rpm -e cowsay
+            //List packages
+                rpm -qa
 	Building from source>
 				//Look for INSTALL txt file
 				//cd into direcotry with source code -> run configure ELF (executable) file to generate system specific makefile ->  run make to compile source code into an ELF -> 
@@ -627,7 +616,6 @@ Packages>
 				//Raise number after j relative to PC hardware
 				make -j8
 				sudo make install		
-
 
 	
 <Scripting languages>
@@ -664,9 +652,7 @@ Domestic Security tools>
 		rkhunter {}
 	chkrootkit>
 		chkrootkit
-	
-General applications>
-	Linux mint firewall>
+	firewall>
 		sudo ufw reject in from 173.194.55.0/24
 		sudo ufw reject in from 206.111.0.0/16
 		sudo ufw status verbose
@@ -676,8 +662,6 @@ General applications>
 		//or
 		sudo pvpn -init
 		//Login
-			emerald1475@protonmail.com
-			protonEmerald9903
 		//Connect
 			sudo protonvpn-cli -connect
 			protonvpn-cli -c [server-name] [protocol]
