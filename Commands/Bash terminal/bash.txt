@@ -301,17 +301,25 @@ GNU core-utils>
 		Compare directories/files>
 			//-q: Only report on differences, -r: recursive
 				diff {}? [dir1] [dir2]
-			
+            //compare byte to byte 
+                cmp
+            
+            //count num of lines, words and chars in file 
+                //-l -w -c: specify one
+                    wc
 		Display contents of a location>
 			//Change amount of contents displayed
 				//Gradually load program into memory
 					less [filePath]	
-				//Output first twenty characters	
-					head -20 [file] 
-				//Output last 20
-					tail -20 [file]
+                    more [filePath]
+				//-[x]: Output first x chars, -n [x], same as -[x]
+					head {} [file] 
+
+				//-[x]: Output last x chars, -n [x], same as -[x]
+					tail {} [file]
 				//Output contents of file as it grows starting from last ten lines
 					tail -f file
+
 			cat>
 				//Print text file contents to console
 					cat filename
@@ -333,7 +341,7 @@ GNU core-utils>
 				//none:, -i: ignore case, -r: recursive search, -s: supress error msg, -v: search for lines without searchQuery
 				//-n: line number, -a[numberOfLines]: return numberOfLines surrounding found results, -b: byte offset with output lines 
 				//-E: use extended regular expression, can also use egrep, use if using any advanced RE patturns
-				grep {} [searchquery] [filename]
+				grep {}?... [searchquery] [filename]
 				//EG piping commands
 					//Search for a filename
 						ls | grep [filename]
@@ -358,6 +366,17 @@ GNU core-utils>
                     cd {}
 			
         Edit file contents>
+            one cmd>
+                //-u: remove duplicate lines, -k [columnNum]: sort particular column
+                    sort {}...
+                //remove duplicate lines, -c: get how many times the line was duplicated
+                    uinq
+                //extract certain columns from file -d [delimiter]: EG ' ', -f [col1, col2, ...]
+                    cut {} {} [fileName]
+                //insert txt at certain place
+                    sed
+
+
             Text editor>
             //Either will create file if it doesnt exist
                 nano

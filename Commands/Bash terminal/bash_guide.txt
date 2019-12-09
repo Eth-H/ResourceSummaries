@@ -32,53 +32,33 @@ Shortcuts>
 	Ctrl + D – Log out of current session, similar to exit
 
 syntax>
+    using wildcards
+        ls .*
+        [fu]*
+        *.*f*u
 	Operators>
-		//Combine commands with pipe
-			[commandOne] | [commandTwo]
-			//Redirect output to a file, >: overwrite target entirely or create file, >>: Append output to file or create file
-		//Use wildcard to auto fill things
-			cat fileNa*
-		//Use "" to use something in that exact way (escape its alt meaning), '' act as a stronger version, EG '' is needed to escape the escape character '\'  
-			//EG to find an exact word
-				find -name "exactFileName"
-		//redirection operators
-			//redirect ouput and overwrite if existing filename
-				scriptname >filename
-			//	//redirect ouput and append if existing filename
-				scriptname >>filename
-			//redirects both the stdout and the stderr of command to filename.
-				command &>filename
-				//EG redirect errors
-					type bogus_command &>/dev/null
-			//redirects stdout of command to stderr		
-				>&2	
+			
 			//|, Passes the stdout of a previous command to the stdin of the next one
 			//-, redirection from/to stdin or stdout
 				//EG pipe to the end of a command
 				bunzip2 -c linux-2.6.16.tar.bz2 | tar xvf -
-		//tidle, ~, home direcotory
-			//~+, current working direcotry (pwd, $PWD)
-			//=~, previous working direcotry ($OLDPWD)
 		// \, escape, give characters their literal meaning
 			echo "The book cost \$7.98."
 			//special escaped characheters
 				\n //newline, \r //return, \t //tab, \v //vertical tab, \b //backspace
 				\a //alert
-		//!
-			//negate a condition
-				true //gives exit status 0
-				! true //gives exit status 1
-			//invoke history
-				...
-		
-		Line formatting>
-			//Run two commands on a line,
-				echo "Hello"; echo "World"				
-			//Write a command on two lines (escapes whitespace)
-				echo "Hello "\
-				"World"	
-			//Run command in the background, freeing up terminal to run commands
-				echo "Hello" &			
+	
+            //Use "" to use something in that exact way (escape its alt meaning), '' act as a stronger version, EG '' is needed to escape the escape character '\'  
+                //EG to find an exact word
+                    find -name "exactFileName"
+            Line formatting>
+                //Run two commands on a line,
+                    echo "Hello"; echo "World"				
+                //Write a command on two lines (escapes whitespace)
+                    echo "Hello "\
+                    "World"	
+                //Run command in the background, freeing up terminal to run commands
+                    echo "Hello" &			
 				
 		operators used mostly in scripting>
 			//comma
@@ -113,19 +93,14 @@ syntax>
 		//Run something in the current folder
 			./programname
 		//Run via path starting from the root folder 
-			/directory/programname
-variables>
-	//noteable present variables
-		//home directory
-			$HOME
-		//last commands exit status
-			$?
-		//path
-			$PATH
-		//current running script PPID
-			$$
-		//script name
-			$0
+        //extract filename from path
+            basename [path]
+        //extract last dir from path
+            dirname [path]
+		//tidle, ~, home direcotory
+			//~+, current working direcotry (pwd, $PWD)
+			//=~, previous working direcotry ($OLDPWD)
+
 	//custom
 		variableName=value variableName2 = value2
 		$value, ${value}
@@ -134,33 +109,56 @@ variables>
 			unset variableName
 		//declare variable and perform arithemtic caluclation
 			let "uninitialized += 5"
-		//assign command result
-			a=`ls -l`
-			//or
-			a=$(ls -l)
-	
 		
 		
-Decision>
-	case "$key" in
-		$'\x1b\x5b\x32\x7e') # Insert
-		echo Insert Key
-		;;
-		$'\x1b\x5b\x33\x7e') # Delete
-		echo Delete Key
-		;;
-functions>
-	functionName(){
-		#print passed parameter
-		echo $1
-	}
-	#function call
-	functionName "parameter"
-	#pass function as parameter, with its paramters
-		function x()      { echo "x(): Passed $1 and $2";  }
-		function around() { echo before; "$@"; echo after; }
-		around x 1st 2nd
-	
+alias shortcut ="cmd"
+		
+//permissions	
+    //user, group, other
+    //read, write, exe
+    //get info
+        groups
+
+    //change
+        //who, u | g | o | a: user, same group, other, all users 
+         //operator, + | - | =: add, remove, exact permissions
+          //permissions, r: read, w: write, x: execute 
+        chmod {} {} {}
+        //or use numbers, num1=user, num2=group, num3=other, 1=x, 3=r, 4=w 
+            chmod 755
+
+//job control
+    ctrl z
+    //%[jobNum]: 
+    bg {}?
+    fg {}?
+    cmd & 
+    //list jobs
+        jobs -l 
+    //kill proc, %[job num]:, [job PID]:,
+        kill {}
+        //sure kill
+        kill -KILL
+    //show info about logged in users and their processes 
+        w
+
+//history
+    history
+    //specific cmd
+    ![historyNumber]
+    //last cmd
+    !!
+    //last cmd args, *: all args, ^: 1st arg, $: 2nd arg
+    !{}
+
+//env variables
+    $PWD, $PATH, $USER, $HOME
+    //output all env
+        env
+    //last commands exit status
+		$?
+    //current running script PPID, script name
+			$$, $0
 
 Scripting>
 	//Tell system what compilier/interpretor to use
@@ -174,14 +172,6 @@ Scripting>
 			#!/usr/awk -f
 			//since the sha-bang is always run first, below causes a self-deleting script
 				#!/bin/rm
-	//EG script
-		#! /bin/bash
-		echo "This is my first bash script..."
-		cd ~/Desktop
-		ls -halt
-		touch somefile
-		ls -halt
-		echo "Pretty cool, right?"
 	//use script
 		//Make that text file an executable, can give more permissions if needed
 			chmod +x myscript.sh
@@ -190,48 +180,46 @@ Scripting>
 		//move to a directory listed in path for global use
 			/usr/local/bin
 			
-		//Run script
-			./myscript.sh
-	//script params
-		./scriptname 1 2 3 4 5 6 7 8 9 10
-		#!/bin/sh
-		MINPARAMS=10
-		args=$#    # Number of args passed.
-		lastarg=${!#}
-		echo
-			if [ -n "$1" ]
-				then
-					echo "Parameter #1 is $1"
-			fi
-			if [ -n "$args" ] # Parameters > $9 must be enclosed in {brackets}.
-				then
-					echo "Parameter #10 is ${10}"
-			fi	
-			
-			if [ $# -lt "$MINPARAMS" ]
-				then
-					echo "This script needs at least $MINPARAMS command-line arguments!"
-			fi
-		//avoid errors if params aren't passed
-			variable1_=$1_ # Rather than variable1=$1
-			critical_argument01=$variable1_
-			//or
-			if [ -z $1 ]
-				then
-					exit $E_MISSING_POS_PARAM
-			fi
+	//script env variables
+       $[envVar] , ${[envVar} //same as above
+        $0=shell script name
+        $1=arg0, $2=arg1, $3... = arg...
+        $* //all args
+        $# //num of args passed 
+		
 		//move value from one positional parameter to anouther	
 			$1 <--- $2
-	Loops>
-		for item in [criteria]; do [commandInvolvingItem, $Item]; done
-		for i in 1 2 3 4 5 6 7 8 9 10; do; echo -n "$i "; done &
+	iteration>
+		for item in items; do 
+            [commandInvolvingItem, $item]; 
+        done
 		while true; do  [thing] [if statement to terminate]
+
 	Decision>
-		//if/then constructs test if a commmands exit status is 0, so 0 = true and 1 = false
-		//[], test, it considers arguments as comprison expressions/file tests, then it returns 0 or 1 relative to coparison exit status
-		//[[ ... ]], extended test, acts more like scripting languages
-		//arithemetic constructs
-			//(( ... )), returns  exit status relative to arithemtic espressions expand to a non-zero value (=0 ES=1, <0 >0 = ES=0) 
+        [test] [expression]
+        //return 0 if expr true, 1 if false
+        
+        //test construct, compares args and returns 1/0 relative to
+exit status
+            \[ expr \]
+                ! expr //oposite
+                //-a: true if both true (&), -o: true if either true (|)
+                    expr = expr1 
+
+                //=, !=
+                    str {} str1 
+                //-eq: a=b, -ne: a!=b, -gt: a>b, -lt: a<b, -ge: a>=b
+                    num {} num1 
+ 
+                //-r: readable, -w: writeable, -x: executable, -f: is file, -d: is dir 
+                    {} file 
+
+        //extended test
+            //[[ ... ]]  		
+            //acts more like scripting languages
+        //arithemetic constructs
+			//(( ... ))
+            //returns exit status relative to arithemtic espressions expand to a non-zero value (=0 ES=1, <0 >0 = ES=0) 
 			//EGs
 				(( 0 && 1 )) //$? = 1
 				//return result directly with $ (without assigning a variable)
@@ -241,8 +229,50 @@ Scripting>
 			//let ... assigns the result of an equation to a value, however the exit status acts similarly to (( ... )), returns exit status relative to result (=0 ES=1, <0 >0 ES=0)
 				//EG
 					let x=-1 ; echo x=$x \$?=$? // x=-1 $?=0
-			
+        //implement constructs
+            //if else block
+                if [exp]; then 
+                    ...
+                elif [exp]; then
+                    ...
+                else
+                    ...
+                fi
+            //case
+                case "var" in 
+                'val')
+                    ...;    
+                    ;;   
+                'val1')
+                    ...;    
+                    ;;   
+                *)
+                    ...;
+                    ;;
+                esac
+
+    functions>
+        functionName(){
+            #print passed parameter
+            echo $1
+        }
+        #function call
+        functionName "parameter"
+        #pass function as parameter, with its paramters
+            function x()      { echo "x(): Passed $1 and $2";  }
+            function around() { echo before; "$@"; echo after; }
+            around x 1st 2nd
 		
-		
-		
-		
+    //edit streams		
+        //redirect stdout to file, >: overite, >>: append
+            cmd {} file 
+        //redirects stdout and stderr of cmd to filename
+            command &>filename
+        //redirects stdout of command to stderr		
+            >&2	
+         //redirect streams
+            //cmd stdout to cmd stdin
+                [cmdOne] | [cmdTwo]
+        //inject cmd stdout into anouther cmds stdin
+            cmd `cmd1`
+            cmd $(cmd1)        
