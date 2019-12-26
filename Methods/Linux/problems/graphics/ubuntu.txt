@@ -1,3 +1,0 @@
-//TODO add nvidia primus solution instructions
-//nvidia prime
-    //run command that switches active GPU on next boot

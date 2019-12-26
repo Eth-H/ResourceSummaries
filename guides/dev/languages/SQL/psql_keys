@@ -1,0 +1,19 @@
+//all cmds from psql prompt
+    //either enter sql
+    //or use \[x] flag
+//List DB
+        \l
+    //Get DB info (including datatypes)
+        \d [tableName]
+    //Connect to a database
+        \c mydb;
+    //Get info on teh connection
+        \conninfo
+    //Execute terminal command
+        \! [terminalCommandSyntax]
+    //Change DB password (for connections outside terminal (EG NodeJS))
+        //Connect to database then run
+        ALTER USER postgres PASSWORD 'newPassword';
+//Check out contents of table
+    \d friends.test
+

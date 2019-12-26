@@ -1,0 +1,7 @@
+//magic
+    sudo apt install magic
+    //-quality: [percentageQuality]: How much to compress by, -resize [WidthxHeight]: CHnage dimensaions of the image, use [WidthxHeight]! to force exact size and ignore aspect ratio
+        //-rotate [degrees]:, -charcoal 2: apply characoal effect
+            convert sample.png {}... sample.jpg
+        //batch process
+            for file in *.png; do convert $file -rotate 90 rotated-$file; done

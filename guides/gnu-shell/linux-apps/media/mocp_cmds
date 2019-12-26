@@ -1,0 +1,6 @@
+mocp
+//Edit options 
+    mkdir ~/.moc
+    cp /usr/share/doc/moc/config.example ~/.mocp/config
+    //Change options you wan, change theme to Theme = /usr/share/moc/themes/nightly_theme & XTermTheme = /usr/share/moc/themes/nightly_theme, theme = line 222, xterm theme = line 228
+    vim config

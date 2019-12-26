@@ -1,0 +1,23 @@
+other
+    https://app.stackbit.com
+html5 frameworks
+    bootstrap 
+    foundation
+    skeleton
+site generators
+    jekyll
+    hugo
+    gatsby
+    vuepress
+    hexo
+    gridsome
+    next.js
+cms
+   forestry
+    netlify cms
+    contentful
+    datocms
+    sanity
+    ghost
+    prismic
+    strapi 

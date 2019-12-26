@@ -1,0 +1,5 @@
+audacity [fileName]
+//if anouther version of audacity is runnin error occurs				
+    sudo rm -r /var/tmp/audacity-$USER/audacity-lock-$USER
+
+

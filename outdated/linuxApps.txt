@@ -1,0 +1,464 @@
+//qpdfview
+    qpdfview [fileName]
+//libreoffice
+    libreoffice [fileName]
+    //convert docx to pdf
+    lowriter --headless --convert-to pdf *.docx 
+
+//virtual box
+	//install
+		sudo apt install virtualbox virtualbox-qt virtualbox-guest-additions-iso
+		//Extra virtual box drivers (mostly for guest additions features)
+		sudo apt-get install virtualbox-guest-utils virtualbox-guest-x11 virtualbox-dkms virtualbox-guest-dkms     
+	//Setup guest additions
+		//run machine and insert CD additions
+		./autorun.sh
+		//reset machine
+
+//Media
+	//Images
+		//magic
+			sudo apt install magic
+			//-quality: [percentageQuality]: How much to compress by, -resize [WidthxHeight]: CHnage dimensaions of the image, use [WidthxHeight]! to force exact size and ignore aspect ratio
+			//-rotate [degrees]:, -charcoal 2: apply characoal effect
+				convert sample.png {}... sample.jpg
+			//batch process
+				for file in *.png; do convert $file -rotate 90 rotated-$file; done
+	//music
+		//audacity
+			audacity [fileName]
+			//if anouther version of audacity is runnin error occurs				
+				sudo rm -r /var/tmp/audacity-$USER/audacity-lock-$USER
+
+		//moc
+			//music player
+			//run
+				mocp
+			//quit
+				q    
+			//Play
+				//pause
+					p, SPACE
+				//Next song
+					n
+				//Previous
+					bb
+				//Change play order
+					//toggle repeat
+						R
+					//toggle suffle
+						S
+					//toggle autonext
+						X
+			//playlist
+				//Move to playlist
+					TAB
+				//Edit playlist
+					//Add file/directory
+						a
+					//Recuresively add directory 
+						A
+					//Del item
+						d
+					//clear playlist
+						C
+					//Save playlist
+						V
+			//Switch layout 
+				l
+			//Edit volumn: -1%, +1%, -5%, +5%,
+				<, >, (,), .
+
+			//Edit options 
+				mkdir ~/.moc
+				cp /usr/share/doc/moc/config.example ~/.mocp/config
+				//Change options you wan, change theme to Theme = /usr/share/moc/themes/nightly_theme & XTermTheme = /usr/share/moc/themes/nightly_theme, theme = line 222, xterm theme = line 228
+				vim config	
+//security
+	//GnuPG
+		//note: throughout use can redirect (>) or pipe (|) outputs rather than using -o
+	
+		sudo apt-get install gnupg
+		//manage keys
+			//generate key, choose needed algorithm and keysize (bigger for more security), no expiry, 
+			 // then enter name/email/comment, enter password for private key
+			 //note real name, key-id (last part (8) of fingerprint), key fingerprint (40 digits)
+				gpg –-gen-key
+			//--list-keys: list keys, --list-public-key: list public keys, --list-secret-keys: list private keys
+				gpg {} [specificKeyIDorName]?
+			//Give public key to someone else
+				//export public key (raw data is converted to armoured ASCII) for others
+					gpg --armor --export Tutonics > publicKey.asc
+				//import a friends pub key 
+					gpg --import friendsPublicKey.asc
+					//validate imported key
+						//enter gpg cli
+							gpg --edit-key [keyName]
+						//display finger print
+							fpr
+						//once verified sign using sign
+							sign
+						//double check its signed
+							check
+						// optionally can trust a signiture if you know the owner, enter 5 (I trust ultimately)
+							trust
+						//exit cli
+							q, CTRL + d
+				//move your private key	
+					//export private key
+						gpg --export-secret-keys [key-id] > privateKey
+					//import private key on other machine	
+						gpg --import privateKey	
+				//use a keyserver
+					//store key on KS
+						gpg --keyserver [KSname] --send-keys [key-id]
+					//recevie key
+						gpg --keyserver [KSname] --recv-keys [key-id]
+				//Revocate key		
+					//Create revocation cert using private key
+						gpg --output [revocationCertName].asc --gen-revoke [key-id]
+					//Use revocation cert
+						gpg --import [revocationCertName].asc
+						gpg --keyserver [KSname] --send-keys [key-id]
+			
+			//asymmetric encryption
+				//encrypt with pub key, decrypt with private key
+				//encrypt file
+					gpg -o [encryptedFileName].gpg -e -r [key-id] [filename]	
+				//decrypt, the passphrase for the private key is needed
+					gpg -o [decryptedFileName] -d [encryptedFileName].gpg
+					
+			//Digital signitures (to identify tampering)
+				//sender generates hash of data -> hash encrypted with sender priv key and added to original data -> optionally then the're encrypted with recipients pub key -> if encrypted recipient decrypts with priv key 
+				// -> digital signiture is decrypted using senders pub key to reveal the original data's hash -> recipient re-calculates hash and if it matches then the integrity of the owner and data is proved. 
+				
+				//create signiture
+					//normal signiture: raw binary data of the signature is included with the original data
+					//clearsign signiture: Signiture is added as a base64 ascii-armour
+					//--sign, -s: normal signiture, --clearsign: clearsign signiture
+					 //-o [signedFileName]: default signed file name is [fileName].asc but can control output
+					 //--local-user [userName]: sign using anouther private key
+						gpg {} {}? [fileName]	
+					//default signed file name is [fileName].asc, control output
+						gpg -o [signedFileName] --clearsign [fileName]
+					//sign and add asymmetric encryption
+						gpg -o [signedFileName].enc -s -e -r [key-id] [fileName]
+				//verify signiture								
+					//verify on recipient pc using senders public key, even if its encrypted it will verify the signiture (but the msg wont be decrypted)
+						gpg --verify [signedFileName]
+					//To decrypt and verify can use just decrypt as it automatically tries to verify present signitures
+						gpg -o [fileName] -d [signedFileName].enc
+				//Detach signiture to crate .sig file
+					gpg --detach-sign [signedFileName]
+				//Can still verify original file if its within the same dir, otherwise append path 
+					gpg --verify [fileName].sig [pathTo fileName.txt]?
+					
+					
+		//symmetric encryption
+			//pub key used to encrypt and decrypt
+			//default gpg uses cast5: gpg <2, aes128: gpg >2.1
+			//to change default  edit ~/.gnupg/gpg.conf and add: cipher-algo [algorithmName]
+			
+			//-c, --symmetric: symmetric encryption
+			 //--cipher-algo: [algorithmName], -o [fileName]: specify output fileName, default is [fileName].gpg, --force-mdc: if using <64 bit cipher use this to prevent message modification atks
+			 //--armour: ascii armoured text (produces .asc file for default name)
+			 //-s: sign data before encryption	
+				gpg {} {}?... [filePath.txt]
+			//eg
+				gpg --armor --symmetric --cipher-algo AES256 file.txt
+			//Decrypt, pw required
+				gpg -o [filePath].txt -d [fileName].gpg
+			
+			
+		
+		
+	//openssl
+		//symmetric
+			//-aes-256-cbc: aes alogorithm
+			openssl enc {} -in [filePath.txt] -out [filePath.dat]
+			//Decrypt
+			openssl enc {} -d -in [filePath.dat] > [filePath.txt]	
+	
+	
+	//emcrypt a folder
+		//folder to file
+			tar czf myfiles.tar.gz [directoryPath]
+			//convert back after decryption
+			tar xzf myfiles.tar.gz
+	
+	//Create zip with a pw
+		7za a -tzip -p -mem=AES256 [archiveName.zip] [fileOne.txt] [fileTwo.txt]			
+			
+
+//Sandbox
+	//fire jail		
+		//Default options
+			/boot – blacklisted, /bin – read-only, /dev – read-only; similar to the home directory, only a skeleton filesystem is available
+			/etc – read-only; /etc/passwd and /etc/group have been modified to reference only the current user, /home – only the current user is visible
+			/lib, /lib32, /lib64 – read-only, /proc, /sys – re-mounted to reflect the new PID namespace; only processes started by the browser are visible
+			/sbin – blacklisted, /selinux – blacklisted, /usr – read-only; /usr/sbin blacklisted, /var – read-only; similar to the home directory, only a skeleton filesystem is available
+
+		// --appimage: sandbox an AppImage application, 
+		// --blacklist=[filename]: blacklist directory or file, --noblacklist=[filename]: disable blacklist for file or directory .
+		//--whitelist=[fileName]
+		// --chroot=[dirname]: chroot into directory, --private=[dirPath]: temporary home directory.
+		// --hostname=[name]: set sandbox hostname, --hosts-file=[file]: use file as /etc/hosts, --dns=[address]: set DNS server.
+		// --ip=[address]: set interface IP address.
+		// --netstats: monitor network statistics, 
+		// --noroot: install a user namespace with only the current user, --nosound: disable sound system, --novideo: disable video devices
+		//--net=eth0: new network space, --ip=[custom IP]: 192.168.1.155
+		//  --tree: print a tree of all sandboxed processes, --list: List all running sandboxes
+		// --trace: trace open, access and connect system calls, --tracelog: add a syslog message for every access to files or directoires blacklisted by the security profile.
+		// --x11: enable X11 sandboxing. The software checks first if Xpra is installed, then it checks if Xephyr is installed. If all fails, it will attempt to use X11 security extension.
+		// -no-remote
+		// --profile=[fileName] - use a custom profile, --profile.print=name|pid - print the name of profile file, --profile-path=directory - use this directory to look for profile files.	
+		fire jail {} [programName]
+
+		//firejail all programs running by a user by changing default share
+			chsh shell /usr/bin/firejail
+
+
+		//EG
+			firejail --blacklist=/home/emera;/mnt;/media --noroot --netstats --private=/home/virtualHome [programName] 
+		
+	//chroot
+	//move root somewhere else	
+		sudo apt-get update
+		sudo apt-get install dchroot debootstrap
+		sudo mkdir /test
+
+		sudo vim /etc/schroot/schroot.conf
+		//modify
+			[saucy]
+				description=Ubuntu Saucy
+				location=/test
+				priority=3
+				users=demouser
+				groups=sbuild
+				root-groups=root
+		//Setup with just certain files
+			mkdir /chroot
+			//add wanted directories -> copy wanted files and needed liabaries
+				//Get wanted executables
+					mkdir /chroot/{bin}
+					cp -v /bin/{bash, ls} /chroot/bin
+				//Get needed liabraries	
+					mkdir /chroot/{lib, lib64}
+					//Check libraries needed to run the wanted executable
+						ldd /bin/bash
+						ldd /bin/ls
+					cp -v /{lib/bib64} /chroot/{lib/lib64}
+			//enter chroot
+				sudo chroot /chroot/ /bin/bas
+			//exit
+				exit	
+		//Setup with full system 
+			//Generate skeleton OS, add --foreign if architectures dont rematch
+				debootstrap --arch=amd64 unstable my_deb/
+			//Setup process mangagement and add temp home thats lost on exit
+				sudo mount -o bind /proc my_deb/proc
+				mount -t tmpfs -o size=100m tmpfs /home/user
+			//Setup internet
+				cp /etc/hosts /chroot/etc/hosts
+				sudo cp /etc/resolv.conf /var/chroot/etc/resolv.conf	
+			//enter chroot env
+				chroot my_deb/ /bin/bash
+			//setup graphical applications
+				//run outside chroot
+					xhost
+				export DISPLAY=:0.0
+				
+			//custom chroot service
+				[Unit]
+				Description=my_chroot_Service
+				[Service]
+				RootDirectory=/chroot/foobar
+				ExecStartPre=/usr/local/bin/pre.sh
+				ExecStart=/bin/my_program
+				RootDirectoryStartOnly=yes
+				systemctl start my_chroot_Service.service
+				
+		
+			//alt setup
+				//Generate skeleton OS, add --foreign if architectures dont rematch
+					sudo debootstrap --variant=buildd --arch amd64 saucy /test/ http://mirror.cc.columbia.edu/pub/linux/ubuntu/archive/
+					sudo chroot /test /debootstrap/debootstrap --second-stage
+
+
+				sudo vim /etc/fstab
+						//edit
+							proc /test/proc proc defaults 0 0
+							sysfs /test/sys sysfs defaults 0 0	
+				//mount within guest
+					sudo mount proc /test/proc -t proc
+					sudo mount sysfs /test/sys -t sysfs
+				//unmount proc filesystems
+					sudo umount /test/proc
+					sudo umount /test/sys
+				//del after use
+					rm -rf /test/
+	//Ip-netns
+	//Directly uses network namespace to create virtual interfaces
+		//Create network namespace
+			ip netns add netns1
+		//Check interfaces inside
+			ip netns exec netns ip addr
+		//Execute shell in it
+			ip netns exec netns /bin/bash	
+		//Bring up loop interface
+			ip netns exec netns ip link set dev lo up
+		//Setup ethernet
+			ip link add veth0 type veth peer name veth1
+			ip link set veth1 netns netns1
+		//Set IP
+			ip netns exec netns1 ifconfig veth1 10.1.1.1/24 up
+			ifconfig veth0 10.1.1.2/24 up
+	//Unshare
+	//Create isolated environment and run program, can combine different created namspaces
+		//--net: different network stack, create user namespace environment
+		//--user: create a user namespace 
+		//--pid --fork: setup PID namespace
+		unshare {} [programToRun]
+	//Containers
+		//System-nspawn
+		//Creates isolated containers, has separate mount point, process tree
+			debootstrap --arch=amd64 unstable my_deb/
+			//Get in container, --network-bridge=br0: Add network set
+				systemd-nspawn -D my_deb {}
+			//Boot into container, remember change root pw in passwd, 
+				systemd-nspawn -bD my_deb
+
+            //machinectl
+            //Control state of systemd based VM
+                //-a: status of all running containers
+                machinectl {} 
+                status: status of specific container, login: login, switchoff: poweroff, -s kill: kill forcefully, -M: View logs
+                machinectl {} {[containerName]}
+		
+		//Docker
+			//Start daemon
+			service docker start
+			//Download base image
+				docker pull kalilinux/kali-linux-docker
+				//or get them from https://hub.docker.com/
+			//Run program inside container
+				docker run -i -t kalilinux/kali-linux-docker [programName]		
+			//images: see avaliable images and get details (EG containerID), ps: List running containers	
+			//commit [containerID] [imageName]:	Save current state as image
+			//rmi [imageName]: remove image
+				docker {}
+			//stop [containerID]: Stop container, rm [containerID]: del files created on host node by that server
+				docker {} 
+			//Run apps on docker instance
+				//Mount external host system 
+					docker run -it -v /temp/:/home/ kalilinux/kali-linux-docker /bin/bash
+				//Attach docker port to external system port
+					docker run -it -v /temp/:/home/ -p 4567:80 kalilinux/kali-linux-docker /bin/bash
+				//Mount x server file
+					docker run -it -v -e DISPLAY=$DISPLAY -v /tmp/.X11-unix:/tmp/.X11-unix \ kalilinux/kali-linux-docker /bin/bash
+			//Move image
+				//push [imageName]: Push it on the docker online repo, export [imageName]: export as archive
+					docker {} 				
+			
+				
+			
+		
+//wine 
+	//install
+		apt install wine winetricks
+
+	mkdir wine, cd wine
+	//Set architecture, win32:, win64:,
+		WINEARCH={} WINEPREFIX=~/wine/[bottleName] winetricks
+	//In GUI: Select default wine prefix -> install dll or component: what u want, dotnet34 and dotnet 452, tahoma -> run wine.cfg -> drop applications into drive_c
+	
+	//alt route
+	mkdir wine
+	//move exe to location
+		//Set architecture, win32:, win64:,
+			WINEARCH={} WINEPREFIX=~/wine/[bottleName] winecfg
+			
+//lynx
+	q
+	//movement
+		//numbers
+			7: top	8: ^	9: page up
+			4: <- 6: ->
+			1: EOF 2: v 3: page down 
+		//arrows
+			up: previous link down: select next link
+			left: prev doc right: follow current link
+
+//File manager
+	//Midnight commander
+
+			Switch column: tab
+			Bottem repersents F1 – F10 
+			Move mc to background ctrl+o
+			select multiple files: insert on each file
+			Change default editor: select file -> F2 -> 1 -> select-editor
+				//or naviage to .selected_editor in homes file
+			Change file permissions: F9 -> File -> chown -> select category -> r, w, x
+			Toggle hidden files: Alt + .
+
+			Simulate F keys
+			F10: Esc + 0
+			F1-10: Esc + 1-10
+
+			//get installation paths
+			mc -F
+			//make your own skins
+				mkdir ~/.local/share/mc/skins 
+				cp /usr/share/mc/skins/default.ini ~/.local/share/mc/skins/
+				sed -i -E 's/^(.* = (gray|brightred|brightgreen|yellow|brightblue|brightmagenta|brightcyan|white);.*)$/\0;bold/' ~/.local/share/mc/skins/default.ini
+			//general settings
+			vim /home/emera/.config/mc/ini
+				//line 85 is skin-default
+				//line 122 is hidden files
+	//vifm 
+		//setup
+			//colours
+				rm -rf ~/.config/vifm/colors
+				git clone https://github.com/vifm/vifm-colors ~/.config/vifm/colors
+				//update
+					cd ~/.config/vifm/colors
+					git pull
+				//set
+					vim ~/.config/vifm/vifmrc
+					//go to line 67, (or for vim /\<colorscheme\> )
+					colorscheme [theme-name]
+			//set settings for all users
+				/usr/share/vifm/vifmrc - edit vifm settings
+				
+		//commands
+			//panes
+				Ctrl-W h - switch to left pane (vifm-CTRL-W_h), Ctrl-W j - switch to pane below               
+				Ctrl-W k - switch to pane above, Ctrl-W l - switch to right pane           
+				Ctrl-W p - switch to previous window, Ctrl-W w - switch to other pane              
+				Ctrl-W o - leave only one pane
+				Ctrl-W s - split window horizontally, Ctrl-W v - split window vertically 
+			//change mode
+				:ex - 
+				:visual - 
+				:view - change to view mode (get preview of file in one pane)
+			:! [programToRunWith] [fileName] & - run graphical program but keep vifm running
+		
+			cw - rename a file or files.
+			o - change file owner.                        
+			cg - change file group.                        
+			ga - calculate directory size
+			za - Toggle showing hidden files
+			zo - Show hidden files
+			zm - Hide hidden files			
+			gu, u - make names of selected files lowercase.
+			gU, U - make names of selected files uppercase.
+            s - open shell with current pwd
+//terminal multiplexers
+    //GNU screen
+    //tmux
+        //list-keys: list all bound keys, list-commands: list every tmux
+command
+        //info: list every session/window/pane/pid, source-file ~/.tmux.conf: reload config
+            tmux {}
+        
+

@@ -1,0 +1,10 @@
+//get installation paths
+    mc -F
+//make your own skins
+    mkdir ~/.local/share/mc/skins 
+    cp /usr/share/mc/skins/default.ini ~/.local/share/mc/skins/
+    sed -i -E 's/^(.* = (gray|brightred|brightgreen|yellow|brightblue|brightmagenta|brightcyan|white);.*)$/\0;bold/' ~/.local/share/mc/skins/default.ini
+//general settings
+vim /home/emera/.config/mc/ini
+    //line 85 is skin-default
+    //line 122 is hidden files

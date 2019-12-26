@@ -1,0 +1,18 @@
+//symmetric
+    //-aes-256-cbc: aes alogorithm
+    openssl enc {} -in [filePath.txt] -out [filePath.dat]
+    //Decrypt
+    openssl enc {} -d -in [filePath.dat] > [filePath.txt]	
+
+
+//emcrypt a folder
+//folder to file
+    tar czf myfiles.tar.gz [directoryPath]
+    //convert back after decryption
+    tar xzf myfiles.tar.gz
+
+//Create zip with a pw
+7za a -tzip -p -mem=AES256 [archiveName.zip] [fileOne.txt] [fileTwo.txt]			
+    
+
+

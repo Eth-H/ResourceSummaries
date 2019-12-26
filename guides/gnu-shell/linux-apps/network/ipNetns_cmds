@@ -1,0 +1,15 @@
+//Directly uses network namespace to create virtual interfaces
+    //Create network namespace
+        ip netns add netns1
+    //Check interfaces inside
+        ip netns exec netns ip addr
+    //Execute shell in it
+        ip netns exec netns /bin/bash	
+    //Bring up loop interface
+        ip netns exec netns ip link set dev lo up
+    //Setup ethernet
+        ip link add veth0 type veth peer name veth1
+        ip link set veth1 netns netns1
+    //Set IP
+        ip netns exec netns1 ifconfig veth1 10.1.1.1/24 up
+        ifconfig veth0 10.1.1.2/24 up

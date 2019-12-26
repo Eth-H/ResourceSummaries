@@ -1,0 +1,11 @@
+//virtual box
+	//install
+		sudo apt install virtualbox virtualbox-qt virtualbox-guest-additions-iso
+		//Extra virtual box drivers (mostly for guest additions features)
+		sudo apt-get install virtualbox-guest-utils virtualbox-guest-x11 virtualbox-dkms virtualbox-guest-dkms     
+	//Setup guest additions
+		//run machine and insert CD additions
+		./autorun.sh
+		//reset machine
+
+
