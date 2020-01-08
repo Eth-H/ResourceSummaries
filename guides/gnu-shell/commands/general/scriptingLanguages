@@ -1,0 +1,25 @@
+python>
+    //run program
+        python [fileName.py]	
+C>
+    //It 32 bit compling doesnt work, some possible packages
+        sudo apt-get install libc6-dev
+        sudo apt-get install gcc-multilib
+        sudo apt-get install libc6-dev:i386
+    
+    //Run a C program via compling it into an ELF
+        gcc -o hello hello.c
+    //Specify processor arcitechure
+        gcc -m32 -o hello hello.c
+    //Use MinGW cross-complier to compile for windows
+java>
+    //archlinux java management
+        //status: list all installed java JDKs, set [javaFromStatus], fix: fix invalid jre links
+        archlinux-java {}
+        //EG java-11-openjdk/bin
+            archlinux-java set java-8-openjdk
+        //run program with a different java version
+        #!/bin/sh
+        export PATH=/usr/lib/jvm/java-8-openjdk/jre/bin/:$PATH
+        exec /path/to/application "$@"	
+    

@@ -1,0 +1,40 @@
+//get info
+    //gpu drivers
+        lshw -numeric -C display
+    //list x11 display server files, 
+        ls -laR /etc/X11 ; cat /etc/X11/xorg.conf.d/*.conf
+    //check blacklisted modules (modprobe cant load them into the kernel)
+        ls -la /etc/modprobe.d ; cat /etc/modprobe.d/*.conf
+    //gpu modules loaded at boot
+        ls -la /etc/modules-load.d ; cat /etc/modules-load.d/*.conf
+    //debug info
+        hwinfo --short
+//no param: list display info, --output [displayName]: select display 
+     //--mode [widthxheight]:, --primary: set selected display to primary, --same-as [displayName]: mirror output from selected display to passed display 
+    xrandr {}? {}?...
+    //EGs
+        xrandr --output [display1Name]  --same-as [display2Name]
+        xrandr --output HDMI-1-1 --same-as eDP-1
+        xrandr --ouput LVDS --pos 0x0 --output HDMI-0 --pos 0x0
+    Xorg display server
+        //run server
+            startx
+        //Run test server and generate config
+            Xorg -configure
+    
+    //manjaro only tool, configure graphics drivers
+        //get info
+            //-l: list video drivers, -li: list installed video drivers
+             //-d: detailed info, --pci:  PCI connection (check unforeseen consequences or problems upon removing a driver)
+                mhwd {} {}?...
+        //remove driver	
+            sudo mhwd -r [pci_orUSB] [nameOfDriver]
+
+    nvidia cards>
+        //-q 
+         //all: display all options, gpucoretemp:, CUDACores:, GPUMemoryInterface:, GPUCurrentClockFreqs:
+        nvidia-settings {} {}  
+        nvidia-smi -q -d temperature
+        //constant report
+            watch -n 1 nvidia-smi --query-gpu=temperature.gpu --format=csv,noheader
+            nvidia-smi -l 10

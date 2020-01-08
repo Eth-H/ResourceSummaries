@@ -1,0 +1,51 @@
+Superuser permissions>
+    //Swap to root user
+        su root
+        sudo su
+        sudo bash
+    //Use sudo to enter admin PW for temporay root privillages, note when piping commands sudo may needed to be prefixed for both commands
+        sudo [command]
+    //Get a root shell with sudo
+        sudo find /etc -exec sh -i \;	
+chmod>
+    //Edit a programs permissions, +x: Give execute permissions, -x: Take	 execute permissions, +w: Give write permissions, u+[permissionLetter]: permissions only apply for the user	
+    //or 
+    //set all permissions: 755 (Each number repersents 1 of user/user group/others; Think of the number as binary for there effect, 111 = 7 so means +rwx, or Read = 4 Write = 2 Execute = 1 then add)
+        chmod {} [filePath]
+chown>
+    //Change ownership of a file, EG
+    sudo chown root:root ./demo
+stat>
+    //Get the owner of a file
+    stat -c %U file
+//users
+    //list users
+        cut -d: -f1 /etc/passwd
+    //Get current user
+        whoami
+    //Create new user
+        adduser [accountname] 
+        //add new user and new group
+        useradd -G [groupName] [userName] 
+    //Give account a new password
+        passwd [accountname] 
+    //Create user directory (if it doesnt exist already)
+        mkhomedir_helper username
+    //del user
+        sudo userdel username
+        sudo rm -r /home/username
+    //groups
+        //list a users group
+            group [userName]
+            id [userName]
+        //-a [username]: add user
+         //-G [group name]: group
+        -g [groupName] [userName]
+            usermod	{}...       
+        //add new group
+            sudo groupadd mynewgroup	        
+Signing>
+    //List apt keys
+        sudo apt-key list
+    //Remove
+        sudo apt-key del [keyName]

@@ -98,7 +98,7 @@ dhcpcd netctl vim s-nail intel-ucode
             127.0.0.1	localhost
             ::1		localhost
             127.0.1.1	myhostname.localdomain	myhostname
-        pacman -S network manager
+        pacman -S networkmanager
         systemctl enable networkmanager
     //recreate Initramfs (normally uneccesary) 
         mkinitcpio -P
@@ -133,4 +133,5 @@ dhcpcd netctl vim s-nail intel-ucode
         systemctl enable lightdm.service
         //intel driver that may be requried
             pacman -S xf86-video-intel    
-    
+    //network (if required)
+        nmtui

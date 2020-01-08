@@ -1,0 +1,16 @@
+Time>
+    data
+    cal
+    uptime
+//Memory
+    //All
+        cat /proc/meminfo
+    //Memory and swap useage
+        free
+//Get kernel version
+    uname -a
+//OS version
+    lsb_release
+    cat /etc/os-release
+    cat /etc/arch-release
+    cat /etc/debian_version

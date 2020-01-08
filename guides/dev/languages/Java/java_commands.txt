@@ -11,7 +11,7 @@ setup
 		archlinux-java
 	variables setup
 		//some systems
-			export JAVA_HOME= /usr/java/jdk1.7.0_05/
+			export JAVA_HOME=/usr/java/jdk1.7.0_05/
 			export PATH=${PATH}:/usr/java/jdk1.7.0_05/bin
             export CLASSPATH=/home/jack/java/classes
 		//arch linux
@@ -37,7 +37,8 @@ run java code
 run java files
 	java fileName.java
 	java -jar jarName.jar
-	
+        //if errs
+            //run with no file extension	
 	
 creating packages
 	put a package statement on the first line
@@ -47,8 +48,3 @@ creating packages
 		javac -d Destination_folder file_name.java
 	file name = public class name
 	directory name = name of package
-
-
-
-
-

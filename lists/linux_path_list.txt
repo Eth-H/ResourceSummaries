@@ -45,7 +45,13 @@
     /bin
 	//other binary locations
     /usr/bin
-	/home/emera/.local/bin
+    //special binaries
+    /sbin /usr/sbin
+    //local binaries
+        //all users
+            /usr/local/bin
+        //current user
+            ~/.local/bin   
 
 /lib
 /lib64

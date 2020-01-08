@@ -1,0 +1,12 @@
+manage bootable kernels>
+    efibootmgr -v
+kernel modules>
+    //show status of modules in the linux kernel
+        lsmod 
+        lsmod | grep [moduleName]
+    //Add and remove modules from the Linux Kernel
+        modprobe {}?
+    //Add modules to the kernel via path
+        ismod [pathToModule]
+	
+

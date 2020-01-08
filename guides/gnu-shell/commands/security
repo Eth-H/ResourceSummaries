@@ -1,0 +1,12 @@
+ClamAV>
+    clamscan -r -i [pathToScan]
+rkhunter>
+    //--check: Check the local system for rootkits
+    rkhunter {}
+chkrootkit>
+    chkrootkit
+firewall>
+    sudo ufw reject in from 173.194.55.0/24
+    sudo ufw reject in from 206.111.0.0/16
+    sudo ufw status verbose
+    

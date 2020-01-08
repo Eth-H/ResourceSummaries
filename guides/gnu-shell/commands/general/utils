@@ -1,0 +1,33 @@
+file conversions>
+    //Convert file to pdf
+        ps2pdf	
+iso files>
+        //burn iso to usb
+            sudo dd bs=4M if=/path/to/manjaro.iso of=/dev/sd[drive letter] status=progress oflag=sync
+            //dd: writing to '/dev/sdc' : input/output error, change to  of=/dev/sdc1
+        //transfer is to iso hybrid
+            //add bios
+                isohybrid -v /path/to/name.iso
+            //add uefi
+                isohybrid --uefi -v output.iso
+Compression>
+    tar>
+        //Extract -> create
+            //Normal
+                tar cf file.tar [files] 
+                tar xf file.tar 
+            //Gzip
+                tar czf file.tar.gz [files]
+                tar xzf file.tar.gz
+            //Bzip2
+                tar cjf file.tar.bz2 [files]
+                tar xjf file.tar.bz2 – Extract a tar using Bzip2
+    gzip>
+        //Compresses file and renames it to file.gz
+            gzip file
+        //Decompresses file.gz back to file
+            gzip -d file.gz 
+    zip>
+        zip -r zippedFolderName.zip folderToZip 
+        unzip folderToUnzip.zip     
+    

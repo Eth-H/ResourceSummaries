@@ -1,0 +1,24 @@
+//disk info
+    //Disk useage
+        df -h
+    //Directory space useage
+        du
+    
+//partitions
+    //scout
+        //output mounted partitions
+            cat /etc/fstab
+            //find mounted filesystems, -s: all, [fileSystemPartitionName]: get more infomation about selected filesystem
+            findmnt {}
+        //entire disk partition summary, includes flags
+            sudo parted -l
+        //output all partitions, includes each partitions UUID, PARTUUID, file system type
+            sudo blkid
+    //mount partition
+        sudo mount /dev/[partitionName] [pathWhereToMount]
+        sudo mount /dev/sdb3 /mnt/partition3
+    //EG, use to remount a drive mounted as read only (id and gid come from id command)
+        sudo mount -o remount,uid=1000,gid=1000,rw /dev/[partitionName]
+    //check a ntfs drive for errors (generally windows problems), otherwise run chkdik on windows then shutdown /s
+        sudo ntfsfix /dev/sdXY
+

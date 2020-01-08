@@ -1,0 +1,174 @@
+//some tools may behave differently on BSD based systems (generally more minimalistic)
+manage files and filesystem>
+    List file directories>
+        ls
+            //-l: Long form list of folders, -t: Sort by modification time, -a: Hidden files, -alt: Combination of previosu commands
+            ls {}
+            //Specific file/folder/path
+            ls [filePath]
+        //List working directory
+            pwd
+    Compare directories/files>
+        //-q: Only report on differences, -r: recursive
+            diff {}? [dir1] [dir2]
+        //compare byte to byte 
+            cmp
+        
+        //count num of lines, words and chars in file 
+            //-l -w -c: specify one
+                wc
+    Display contents of a location>
+        //Change amount of contents displayed
+            //Gradually load program into memory
+                less [filePath]	
+                more [filePath]
+            //-[x]: Output first x chars, -n [x], same as -[x]
+                head {} [file] 
+
+            //-[x]: Output last x chars, -n [x], same as -[x]
+                tail {} [file]
+            //Output contents of file as it grows starting from last ten lines
+                tail -f file
+
+        cat>
+            //Print text file contents to console
+                cat filename
+            //Join two files
+                cat filename1 filename2
+            //Redirect file output
+                //Overwrite it
+                    cat filename1 filename2 > new_file
+                //Append to it	
+                    cat filename1 filename2 >> appended_file
+            //Use wildcard operator, match any files: *, match all txt files: *.txt, match files starting with pass: pass*
+                cat {}
+        strings>
+            //Get all strings in a file
+                strings [filePath]		
+    Search filesystem>
+        grep>
+            //use * and "" in queries, "" can contain regex expressions
+            //none:, -i: ignore case, -r: recursive search, -s: supress error msg, -v: search for lines without searchQuery
+            //-n: line number, -a[numberOfLines]: return numberOfLines surrounding found results, -b: byte offset with output lines 
+            //-E: use extended regular expression, can also use egrep, use if using any advanced RE patturns
+            grep {}?... [searchquery] [filename]
+            //EG piping commands
+                //Search for a filename
+                    ls | grep [filename]
+                //Print a files contents and filter to a certain number of lines around target string
+                    cat securityEventFile | grep -a[numberOfLines] [targetString]	
+            //EG regex
+                grep fileName "b[ab]*" //ba... bb...
+        find>
+            //-name:, can use wildcards in file name EG "*myfile*"
+            //-mtime -[num]: find files in the last 30 days, -size +[num]M: find files > 10 MB in size
+            //-perm -[permissionsValuable], -user [user]
+            find [searchDirectoryPath] {searchMethod}... [searchQuery]
+            //EG Search entire file system and redirect errors to a certain file 
+                find / -name "passwords" 2> /dev/null
+                find [path] {} {}?
+
+        whereis>
+            //Find all the locations of a program
+                whereis gimp
+
+    Change directories>
+        cd
+            //..: Back one, .:curretn directory, ~: home, /home/agent/Desktop: specific path
+                cd {}
+        
+    Edit file contents>
+        one cmd>
+            //-u: remove duplicate lines, -k [columnNum]: sort particular column
+                sort {}...
+            //remove duplicate lines, -c: get how many times the line was duplicated
+                uinq
+            //extract certain columns from file -d [delimiter]: EG ' ', -f [col1, col2, ...]
+                cut {} {} [fileName]
+            //insert txt at certain place
+                sed
+
+
+        Text editor>
+        //Either will create file if it doesnt exist
+            nano
+                nano [filePath]
+            vim
+                //More powerful CLI text editor
+                    vim [filePath]
+                //use i for insert/interactive mode, v for visual mode (select
+stuff), esc to return to normal mode
+                // :q quit with saved changes, :q! quit while you have unsaved changes, :wq save and quit
+    Create file>
+        //Note for any commands to effect hidden files add a . before the file name
+        //Create a file with text, can use that operator to output anything to a file
+            echo "[text]" > [newFilePath]
+        //Check if a file exists, if it doesnt create it
+            touch [filename]	
+    Edit directories and files>
+        move>
+            //blank: no parameters, -n: Dont overwrite, -u: overwrite if timestamp is newer 
+                mv {} [filePath] [targetFilePath]
+            //Rename file
+                mv [filePath] [filePathEndingInADifferentName]
+        Copy>
+            //blank: no parameters, -r or -R: use recursive parameter to copy directories (and contents)
+                cp {} [filePath] [filePath]	
+        Remove> 
+            //blank: no parameters, -r: recursive, allows to remove folders
+                rm {} [filePath]
+        Make directory>
+            mkdir [directoryPath]
+            //Make multiple directories
+                mkdir -p [folderName]/[subFolderName]/[subFolder2Name]
+            //Set permissions
+                mkdir -m 777 dirname
+        //Sync two folders
+            //
+             //-e: Execute commands, exploitable by wildcard injection 
+                Rsync {} [firstFolder] [secondFolder] {}				
+//manipulate streams
+    //tee
+    //reduce content in stdin
+        //-b: by bytes, -c: by num charl, -f: by fields
+         //[-x]: up to x, [x-y]: range, [x-]: after x
+            cut {} {}
+
+//Manual
+        //Print as plain text
+            man [subject] | [targetInfo]
+
+
+
+//Time command
+    time []
+
+shell features>
+    //change shell
+        chsh {}
+    History>
+        //Show history
+            history	
+        //Delete history
+            history -c
+        //For a reverse-command-search use CTRL + R, then type in part of a previous command, CTRL + R again to go further back
+        
+        //Hide commands
+            //Prefix each command with a 'space'
+            //or
+                set +o history
+Environment variables>
+    //Data is ephemeral (disapears when you close the terminal window)
+        //Print a EV. /home/user
+            echo $HOME
+        //Change the value of a EV temporarily
+            export HOME=/tmp
+        //Get all EV
+            printenv
+        PATH> 
+            //Get the path of EV
+            which [EV name]
+            //When you open a bash shell it runs the script .bashrc, so you can add an export statement here to set PATH permanently
+            export PATH=$PATH:/mycustomfolder
+
+

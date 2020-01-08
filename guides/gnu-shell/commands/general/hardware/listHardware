@@ -1,0 +1,7 @@
+    
+//CPU
+    cat /proc/cpuinfo
+
+//system, machine, battery, CPU, Graphics, Audio, network, drives, RAID, partition, sensors, runtime info
+    inxi -Fxxxz
+lspci

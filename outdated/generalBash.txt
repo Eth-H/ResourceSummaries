@@ -19,21 +19,14 @@ hardware>
                     hwinfo --short
             //CPU
                 cat /proc/cpuinfo
-            //Memory
-                //All
-                    cat /proc/meminfo
-                //Memory and swap useage
-                    free
+            
 			//system, machine, battery, CPU, Graphics, Audio, network, drives, RAID, partition, sensors, runtime info
                 inxi -Fxxxz
             //Disk useage
                 df -h
             //Directory space useage
                 du
-			//Get kernel version
-				uname -a
-			//OS version
-				lsb_release
+
     configure    
         Displays>
             //no param: list display info, --output [displayName]: select display 
@@ -117,7 +110,15 @@ system>
             data
             cal
             uptime
-	
+        //Memory
+            //All
+                cat /proc/meminfo
+            //Memory and swap useage
+                free
+        //Get kernel version
+            uname -a
+        //OS version
+            lsb_release
     commands>
         //get info on commands
             //none: run command, -v: command description, -V: verbose command description

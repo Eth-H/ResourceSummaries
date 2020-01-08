@@ -1,0 +1,15 @@
+//Print demon
+    /etc/rc.d/init.d/lpd start 
+    /etc/rc.d/init.d/lpd stop
+    /etc/rc.d/init.d/lpd status
+//Print queue
+    //Display jobs in queue
+        lpq
+    //Remove jobs from queue	
+        lprm
+//Print a file
+    lpr
+//Printer control tool
+    lpc
+//Start X printer setup interface
+    printtool
