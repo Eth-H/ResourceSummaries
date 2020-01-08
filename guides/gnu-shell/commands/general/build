@@ -1,0 +1,10 @@
+//GNUmakefile, makefile, and Makefile
+    //contains info tellig make how to build
+        make
+    //may /maynot be needed
+        make install
+
+//if need platform specific build instructions
+    cmake
+    autoconf
+

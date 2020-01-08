@@ -7,23 +7,16 @@
 				to command mode- : 
 				to insert- any insert command (EG i)
 				to visual- v
-				back to normal- esc
-				
-				
+                to selection- gh				
+				back to normal- esc, Ctrl + [
+	            to operator pending- any command that leaves an operation pending (eg y, d)			
 	normal mode
 		Editing
 			r - replace a single character
 			J - join line below to the current one with one space in between
 			gJ - join line below to the current one without space in between
 			gwip - reflow paragraph
-			go to insert mode
-				cc - change (replace) entire line
-				C - change (replace) to the end of the line
-				c$ - change (replace) to the end of the line
-				ciw - change (replace) entire word
-		 		cw - change (replace) to the end of the word
-				s - delete character and substitute text
-				S - delete line and substitute text (same as cc)
+			
 			xp - transpose two letters (delete and paste)
 			u - undo
 			Ctrl + r - redo
@@ -101,21 +94,27 @@
 			@@ - rerun last run macro
 			
 	Insert mode - inserting/appending text
-		i - insert before the cursor
-		I - insert at the beginning of the line
-		a - insert (append) after the cursor
-		A - insert (append) at the end of the line
-		o - append (open) a new line below the current line
-		O - append (open) a new line above the current line
-		ea - insert (append) at the end of the word
-		Esc, Ctrl + [ - exit insert mode
-		
+		go to insert mode
+            i - insert before the cursor
+            I - insert at the beginning of the line
+            a - insert (append) after the cursor
+            A - insert (append) at the end of the line
+            o - append (open) a new line below the current line
+            O - append (open) a new line above the current line
+            ea - insert (append) at the end of the word
+            cc - change (replace) entire line
+            C - change (replace) to the end of the line
+            c$ - change (replace) to the end of the line
+            ciw - change (replace) entire word
+            cw - change (replace) to the end of the word
+            s - delete character and substitute text
+            S - delete line and substitute text (same as cc)
+
 		//access registers
 			//global clipboard
 				CTRL-R *
 			//unamed clipboard
 				CTRL-R "
-				
 		
 	Command mode	
 		:help keyword - open help for keyword
