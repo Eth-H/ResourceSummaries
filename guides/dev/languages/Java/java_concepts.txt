@@ -3,13 +3,13 @@
 	//can have two constuctors (one needs a different num of params)
 	//auto generated if not produced 
 	
-	Public class MyClass {
+	public class MyClass {
 	   
         private int num;
         private int width;
         private String theString;
 
-        MyClass(int width, String theString) {
+        public MyClass(int width, String theString) {
             //attribute not passed as a param, so not used by this classes new objects
             num = 100;
             //if passing parameter to class instance with a different name, no this.
@@ -27,11 +27,11 @@ prefex needed
 
     //If class isn't present in current package import it
     import [packagePath].ExternalClass
-    Public class MyClass2 {
+    public class MyClass2 {
         //create external objects using the constructor
 	    private ExternalClass externalObject1;
         private ExternalClass externalObject2;
-	    MyClass2(){
+	    public MyClass2(){
             //if new instance variable is the same
             externalObject1 = new ExternalClass()
 	        
@@ -48,7 +48,14 @@ prefex needed
 
     //tentiray/conditional operator
     condition ? value1 : value2
-
+    switch (month) {
+                case 1:  monthString = "January";
+                         break;
+                case 2:  monthString = "February";
+                         break;
+                default: monthString = "Invalid month";
+                         break;
+            }
 
  //loops
     loopMethod(stringList){
@@ -202,6 +209,21 @@ size
                       "variable is %d, and the string " +
                       "is %s", floatVar, intVar, stringVar);
 
+//read from stdin (read terminal input while active)
+    //Scanner, 
+        import java.util.Scanner
+        Scanner in = new Scanner(System.in);
+        String s = in.inputLine();
+        int a = in.nextInt();
+        float b = in.nextFloat();
+    //DataInputStream (.readline() method is depreciated)
+        DataInputStream dis = new DataInputStream(System.in)
+        String str = dis.readline();
+    //Buffered reader
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+
+
+
 
 //useful libraries
     //java.util.Collections 
@@ -215,12 +237,6 @@ size
             System.out.println(pair.getKey() + " = " + pair.getValue());
             it.remove(); // avoids a ConcurrentModificationException
         }
-    //Scanner, take input 
-        import java.util.Scanner
-        Scanner in = new Scanner(System.in);
-        String s = in.inputLine();
-        int a = in.nextInt();
-        float b = in.nextFloat();
 
     //Random
         import java.util.Random;
@@ -317,8 +333,8 @@ possible
 		//short, 16 bit signed TC int, 2^7
 		//int, 32 bit signed TC int, 2^31
 		//long, 64 bit signed TC, 2^63, Default value (DV) = 0L  	
-float,single-precision 32-bit IEEE 754 floating point, DV = 0.0f 
-double, double-precision 64-bit IEEE 754 floating point, DV = 0.0d  
+        //float,single-precision 32-bit IEEE 754 floating point, DV = 0.0f 
+        //double, double-precision 64-bit IEEE 754 floating point, DV = 0.0d  
 		//boolean, 1 bit, DF = false
 		//char, 16 bit unicode character, \u0000 to \uffff
 		int decimal = 100; int octal = 0144; int hexa =  0x64;
@@ -329,7 +345,7 @@ double, double-precision 64-bit IEEE 754 floating point, DV = 0.0d
         //convert between 
             Integer.parseInt(string);
             Integer.toString(int);
-            
+            Integer.parseLong(str);  
             //double -> float -> long -> int -> short -> byte 
                 //explicit (type casting)
                     double d; long l; short s; 

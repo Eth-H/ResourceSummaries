@@ -1,4 +1,4 @@
-commands>
+//commands
     //get info on commands
         //none: run command, -v: command description, -V: verbose command description
         command {}? [commandName]	
@@ -9,7 +9,7 @@ commands>
         //-h, --help 		
             [binName] {}
         
-Edit machine state>
+//Edit machine state
     shutdown
     //Similar parameters in windows and linux, prefix with / in windows and - in linux
     //-r: Restart, -t: Time to process, [number]: time to process, now:,  

@@ -77,12 +77,13 @@
 		ib - inner block with ()
 		iB - inner block with {}
 		Esc - exit visual mode
-		
+	
 		Visual commands
 			> - shift text right, < - shift text left, 2<, 2>, //or use . to repeat > or <
 			y - yank (copy) marked text
 			d - delete marked text
-			~ - switch case		
+			~ - switch case	
+            u - all lower case, U - all upper case
 			//recomended to be manually remapped
 			Ctrl + c - copy text to global clipboard
 		
@@ -126,7 +127,13 @@
 		insert into command file
 			:r [fileName]
 			:r ! [commandName]
-		
+        edit modifiable file state
+            :set ma, :set noma	
+        check key mappings
+            //<TAB> <Space> <C-[x]>  <A-[x]> <S-[x]>
+            :map [key], imap, vmap, omap
+            :versbose map [key]
+
 		Saving and exiting
 			:saveas file - save file as
 			:w - write (save) the file, but don't exit (overwrites the current buffer)

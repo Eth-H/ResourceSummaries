@@ -1,3 +1,14 @@
+langauge by group
+    interpretation
+        python
+    compilation
+        Just-in-time compilation
+            java
+    dynamicly or statically typed         
+        dynamicly (type checking at run time)
+            python, perl, ruby, php, js
+        static (type of variable is known at compile time)
+            java, c, go
 elements
     decision
         if/else 

@@ -1,7 +1,7 @@
-python>
+python 
     //run program
         python [fileName.py]	
-C>
+C 
     //It 32 bit compling doesnt work, some possible packages
         sudo apt-get install libc6-dev
         sudo apt-get install gcc-multilib
@@ -12,7 +12,7 @@ C>
     //Specify processor arcitechure
         gcc -m32 -o hello hello.c
     //Use MinGW cross-complier to compile for windows
-java>
+java 
     //archlinux java management
         //status: list all installed java JDKs, set [javaFromStatus], fix: fix invalid jre links
         archlinux-java {}

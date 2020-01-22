@@ -1,0 +1,95 @@
+//context examples
+    ^                 # anchor to start of line
+    (                 # start grouping
+     (                # start grouping
+      [\w]+           # at least one of 0-9a-zA-Z_
+      :               # a literal colon
+     )                # end grouping
+     ?                # this grouping is optional
+     \/\/             # two literal slashes
+    )                 # end capture
+    ?                 # this grouping is optional
+    (
+     (
+      [\d\w]          # exactly one of 0-9a-zA-Z_
+                      # having \d is redundant
+      |               # alternation
+      %               # literal % sign
+      [a-fA-f\d]{2,2} # exactly 2 hexadecimal digits
+                      # should probably be A-F
+                      # using {2} would have sufficed
+     )+               # at least one of this groups
+     (                # start grouping
+      :               # literal colon
+      (
+       [\d\w]
+       |
+       %
+       [a-fA-f\d]{2,2}
+      )+
+     )?               # Same grouping, but it is optional
+                      # and there can be only one
+     @                # literal @ sign
+    )?                # this group is optional
+    (
+     [\d\w]           # same as [\w], explained above
+     [-\d\w]{0,253}   # includes a dash as a valid character
+                      # between 0 and 253 of these characters
+     [\d\w]           # end with \w.  They want at most 255
+                      # total and - cannot be at the start
+                      # or end
+     \.               # literal period
+    )+                # at least one of these groups
+    [\w]{2,4}         # two to four \w characters
+    (
+     :                # literal colon
+     [\d]+            # at least one digit
+    )?
+    (
+     \/               # literal slash
+     (
+      [-+_~.\d\w]    # one of these characters
+      |              # *or*
+      %              # % with two hex digit combo
+      [a-fA-f\d]{2,2}
+     )*              # zero or more of these groups
+    )*               # zero or more of these groups
+    (
+     \?              # literal question mark
+     (
+      &amp;?         # literal &amp or &amp;
+      (
+       [-+_~.\d\w]
+       |
+       %
+       [a-fA-f\d]{2,2}
+      )
+      =?             # optional literal =
+     )*              # zero or more of this group
+    )?               # this group is optional
+    (
+     #               # literal #
+     (
+      [-+_~.\d\w]
+      |
+      %
+      [a-fA-f\d]{2,2}
+     )*
+    )?
+    $                # anchor to end of line
+
+//meta with no context
+    ^ -- zero width start of line
+    () -- grouping/capture
+    ? -- zero or one of the preceding sequence
+    + -- one or more of the preceding sequence
+    * -- zero or more of the preceding sequence
+    [] -- character class
+    \w -- alphanumeric characters and _. Opposite of \W
+    | -- alternation
+    {} -- length assertion
+    $ -- zero width end of line
+
+//meta inside character class
+    - creates a range of characters unless it is at the start or the end of the character class
+

@@ -1,0 +1,16 @@
+frameworks
+    react native 
+        facebook
+        js
+    xamarin 
+        ms
+        C# .NET
+    phonegap 
+        adobde
+    flutter 
+        google
+        dart
+    nativescript
+        angular, vue integration
+    corona
+        lua

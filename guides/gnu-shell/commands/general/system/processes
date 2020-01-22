@@ -6,7 +6,7 @@
     ps auxf | {}
 //Print current user running processes, See more info: -u, See all processes (not only for your user): -ax, -o [processName]:,
     ps {}
-Services>
+Services 
     //See status of all services
         service --status-all
     //All
@@ -30,7 +30,7 @@ Services>
         fg
 //Stop all running processes
     halt
-cron table>
+cron table 
     //Schedule commands to run at regular time intervals
     //Open crontab to edit tasks
         crontab -u [user]  [filePath]

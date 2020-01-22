@@ -1,6 +1,6 @@
-manage bootable kernels>
+manage bootable kernels
     efibootmgr -v
-kernel modules>
+kernel modules
     //show status of modules in the linux kernel
         lsmod 
         lsmod | grep [moduleName]

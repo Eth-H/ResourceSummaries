@@ -10,6 +10,8 @@ syntax
 	    //
 	Multi-line comments
 	/* */
+    regex, used to display a range of options
+    / regex content /
 	Square brackets, used to reference something that could be anything, generally used in ELF/EXE/bin paramters EG [fileName]
 	[] 
 	Curly brackets, a place where multipe parameters can be inserted, generally the parameters are explained above, also can be a reference to an index

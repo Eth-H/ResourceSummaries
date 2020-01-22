@@ -1,0 +1,13 @@
+//launch gui
+    keepassxc
+//withdraw pws
+    //locate: get names of pws similar to SQ
+    //search: return SQ pw details
+        keepassxc-cli {} [pw_database_path] [searchQuery]
+//add
+    //-u: username
+     //-p: password-prompt, -g: gen pw,
+      //-l: generated pw length
+        keepassxc-cli add {}... [pw_database_path] [entryName]
+    
+

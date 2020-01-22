@@ -1,5 +1,5 @@
-Package manager>
-    apt-get>
+Package manager 
+    apt-get 
     //Debian package manager, apt or apt-get
         //Update sources (servers with package info/download links)
             sudo apt update
@@ -25,7 +25,7 @@ Package manager>
             //Remove uneccessary software dependancies
              sudo apt-get autoremove
         
-    pacman>
+    pacman 
         //arch linux package manager
         //-S: sync packages
          //[packageName]: install package, -u: upgrade installed packages, y: download fresh pacakges, --noconfirm: dont ask, --ignore: ignore a packages upgrade
@@ -40,7 +40,7 @@ Package manager>
                 
         //EG Upgrade all packages 
             sudo pacman -Syu
-        AUR (arch user repositary)>
+        AUR (arch user repositary) 
             //first install base level package group
                 pacman -S --needed base-devel
             //manual
@@ -59,16 +59,16 @@ Package manager>
                     //or run makepkg -s and then instal yourself
                         pacman -U package_name.pkg.tar.xz
             //aur helpers
-                yaourt>
+                yaourt 
                     wrapper for pacman that includes support for AUR
                     //install
                         
                     //can use all pamac commands
                         //[package name]: search AUR for package (then type its number), --stats: package installation stats, 
                         yaourt {}...
-                yay>
+                yay 
                     //more modern pacman wrapper
-    yum>
+    yum 
         //Fedora package manager, automatically updates sources	
         //Upgrade installed software, blank: Update all software, [packageName]
             sudo yum update {}
@@ -77,8 +77,8 @@ Package manager>
             sudo yum remove [packageName]
     
     
-Packaged software>
-    dpkg>
+Packaged software 
+    dpkg 
             // .deb files are packages generated for Debian-based distros, install with dpkg
             // Install debian package
                 sudo dpkg -i /home/user/cowsay.deb
@@ -88,7 +88,7 @@ Packaged software>
                 dpks -l
             //RE-configure package database (fix dpkg corruption problems)
                 sudo dpkg --configure -a
-    rpm>
+    rpm 
         //Generated for Fedora-based distros
         //Install
             rpm -Uvh /home/user/cowsay.rpm
@@ -96,9 +96,9 @@ Packaged software>
             rpm -e cowsay
         //List packages
             rpm -qa
-Building from source>
+Building from source 
             //Look for INSTALL txt file
-            //cd into direcotry with source code -> run configure ELF (executable) file to generate system specific makefile ->  run make to compile source code into an ELF -> 
+            //cd into direcotry with source code ->  run configure ELF (executable) file to generate system specific makefile ->   run make to compile source code into an ELF ->  
              // run sudo make install to move binary created and required files to system folders (now they can be used anywhere)	
                 cd [pathToSourceCode]
                 make [sourceCode]

@@ -30,7 +30,7 @@
         //remove driver	
             sudo mhwd -r [pci_orUSB] [nameOfDriver]
 
-    nvidia cards>
+    nvidia cards
         //-q 
          //all: display all options, gpucoretemp:, CUDACores:, GPUMemoryInterface:, GPUCurrentClockFreqs:
         nvidia-settings {} {}  

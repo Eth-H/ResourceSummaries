@@ -1,0 +1,70 @@
+other
+    https://app.stackbit.com
+server
+    ngnix
+    static pages 
+        apache http server
+    java servlets (server capacbility extensions)
+        apache tomcat
+
+site generators
+    static
+        jekyll
+        hugo
+        gatsby
+        hexo
+        gridsome
+    dynamic
+        vuepress
+        next.js
+        appseed
+        https://github.com/tiangolo/full-stack
+
+cms
+   forestry
+    netlify cms
+    contentful
+    datocms
+    sanity
+    ghost
+    prismic
+    strapi
+ 
+frameworks
+    frontend
+        js
+            react.js
+                css
+                    react-bootstrap
+                    material ui
+                    semantic ui
+            vue.js
+            angular.js
+            ember.js
+        mix
+            bootstrap
+                shards
+                argon
+            backbone.js
+            foundation
+        css
+            bulma
+            skeleton
+    backend
+        js
+            node.js
+                express.js
+        php
+            laveral
+        python
+            django
+            flask
+        java
+            spring boot
+            grails
+            apache struts
+    fullstack
+        jhipster
+
+unorganised
+    https://github.com/swagger-api/swagger-codegen

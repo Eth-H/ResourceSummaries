@@ -1,0 +1,36 @@
+xmpp
+    custom servers
+        https://xmpp.org/software/servers.html
+
+        prosody
+        ejabberd
+    public servers
+        https://list.jabber.at/
+
+        https://niel.site/
+    clients
+        https://jabber.at/clients
+        desktop
+            pidgin
+            linux
+                https://mcabber.com/
+                https://github.com/profanity-im/profanity
+                gajim
+                empathy
+                dino
+            win
+                gajim
+        android
+            conversations
+        ios
+            https://github.com/chatsecure
+        browser
+            https://conversejs.org/fullscreen.html
+
+irc
+    clients
+        pidgin
+        hexchat
+
+
+https://matrix.org/docs/guides/introduction/#how-can-i-try-it-out

@@ -1,5 +1,5 @@
 //magic
-    sudo apt install magic
+    sudo apt install imagiemagick
     //-quality: [percentageQuality]: How much to compress by, -resize [WidthxHeight]: CHnage dimensaions of the image, use [WidthxHeight]! to force exact size and ignore aspect ratio
         //-rotate [degrees]:, -charcoal 2: apply characoal effect
             convert sample.png {}... sample.jpg

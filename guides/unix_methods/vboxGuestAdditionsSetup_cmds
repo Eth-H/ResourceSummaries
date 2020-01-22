@@ -1,8 +1,9 @@
-//click insert guest additions, or install with apt (in guest)
-    sudo apt install virtualbox-guest-additions-iso
-
-//setup script
+//host
+    //click insert guest additions, or install with apt (in guest)
+        sudo apt install virtualbox-guest-additions-iso
+//guest
     chmod +x ./virtual_box_guest_additions.txt
+    chmod +x /media/$USER/VBox_GAs_[version]
     ./virtual_box_guest_additions.txt
 
 //errors

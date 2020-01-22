@@ -2,8 +2,10 @@
 //page 50
 Terminology>
 	data streams
-		// stdin = input
-		// stdout = output
+		// stdin (0)  = input
+		// stdout (1) = output
+        // stderr (2) = err
+        //there are 6 other streams that are generally unused
 	exit/return status
 		//all commands return a exit/return status, where 0 is successful and other values match a specific error code, in a script the last command run determines the scripts exit status
 		
@@ -36,6 +38,33 @@ syntax>
         ls .*
         [fu]*
         *.*f*u
+    Search text (regex)
+        //use for ed, sed, awk, grep, find, vi, ...
+            cmd ... " regexQuery... " ...
+            // generally the same as javascript
+            //but some features might not work in bash or other apps
+                //PCRE expressions
+                    \d \D \s \S \w \W            
+                    //if so use posix class equlivants    
+                        [[:digit:]], [^[:digit:]], [[:space:]], [^[:space:]], [_[:alnum:]], and [^_[:alnum:]]
+                //non-greedy matching 
+                    greedy chars: *, +, ?, {n,m} {n,}
+                    greedy: match string upto entire seach query
+                    non-greedy: match string upto any char from search query
+                    non-greedy:  
+                    //EG
+                        m/^(.*)ab/
+                        .* will backtrack to find regex patturns following it 
+                        so it will match up till it finds an ab or ba
+                        follow with ? to change to none greedy
+                            m/^(.*?)ab/
+                            .* will match up till it finds an a or b
+                //non-capturing parentheses (grouping assertions)
+                    (?:...), group but dont capture
+                        /(?:a)/ - match a but not captured for replacement
+                //lookarounds (lookahead/lookbehind assertions)
+                    (?<=before) (?!after)
+                    ?=, ?!, ?<=, ?<!.
 	Operators>
 			
 			//|, Passes the stdout of a previous command to the stdin of the next one
@@ -120,11 +149,12 @@ alias shortcut ="cmd"
         groups
 
     //change
+        //who can change: root can change owner, owner can change group owner if within previous group owner
         //who, u | g | o | a: user, same group, other, all users 
          //operator, + | - | =: add, remove, exact permissions
           //permissions, r: read, w: write, x: execute 
-        chmod {} {} {}
-        //or use numbers, num1=user, num2=group, num3=other, 1=x, 3=r, 4=w 
+        chmod {}{}{}
+        //or use numbers, num1=user, num2=group, num3=other, 1=x, 2=w, 4=r 
             chmod 755
 
 //job control
@@ -264,15 +294,38 @@ exit status
             around x 1st 2nd
 		
     //edit streams		
-        //redirect stdout to file, >: overite, >>: append
-            cmd {} file 
-        //redirects stdout and stderr of cmd to filename
-            command &>filename
-        //redirects stdout of command to stderr		
-            >&2	
-         //redirect streams
-            //cmd stdout to cmd stdin
-                [cmdOne] | [cmdTwo]
-        //inject cmd stdout into anouther cmds stdin
+        //cmd stdout to cmd stdin
+            [cmdOne] | [cmdTwo]
+        // redirect stodut to stdin and to a file         
+            ls [dirPath] | tee [file]
+        //inject cmd stdout where ever u want
             cmd `cmd1`
-            cmd $(cmd1)        
+            cmd $(cmd1)
+        // use < > to redirect to a file
+            //redirect stdout to file, >: overite, >>: append
+            //redirect stdin to file: <, <<
+                cmd {} file
+            //EG
+                //for > can redirect anouther stream instead of stdout
+                    2>
+                //redirects stdout and stderr of cmd to filename
+                    command &>filename
+        //use < > to redirect streams to each other
+            //redirects stdout of command to stderr		
+                cmd >&2	
+            //redirect any stream manlly (including the over 6 streams)
+            [streamNum]>&[otherStreamNum]
+            //redirect stderr to a third stream
+                2>&3 
+        //redirect variables
+            grep hello <<< $yeet
+
+//filesystem links
+    //hard links
+        //additional name/path for existing file (link contains same content as the original file)
+        //any number, within same filesystem/partition
+            ln [fileName] [hardLinkName]
+    //symbolic/soft
+        //link just points to anouther file
+            ln -s [fileName] [softLinkName]
+        //useful to symlink binaries to your ~/.local/bin 
