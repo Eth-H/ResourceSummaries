@@ -35,3 +35,7 @@ boxing
             posting arm
                 leave arm out after jab
             
+    dodge jab
+        stretch out stance, lean forwards towards back leg
+        hook right above arm, lean into right
+

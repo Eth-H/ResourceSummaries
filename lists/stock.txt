@@ -23,6 +23,7 @@ placing investments
         brokername country platforms education investment_method trade_fee
 annual_fee
         
+        trading 212
         interactive_investor uk all no manual
         saxo_markets uk all-win yes manual
         degiro uk all-win yes manual 1.75+.022%/trade 2.5/year/per_trade 

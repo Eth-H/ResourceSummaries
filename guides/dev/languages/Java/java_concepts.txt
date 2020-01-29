@@ -222,9 +222,37 @@ size
     //Buffered reader
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 
-
-
-
+//enums
+    //enumerated values
+    //fixed number of instances
+    //internal constructor needs to be private
+    public enum Coin {
+        ONE_PENNY(1), TWO_PENCE(2), FIVE_PENCE(5);
+        private int value;
+        private Coin(int value){
+            this.value = value;
+        }
+        public int getValue(){
+            return value;
+        }
+        public String toString(){
+            switch(this){
+                case ONE_PENNY:
+                    return "one penny";
+                case TWO_PENCE:
+                    return "two pence";
+                case FIVE_PENCE:
+                    return "five pence";
+                default:
+                    return "what";
+            } 
+        }
+    //create new object
+        Coin.ONE_PENNY();
+    //iterate over all values
+        Coin.values();
+    //use getter to access enumerated value
+        Coin.getValue();
 //useful libraries
     //java.util.Collections 
         //sort alphanumerically

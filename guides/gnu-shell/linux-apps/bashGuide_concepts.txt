@@ -242,8 +242,13 @@ exit status
                     num {} num1 
  
                 //-r: readable, -w: writeable, -x: executable, -f: is file, -d: is dir 
+                //-e: true if exists, -L: true if symbolic link, 
                     {} file 
-
+                //-nt: file 1 newer than file 2, -ot: older
+                    file1 {} file2
+                //-z: string empty, -n: not empty               
+                    {} string
+                
         //extended test
             //[[ ... ]]  		
             //acts more like scripting languages
@@ -273,7 +278,7 @@ exit status
                 'val')
                     ...;    
                     ;;   
-                'val1')
+                'val1 | Val1')
                     ...;    
                     ;;   
                 *)

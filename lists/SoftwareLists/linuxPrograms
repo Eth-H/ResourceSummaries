@@ -4,7 +4,7 @@ appplication type -> possbile further sub-categories -> program name
 			brave, apt
 			netsurf
 			falkon
-		command line
+		cli
 			links2
 		
 	email
@@ -32,11 +32,15 @@ appplication type -> possbile further sub-categories -> program name
 		FBReader
 	editor
 		text
-			atom
-			geany
-			mousepad
-			visual studio code
-			xed
+			gui
+                atom
+                geany
+                mousepad
+                visual studio code
+                xed
+            cli
+                vim
+                emacs       
 		db
 			sqlitebrowser
 		hand draw
@@ -55,8 +59,9 @@ appplication type -> possbile further sub-categories -> program name
 		krita
 		pinta
 		tux paint
-	garphics organising
+	graphics organising
 		magic
+        imagemagick
 		gpicview
 		gThumb
 		ristretto
@@ -66,32 +71,40 @@ appplication type -> possbile further sub-categories -> program name
 	
 	play media
 		Video/Movie
-			Kodi
-			Parole
-			SM Player
-			Totem
-			VLC
-			xplayer
-			moc (mocp)
+            Kodi
+            Parole
+            SM Player
+            Totem
+            VLC
+            xplayer
+            minimalist
+                mpv
 		Audio
-			audacious
-			clementine
-			deadbeef
-			lollypop
-			rhythmbox
-			sayonara
-			qmmo
+            gui
+                audacious
+                clementine
+                deadbeef
+                lollypop
+                rhythmbox
+                sayonara
+                qmmo
+            cli
+                moc (mocp)
 	media recording/editing
 		audacity
 		kdenlive
 		OBS studio
 		simple screen recorder
 	chat
-		hexchat
-		pidgin messeger
+        irc
+            hexchat
+        xmpp
+            pidgin messeger
 	file manager
 		thunar
-		midnight commander (mc)
+        cli
+            midnight commander (mc)
+            vifm
 	file sharing
 		bittorent
 			deluge
@@ -118,13 +131,18 @@ appplication type -> possbile further sub-categories -> program name
 		mind forger
 		copyq
 	system tools
-		etcher
-		gnome disks
-		gparted
-		IsoUSB
-		mintstick
-		pamac CLI, GTK, QT
+        iso
+            etcher
+            gnome disks
+            gparted
+            IsoUSB
+            mintstick
+        package manager
+            pamac CLI, GTK, QT
+        screen lock 
+            physlock
 	Virtual Computing
+        qemu
 		virtualbox
 		gnome boxes
 	cyber security

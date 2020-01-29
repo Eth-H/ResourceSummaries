@@ -23,13 +23,14 @@
 /root	
 	//home directory for root user
 
-//where the references to partitions are containd, use to mount partitions or to refer to them
-
-//dev (llinks/info on devices)
+//dev (device files) (virtual files that repersent devices)
 	//references to drives
 		/dev/sdax /dev/sdbx
-	//reference to virtual consoles
-		/dev/ttyx
+    //virtual consoles
+        //the controlling terminal
+            /dev/tty
+        //reference to specific virtual consoles
+            /dev/tty[virtualConsoleNumber]
 	//pseudo-devices (device nodes that dont correspond to physical devices)
 		//discard written input, provides EOF when read
 			/dev/null
@@ -63,6 +64,8 @@
 	/mnt
 		//temp mounts
 /opt
+
+/var
 
 /proc (processess)
 	//virtual file system, each numbered directory repersents a PID and contain a command that occ

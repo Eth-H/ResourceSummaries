@@ -3,6 +3,8 @@
         df -h
     //Directory space useage
         du
+    //inodes useage
+        df -hi
     
 //partitions
     //scout
