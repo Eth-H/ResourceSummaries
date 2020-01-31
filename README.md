@@ -1,6 +1,7 @@
-# ResourceSummaries
+# wiki 
 
-Contains commands and other functionality from numerous applications and languages.
+Vimwiki containig my notes on commands and other functionality from numerous applications and languages.
+
 Content collected from experience and openly avaliable sources, abstracted and rearranged in a consistent format, this format allows you to quickly find what you want and apply it.
 
 Dir types

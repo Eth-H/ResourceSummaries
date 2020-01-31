@@ -1,6 +1,0 @@
-//list-keys: list all bound keys, list-commands: list every tmux
-command
-    //info: list every session/window/pane/pid, source-file ~/.tmux.conf: reload config
-        tmux {}
-    
-
