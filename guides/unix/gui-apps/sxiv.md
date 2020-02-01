@@ -1,10 +1,10 @@
-//cmds
+# cmds
     //-i: read file name from stdin
     //-t: start in thumbnail mode 
     //-z [num]: zoom to num%
     sxiv {}?... [fileName]
     
-//keys
+# keys
     //move between images
         0-9 - count, prefix cmds like p and n
         n - next, p - previous

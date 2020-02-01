@@ -1,4 +1,4 @@
-//shell
+# shell
     sudo protonvpn-cli -init
     //or
     sudo pvpn -init

@@ -1,0 +1,14 @@
+//setup
+    //neomutt wizard quick setup
+        sudo apt install neomutt isync msmtp
+        git clone https://github.com/LukeSmithxyz/mutt-wizard
+        cd mutt-wizard
+        sudo make install
+
+//mutt wizard commands
+    mw add -- add a new email account
+    mw ls -- list existing accounts
+    mw pass -- revise an account's password
+    mw delete -- deleted an added account
+    mw purge -- delete all accounts and settings
+    mw cron -- toggle/configure a cronjob to sync mail

@@ -1,14 +1,7 @@
 //console password manager
-//setup
-    gpg --gen-pair
-    pass init gpgPrivateKeyID
-    //git
-    //git setup
-        pass git init
-        //Initialized empty Git repository in /home/zx2c4/.password-store/.git/
-        pass git remote add origin kexec.com:pass-store
-
-
+# shell
+## setup
+https://www.passwordstore.org/
 //init
     pass init
 //search
@@ -17,12 +10,9 @@
     //grep [searchQuery] {}?...: search pw-files containing sQ
         pass {add pw to dir}
     pass -c [pwName]
-    pass [pwName]
-    //EG
-        pass Email/zx2c4.com
 //edit store
     //-m: multiline entry
-        pass insert {}?... [pwName]
+        pass insert {}... [pwName]
     pass-edit [pwName]
     //Remove existing password or directory
         pass rm {--recursive, -r; --force, -f;} pass-name
@@ -30,11 +20,10 @@
         pass mv {--force,-f} [old-path] [new-path]                          
     , optionally forcefully
 ectively reencrypting.                                          
-    //edit password txt file in vim
-        pass edit pass-name
 
 //other
     //gen pw
     //-c: output to clipboard, -i: output inplace 
     //-f: force overwrite
         pass generate {}?... [pwName] [pwLength]
+

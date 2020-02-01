@@ -1,4 +1,4 @@
-//shell
+# shell
     //host
         //click insert guest additions, or install with apt (in guest)
             sudo apt install virtualbox-guest-additions-iso

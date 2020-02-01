@@ -1,13 +1,13 @@
-//links
+# links
     https://wiki.archlinux.org/index.php/Mutt
     https://github.com/firecat53/urlscan
     https://github.com/wofr06/lesspipe
     https://github.com/Konfekt/vim-mutt-aliases/
-//dirs
+# dirs
     /usr/share/doc/mutt/examples
 
 
-//shell
+# shell
     //setup
         mkdir ~/.config/mutt
         cd ~/.config/mutt
@@ -21,7 +21,7 @@
     //open second mutt (in recomended read-only mode)
         mutt -R
 
-//keys
+# keys
     move
         basics
             vim keys: h j k l

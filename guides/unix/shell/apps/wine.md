@@ -1,4 +1,4 @@
-//shell
+# shell
     //install
         apt install wine winetricks
     //make new wine config
