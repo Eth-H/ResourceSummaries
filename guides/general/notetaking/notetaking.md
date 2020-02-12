@@ -11,7 +11,6 @@
 ## articles
     https://writingcooperative.com/zettelkasten-how-one-german-scholar-was-so-freakishly-productive-997e4e0ca125
     https://vimways.org/2019/personal-notetaking-in-vim/
-
 ## markdup types/flavours
     vimwiki
     markdown

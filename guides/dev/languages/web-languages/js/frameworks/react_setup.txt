@@ -98,21 +98,6 @@
 	
 	
 	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
 //Testing with jest
 	//Setup
 		//Install

@@ -16,7 +16,7 @@ Content collected from experience and openly avaliable sources, abstracted and r
         use when files/file contains lots of commands and keybindings and/or examples
     data/reference: general data about a topic, no specific implementation
     scripts: shell commands organsied to be directly run
-    
+`    
 ## File types 
     (if only one file in a guide or if file is of different type to dir)
     commands
@@ -33,4 +33,4 @@ Content collected from experience and openly avaliable sources, abstracted and r
         _templates
     data/reference
         _ref
-    
+`    

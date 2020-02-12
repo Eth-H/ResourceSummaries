@@ -1,0 +1,32 @@
+
+
+essentional
+    D-Bus
+        concurrent cooms between multiple local bprograms
+        
+    policykit
+    zeitgeist
+    libc (startard c libraries)
+        glibc
+            
+    
+
+basic
+    display server
+        xorg, wayland
+    display manager
+        lightdm
+    window manager
+        tiled
+    network manager
+        networkmanager
+        systemd-networkd
+components
+    appfinder
+    power manager/display
+        upower
+    panel
+        polybar
+    terminal emulator
+        st, gnome-terminal
+    session manager

@@ -1,26 +1,39 @@
-appplication type -> possbile further sub-categories -> program name 
+cli utils
+    navigation
+        fuzzy file finder
+            fzf
+            broot
+    web get requests
+        curl
+        wget
+    browser
+        links2
+        w3m
+    email
+        mutt
+        alpine
+        sup
+        not much
+	txt editor	
+        vim
+        emacs       
+    audio
+        moc (mocp)
+    file manager
+        midnight commander (mc)
+        vifm
+
+gui
 	browser
-		gui	
-			brave, apt
-			netsurf
-			falkon
-		cli
-			links2
-		
+        brave, apt
+        netsurf
+        falkon
 	email
-		gui
-			evolution
-			claws mail
-			geary
-			kmail
-			Sylpheed	
-		cli
-			mutt
-			alpine
-			sup
-			not much
-			
-		
+        evolution
+        claws mail
+        geary
+        kmail
+        Sylpheed	
 	Office Suites
 		Calligra Office
 		FreeOffice
@@ -32,15 +45,11 @@ appplication type -> possbile further sub-categories -> program name
 		FBReader
 	editor
 		text
-			gui
-                atom
-                geany
-                mousepad
-                visual studio code
-                xed
-            cli
-                vim
-                emacs       
+            atom
+            geany
+            mousepad
+            visual studio code
+            xed
 		db
 			sqlitebrowser
 		hand draw
@@ -80,16 +89,13 @@ appplication type -> possbile further sub-categories -> program name
             minimalist
                 mpv
 		Audio
-            gui
-                audacious
-                clementine
-                deadbeef
-                lollypop
-                rhythmbox
-                sayonara
-                qmmo
-            cli
-                moc (mocp)
+            audacious
+            clementine
+            deadbeef
+            lollypop
+            rhythmbox
+            sayonara
+            qmmo
 	media recording/editing
 		audacity
 		kdenlive
@@ -102,9 +108,6 @@ appplication type -> possbile further sub-categories -> program name
             pidgin messeger
 	file manager
 		thunar
-        cli
-            midnight commander (mc)
-            vifm
 	file sharing
 		bittorent
 			deluge

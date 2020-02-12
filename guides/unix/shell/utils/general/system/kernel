@@ -9,4 +9,4 @@ kernel modules
     //Add modules to the kernel via path
         ismod [pathToModule]
 	
-
+modinfo [moduleName]

@@ -28,9 +28,12 @@ run java code
 		//-g: gen all debug info, -noware: gen no warnings  
 		javac {}...
         //run with a specifc file, list jar files via :
-            javac -classpath /path/to/json.jar:. YourClass.java 
+            javac {-classpath | -cp} /path/to/json.jar:. YourClass.java 
             //EG run Junit tests
-            javac -classpath /usr/lib/jvm/java-11-openjdk/lib/junit.jar:. TestRunner.java 
+                javac -classpath /usr/lib/jvm/java-11-openjdk/lib/junit.jar:. TestRunner.java 
+                //or use shell var
+                    export CLASSPATH=".:/absolutePath/junit.jar:/absolutePath/hamcrest-core-1.3.jar"
+                    javac TestRunner.java	
 
 	interprete java bytecode files 
 		java {}

@@ -1,77 +1,77 @@
-Anti-virus>
-    Aggressive>
+Anti-virus 
+    Aggressive 
         Norton power eraser
         KVRT
         McAfee GetSusp & Stinger
-    PUP>    
+    PUP     
 	    adwcleaner
-    Generic>
+    Generic 
 	    malwarebytes
-    Rescue CD iso>
+    Rescue CD iso 
         Avira
         Norton        
         Dr Web
         Trend micro
         F-secure
         eset sysrescue
-    Ransomware decrypters>
+    Ransomware decrypters 
         Kasperskies
         Trend micro
         Individual decryptors
-    Rootkit scanners>
+    Rootkit scanners 
         Malwarebytes Anti-rootkit beta
         TDSS Killer   
         McAfee Labs RootkitRemover
         
-Browsers>
+Browsers 
 	brave
 	firefox
 
-Communication>
+Communication 
 	Discord
    
-Compression>
+Compression 
 	7zFM
 
-Media management>
+Media management 
     Infran view
 	Audacity
 	Windows Media Player
 
-Technical>
+Technical 
 
-	Console Emulator>
+	Console Emulator 
 		Cmder
-	GitHub>
+	GitHub 
 		youtube-dl
-		Build files>
+		Build files 
 			make
 			cmake
-		Windows package manager>
+		Windows package manager 
 			Chocolatey
-	technolgies>
+	technolgies 
 		Node.js
 		git
 		python
 		Qt-tools
-	IDEs>
+	IDEs 
 		IDLE
 		IntelliJ
 		PyCharm
 		NetBeans 
 		Visual Studio 2017
 		Visual studio code
-	Text editor>
+	Text editor 
         Atom
         Notepad++
-	DataBases>		
+	DataBases 		
 		SQ Browser for SQLite
 		ESF DataBase migration toolkit
 		pgAdmin4		
-	Engines>
+	Engines 
 		Epic Games Launcher (Unreal 4)
 		Unity 2017.2.0f (64 bit)
-	VM>
+	VM 
         Type 2
             VMware
             Oracle VirtualBox
@@ -80,6 +80,6 @@ Technical>
             VMware vSphere
             
 
-	Miscellaneous>
+	Miscellaneous 
     Microsoft package
 

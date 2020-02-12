@@ -1,0 +1,11 @@
+https://debian-handbook.info/browse/stable/sect.installation-steps.html#sidebar.bootloader-dual-boot
+https://wiki.ubuntu.com/DebootstrapChroot
+https://www.debian.org/releases/lenny/ia64/apds03.html.en
+https://wiki.debian.org/Debootstrap
+https://www.debian.ohttps://www.debian.org/relhttps://www.debian.org/releases/buster/amd64/index.en.htmleases/buster/amd64/index.en.htmlrg/releases/buster/amd64/index.en.html
+https://www.linuxquestions.org/questions/debian-26/how-to-install-debian-using-debootstrap-4175465295/
+
+//installl without iso 
+    hardisk install
+    install from chroot
+    install from existing linux

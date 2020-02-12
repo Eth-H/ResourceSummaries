@@ -1,0 +1,233 @@
+"//"
+"" instructions
+"->" Process
+"//(x)" Declaration of Index "x"
+"{x}" Reference to index "x"
+
+# git concepts
+    //Explaining how it works
+        //Git is the version control system that runs locally on your PC, GitHub.com is a hosting website that saves files. To go past saving files a link between the local repo and online GitHub repo needs to be established
+        //Git to GitHub: A repositary is created (a file system is marked as a repositary) -> you set files to be tracked (changes to these files are saved by git) -> Established local repo to online repo connection 
+        // -> Tracked files are staged to be pushed (commited) -> staged pushed up to the remote repositary 
+        //GitHub to Git: Establish online repo to local repo connection -> pull repositary down locally -> changes to current files are tracked and new files added are tracked -> commit changes -> push changes
+        //Cloning a repo: This means to pull someone elses repo down locally, you can do this to copy remote repositaries to edit it locally as your own, though you would need permission to push chanegs to the original 
+        
+## Basic workflow
+    //Starting a repositary
+        //Create online GitHub preositary at Github.com -> Create local repositary {I1} -> Connect local to online repositary {I2}
+        // -> Add files to tracking and commit changes (get them ready to be pushed) {I3} -> push changes to the online repo {I4}  
+    //Maintaining a repositary
+        //Commit changes for tracked files {I5}  -> Pushing commited files {I4}
+        //Pull changes down locally {I6}
+    //Use someone elses existing repositary
+        //Clone an existing repositary {I7}
+				
+				
+## Initializing a Repository in an Existing Directory:
+        //Go to project folder
+            cd /c/user/my_project
+        //Create local repositary
+            git init
+
+## Connect repositary to a remote one (only need to do once during setup)
+    git remote add origin https://github.com/Eth-H/JPP
+    //Check if the connection exists
+        git remote -v
+
+## Initialise repositary
+    //Add all files in repositary to tracking (so they can be commited), or stage updates for existing files
+        git add .
+    //Add license file
+        git add LICENSE
+    //Commit all tracked files to the repositary ("-m" gives the commit comment)	
+        git commit -m "initial commit"
+
+## Pushing to GitHub.com
+        //This means moving files from locally to the online GitHub repositary, origin is the default name of remote connections
+            git push origin master
+            //If you run into problems
+                git push origin master --allow-unrelated-histories
+                git push origin master -f
+                
+            //Push wthout origin link
+            git push https://[username]@github.com/[github repository] [local branch name]:[remote branch name]
+
+## Commit files:  command, optional commit message, ignore staging area (no git add)
+    //Stage files to be pushed up to the actual repositary
+    git commit 
+    git commit -m Fix this thing
+    git commit -a 
+
+## Pull Repositories
+    //Pull online GitHub repositary to locally
+        git pull  https://github.com/Eth-H/JPP 
+    //Pull repositary and commit history, then integrate with local commits (needed if top of repo is behind remote counterpart)
+        git pull --rebase origin master
+    
+## Clone an existing repository:    commnd, url, git targetDirectoryName
+    git clone https://github.com/libgit2/libgit2 mylibgit
+
+## Add files to .gitignore
+    //Listed files are not tracked by git
+    echo node_modules > .gitignore
+
+## Delete git repo
+    //local repo
+        //Turn on view hidden files for windows 10 OS
+            //Open File Explorer from the taskbar.
+            //Select View > Options > Change folder and search options.
+            //Select the View tab and, in Advanced settings, select Show hidden files, folders, and drives and OK.
+        //Then delete the .git folder
+
+		//Configure account
+			git config --global --list
+			git config --global user.name "Firstname Lastname"
+			git config --global user.email username@email.com
+			//or
+			git config --global --edit
+		//connect to repo via ssh
+				ssh user@host git init --bare /path/to/repo.git
+		
+# other cmds
+    //Check status:
+        git status
+    //get differences between git and current files
+        git diff
+    //ignore files  
+		//- [Blank lines are or staring with "#" are ignored, start with / to ignore recursivity, end with / to avoid a directory, negate a patturn by starting wioth an exclamation mark]
+			vim .gitignore
+                *.[oa]
+                *~
+            
+    //Remove files: Command, untrack but keep file, delte all .log files in the log/ directory, removes all files ending with ~, untrack directory
+        rm 'PROJECTS.md'
+        git rm --cached README
+        git rm log/\*.log
+        git rm \*~S
+        git rm --cached -r .
+
+    //See old version:
+        -git show "file"
+
+# problems
+## Head is checked out problem
+    //Create new branch and re-attach HEAD to it
+    git checkout -b temp
+    
+    //Check differences between branches before continuing
+        git log --graph --decorate --pretty=oneline --abbrev-commit master origin/master temp
+        git diff master temp
+        git diff origin/master temp
+    
+    //Update master branch to point to the new branch
+        git branch -f master temp
+        git checkout master
+    //Push it
+        git push origin master
+## Remove folder from local git and remote 
+    git filter-branch --tree-filter 'rm -rf node_modules' --prune-empty HEAD
+    git for-each-ref --format="%(refname)" refs/original/ | xargs -n 1 git update-ref -d
+    echo node_modules/ >> .gitignore
+    git add .gitignore
+    git commit -m 'Removing node_modules from git history'
+    git gc
+    git push origin master --force
+## remove folder from repo but not local
+    git rm -r --cached FolderName
+    git commit -m "Removed folder from repository"
+    git push origin master
+    
+# Git workflow in industry
+    //Centralized Workflow
+        //uses a central repository to serve as the single point-of-entry for all changes to the project		
+        //clone central repo -> commit changes but store locally isolated -> push local master branch at breakpoint	
+        
+        //conflicts 
+            //top of repo is behind remote counterpart
+                //If one persons commits to the central repo, then anyone else who cloned before he pushed changes wont have the latested updates, hence they wont be able to push changes and will need to pull and integrate the remote changes with her local branch 
+                    git pull --rebase origin master
+            //CONFLICT (content): Merge conflict in [some-file]
+                //find unmerged paths
+                    git status
+                //edit files then stage and rebase
+                    git add [problematicFile]
+                    git rebase
+                    //If the rebase stops
+                        git rebase --abort
+    //Git feature branch workflow
+        //all feature development should take place in a dedicated branch instead of the master branch, allows to store changes serverside
+        //start with master branch
+            git checkout master
+            git fetch origin
+            git reset --hard origin/master
+        //create branch
+            git checkout -b [branchName]
+        //after commits push feature branch to remote, -u: setup tracking branch, not can use "git push" to push new branch to central repo=
+            git push {} origin new-feature
+        //make a pull request with git GUI (for code review)
+         //if accepted merge with master branch	
+            git checkout master
+            git pull
+            git pull origin marys-feature
+            git push
+    //Gitflow Workflow
+        //suited for projects that have a scheduled release cycle
+        //uses two branches to record the history of the project. The master branch stores the official release history, and the develop branch serves as an integration branch for features.
+    
+        //create dev branch
+            git branch develop
+            git push -u origin develop
+
+        //feature branches use develop as their parent branch
+         //create a feature branch
+            git checkout develop
+            git checkout -b feature_branch
+        //Merge feature branch
+            git checkout develop
+            git merge feature_branch
+        
+        //Once develop has acquired enough features for a release, you fork a release branch off of develop, this allows for the team to work on current and future releases
+            git checkout develop
+            git checkout -b release/0.1.0
+        //once release is ready to ship merge to master and develop
+            git checkout master
+            git merge release/0.1.0
+        //use a hotfix branch to quickly patch production releases, similar to new feature branches but they focus on master instead of development
+            git checkout master
+            git checkout -b hotfix_branch
+            //after changes merge to master and develop
+                git checkout master
+                git merge hotfix_branch
+                git checkout develop
+                git merge hotfix_branch
+                git branch -D hotfix_branch
+            
+        //could use dev-flow library (install git-flow with apt or brew )
+            git flow init
+            git flow feature start feature_branch
+            git flow feature finish feature_branch
+            git flow release start 0.1.0
+            git flow release finish '0.1.0'
+            git flow hotfix start hotfix_branch
+            git flow hotfix finish hotfix_branch
+    
+    //Forking Workflow
+        //gives every developer their own forked server-side repository
+        //generally similar to gitflow with the dev's forked repo acting as develop repo
+        //generally the developers forked repo is called origin and the official repo is called upstream
+        //dev forks official server-side repo (creating a server-side-copy) -> forked server-side copy is cloned locally -> git remote path for official repo addeded for local clone -> new local feature branch created -> branch pushed to forked repo 
+        // -> dev opens a pull request from the new branch to the official repo -> if approved the branch is mereged in the official repo
+        
+        //fork the official repo
+            //ssh into server -> use git clone to copy to target location for server-side-copy
+        //clone forked repo
+            git clone https://user@bitbucket.org/user/repo.git
+        //add remotes (forked remote is already added via clone)
+            git remote add upstream https://bitbucket.org/maintainer/repo
+            //if you want users to enter a password
+                git remote add upstream https://user@bitbucket.org/maintainer/repo.git
+        //git pull upstream master		
+            //pull changes made to the official repo	
+        //push branches to forked repo
+            git push origin feature-branch
+    

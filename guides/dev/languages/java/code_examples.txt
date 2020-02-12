@@ -176,3 +176,24 @@ one, add to full)
         }
     }
 
+
+// cool grabbed code
+    /**
+      Return true if firstWord has been immediately
+     * followed by secondWord; false otherwise.
+     * @param firstWord
+     * @param secondWord
+     */
+    public boolean followedBy(String firstWord, String secondWord)
+    {
+        if(words.containsKey(firstWord) && words.containsKey(secondWord)){
+            for (int i = 0; i < allWords.size()-1; i++){
+                if(allWords.get(i).equals(firstWord)){
+                    if(allWords.get((i+1)).equals(secondWord)){
+                        return true;    
+                    }
+                }    
+            }
+        }
+        return false;
+    }
