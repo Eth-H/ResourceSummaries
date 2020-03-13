@@ -188,13 +188,7 @@
           gem 'jekyll-feed'
           gem 'jekyll-seo-tag'
         end
-### bundler use
-    //install from Gemfile
-        bundle install 
-    //update dependances 
-        bundler update
-    //get outdated dependancies
-        bundler outdated
+
 ## environment
     JEKYLL_ENV=production bundle exec jekyll build
     {% if jekyll.environment == "production" %}

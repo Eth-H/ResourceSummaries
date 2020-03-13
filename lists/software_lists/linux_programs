@@ -10,7 +10,7 @@ cli utils
         links2
         w3m
     email
-        mutt
+        mutt //gd
         alpine
         sup
         not much
@@ -18,18 +18,20 @@ cli utils
         vim
         emacs       
     audio
-        moc (mocp)
+        moc (mocp) //gd
+        ncmpcpp
     file manager
+        vifm //gd, vim users
+        nnn //gd
         midnight commander (mc)
-        vifm
-
 gui
 	browser
-        brave, apt
+        brave //gd
+        fox //gd, setup extensions
         netsurf
         falkon
 	email
-        evolution
+        evolution //gd
         claws mail
         geary
         kmail
@@ -55,6 +57,7 @@ gui
 		hand draw
 			Xournal
 	PDF
+        zathura //gd
 		Epdfview
 		Evince
 		Okular
@@ -93,7 +96,7 @@ gui
             clementine
             deadbeef
             lollypop
-            rhythmbox
+            rhythmbox //gd
             sayonara
             qmmo
 	media recording/editing
@@ -112,7 +115,7 @@ gui
 		bittorent
 			deluge
 			qBittorent
-			transmission CLI, GTK
+			transmission CLI, GTK //gd
 			Qtransmission
 		filezilla
 		
@@ -144,6 +147,7 @@ gui
             pamac CLI, GTK, QT
         screen lock 
             physlock
+            vlock
 	Virtual Computing
         qemu
 		virtualbox
@@ -159,6 +163,3 @@ gui
 		nmap
 		volatility
 		steghide
-	
-
-

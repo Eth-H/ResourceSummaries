@@ -209,6 +209,9 @@ websites that can be made use of
 		https://theromdepot.com		
 		https://vimm.net
 		http://www.portalroms.com/en
+        bios files
+            http://www.planetemu.net/roms/sony-playstation-bios
+
 	Linux 
 		debian
 			https://cdimage.debian.org/images/unofficial/non-free/images-including-firmware/10.0.0-live+nonfree/amd64/iso-hybrid/
