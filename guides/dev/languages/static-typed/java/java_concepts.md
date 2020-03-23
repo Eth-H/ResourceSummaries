@@ -213,6 +213,9 @@ generally apply to any array implementation
                       "%f, while the value of the integer " +
                       "variable is %d, and the string " +
                       "is %s", floatVar, intVar, stringVar);
+    //convert str to charArray
+    private static final char[] ALPHABET = 
+                "abcdefghijklmnopqrstuvwxyz ".toCharArray();
 
 # read from stdin (read terminal input while active)
     //Scanner, 

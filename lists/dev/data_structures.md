@@ -63,5 +63,3 @@
         //vertices part of graph structure or external entities with int indicies or refs
 
     bag //dynamic array you can only add too
-
-

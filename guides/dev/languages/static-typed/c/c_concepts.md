@@ -1,6 +1,6 @@
 # language
 tokens: keywords, identifier, constants, strings, special symbols (EG [] {}), operators
-## Data Types
+## data types
     types
         Basic: int, char, float, double
         Derived: array, pointer, structure, union
@@ -36,6 +36,7 @@ tokens: keywords, identifier, constants, strings, special symbols (EG [] {}), op
             char a = 'a';
         String (char arr)
             char a[] = "hello";
+            char a[10];
         bool
             true = 1, false = 0
             bool x=false; 
@@ -98,6 +99,58 @@ tokens: keywords, identifier, constants, strings, special symbols (EG [] {}), op
     \nnn	octal number, \xhh	hexadecimal number
     \0	Null
 
+### strings
+    declare
+        char ch[10]={'j', 'a', 'v', 'a', 't', 'p', 'o', 'i', 'n', 't', '\0'};
+        char ch[]="javatpoint";
+        printf("char arr: %s\n String Literal: %s\n", ch, ch2);
+    store str while newline is not encountered
+        char s[20];  
+        printf("Enter the string?");  
+        scanf("%[^\n]s",s);  
+#### pointers with strings
+    //a strings identifier (sI = "...") is the base address of the string and is treated as a const pointer internally
+    //can declare pointers to point at strings (without &)
+    //this allows us copy/change from the str, since we repoint the internal pointer to anouther string
+        char s[11] = "javatpoint";  
+        char *p = s; // pointer p is pointing to string s
+        printf("%s",p);
+        char p = "yeet"; //can reset "s"'s val
+
+        //can use *p to access addr and p to access "s"'s internal pointer to its val
+#### inp/oup
+    #include<stdio.h>
+
+    char s[30];  
+    //allows user to enter space separated strings
+    gets(s);
+    //same as gets(), but make sure inp is less that 30 bits to avoid buffer overflow
+    fgets(s);
+
+    #include <string.h> 
+    char ch[20]={'j', 'a', 'v', 'a', 't', 'p', 'o', 'i', 'n', 't', '\0'};    
+    //print string with newline, returns num of printed chars (including added newline)
+        puts(ch);
+    //length str (without ending \0 null char)
+        strlen("we")
+    //cp str
+        char ch2[20];    
+        strcpy(ch2,ch);
+    //concat strs, return result to first str
+        char ch3[10]={'c', '\0'};    
+        strcat(ch,ch3); 
+    //compare str, return 0 if equal
+        strcmp(str1,str2)
+    //return reversed str
+        strrev(ch)
+    //return lowercase, uppercase str
+        strlwr(ch)
+        strupr(ch)
+    //returns pointer to the first occurrence of 2nd param str within 1st param str
+        char *sub;    
+        sub=strstr(str,"java");    
+
+
 ## var declaration and assignment
     int x = 10;
     int a=10,b=20;
@@ -140,7 +193,7 @@ tokens: keywords, identifier, constants, strings, special symbols (EG [] {}), op
     float f=(float) 9/4;
 
 
-## Functions
+## functions
 ### library func
     func declared in library header files
     include header files to use them
@@ -174,7 +227,7 @@ tokens: keywords, identifier, constants, strings, special symbols (EG [] {}), op
         //Return 0 if the program run successfully or 1 if unsuccessfully
         return(0)
     }
-## Conditionals (decision)
+## conditionals (decision)
     int r = rand() % 20;
     if (r < 5) {
         puts("r is less than 5");
@@ -193,7 +246,7 @@ tokens: keywords, identifier, constants, strings, special symbols (EG [] {}), op
         printf("number is not equal to 10, 50 or 100");    
     }
 
-## Loops
+## loops
     for (x = 0; x <= 5; x++){
         printf("x is %d\n", x);			
     }		
@@ -214,7 +267,7 @@ tokens: keywords, identifier, constants, strings, special symbols (EG [] {}), op
       }
       out: 
 
-## Lists
+## lists
 ### array
     fixed length list
     //Same as char arrays, can only hold data type used to create it, cant increase size (is a set)
@@ -224,7 +277,23 @@ tokens: keywords, identifier, constants, strings, special symbols (EG [] {}), op
     
     ways to return an arr from a function
         [return array from func](./code_examples/##raff)
-## Input
+    //2D arr, save inp to arr
+        int arr[3][3],i,j;     
+        for (i=0;i<3;i++){    
+            for (j=0;j<3;j++){    
+                printf("Enter a[%d][%d]: ",i,j);                
+                scanf("%d",&arr[i][j]);    
+            }    
+        }    
+        printf("\n printing the elements ....\n");     
+        for(i=0;i<3;i++){    
+            printf("\n");    
+            for (j=0;j<3;j++){    
+                printf("%d\t",arr[i][j]);    
+            }    
+
+
+## input
     //Array stores 20 bytes of data
     char data[20];
     puts("Enter some data here: ");
@@ -252,7 +321,7 @@ tokens: keywords, identifier, constants, strings, special symbols (EG [] {}), op
             }
             return(0);
         }
-## Files
+## files
     #include <stdio.h>
     #include <string.h>
     int main() {
@@ -268,7 +337,7 @@ tokens: keywords, identifier, constants, strings, special symbols (EG [] {}), op
             fclose(file);
         return(0);
     }
-## Pointers and memory
+## pointers and memory
 ### memory allocation contex
     Saving a variable process: the program asks the kernel for some space in memory -> kernel provides a memory address -> data is stored into memory at that location.
     stack and heap (memory types)
@@ -290,13 +359,17 @@ tokens: keywords, identifier, constants, strings, special symbols (EG [] {}), op
         int number = 50;
         //must intialise with a mem location to point to
         //var of type pointer that points to mem addr of int var
-        int *p = &number; //or could use int *p; p=&number;
+            int *p = &number; //or could use int *p; p=&number;
         //can access mem addrs val with *p (dereference it), or mem addr itself with p
-        printf("Value of p variable is %d \n",*p);
-        printf("Address of p variable is %p \n",p);
-        //can reset pointer mem addr
-        //can also reset the current pointed to mem addrs val (via the dereferencing pointer)
-        *p = 60 //now number = 60
+            printf("Value of p variable is %d \n",*p);
+            printf("Address of p variable is %p \n",p);
+        //reset 
+            //can reset pointer mem addr
+            //can also reset the current pointed to mem addrs val (via the dereferencing pointer)
+                *p = 60 //now number = 60
+    //can declare pointers to point at strings (without &)
+        //if we do *p is the address and p is the value
+        //see #strings/pointers with strings
 
 ### examples
     int* x; int *x; //equal, but first expresses var as type pointer
@@ -424,13 +497,255 @@ tokens: keywords, identifier, constants, strings, special symbols (EG [] {}), op
     free()	frees the dynamically allocated memory.    
         free(ptr)
 
+# maths func
+    ceil(num): rounds up to >= int (though still stored as decimal)
+    floor(num): rounds down to <= int (though still stored as decimal)
+    sqrt(num): returns the square root
+    pow(base, exponent): returns the power
+    abs(num): returns the absolute value
+
+    #include <math.h>
+    printf("\n%f",ceil(3.6)); //4.000000
+    printf("\n%f",floor(3.6)); //3.000000
+    printf("\n%f",sqrt(7)); //2.645751
+    printf("\n%f",pow(2,4)); //16.000000
+    printf("\n%d",abs(-12)); //12
+
+# struct
+    store multiple attributes of an entity that have different data types
+    keyword -> tag -> fields/members
+    //ways to declare
+        //1, need to declare var in main func, can declare struct many times
+        struct employee {
+            int id;  
+            char name[50];  
+            float salary;  
+        };
+        struct employee e1, e2;  
+        //2 struct declared inplace, use if num struct vars fixed
+        struct employee {   
+            int id;  
+            char name[50];  
+            float salary;  
+        }e1,e2;  
+    //access members
+        e1.id //member/dot operator
+        e1->id //structure pointer operator
+
+    //give alias name to exisitng var
+        typedef unsigned int unit;
+        uint a = 10;
+
+        //shorten struct name
+            struct student{  
+                char name[20];  
+                int age;  
+            };  
+            typedef struct student stud;  
+            stud s1, s2;   
+    //arr of structs
+            struct student st[5];    
     
-    
-    /* So the methods to pass actual varaibles between functions are (pass by reference):			
-    You could create a variable in the main function and pass a pointer to the variable into the doStuff function, 
-     which will then modify the data at that memory address and then return. This would work because the variable 
-     was created in the main() function, which hasn't returned yet.
-     You could allocate memory on the heap, and return a pointer to that memory address. 
-     Memory on the heap exists until you call free() on it, no matter where it was created, so even if you 
-     allocate the memory inside the doStuff() function it will still exist even when the doStuff() function returns.
-    */
+        
+## nested struct
+    //separate
+        struct Date{  
+           int dd;  
+           int mm;  
+           int yyyy;   
+        };  
+        struct Employee{     
+           int id;  
+           char name[20];  
+           struct Date doj;  
+        }emp1;  
+    //embedded, can't be used in multiple data structures
+        struct Employee{     
+            int id;  
+            char name[20];  
+            struct Date{  
+                int dd;  
+                int mm;  
+                int yyyy;   
+            }doj;  
+        }emp1;  
+
+## union
+    only one field can occupy mem, so a unions instance size = its largest mem 
+    if anouther field is changed, already assigned fields will get garabge vals
+    union employee{   
+        int id;  
+        char name[50];  
+        float salary;  
+    };  
+
+# file handling
+    Creation, open, read, overwrite, del file
+    file modes
+        open txt files in mode
+            r read, w write, a append
+            r+ read and write
+            w+ read and write
+            a+ read and write
+        open binary files in mode
+            rb read, wb write, ab append
+            rb+	read and write
+            wb+	read and write
+            ab+	read and write
+    FILE* fopen(const char *filename, const char *mode) 
+        //opens new/existing file into buffer (as a stream)
+        FILE *fp;  
+        fp = fopen("file_handle.c","r");
+    int fprintf(FILE *stream, const char *format [, argument, ...])
+        //write char set into file, accepts format string
+        fprintf(fp, "Hello file by fprintf...\n")
+    int fscanf(FILE *stream, const char *format [, argument, ...])  
+        //read char set, return EOF at EOF, accepts format specifier
+        fp = fopen("file.txt", "r");
+        while(fscanf(fp, "%s", buff)!=EOF){printf("%s ", buff );}
+    int fputs(const char *s, FILE *stream)
+        //write line of chars to file, dont accept fs but quicker at plain strs
+        fputs("hello c programming",fp);
+    char* fgets(char *s, int n, FILE *stream)  
+        //read line of chars, return EOF at EOF
+        printf("%s",fgets(text,200,fp));
+    int fputc(int c, FILE *stream)  
+        //writes a char
+        fputc('a',fp);//writing single character into file
+    int fgetc(FILE *stream)
+        //read a char
+        ch = fgetc (fp); //Each character of the file is read and stored in the character file, returns EOF at EOF
+    fputw()	writes an integer to file
+    fgetw()	reads an integer from file
+    fclose(FILE *fp) //closes the file
+    int fseek(FILE *stream, long int offset, int whence)  	
+        //sets the file pointer to specified offset
+        //whences: SEEK_SET (from file start), SEEK_CUR and SEEK_END
+        fseek( fp, 7, SEEK_SET );
+    long int ftell(FILE *stream)  
+        returns current file position
+        pos = ftell(fp); 
+    rewind()
+        //sets the file pointer to the beginning of the file
+        rewind(fp);
+    void rewind(FILE *stream)
+        //move file pointer to start of stream
+            rewind(fp);
+
+# c preprocessor directives
+    c micro processor transforms code before compiler
+    preprocessor directives, #preprocessorDirectives
+    #include
+        paste code of file into given file, ignores \ and // within fn
+        <fileName> //look for dir with system-header files (/usr/include)
+        "fileName" //look in current dir for user-defined files
+    #define
+        define macro
+    #undef
+        undefine a defined macro
+        #define number 15  
+        int square=number*number;  
+        #undef number  
+    #ifdef, #ifndef
+        #ifdef MACRO  
+            //successful code   
+        #else  
+            //else code  
+        #endif  
+    //evaluate defined macros
+    #if, #else, #elif, #endif
+    #error
+        stop compilation if found
+        #error err msg
+    #pragma
+        provide additional info to compiler
+        different compilers can provide different usage of #pragma directive
+            #pragma startup
+                Before the execution of main(), the function specified in pragma is needed to run.
+            #pragma exit
+                Before the end of program, the function specified in pragma is needed to run.
+            #pragma warn
+                Used to hide the warning messages.
+            #pragma GCC dependency
+                Checks the dates of current and other file. If other file is recent, it shows a warning message.
+            #pragma GCC system_header
+                It treats the code of current file as if it came from system header.
+            #pragma GCC poison
+                Used to block an identifier from the program.
+
+## macros
+    allows for macros, where code segments are replaced by a macros val
+    obj like macros
+        identifier replaced by val
+        //EG repersent numeric constant
+            #define PI 3.14   
+    function like macros
+        #define MIN(a,b) ((a)<(b)?(a):(b))
+    predefined macros
+        _DATE_	represents current date in "MMM DD YYYY" format
+        _TIME_	represents current time in "HH:MM:SS" format
+        _FILE_	represents current file name
+        _LINE_	represents current line number
+        _STDC_	It is defined as 1 when compiler complies with the ANSI standard
+
+# cli args
+    #include <stdio.h>  
+    void main(int argc, char *argv[] )  {  
+       printf("Program name is: %s\n", argv[0]);  
+       if(argc < 2){  
+          printf("No argument passed through command line.\n");  
+       }  
+       else{  
+          printf("First argument is: %s\n", argv[1]);  
+       }  
+    }
+
+# theory
+## expressions
+    arithmetic expressions
+        bidmas
+        EGs
+            int/int
+                3/2 = 1
+            int/float
+                6/2.0 = 3.0
+    relational expressions
+        x%2 == 0, a!=b
+    logical
+        x > 10 || y <11
+        !(x>10) && (y==2) 
+    conditional
+        return 1 if true, otherwise 0
+        if, if else, else 
+        ternary
+            exp1 ? exp2 : exp3
+            status = (age>22) ? 'M': 'U';  
+## data segments
+    vars, func, data structures allocated mem in data segment
+### Data Area
+    permanent memory area, stores all static and external variables
+### Code Area
+    memory area which can only be accessed by the function pointers. The size of the code area is fixed
+### Heap Area
+    the heap area is used to store the data structures which are created by using dynamic memory allocation. The size of the heap area is variable and depends upon the free space in the memory
+### Stack Area
+    has two parts: initialize and non-initialize. Initialize variables are given priority than non-initialize variables
+
+        automatic, constant vars
+        local vars of the default storage class
+        func params and return value
+
+        stack area is the temporary memory area as the variables stored in the stack area are deleted whenever the program reaches out of scope.
+
+# progam flow
+source -(preprocessor)> expanded source -(compiler)> assembly -(assembler)> obj code -(linker)> exe code -(loader)> mem
+    preprocessor
+        convert directives to respective vals
+    linker
+        links to the library (header files)
+
+
+
+
+
+

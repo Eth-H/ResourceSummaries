@@ -197,3 +197,52 @@ one, add to full)
         }
         return false;
     }
+
+//take dynamic stdin inp with str
+    public static void main(String[] args) {
+        Scanner s = new Scanner(System.in);
+        String inp = new String();
+        inp += s.next();
+        while (s.hasNextInt()){
+            inp += " " + s.nextInt();
+        }
+        String[] inpList = inp.split(" ");
+        int t = 0;
+        int c = 0;
+        for (int i=0; i<inpList.length; i++){
+            int currentInt = Integer.parseInt(inpList[i]);
+            t+=currentInt;
+            c++;
+        }
+        s.close();
+        System.out.println(t/c);
+    }
+
+//reverse str
+    char[] arr = inp.toCharArray();
+    int len = arr.length;
+    for(int i=0; i<(inp.length())/2; i++,len--){
+        temp = arr[i];
+        arr[i] = arr[len-1];
+        arr[len-1] = temp;
+    }
+
+//read file
+    private static List<String> readDictionary(String filename){
+        try(BufferedReader reader = new BufferedReader(
+                new FileReader(filename))) {             
+            List<String> dictionary = new ArrayList<>();
+            String word = reader.readLine();
+            while(word != null) {
+                dictionary.add(word.toLowerCase());
+                word = reader.readLine();
+            }
+            return dictionary;
+        }
+        catch(Exception e) {
+            System.out.println("Read of " + filename + " failed.");
+            throw new RuntimeException(e);
+        }
+    }
+
+

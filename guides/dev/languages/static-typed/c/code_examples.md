@@ -269,3 +269,148 @@
             free(res);
             return(0);
         }
+
+# struct
+    struct student{
+        int rollno;    
+        char name[10];    
+    };    
+    int main(){    
+        int i;    
+        struct student st[5];    
+        printf("Enter Records of 5 students");    
+        for(i=0;i<5;i++){    
+            printf("\nEnter Rollno:");    
+            scanf("%d",&st[i].rollno);    
+            printf("\nEnter Name:");    
+            scanf("%s",&st[i].name);    
+        }
+    }
+
+## nested struct
+    struct address{
+        char city[20];  
+        int pin;  
+        char phone[14];  
+    };  
+    struct employee  
+    {  
+        char name[20];  
+        struct address add;  
+    };  
+    void main (){
+        struct employee emp;  
+        scanf("%s %s %d %s",emp.name,emp.add.city, &emp.add.pin, emp.add.phone);  
+        printf("name: %s\nCity: %s\nPincode: %d\nPhone: %s",emp.name,emp.add.city,emp.add.pin,emp.add.phone);  
+    }
+## union eg
+    #include <stdio.h>  
+    #include <string.h>  
+    union employee{
+        int id;    
+        char name[50];    
+    }e1;  //declaring e1 variable for union  
+    int main(){  
+       //store first employee information  
+       e1.id=101;  
+       strcpy(e1.name, "Sonoo Jaiswal");//copying string into char array  
+       //printing first employee information  
+       printf( "employee 1 id : %d\n", e1.id); //1869508435
+       printf( "employee 1 name : %s\n", e1.name); //Sonoo Jaiswal
+       return 0;  
+    }  
+
+# file
+    //open and read line by line
+    #include;
+    void main(){
+        FILE *fp; // file pointer
+        char ch; 
+        fp = fopen("file_handle.c","r");
+        while (1){
+            ch = fgetc ( fp ); //Each character of the file is read and stored in the character file.  
+            if ( ch == EOF )
+            break;
+            printf("%c",ch);
+        }
+        fclose (fp );
+    }
+    //write data at specific location
+    #include <stdio.h>
+    void main(){  
+       FILE *fp;  
+      
+       fp = fopen("myfile.txt","w+");  
+       fputs("This is javatpoint", fp);  
+        
+       fseek( fp, 7, SEEK_SET );  
+       fputs("sonoo jaiswal", fp);  
+       fclose(fp);  
+    }  
+    //ftell
+        fp = fopen("file.txt", "r");  
+        fseek(fp, 0, SEEK_END);  
+        length = ftell(fp);  
+        fclose(fp);  
+
+# c preprocessor
+## macros
+    #include <stdio.h>  
+    #define MIN(a,b) ((a)<(b)?(a):(b))  
+    void main() {  
+       printf("Minimum between 10 and 20 is: %d\n", MIN(10,20));    
+    } 
+
+    #ifndef EG
+        #include <stdio.h>  
+        #include <conio.h>  
+        #define INPUT  
+        void main() {  
+            int a=0;  
+            #ifndef INPUT  
+                a=2;  
+            #else  
+                printf("Enter a:");  
+                scanf("%d", &a);  
+            #endif         
+            printf("Value of a: %d\n", a);  
+        }  
+    evalute vale of defined vals
+        #include <stdio.h>  
+        #include <conio.h>  
+        #define NUMBER 0  
+        void main() {  
+            #if (NUMBER==0)  
+                printf("Value of Number is: %d",NUMBER);  
+            #endif         
+        }  
+    err
+        #include<stdio.h>  
+        #ifndef __MATH_H  
+        #error First include then compile  
+        #else  
+        void main(){  
+            float a;  
+            a=sqrt(7);  
+            printf("%f",a);  
+        }  
+        #endif  
+## pragma
+    start exit
+        #include<stdio.h>  
+        #include<conio.h>  
+        void func() ;  
+        #pragma startup func  
+        #pragma exit func  
+          
+        void main(){  
+            printf("\nI am in main");  
+        }  
+          
+        void func(){  
+            printf("\nI am in func");  
+        }  
+    I am in func
+    I am in main
+    I am in func
+
