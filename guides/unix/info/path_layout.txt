@@ -1,3 +1,7 @@
+//notes
+    on most systems path1 will be symlinked to path2
+    [path1] -> [path2]
+
 //where boot files are stored
 //boot
 	//contains kernel in object form
@@ -14,11 +18,15 @@
     //contain user home directories, can be a different partition
     /home/$USER
         //config files
-        ~/.config
-        ~/.local/share
-		~/.ssh
-		~/.[individualConfigFileName]
-		
+            ~/.config
+            ~/.ssh
+            ~/.[individualConfigFileName]
+        //shared local resources
+            ~/.local/share
+        //current user, binaries
+            ~/.local/bin
+        //local shared libraries
+            ~/.local/lib
 		
 /root	
 	//home directory for root user
@@ -43,16 +51,9 @@
 /bin
     //where binaries are stored, move binary apps here to give the terminal global access to them
     //generally /bin binaries are needed earily in the boot process or are more important
-    /bin
-	//other binary locations
-    /usr/bin
-    //special binaries
-    /sbin /usr/sbin
-    //local binaries
-        //all users
-            /usr/local/bin
-        //current user
-            ~/.local/bin   
+        /bin -> /usr/bin
+    //special/system binaries
+        /sbin -> /usr/sbin
 
 /lib
 /lib64
@@ -63,9 +64,6 @@
 		//pernement mounts (may need to make yourself)
 	/mnt
 		//temp mounts
-/opt
-
-/var
 
 /proc (processess)
 	//virtual file system, each numbered directory repersents a PID and contain a command that occ
@@ -117,12 +115,27 @@
             /etc/arch-release	
 
 /usr (unix system resources)
-	//config files
-	/usr/share/doc
-	//data
+	//multi user config files
     /usr/share
+        /usr/share/doc
+	//data
     //libraries
-    /
+
+    /usr/bin
+    //local binaries, can put user defined binaries here
+        /usr/local/bin
 /var
 	//variables
-	
+    //contains files to which the system writes data during the course of its operation
+    //application cache
+        /var/cache
+    //contains dynamic data libraries and files
+        /var/lib 
+
+/var/lock (contains lock files created by programs to indicate that they are using a particular file or device), /var/log (contains log files), /var/run (contains PIDs and other system information that is valid until the system is booted again) and /var/spool (contains mail, news and printer queues). 
+
+/opt
+
+/sys
+    info about system
+    mostly hardware or low level system software info

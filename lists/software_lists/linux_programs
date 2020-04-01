@@ -3,6 +3,7 @@ cli utils
         fuzzy file finder
             fzf
             broot
+        ripgrep
     web get requests
         curl
         wget
@@ -24,6 +25,9 @@ cli utils
         vifm //gd, vim users
         nnn //gd
         midnight commander (mc)
+    other
+        pwgen
+
 gui
 	browser
         brave //gd
@@ -37,6 +41,7 @@ gui
         kmail
         Sylpheed	
 	Office Suites
+        LibreOffice
 		Calligra Office
 		FreeOffice
 	Office Apps

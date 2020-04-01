@@ -20,7 +20,7 @@
     gpg --keyserver-options auto-key-retrieve --verify archlinux-version-x86_64.iso.sig
     pacman-key -v archlinux-version-x86_64.iso.sig
 ## burn iso 
-    dd if=[isoPath] of=/dev/[usbDrive] status="progress"
+    dd if=[isoPath] of=/dev/[usbDrive] status="progress" bs="40"
 
 # after booted into iso
 ## temp setup iso

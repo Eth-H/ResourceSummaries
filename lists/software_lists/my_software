@@ -1,0 +1,53 @@
+system packages
+    build-essentionals
+    os-prober
+    ntfs-3g 
+    git
+    ffmpeg
+    zip
+
+    libncursesw5-dev
+    python3
+    python3-pip
+    python3-tk
+
+    openjdk-11-jdk
+    golang-go
+    ruby
+terminal
+    smartmontools
+    tlp
+    xsel
+
+    vim-gtk3
+    vifm
+    tmux
+    moc moc-ffmpeg-plugin
+    pwgen
+    fzf
+    rkhunter
+    ripgrep
+    curl
+    wget
+    lynx
+    w3m
+    mutt
+    exiftool libimage-exiftool-perl
+    firejail
+gui
+    zathura
+    sxiv
+    flameshot
+    audacity
+    sqlitebrowser
+    gparted
+    virtualbox
+    LibreOffice
+    evolution
+    brave
+    mpv
+
+to test
+    keepassx
+    veracrypt
+    poppler-data

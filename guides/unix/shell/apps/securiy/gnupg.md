@@ -5,7 +5,7 @@
     //generate key, choose needed algorithm and keysize (bigger for more security), no expiry, 
      // then enter name/email/comment, enter password for private key
      //note real name, key-id (last part (8) of fingerprint), key fingerprint (40 digits)
-        gpg –-gen-key
+        gpg --gen-key
     //--list-keys: list keys, --list-public-key: list public keys, --list-secret-keys: list private keys
         gpg {} [specificKeyIDorName]?
     //Give public key to someone else
