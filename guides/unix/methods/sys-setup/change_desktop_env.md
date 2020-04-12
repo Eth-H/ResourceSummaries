@@ -1,19 +1,25 @@
-#to xfce4
+# install pkgs
+## xfce4
     //battery plugin: batttery indicator for panel, may need to add manully
     //whiskermenu: better looking more modern menu
-
     sudo apt install xfce4 xfce4-terminal xfce4-battery-plugin xfce4-whiskermenu-plugin
-    echo "xfce4-session" > ~/.xsession
-    cp [path to your xfce4 config folder] ~/.config/xfce4
+# theme
+    cp [.../themeName] /usr/share/themes/themeName
+    cp [.../xfce4] ~/.config/xfce4
 
-# changing default environment
-## universal and recommended
-    //add desktop/window manager startup cmd to ~/.xsession
-        vim ~/.xsession
-            exec xfce4-session
-## ubuntu only
-    //get sessions
-    ls /usr/share/xsessions
-    //change default session, manually or auto
-        sudo vim /usr/share/lightdm/lightdm.conf.d/50-ubuntu.conf
-        sudo sed -i "/user-session/ s/[currentDefaultDesktop]/[newDefaultDesktop]/" /usr/share/lightdm/lightdm.conf.d/50-ubuntu.conf
+# ways to start xorg server with correct de/wm
+xinit (startx frontend)
+    put start cmd in x conf file
+        ~/.xinitrc
+        ~/.xprofile
+    EG
+        echo "exec xfce4-session" > ~/.xsession
+display manager (lightdm, gdm)
+    put start cmd in x conf file
+        //any xinit file
+        ~/.xsession
+    if not using any x conf file
+        add de.desktop file to /usr/share/xsessions/ubuntu.desktop
+        //set that desktop file to auto
+            sudo vim /usr/share/lightdm/lightdm.conf.d/50-ubuntu.conf
+            #sudo sed -i "/user-session/ s/[currentDefaultDesktop]/[newDefaultDesktop]/" /usr/share/lightdm/lightdm.conf.d/50-ubuntu.conf

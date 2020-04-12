@@ -2,6 +2,15 @@ https://www.cs.kent.ac.uk/systems/cgi-bin/mysql.pl
 
 mysql -u [username] -p -h dragon.kent.ac.uk [tableName]
 
+# cmds
+//Will show the names of all tables in your database.
+SHOW TABLES;
+//Will show the columns and types in the person table.
+DESCRIBE person;
+//Will show all the data in the doctor table.
+SELECT * FROM doctor;
+
+
 # select
 ## no tables
 select sqrt(25);

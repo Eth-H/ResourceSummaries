@@ -12,10 +12,9 @@
     string (char arr)
         manipulation
 
+# types
 
-
-
-# linear //elems form a seq
+## linear //elems form a seq
     array //collection of elemns each identified by index or key
         fixed/general array
         two dimensional arr/matrice/matrix
@@ -25,19 +24,42 @@
         linked list
             singly linked list
             doubly linkded list
-# tree
+
+## tree
     Binary search tree
-    AVL Trees
+    n-ary tree
+    self balancing
+        //auto balance to stop overloading on one branch (losing O(log n))
+        B-tree
+            of order m
+                requirements
+                    every node at most m children
+                    non-leaf node with k children contains k-1 keys
+                    root at least 2 children if not leaf node
+                    non-leaf nodes (except root) has >= m/2 children
+                    all leaves appear in same lv
+                inserting val
+                    compare to vals in tree put inbetween less and more than vals
+                    if new val makes num vals in node > m
+                        node split into two nodes, left has vals < median val and right >
+                            median val is promoted to parent node
+                    if root node too many nodes then new root node created with med val
+
+
+        AVL Trees
     Red Black Trees
+    2-3 tree
     Binary Heaps
-# hash based
+    prefix trees (trie)
+
+## hash based
     hash list //list of hashes of data blocks in a file
     hash map/table //map key to value, implements dict
 
-# heap
+## heap
     binary heap
 
-# graphs
+## graphs
     Adjacency list
         Vertices stored as records or objects, every vertex stores a list of adjacent vertices 
         allows the storage of additional data on the vertices. 
@@ -49,7 +71,8 @@
     Incidence matrix
         A two-dimensional Boolean matrix, in which the rows represent the vertices and columns represent the edges. The entries indicate whether the vertex at a row is incident to the edge at a column.
 
-# abstract data type //model for data type, defined by the behaviour from users point of view
+# abstract data types 
+//model for data type, defined by the behaviour from users point of view
     list/seq //countable num of ordered values
     set //can only store unique values
     Queues //FIFO

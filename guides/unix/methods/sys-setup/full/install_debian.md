@@ -39,7 +39,7 @@ if using live system setup network and locale manually
     apt install binutils debootstrap
 
 ## create base system (run debootstrap)
-    debootstrap --arch [amd64 | i386] [FLAVOR] /mnt/debinst http://ftp.debian.org
+    debootstrap --arch [amd64 | i386] [FLAVOR] /mnt/debinst http://ftp.uk.debian.org
 ## 
 
 ## config system (mostly from chroot)

@@ -27,3 +27,13 @@
     //EG
     firejail --blacklist=/home/emera;/mnt;/media --noroot --netstats --private=/home/virtualHome [programName] 
 
+    firejail --net=none [pn]
+    //view running sandboxes
+        firejail --list
+        firejail --top
+    
+    //use config from /etc/firejail/[pn].profile
+    firejail [pn]
+    
+//todo 
+add isolated network stack

@@ -1,5 +1,3 @@
-
-
 essentional
     D-Bus
         concurrent cooms between multiple local bprograms
@@ -8,19 +6,18 @@ essentional
     zeitgeist
     libc (startard c libraries)
         glibc
-            
-    
 
 basic
     display server
         xorg, wayland
     display manager
         lightdm
+        light-slick-greeter
     window manager
         tiled
     network manager
-        networkmanager
-        systemd-networkd
+        networkmanager //nmtui, nmcli
+        systemd-networkd //networkctl
 components
     appfinder
     power manager/display
@@ -30,3 +27,4 @@ components
     terminal emulator
         st, gnome-terminal
     session manager
+        xfce4-session //loaded by lightdm
