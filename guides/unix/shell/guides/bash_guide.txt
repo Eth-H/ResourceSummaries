@@ -47,6 +47,11 @@ syntax>
                     \d \D \s \S \w \W            
                     //if so use posix class equlivants    
                         [[:digit:]], [^[:digit:]], [[:space:]], [^[:space:]], [_[:alnum:]], and [^_[:alnum:]]
+                        [[:digit:]], [^[:digit:]], [:punct:], [:alpha:]
+                            [_[:alnum:]] ([:alpha:]+[:digit:],[0-9A-Za-z])
+                            [:print:] ([:alpha:]+[:print:])
+                        [[:space:]], [:blank:], , [:xdigit:] (hex)
+
                 //non-greedy matching 
                     greedy chars: *, +, ?, {n,m} {n,}
                     greedy: match string upto entire seach query

@@ -2,7 +2,9 @@
     sudo apt install slick-greeter
     sudo vim /etc/lightdm/lightdm.conf
         greeter-session=slick-greeter
-
+    //or
+        sudo vim /usr/share/lightdm
+            //change something
 # change theme
     update-alternatives --config desktop-background
     # /etc/lightdm/lightdm-gtk-greeter.conf

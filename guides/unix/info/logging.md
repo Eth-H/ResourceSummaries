@@ -5,6 +5,7 @@
         waits for event msgs to occur and filter important ones
             may log/print/del msg
     less /var/log/syslog
+        timestamp hostname app
     files maintained by sys logger
         /etc/rsyslog.d
             EG

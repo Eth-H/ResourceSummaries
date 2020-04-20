@@ -1,43 +1,15 @@
 https://wiki.manjaro.org/index.php?title=How-to_verify_GPG_key_of_official_.ISO_images
 
-How-to verify GPG key of official .ISO images
-Jump to: navigation, search
-
-1. Go to the SourceForge page of Manjaro, where you can choose the latest version you want to download. Also, choose the edition you want to download such as XFCE or KDE.
-
-2. You can find many files:
-
-    Some files with an .ISO extension. These files are the images to download.
-    Some files have an .ISO.SHA1 extension. They contain a check sum.
-    Some files end with .PKGS.TXT and contain a complete list installed packages. Attention: These are all packages installed in the image file.
-    Some files with an .ISO.SIG extension. These files contain the GPG key of the packager. In most cases, this will be Philip Müller, one of the founders of Manjaro.
-
-3. Download the corresponding .ISO and .ISO.SIG files and place them in the same folder. Navigate with your terminal to that folder.
-
-4. Install GPG:
-
+.ISO and .ISO.SIG files
 sudo pacman -S gnupg wget
 
-5. Next, you have 2 possible ways to import Manjaro's keys. Choose one of them:
-
-5.1 Download all keys from the Manjaro Developers from GitHub:
-
+//Download all keys from the Manjaro Developers from GitHub or get philips key
 wget github.com/manjaro/packages-core/raw/master/manjaro-keyring/manjaro.gpg
-
-Next, import all the keys in the downloaded .GPG file into your gnupg keyring:
-
+gpg --keyserver hkp://pool.sks-keyservers.net --search-keys 11C7F07E
+//import all the keys in the downloaded .GPG file into your gnupg keyring
 gpg --import manjaro.gpg
 
-5.2 If you do not trust GitHub, import Philip Müller's GPG key to your system (afterwards, select the key by entering its number and pressing ENTER):
-
-gpg --keyserver hkp://pool.sks-keyservers.net --search-keys 11C7F07E
-
-6. Finally, verify if the .ISO image file was built by one of Manjaro's Developers or Philip Müller:
-
 gpg --verify manjaro-xfce-16.06-pre2-x86_64.iso.sig
-
 Compare the key, which was used to sign the .ISO file to the key
 
-Check, whether the .ISO was verified by Philip Müller's key ("11C7F07E") or another Manjaro Developer's key, which you have imported to your system. If this is the case, you can be sure that your .ISO file was built by Philip Müller or another Manjaro Developer.
-
-
+Check, whether the .ISO was verified by Philip Müller's key ("11C7F07E") or another Manjaro Developer's key, which you have imported to your system

@@ -4,4 +4,6 @@
             arrow keys
 # cant fix
     pas aux | grep [programName]
-    kill {}
+    //or
+    pgrep [programName]
+    kill [programPID]

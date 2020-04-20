@@ -1,4 +1,4 @@
-Time
+time
     data
     cal
     uptime
@@ -7,7 +7,7 @@ Time
         cat /proc/meminfo
     //Memory and swap useage
         free
-//Get kernel version
+//Get system arch and kernel version
     uname -a
 //OS version
     lsb_release

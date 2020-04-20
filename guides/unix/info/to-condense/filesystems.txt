@@ -1,0 +1,61 @@
+stored data management
+    physical volume management of >=1 block storage devices (HDD, SD cards)
+organised into logical block devices (involing a volume manager | device
+controller | array manager | other device driver)
+    management of data/files stored on the lbd
+
+File systems>
+    Drives must be formatted with a file system to determine how files are stored
+    Acts as protocol for accessing and saving files to the physical storage media
+    Clusters>
+        Every storage device is broken down into a series of clusters, the file system determines their size 
+        EG if cluster size = 32kb and files saved is 64kib, then 2 clusters are required
+        A 1kb file takes a whole cluster since a cluster can only store one file, the wasted space is called slack space
+        Clusters have an address
+        if a file takse multiple clusters then the adjacent cluster is used, if it's full then a different cluster is used and the cluster addresses are combined,
+         if the file system uses a file allocation table then the first cluster will point at the table entry which contains the next clusters address
+    Stores extra info per file including metadata, which is stored on an index which provides a list of files and their location on the disk
+    If a file is deleted, then the index entry is removed and the cluster is marked as overwritable (for efficiency)
+
+
+    Types of file systems>
+        FAT32>
+            Win 95 
+            File Allocation Table maps each cluster
+            files < 4GB
+            doesnt store metadata (so doesnt suppport permissions and security features)
+            suits USB
+            FAT 32 vs FAT
+                FAT 32 Works on drives up to 2TB nad has more efficient storage										
+        exFAT> 
+            file system designed for removable media (USB),  introduced in 2006,  file size limit is massive
+        ntfs>
+            win10/7
+            many features (permissions, encryption support, shadow copies (backups))
+            can partly heal from data corruption, not cross-platform, proprietary
+            Master File Table (MFT) entries still contain info on deleted files, 
+            Index enteries use $FILE_NAME attribute to store info in an index 
+                EG full file name, creation and modification time, access time, MFT change time, file size and its parent directory
+                
+        EXT3 and EXT4>
+            Linux, introduced in 2001 (doesnt support shadow copy), EXT3 max file size is 2TB. Changes tracked in a journal, which can be used for data recovery
+            EXT4 2008, massive max file size, can optionally turn off journal and has a faster disk check processor
+            EXT2 is the most popular
+            EXT4 
+        zfs>
+            control over physical volume management and filesystem
+                hence reduces data lose
+                    misprocessing, overtime bit rot and data corruption
+            snapshots (create img of system state), snapshot cloning
+            replication (same data stored on multiple devices)
+        btrfs>       
+            16 exabytes max file size
+            2^64 max num files     
+            copy on write 
+            snapshots
+            transparent compression
+            good for consumers
+        Apple proprietary file systems>
+            HFS+ & APFS: HFS+ (Hierarchical File System Plus) orignally used for MAC, similar to EXT4
+            APFS (Apple File System): first used in Mac OS High Sierra, it is thought that duplicate files can be stored without using additional space, with changes to one copy of a file being saved as a delta  
+    

@@ -9,5 +9,3 @@
      //-p: password-prompt, -g: gen pw,
       //-l: generated pw length
         keepassxc-cli add {}... [pw_database_path] [entryName]
-    
-

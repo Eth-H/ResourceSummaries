@@ -90,6 +90,11 @@
         /proc/swap – Information about swap space.
         /proc/uptime – Uptime information (in seconds).
         /proc/version – Kernel version, gcc version, and Linux distribution installed.	
+        /proc/sys/ - kernel params categories & kps
+                dev - params for specific devices
+                fs - filesystem config
+                net - network config
+                vm - use of kernels virtual mem
 
     /run
     //info about running sys since last boot
@@ -234,6 +239,7 @@ check/repair damaged fs
 
 inodes
     inode (index node) is an entry in inode table, one per file (dir is also a file)
+    contains file metadata/context
     metadata
         File type - regular file, directory, character device, ...
         Owner, Group, Access permissions
@@ -251,17 +257,13 @@ inodes
         stat
 
 symlinks (symbolic/soft links)
+    creates new file thats inode metadata points to anouther files inode
     shortcut link to file via path
     ln -s myfile myfilelink
+    some filesystems will store these inline for quicker access time if they <60 bytes
 hardlink
-    link to original file inode
+    shares a files inode (doesnt create a new file, but gives it anouther name/path)
         cant be refered across fs's
         can edit either file to reflect changes
     ln myfile2 myhardlink
     link count: num hardlinks to inode, inodes delled when 0
-
-
-
-
-
-

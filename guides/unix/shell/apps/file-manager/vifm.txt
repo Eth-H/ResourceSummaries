@@ -24,6 +24,8 @@
         :ex - 
         :visual - 
         :view - change to view mode (get preview of file in one pane)
+    :media - show mountable drives
+    :sync - copy pain path to unselected pain
     :! [programToRunWith] [fileName] & - run graphical program but keep vifm running
 
     cw - rename a file or files.

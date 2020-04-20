@@ -15,6 +15,10 @@ chmod
         chmod {\[ugoa]?[+-=][rwx]\} [filePath]
     //set all permissions: 755 (Each number repersents 1 of user/group/others; Think of the number as binary for there effect, 111 = 7 so means +rwx, or Read = 4 Write = 2 Execute = 1 then add)
         chmod {} [filePath]
+chgrp
+    //change group ownership of a file
+    //-c: be verbose, -R: recursive
+    sudo chgrp WHEEL *.rtc
 chown 
     /*Change ownership of a file, EG
     user - just change UO, user:group - change UO and GO,

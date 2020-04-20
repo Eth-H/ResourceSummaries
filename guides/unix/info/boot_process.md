@@ -21,6 +21,12 @@ Bootloader
             ro - mounts the fileystem as read-only mode
             quiet - don't see background display messages during boot
             splash - lets the splash screen be shown
+        naming conventions
+            (hd0) First hard disk /dev/sda (or /dev/hda)
+            (hd1) Second hard disk /dev/sdb (or /dev/hdb)
+            (hd0,0) First hard disk, first partition /dev/sda1 (or /dev/hda1)
+            (hd1,0) Second hard drive, first partition /dev/sdb1 (or /dev/hdb1)
+            (hd1,1) Second hard drive, second partition /dev/sdb2 (or /dev/hdb2)
 
 kernel
     when loaded, immediately initializes devices and mem, main job is to load up the init process
@@ -33,5 +39,3 @@ kernel
 
 init
     first process that gets started, starts and stops essential service process on the sys
-
-

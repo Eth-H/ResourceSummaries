@@ -9,7 +9,7 @@ how the kernel links up the software side of networking to the hardware side (de
     ifconfig eth0 192.168.2.1 netmask 255.255.255.0 up
     //bring up/down
         ifup eth0
-        ifdown eth
+        ifdown eth0
 
 ## ip (from iproute2)
     more modern alternative to ifconfig (from net-tools)
@@ -39,6 +39,16 @@ how the kernel links up the software side of networking to the hardware side (de
     //get fresh ip
         sudo dhclient
 
+# arp cache
+    not persistent between reboots
+    if packet sent to dest not in arp
+        boadcast frame containing arp req packet asking for dest mac
+        adds the ip to mac mapping to the arp cache and then proceeds with sending the packet
+
+    check local arp cache
+        arp
+        ip neighbour show
+
 # Network Manager
     NetworkManager daemon to configures networks automatically
     get network hardware information, search for conns to wireless/wired and activate
@@ -48,12 +58,3 @@ how the kernel links up the software side of networking to the hardware side (de
     //control
         nmcli
         nmtui
-## arp cache
-    not persistent between reboots
-    if packet sent to dest not in arp
-        boadcast frame containing arp req packet asking for dest mac
-        adds the ip to mac mapping to the arp cache and then proceeds with sending the packet
-
-    check local arp cache
-        arp
-        ip neighbour show

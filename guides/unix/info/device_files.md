@@ -60,7 +60,7 @@ list device info
         lsscsi 
 
 dd 
-    reads input from a file or data stream and writes it to a file or data stream.
+    reads input from a file or data stream and writes it to a file or data stream
     //if, of: read from/output to file (not stdin/stdout)
     //bs: blk size, read/write this many bytes per time (can use k m abbreviations)
     //count: num blks to cp

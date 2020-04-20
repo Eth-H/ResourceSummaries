@@ -1,31 +1,67 @@
 # Package manager 
-## apt-get 
-Debian package manager, apt or apt-get
-  //Update sources (servers with package info/download links)
-      sudo apt update
-  //Update installed software
-      sudo apt upgrade
-  //Download/remove software
-      sudo apt install [packageName]
-      sudo apt remove [packageName]
-      //Fix installation problems
-          //Force package installation
-          sudo apt-get install -f
-          //try to remove problomatic package or run CLean commands
-      
-  //Get info on a package
-      aptitude show [packageName]
-  //Search for a package
-      sudo apt search [packageName]
-  //Clean
-      //Remove half-installed packages
-      sudo apt-get autoclean
-      //Remove apt cache
-      sudo apt-get clean
-      //Remove uneccessary software dependancies
-       sudo apt-get autoremove
-  //list explicitly installed programs
 
+# debian
+## dpkg 
+lower lv pkg manager
+    // .deb files are packages generated for Debian-based distros, install with dpkg
+    // install debian package, cant install dependancies
+        sudo dpkg -i /home/user/cowsay.deb
+    //remove
+        sudo dpkg -r cowsay
+    //list packages installed
+        dpks -l
+    //re-configure package database (fix dpkg corruption problems)
+        sudo dpkg --configure -a
+## apt
+    apt (advanced pkging tool): contains other pkging modulues, can use most other apt cmds
+    //apt-get: install/remove/upgrade
+        //Update sources (servers with package info/download links) from /etc/apt/sources.list
+            sudo apt update
+        //Update all/specific installed software
+            sudo apt upgrade [packageName]?
+        sudo apt dist-upgrade
+        //Download/remove software
+        //-f: force, rm problomatic package
+            sudo apt install [packageName]...
+        //rm pkgs without/with their configs
+            sudo apt remove [packageName]...
+            sudo apt purge [packageName]...
+        //get pkg source to certain dir
+            sudo apt source [packageName]
+        //download but dont install
+            sudo apt download [packageName]
+        //download pkg change-log and shows installed pkg version
+            sudo apt changelog [packageName]
+        //check for broken dependancies
+            sudo apt-get check
+        //search local repos and install build dependancies for pkg
+            sudo apt-get build-dep [packageName]
+        //Clean/fix
+            //Remove half-installed packages
+            //rm .deb files from /var/cache/apt/archives
+                sudo apt autoclean
+            //remove apt cache (rm downloaded .debs from local repo)
+                sudo apt clean
+            //remove uneccessary software dependancies
+                sudo apt autoremove
+    //apt-cache: search apt software cache
+        //Get info on a package //uses apt-cache
+            apt show [packageName]
+        //Search for a package //uses apt-cache
+            sudo apt search [packageName]
+        //get a pkgs dependancies
+            apt-cache showpkg [packageName]
+        //stats
+            apt-cache stats
+
+### aptitude
+apt frontend with ncurses and cli tools
+    //run ncurses iterface
+        aptitude
+    //can use any apt cmds with cli
+      aptitude ...
+
+#### list explicitly installed programs
       comm -23 <(apt-mark showmanual | sort -u) <(gzip -dc /var/log/installer/initial-status.gz | sed -n 's/^Package: //p' | sort -u)
       comm -23 <(aptitude search '~i !~M' -F '%p' | sed "s/ *$//" | sort -u) <(gzip -dc /var/log/installer/initial-status.gz | sed -n 's/^Package: //p' | sort -u)
 
@@ -33,8 +69,9 @@ Debian package manager, apt or apt-get
       wget -qO - http://mirror.pnl.gov/releases/precise/ubuntu-12.04.3-desktop-amd64.manifest \
         | cut -f1 | sort -u > defaultinstalled.txt
       comm -23 currentlyinstalled.txt defaultinstalled.txt
+
+# arch
 ## pacman 
-arch linux package manager
     //-S: sync packages
      //[packageName]: install package, -u: upgrade installed packages, y: download fresh pacakges, --noconfirm: dont ask, --ignore: ignore a packages upgrade
      //s: search for package
@@ -47,8 +84,8 @@ arch linux package manager
             sudo pacman {} {}?...
     //EG Upgrade all packages 
         sudo pacman -Syu
-## AUR
-arch user repositary
+
+## AUR (arch user repositary)
     //first install base level package group
         pacman -S --needed base-devel
     //manual
@@ -67,8 +104,8 @@ arch user repositary
             //or run makepkg -s and then instal yourself
                 pacman -U package_name.pkg.tar.xz
     //aur helpers
+            pacman AUR wrappers
         yaourt 
-            wrapper for pacman that includes support for AUR
             //install
                 
             //can use all pamac commands
@@ -76,34 +113,77 @@ arch user repositary
                 yaourt {}...
         yay 
             //more modern pacman wrapper
-## yum 
-    //Fedora package manager, automatically updates sources	
-    //Upgrade installed software, blank: Update all software, [packageName]
-        sudo yum update {}
-    //Download/remove software
-        sudo yum install [packageName]
-        sudo yum remove [packageName]
-    
-    
-# Packaged software 
-## dpkg 
-    // .deb files are packages generated for Debian-based distros, install with dpkg
-    // Install debian package
-        sudo dpkg -i /home/user/cowsay.deb
-    //Remove
-        sudo dpkg -r cowsay
-    //List packages installed
-        dpks -l
-    //RE-configure package database (fix dpkg corruption problems)
-        sudo dpkg --configure -a
+            //pacman syntax
+
+# fedora/RHEL/CentOS
 ## rpm 
     //Generated for Fedora-based distros
+    //-v: verbose, -h: hash marks (% completion)
     //Install
-        rpm -Uvh /home/user/cowsay.rpm
+        rpm -i [pkg]
     //Remove
-        rpm -e cowsay
+        rpm -e [pkg]
+    //Upgrade
+        rpm -U [pkg]?
     //List packages
+        rpm -q [pkg]
         rpm -qa
+## yum 
+    //Fedora package manager, automatically updates sources	
+    //Upgrade installed software
+        //blank: all, --security, [packageName]
+            sudo yum update {}?
+        //update >=1 pkg to certain version
+            sudo yum update-to
+        //take obsoletes into acocunt
+            sudo yum upgrade
+    //Download/remove software
+        sudo yum install [pkg]
+        sudo yum groupinstall [pkgGroup]
+        sudo yum localinstall pkg.rpm
+        sudo yum remove [pkg]
+        sudo yum downgrade [pkg]
+        // remove additional uneeded pkgs
+        sudo yum autoremove [pkg]?
+        sudo yum reinstall [pkg]
+        sudo yum swap [oldPkg] [newPkg]
+
+    //query
+        //list avaliable pkgs from repos
+            //avaliable, installed, all, kernel
+                yum list {}
+            //list installed/avaliable pkg groups
+                yum grouplist
+        yum info [pkg]
+        yum groupinfo [pkgGroup] //EG "Web Server"
+        //list dependancies
+            yum deplist [pkg]
+        //pkgs contining queried file
+            yum provides [fileFromPkg]
+        //search pkg names and desc
+            yum search [pkg]
+        //info on pkg updates
+            yum updateinfo [pkg]
+        //desiplay desc and contents of pkg group
+            yum grouplist [pkgGroup]
+    //repos
+        repolist
+        repoinfo [enabledYumRepoName]
+        //list,install,remove
+            repo-pkgs repoName {}
+        //download repo data to cache
+            makecache
+    //troubleshot/maintain
+        //check local db for errs
+            yum check
+        //list: install/update/erase actions
+        //info/update/redo: [transactionNum]
+            yum history {}
+        //delete packages from / clean out pkgs and metadata from - cache
+            yum clean packages
+            yum clean all
+
+
 # Building from source 
     //Look for INSTALL txt file
     //cd into direcotry with source code ->  run configure ELF (executable) file to generate system specific makefile ->   run make to compile source code into an ELF ->  
@@ -117,6 +197,6 @@ arch user repositary
     mkdir build
     cd build
     cmake ..
-    //Raise number after j relative to PC hardware
+    //Raise number after j relative to num cores+1
     make -j8
     sudo make install		

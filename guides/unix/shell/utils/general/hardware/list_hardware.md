@@ -25,6 +25,7 @@
     sudo dmidecode -t {}
 ## access by handle
 https://en.wikipedia.org/wiki/System_Management_BIOS#Structure_types
+man dmidecode
     sudo dmidecode -t [handleNum]
 
 

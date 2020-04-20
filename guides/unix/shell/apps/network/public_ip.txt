@@ -1,0 +1,7 @@
+let ip addr
+    ifconfig.me
+    curl ipecho.net/plain
+
+get mac addr
+    curl ifconfig.co
+    curl icanhazip.com

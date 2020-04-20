@@ -1,12 +1,26 @@
-//See running processes using the most resources
-    top	
-//List running processes
-    ps auxf
-    //less: scroll through, grep [processName]: find stuff, grep bash | grep -v grep: find stuff and ignore grep process
-    ps auxf | {}
-//Print current user running processes, See more info: -u, See all processes (not only for your user): -ax, -o [processName]:,
-    ps {}
-Services 
+//see running processes using the most resources
+    top
+
+# List running processes
+        //less: scroll through, grep [processName]: find stuff, grep bash | grep -v grep: find stuff and ignore grep process
+        ps auxf | {}
+    //Print current user running processes, See more info: -u, See all processes (not only for your user): -ax, -o [processName]:,
+        ps {}
+        //get processes for all users
+        ps auxf
+    //Get PID of cmd
+        pgrep [cmd]
+    //get parent id of current tty
+        echo $PPID
+        cat /proc/$PPID/comm
+        cat /proc/$PPID/cmdline
+
+    //process tree
+        pstree
+        pstree -p -h -s 2072 //show pids, highlight current process and its ancestors, parent process of specified
+
+
+# Services 
     //See status of all services
         service --status-all
     //All
@@ -16,12 +30,11 @@ Services
     //start:, stop:
         sudo service [serviceName] {}		
 
-//Get PID
-    pgrep
-//Kill process, -9: kill 
-    kill -{signal} [PID]	
-    //run command to get PID first
-        kill -9 `lsof -t -u [userName]`
+# signals
+    //Kill process, -9: kill 
+        kill -{signal} [PID]	
+        //run command to get PID first
+            kill -9 `lsof -t -u [userName]`
 
 //Add space to run new jobs
     //Send paused task to the background
@@ -30,7 +43,8 @@ Services
         fg
 //Stop all running processes
     halt
-cron table 
+
+# cron table 
     //Schedule commands to run at regular time intervals
     //Open crontab to edit tasks
         crontab -u [user]  [filePath]
@@ -39,7 +53,8 @@ cron table
     //EG
         0,14,29,44 * * * * /usr/bin/example2
         runs /usr/bin/example2 at the 15-minute mark on every hour, every day. Make sure you add each new task on a new line.
-//get info on running processes
+
+# get info on running processes
     // -p [processID]: Find out what files the process is using
     //-r: read access, -w: write access
     //-u [userName]: process owned by specific user, -u^[userName]: not owned

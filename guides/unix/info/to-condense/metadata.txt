@@ -1,0 +1,14 @@
+inodes (index node)
+    all inodes stored at start of partition in a table
+    store file metadata (so dont store name or data)
+    every file has an entry, including file name and inode num 
+    if all inodes used up cant create any more files
+
+    for hard links, the files share an inode
+    for some filesystems, can include inline data in inodes for tiny files (60ish bytes)
+
+//inodes for current dir
+ls -i
+
+//entire disk inodes
+df -hi

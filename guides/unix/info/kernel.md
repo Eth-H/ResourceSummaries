@@ -44,12 +44,34 @@ kernel modules
     
     //currently loaded
         lsmod
-    //load module (and dependancies) from /lib/modules/(kernel version)/kernel/drivers 
+    //load/unload modules with full path
+        insmod /lib/modules/4.4.0-21-generic/kernel/drivers/cpufreq/speedstep-lib.ko
+        rmmod /lib/modules/4.4.0-21-generic/kernel/drivers/cpufreq/speedstep-lib.ko
+    //load/unload modules (and dependancies) from /lib/modules/$(uname -r)/kernel/drivers 
         sudo modprobe bluetooth
-    sudo modprobe -r bluetooth
+        sudo modprobe -r bluetooth
     //add config file to load/stop loading modules during boot
         /etc/modprobe.d/peanutbutter.conf
             options peanut_butter type=almond 
             blacklist peanut_butter
 
-
+kernel params
+    most params coinside with files in /proc/sys subdirectories
+        EG
+            net.ipv4.ip_forward → /proc/sys/net/ipv4/ip_forward
+    list all modifiable
+        sysctl -a  
+    list/change specific param
+        sysctl net.ipv4.ip_forward
+        cat /proc/sys/net/ipv4/ip_forward
+        //non-persistent change
+            echo 0 > /proc/sys/net/ipv4/ip_forward
+            sysctl -w net.ipv4.ip_forward=0
+        //persistent changes
+            //edit variables in /etc/sysctl.d
+        //apply changes to current runtime config (from non-persistent or persistent mtds)
+            sysctl -p
+    EG important params
+        fs.file-max //max num file handles kernel can allocate, allows more open files
+        kernel.sysrq //enable SysRq key (print screen)
+        net.ipv4.icmp_echo_ignore_all //ignore and drop ping reqs at kernel lv
