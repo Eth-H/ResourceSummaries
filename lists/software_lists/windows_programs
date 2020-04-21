@@ -19,10 +19,14 @@ Anti-virus
         Kasperskies
         Trend micro
         Individual decryptors
-    Rootkit scanners 
+    Rootkit scanners (generally less effective than rescue CDs)
+        bitdefender rootkit remover
         Malwarebytes Anti-rootkit beta
-        TDSS Killer   
+        TDSS Killer 
         McAfee Labs RootkitRemover
+        sophos anti-rootkit
+        Avast aswMBR
+        GMER
         
 Browsers 
 	brave
@@ -83,4 +87,3 @@ Technical
 
 	Miscellaneous 
     Microsoft package
-

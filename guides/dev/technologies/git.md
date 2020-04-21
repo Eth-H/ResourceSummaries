@@ -100,16 +100,35 @@
                 *~
             
     //Remove files: Command, untrack but keep file, delte all .log files in the log/ directory, removes all files ending with ~, untrack directory
-        rm 'PROJECTS.md'
-        git rm --cached README
-        git rm log/\*.log
-        git rm \*~S
-        git rm --cached -r .
+        //del file from filesystem but no git index
+            rm 'PROJECTS.md'
+        // untrack but keep file/dir, or untrack deleted file
+            git rm --cached README
+            git rm --cached -r .
+            //untrack .gitignore  files
+                git rm --cached `git ls-files -i --exclude-from=.gitignore`
+                //or
+                git ls-files -i --exclude-from=.gitignore | xargs git rm --cache
+        //untrack and del
+            git rm log/\*.log
+            git rm \*~S
 
     //See old version:
         -git show "file"
 
 # problems
+
+## want a file deleted in a previous commit
+    //find commit
+        //summaries
+        git log
+        //diff introduced in each commit, last 2 commits
+            git log -p -2
+        git log --diff-filter=D --summary
+
+    //revert to older commit with file
+        git checkout [commitId]
+
 ## Head is checked out problem
     //Create new branch and re-attach HEAD to it
     git checkout -b temp

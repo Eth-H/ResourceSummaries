@@ -35,10 +35,9 @@ stat
         cut -d: -f1 /etc/passwd
     //Get current user
         whoami
-    //Create new user
-        adduser [accountname] 
-        //add new user and new group
-        useradd -G [groupName] [userName] 
+    //Create new user and their initial group (named after them)
+        adduser [accountname]
+        useradd [accountName]
     //Give account a new password
         passwd [accountname] 
     //Create user directory (if it doesnt exist already)
@@ -51,8 +50,8 @@ stat
             group [userName]
             id [userName]
         //-a [username]: add user
-         //-G [group name]: group
-        -g [groupName] [userName]
+         //-G [group name]: addtional groups to add user to
+        -g [groupName] [userName]: users initial group (with custom name)
             usermod	{}...       
         //add new group
             sudo groupadd mynewgroup	        
