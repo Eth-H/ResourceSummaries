@@ -7,21 +7,3 @@
         npm run [scriptName]	    
     //List npm
         npm list [packageName]
-
-
-
-
-               
-
-
-
-
-
-
-
-
-
-
-
-
-

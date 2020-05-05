@@ -1,10 +1,4 @@
 
-//Import csv file to database 3
-	.mode csv
-	//Here create the table with columns names
-	.import OutlineTable.csv Cartoons
-    .output fileName
-	.save output.db
 
 /* syntax
 CREATE TABLE `Manga` (
@@ -26,3 +20,17 @@ CREATE TABLE `Manga` (
 "Author","VARCHAR(8)"
 "Genre","VARCHAR(22)"
 */
+
+# merge tables
+    //open db
+        attach "mydb.sqlite" as db1;
+    //merge databases
+    attach './mydb2.db' as toMerge;           
+    /* BEGIN; */
+    insert into table1 select * from toMerge.table1; 
+    COMMIT; 
+    detach toMerge;
+
+    //get columns
+        SELECT name FROM PRAGMA_TABLE_INFO('tableName');
+    insert into TableName.table1 select * from TableName2.table1;

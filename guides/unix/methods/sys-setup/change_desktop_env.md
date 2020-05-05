@@ -16,7 +16,6 @@ xinit (startx frontend)
         echo "exec xfce4-session" > ~/.xsession
 display manager (lightdm, gdm)
     put start cmd in x conf file
-        //any xinit file
         ~/.xsession
     if not using any x conf file
         add de.desktop file to /usr/share/xsessions/ubuntu.desktop

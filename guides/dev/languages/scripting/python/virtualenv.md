@@ -10,6 +10,10 @@
 # pip
 //install, unlock, lock
 pip {}
+pip -U //upgrade all pkgs
+pip install --upgrade pkg //upgrade a pkgs
+pip install --user --upgrade pkg //upgrade a pkg installed for a specifc user
+pip list --outdated
 
 # pipenv
 ## install

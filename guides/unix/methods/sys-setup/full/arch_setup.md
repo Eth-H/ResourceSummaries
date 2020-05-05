@@ -116,7 +116,7 @@ dhcpcd netctl vim s-nail intel-ucode
     //finish    
         exit
         unmount -R /mnt 
-        rebbot
+        reboot
     
 # active setup
     //users

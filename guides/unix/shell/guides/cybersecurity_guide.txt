@@ -590,6 +590,3 @@ Persistence>
 				echo "obase=16; ibase=10; 25" | bc
 				//Binary to hex
 				echo "obase=16; ibase=2; 1111" | bc
-
-
-					

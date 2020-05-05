@@ -123,12 +123,3 @@ One way to optimise images for retina displays is to define their width and heig
 		max-width: 100em;
 		min-width: 80em;
     }
-
-/*use u to refer to percentage of a row a column takes up */
-/*will wrap to new line (new row) after 12, or can force with a terminator (EG
- * 6u$)*/
-<div class="row">  
-  <div class="6u"> Big Div Here. </div>
-  <div class="3u"> Small Div Here. </div>
-  <div class="3u"> Small Div here (same size as the other small div)> </div>
-</div>  (This ends the row).

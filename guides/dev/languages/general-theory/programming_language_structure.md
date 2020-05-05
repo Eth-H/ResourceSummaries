@@ -96,15 +96,28 @@
         mixins
         generics
 
+    functional
+        first class functions: can be assigned to a variable, passed into another function, or returned from another function
+        higher order functions: take a func as an arg or return a func
 
-    funational 
+        anouymous func
+            no name func
+            are declared before they are called (unlike normal funcs)
+            define func expressions
+                var outName = function (name){consolg.log(name);}
+            Immediately Invoked Function Expressions (IIFE)
+                (function (name) {console.log(name);})("Tom") 
+        lambda expressions
+            lambda: a func that is passed into another func or returned from one
+            EG with java functional interfaces
+            can name in some languages
         func params
         tail calls
-        anouymous func
+            callbacks
+                funcs are slipped/passed into another func to decide the invocation of that function
     others
         docs
         packaging
         cli tool
             compiler, interpreter
             package manager
-

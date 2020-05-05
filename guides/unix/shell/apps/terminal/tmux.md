@@ -4,6 +4,17 @@
     command
         //info: list every session/window/pane/pid, source-file ~/.tmux.conf: reload config
             tmux {}
+        //list sessions
+            tmux ls
+        //attach to session and detact other clients connected to it
+            tmux attach -d -t <session id>
+        //detach session
+            tmux detach -t <session id>
+            tmux detach //current session
+        //kill sessions
+            tmux kill-session -t mysession
+            tmux kill-session -a
+
 # mostly keys
     //prefix = Ctrl + B
     //sessions

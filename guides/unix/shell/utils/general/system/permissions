@@ -60,3 +60,13 @@ Signing
         sudo apt-key list
     //Remove
         sudo apt-key del [keyName]
+
+
+//idk
+    set file attributes and a lower-level alternative to file permissions
+        chattr
+        sudo chattr +i /critical/directory/or/file #eg protect against accidental file del
+
+        getfacl, setfacl #save and restore file permissions
+            getfacl -R /some/path > permissions.txt
+            setfacl --restore=permissions.txt

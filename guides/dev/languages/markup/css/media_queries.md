@@ -6,9 +6,7 @@
     body {background-color: lightblue}
 }
 
-
-
-/*Media features: 
+# Media features
 any-hover	Does any available input mechanism allow the user to hover over elements? (added in Media Queries Level 4)
 any-pointer	Is any available input mechanism a pointing device, and if so, how accurate is it? (added in Media Queries Level 4)
 aspect-ratio	The ratio between the width and the height of the viewport
@@ -44,4 +42,3 @@ scan	The scanning process of the output device
 scripting	Is scripting (e.g. JavaScript) available? (added in Media Queries Level 4)
 update	How quickly can the output device modify the appearance of the content (added in Media Queries Level 4)
 width	The viewport width 
-*/

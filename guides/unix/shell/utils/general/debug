@@ -1,0 +1,27 @@
+java
+    kill -r pid #stacktrace
+    JDK: jps, jstat, jstack, jmap
+    [SJK tools](https://github.com/aragozin/jvm-tools) #more advanced
+    strace, ltrace #helpful if a program is failing/hanging/crashing
+        profiling option: -c  
+        attach to a running process: -p
+        trace child option: -f #avoid missing important calls
+c
+    ldd #to check shared libraries
+        [never run it on untrusted files](http://www.catonmat.net/blog/ldd-arbitrary-code-execution/)
+    gdb #connect to a running process and get its stack traces
+
+/proc #debugging live problems. 
+    /proc/cpuinfo, /proc/meminfo, /proc/cmdline, /proc/xxx/cwd, /proc/xxx/exe, /proc/xxx/fd/, /proc/xxx/smaps (where `xxx` = pid)
+
+#faulty hardware/drivers (kernel logs)
+    dmesg #kernel err msgs
+
+
+#debugging why something went wrong in the past
+    [sar](http://sebastien.godard.pagesperso-orange.fr/) #shows historic statistics on CPU, memory, network, ...
+
+#deeper systems and performance analyses, 
+    stap, ([SystemTap](https://sourceware.org/systemtap/wiki))
+    [`perf`](https://en.wikipedia.org/wiki/Perf_%28Linux%29)
+    [`sysdig`](https://github.com/draios/sysdig)

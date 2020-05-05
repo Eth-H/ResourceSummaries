@@ -3,6 +3,8 @@
         df -h
     //Directory space useage
         du
+        [`ncdu`](https://dev.yorhel.nl/ncdu) //saves time over du -sh
+        
     //inodes useage
         df -hi
     
@@ -26,3 +28,7 @@
         sudo mount -o remount,uid=1000,gid=1000,rw /dev/[partitionName]
     //check a ntfs drive for errors (generally windows problems), otherwise run chkdik on windows then shutdown /s
         sudo ntfsfix /dev/sdXY
+
+//disk health
+    smartmontools: smartctl
+    smartctl -a /dev/[deviceName]

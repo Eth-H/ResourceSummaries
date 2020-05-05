@@ -1,4 +1,4 @@
-//git setup
+# git setup
 	//Create repositary at Github.com
 	//Convert local react project to a git repositary
 		git init
@@ -11,26 +11,22 @@
 		// If getting consistant errors can pull the repositary
 			git pull  https://github.com/Eth-H/JPP master --allow-unrelated-histories	
 
-//Setup file system
+# Setup file system and dependancies
     //Create parent directory
     //Create server child directory  (the client sub-direcotry is created by create-react app)
-//Seting up the server
-    npm init
-    npm install body-parser cookie-parser express request request-promise --save
-    npm install concurrently nodemon --save-dev
-    //run server
-		node src/server/index.js
 
-//Setup react (client side)
+## setup client side (react)
     npm install create-react-app -g
 	//Create app specify name, can specify path
 		npx create-react-app my-app
 	//Go to directory with app
 		cd my-app
-	//Start development server
-		npm start
 
-//setup package.json
+## Seting up the server
+    npm init
+    npm install body-parser cookie-parser express request request-promise --save
+    npm install concurrently nodemon --save-dev
+### package.json
 	//server
 		"scripts": {
 			"test": "echo \"Error: no test specified\" && exit 1",
@@ -46,7 +42,7 @@
 
 		 //Setup for deployment to github pages (independant deployment)
 			//then add a homepage field to package.json (url thet the app lives on):
-				"homepage": "https://Eth-H.github.io/JPP/",
+				"homepage": "https://user.github.io/proj/",
 			//deployment setup
 				//then add scripts for target
 					"scripts": {
@@ -59,7 +55,7 @@
 					npm run build
 				//Deploy to target EG github pages  (Carry out git setup before this command)
 					npm run deploy	
-//setup database
+### setup database
 	//postgres
 	//Use pgAdmin or CLI to create local database
 	//Fill that local db using SQL queries (with the Query Tool)
@@ -67,45 +63,47 @@
 		C:\Program Files\PostgreSQL\10\bin
 	npm install pg --save
 
-//useful packages
-	//backend
-        body-parser, cookie-parser, hash.js, uuid
-		//dev
-			concurrently, nodemon
-		//http
-			request request-promise
-        //server
-            express        
-        //sql drivers
-            pg    
-	//client
-		//date, time
-			date-arithmetic: 3.1.0
-			//localizer
-				moment
-			react-big-calendar
-			react-day-picker
-		event-stream
-		react-bootstrap
-		//routing
-			react-router
-			react-router-bootstrap
-			react-router-dom
+
+# deploy
+	//Start development server
+		npm start
+    //run server
+		node src/server/index.js
+
+# useful packages
+## backend
+    body-parser, cookie-parser, hash.js, uuid
+    //dev
+        concurrently, nodemon
+    //http
+        request request-promise
+    //server
+        express        
+    //sql drivers
+        pg    
+## client
+    //date, time
+        date-arithmetic: 3.1.0
+        //localizer
+            moment
+        react-big-calendar
+        react-day-picker
+    event-stream
+    react-bootstrap
+    //routing
+        react-router
+        react-router-bootstrap
+        react-router-dom
 
 
-	
-	
-	
-	
-	
-//Testing with jest
-	//Setup
-		//Install
-			//Optionally install typescript definitions
-				//npm i @types/jest
-			npm install --save-dev jest jest-fetch-mock enzyme enzyme-adapter-react-16
-			//Run test, can optionally pass directory 
-				npm test --file_name/path
+# testing with jest
+    //setup
+        //Optionally install typescript definitions
+            //npm i @types/jest
+        npm install --save-dev jest jest-fetch-mock enzyme enzyme-adapter-react-16
+        //Run test, can optionally pass directory 
+            npm test --file_name/path
+
 
 
 //Using webtest.io (don't install in project folder (webpackage update problem))

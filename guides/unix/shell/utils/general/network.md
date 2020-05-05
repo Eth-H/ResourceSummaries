@@ -1,3 +1,14 @@
+# troubleshoot
+## trace packets to a domain
+    //may need to install either
+    traceroute [domain]
+    mtr [domain]
+## watch all packets
+    [`wireshark`](https://wireshark.org/)
+    [`tshark`](https://www.wireshark.org/docs/wsug_html_chunked/AppToolstshark.html)
+    [`ngrep`](http://ngrep.sourceforge.net/)
+
+
 # netcat
 conenct to ports
     //Listen on a port
@@ -103,6 +114,12 @@ newer net-tools alt
         ss -t dst 192.168.1.10:443
     //show all ssh related connection
         ss -t state established '( dport = :ssh or sport = :ssh )'
+
+
+# run a local file server
+    python server
+        python -m SimpleHTTPServer 7777 #py2 
+        python -m http.server 7777 #py3
 
 # to check
     //Point to point conenction between two nodes, encapsulate packets in IP packets and send over IP infrastructure

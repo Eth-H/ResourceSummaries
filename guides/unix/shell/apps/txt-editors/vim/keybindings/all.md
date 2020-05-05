@@ -266,13 +266,15 @@ mark text
             Filetypes
        //search windows
             Windows
+        //search maps
+            Maps
        //file contents
             //Change active colour scheme
                 Colors
             //search in file, can enter line number or patturn
                 //all loaded buffers, curent loaded buffer
                     Lines   
-                    BLines    
+                    BLines, Line  
            //search tags
                 //all loaded buffers, current loaded buffer 
                     Tags
@@ -280,7 +282,7 @@ mark text
        //item contents
            //: commands
                 Commands
-           //history, command history, search history
+           //file history, command history, search history
                History, History:, History/
            //list commits, list commits for current buffer
                Commits, BCommits                           
@@ -311,9 +313,31 @@ mark text
         trigger jedi (python autocomplete)
             ctrl + space
 ### code folding
-    SimpylFold
-        zc - close a fold
-        zo - open a fold
+    SimpylFold (built in)
+        create fold
+            zf{motion}  or {Visual}zf //create fold flexibilly
+            [zount]zF: create a fold for [count] lines
+            :{range}fo[ld]  //create a fold for the lines in {range}
+        del folds
+            zd - del fold at cursor or in selection
+            zD - recursive zd, del nested folds
+            zE - del all folds in window
+        zc/zC - close a fold at cursor nomally/recusively
+        zo/ZO - open a fold at cursor nomally/recusively
+        zx - update folds: undo manually opened/closed folds
+### lsp
+    coc
+        some cmds provided out of the box
+        cmds and actions provided by lsp plugins (generally vs-code)
+        :CocCommand [plugin|area].[cmd|cmdGroup]...[cmd]
+            dcoument.renameCurrentWord -> i -> type new var name
+        :call CocAcion()
+        //extensions, diagnostics, commands, actions, outline
+        :CocList {}
+
+        use grep (generally fzf is better)
+        :CocSearch term 
+
 
 ## vim session
     //open vim with certain session

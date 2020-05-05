@@ -1,30 +1,5 @@
 # js abstraction
-
-## concepts
-### Example errors
-    Misspelled variable/fucntion, unclosed parentheses/brackets/braces/quotes, mixed useage of single and double quotes, assigment operator rather then equality operator,
-	forgeting opening nad closing parenthesis after a function call, paramters the wrong way, index[0] mistakes espically in for loops, (reinitializing or not, variables in loops),
-	no terminal condition leads to infinate loops 
-				
-### Terminology
-    Callbacks are the functions that are slipped or passed into another function to decide the invocation of that function. (EG Filter)
-    First class functions: Functions that can be assigned to a variable, passed into another function, or returned from another function just like any other normal value (covering all js functions)
-    Higher order functions: The functions that take a function as an argument, or return a function as a return value
-    Lambda: When the functions are passed in to another function or returned from another function, then those functions which gets passed in or returned can be called a lambda.
-    in functional programming, changing or altering things is called mutation, and the outcome is called a side effect
-    - A function, ideally, should be a pure function, meaning that it does not cause any side effects.
-    arity: Number of arguments a function requires
-    Refactor: Rewrite code
-    Currying a function: to convert the function of N arity into N functions of arity 1
-        -(restructures a function so it takes one argument, then returns another function that takes the next argument),
-        useful if you can't supply all the arguments to a function at one time
-    partial application: applying a few arguments to a function at a time and returning another function that is applied to more arguments.
-        
-### principles
-    Don't change things in functions (mutation)
-    Declare dependencies explicitly (pass needed variables and don't depend on global variables)
-
-```js    
+```javascript    
 
 //List methods
 	var list = [];

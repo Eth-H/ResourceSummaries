@@ -35,3 +35,6 @@
 # zip 
     zip -r zippedFolderName.zip folderToZip 
     unzip folderToUnzip.zip     
+
+# operate on uncompressed files
+    zless, zmore, zcat, zgrep

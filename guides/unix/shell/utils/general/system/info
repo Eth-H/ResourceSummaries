@@ -1,16 +1,41 @@
-time
-    data
+//interactive info
+    top, htop //processes
+    nvtop //nvidia gpu
+    intel_gpu_top //intel gpu
+    dstat //sys performance
+    glances //sys performance
+    iotop -mxz 15 //disk i/o
+//disk
+    iostat //i/o
+//file or file sys status
+    stat
+    //octal file permissions
+        stat -c '%A %a %n' /etc/timezone
+
+# user activity
+    //who logged in in and what they doing
+        w 
+
+# date
+    date
+        //EG
+            date -u +"%Y-%m-%dT%H:%M:%SZ" #ISO 8601 format
     cal
+## dateutils pkg
+    dateadd, datediff, strptime
+# time
     uptime
 //Memory
     //All
         cat /proc/meminfo
     //Memory and swap useage
         free
+        vmstat #cached val=linux kernel file cache mem
+
 //Get system arch and kernel version
     uname -a
 //OS version
-    lsb_release
+    lsb_release -a
     cat /etc/os-release
     cat /etc/arch-release
     cat /etc/debian_version

@@ -8,8 +8,12 @@
         ps {}
         //get processes for all users
         ps auxf
-    //Get PID of cmd
-        pgrep [cmd]
+    //deal with processes by name
+        //get cmds PID
+            pgrep [cmd] 
+        //kill cmds instances
+            pkill [cmd]
+
     //get parent id of current tty
         echo $PPID
         cat /proc/$PPID/comm
@@ -55,6 +59,8 @@
         runs /usr/bin/example2 at the 15-minute mark on every hour, every day. Make sure you add each new task on a new line.
 
 # get info on running processes
+## lsof
+//lists all all files, including processes, sockets, ...
     // -p [processID]: Find out what files the process is using
     //-r: read access, -w: write access
     //-u [userName]: process owned by specific user, -u^[userName]: not owned
@@ -66,4 +72,10 @@
         lsof {} {}
         //EG get all tcp port 80 traffic 
             lsof -i tcp:80 -P -R
+## fuser (file user)
+//identify processes using files or sockets
+//show which processes use the named files, sockets, or filesystems
+    fuser -v
+
+
 desktop specific

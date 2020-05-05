@@ -76,6 +76,7 @@
             SIGSEGV/SEGV/11: Segmentation fault
             SIGTERM/TERM/15: Software termination
             SIGSTOP/STOP: Stop
+        man [signalNum] signal
 
 # kill
     send terminating signals

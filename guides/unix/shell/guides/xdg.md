@@ -55,4 +55,3 @@ This example defines a new MIME type application/x-foobar and assigns it to any 
 
     //Shortcut for setting the default application for a URL scheme:
         xdg-settings set default-url-scheme-handler irc xchat.desktop
-

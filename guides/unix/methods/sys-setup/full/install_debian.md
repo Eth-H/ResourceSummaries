@@ -48,6 +48,7 @@ if using live system setup network and locale manually
     //initialise chroot
         mount -t proc proc /mnt/debinst/proc
         mount -o bind /dev /mnt/debinst/dev
+        mount -o bind /sys /mnt/debinst/sys
         //mount --bind /dev/pts /mnt/debinst/dev/pts
         LC_ALL= chroot /mnt/debinst /bin/bash
     //timezone
