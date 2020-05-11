@@ -1,3 +1,10 @@
+# general terms
+    function: stand alone section of code to be run
+        mtd()
+    mtd: a func that belongs to a class
+        staticclass.mtd()
+        objInstance.mtd()
+
 # concepts
 ## Example errors
     Misspelled variable/function, unclosed parentheses/brackets/braces/quotes, mixed useage of single and double quotes, assigment operator rather then equality operator,
@@ -18,5 +25,3 @@
 ## principles
     Don't change things in functions (mutation)
     Declare dependencies explicitly (pass needed variables and don't depend on global variables)
-
-

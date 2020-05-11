@@ -39,18 +39,39 @@ if using live system setup network and locale manually
     apt install binutils debootstrap
 
 ## create base system (run debootstrap)
-    debootstrap --arch [amd64 | i386] [FLAVOR] /mnt/debinst http://ftp.uk.debian.org
-## 
+    sudo debootstrap 
+    --arch [amd64 | i386] \
+    --variant=minbase \
+    [FLAVOR] \
+    [BUILD_DIR] \
+    http://ftp.uk.debian.org/debian
+
+
+    sudo debootstrap \
+    --arch amd64 \
+    bullseye \
+    . \
+    http://ftp.uk.debian.org/debian
+
+    //if systemd err
+        sudo chown root:root [BUILD_DIR]
+        sudo chmod 755 [BUILD_DIR]
 
 ## config system (mostly from chroot)
     //gen fstab file
         genfstab -U /mnt >> /mnt/etc/fstab
+        //debian doesnt have this, need to edit it manually
+        copy current and then add / partitions uuid from blkid
     //initialise chroot
         mount -t proc proc /mnt/debinst/proc
         mount -o bind /dev /mnt/debinst/dev
         mount -o bind /sys /mnt/debinst/sys
+        sudo mount -t proc /proc proc/
+        sudo mount --rbind /sys sys/
+        sudo mount --rbind /dev dev/
         //mount --bind /dev/pts /mnt/debinst/dev/pts
-        LC_ALL= chroot /mnt/debinst /bin/bash
+        LC_ALL=C 
+        chroot /mnt/debinst /bin/bash
     //timezone
     //localization
     //users
@@ -87,6 +108,7 @@ if using live system setup network and locale manually
       sudo apt install kernel.deb -y
 
 ### install needed packages
+    sudo apt install build-essential systemd man iproute2 wget curl
     sudo apt install gvim vifm git ...
 
 ### clean up

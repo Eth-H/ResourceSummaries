@@ -6,21 +6,22 @@ urllib2, urllib3
 jsob
 sqlite3
 
-# graphing
-Matplotlib
-
 # os interaction
 os
 
 # ui 
 tkinter //beginner
-pyqt5
-wxwidgets
+pyqt5,wxwidgets,kivy //multi-platform
 gtk3 //linux
-kivy //android
 
 # images
 pillow
 
 # data science
 pandas
+scipy
+IPython
+
+## graphing
+Matplotlib
+

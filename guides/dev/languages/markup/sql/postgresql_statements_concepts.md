@@ -286,10 +286,6 @@
 		--Del schema
 			DROP SCHEMA [IF EXISTS] schema_name [ CASCADE | RESTRICT ];
 			
-		
-		
-
-
 --Get the size of different objects in postgreSQL
 	--Specific table size
 		SELECT pg_relation_size('actor');
@@ -444,9 +440,6 @@
 				FETCH { FIRST | NEXT } [ row_count ] { ROW | ROWS } ONLY
 			ORDER BY title FETCH FIRST ROW ONLY;
 			
-			
-				
-				
 																					 
 	--Aliases, assign alias to a query result, AS keyword is optional
 		SELECT column_name AS alias_name FROM table;																				 

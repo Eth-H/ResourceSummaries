@@ -259,11 +259,3 @@ Section "Screen"
     Identifier "nvidia2"
     Device "nvidia2"
 EndSection
-
-
-
-
-
-
-
-

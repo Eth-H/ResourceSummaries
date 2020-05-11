@@ -5,52 +5,65 @@
 "{x}" Reference to index "x"
 
 # git concepts
-    //Explaining how it works
-        //Git is the version control system that runs locally on your PC, GitHub.com is a hosting website that saves files. To go past saving files a link between the local repo and online GitHub repo needs to be established
-        //Git to GitHub: A repositary is created (a file system is marked as a repositary) -> you set files to be tracked (changes to these files are saved by git) -> Established local repo to online repo connection 
-        // -> Tracked files are staged to be pushed (commited) -> staged pushed up to the remote repositary 
-        //GitHub to Git: Establish online repo to local repo connection -> pull repositary down locally -> changes to current files are tracked and new files added are tracked -> commit changes -> push changes
-        //Cloning a repo: This means to pull someone elses repo down locally, you can do this to copy remote repositaries to edit it locally as your own, though you would need permission to push chanegs to the original 
-        
-## Basic workflow
+## how it works
+    //Git is the version control system that runs locally on your PC, GitHub.com is a hosting website that saves files. To go past saving files a link between the local repo and online GitHub repo needs to be established
+    //Git to GitHub: A repositary is created (a file system is marked as a repositary) -> you set files to be tracked (changes to these files are saved by git) -> Established local repo to online repo connection 
+    // -> Tracked files are staged to be pushed (commited) -> staged pushed up to the remote repositary 
+    //GitHub to Git: Establish online repo to local repo connection -> pull repositary down locally -> changes to current files are tracked and new files added are tracked -> commit changes -> push changes
+    //Cloning a repo: This means to pull someone elses repo down locally, you can do this to copy remote repositaries to edit it locally as your own, though you would need permission to push chanegs to the original 
+    
+## basic workflow
     //Starting a repositary
         //Create online GitHub preositary at Github.com -> Create local repositary {I1} -> Connect local to online repositary {I2}
         // -> Add files to tracking and commit changes (get them ready to be pushed) {I3} -> push changes to the online repo {I4}  
     //Maintaining a repositary
         //Commit changes for tracked files {I5}  -> Pushing commited files {I4}
         //Pull changes down locally {I6}
-    //Use someone elses existing repositary
-        //Clone an existing repositary {I7}
-				
-				
-## Initializing a Repository in an Existing Directory:
-        //Go to project folder
-            cd /c/user/my_project
-        //Create local repositary
+    //pull request someone elses repo
+        fork -> clone -> create branch -> commit changes -> go to original repo and hit pull req
+          
+        
+
+## configure account (for current machine)
+    git config --global --list
+    git config --global user.name "Firstname Lastname"
+    git config --global user.email username@email.com
+    //or
+    git config --global --edit
+
+## setup repo
+    //if not cloning
+        mkdir projroot && cd projroot
+        //Create/initilise local repositary
             git init
+        //Add all files in repositary to tracking (so they can be commited), or stage updates for existing files
+            git add .
+        //Add initial files
+            git add LICENSE
+            git add README
+            //Listed files are not tracked by git
+                echo node_modules > .gitignore
+        //Commit all tracked files
+            git commit -m "initial commit"
+        //or when creating 
+         to the repositary ("-m" gives the commit comment)
+        //Connect repo to a remote one
+            git remote add origin [repoUrl]
+            //Check if the connection exists
+                git remote -v
+    //otherwise create on website then
+    //clone an existing repository: commnd, url, git targetdirectoryname
+        git clone [repoUrl] rootdirname
 
-## Connect repositary to a remote one (only need to do once during setup)
-    git remote add origin https://github.com/Eth-H/JPP
-    //Check if the connection exists
-        git remote -v
-
-## Initialise repositary
-    //Add all files in repositary to tracking (so they can be commited), or stage updates for existing files
-        git add .
-    //Add license file
-        git add LICENSE
-    //Commit all tracked files to the repositary ("-m" gives the commit comment)	
-        git commit -m "initial commit"
 
 ## Pushing to GitHub.com
-        //This means moving files from locally to the online GitHub repositary, origin is the default name of remote connections
+        //moving files locally to online repo, origin: default name of remote connections
             git push origin master
             //If you run into problems
                 git push origin master --allow-unrelated-histories
                 git push origin master -f
-                
             //Push wthout origin link
-            git push https://[username]@github.com/[github repository] [local branch name]:[remote branch name]
+                git push https://[username]@github.com/[github repository] [local branch name]:[remote branch name]
 
 ## Commit files:  command, optional commit message, ignore staging area (no git add)
     //Stage files to be pushed up to the actual repositary
@@ -60,17 +73,10 @@
 
 ## Pull Repositories
     //Pull online GitHub repositary to locally
-        git pull  https://github.com/Eth-H/JPP 
+        git pull [repoUrl] 
     //Pull repositary and commit history, then integrate with local commits (needed if top of repo is behind remote counterpart)
         git pull --rebase origin master
     
-## Clone an existing repository:    commnd, url, git targetDirectoryName
-    git clone https://github.com/libgit2/libgit2 mylibgit
-
-## Add files to .gitignore
-    //Listed files are not tracked by git
-    echo node_modules > .gitignore
-
 ## Delete git repo
     //local repo
         //Turn on view hidden files for windows 10 OS
@@ -79,14 +85,8 @@
             //Select the View tab and, in Advanced settings, select Show hidden files, folders, and drives and OK.
         //Then delete the .git folder
 
-		//Configure account
-			git config --global --list
-			git config --global user.name "Firstname Lastname"
-			git config --global user.email username@email.com
-			//or
-			git config --global --edit
-		//connect to repo via ssh
-				ssh user@host git init --bare /path/to/repo.git
+//connect to repo via ssh
+        ssh user@host git init --bare /path/to/repo.git
 		
 # other cmds
     //Check status:
@@ -157,45 +157,46 @@
     git push origin master
     
 # Git workflow in industry
-    //Centralized Workflow
-        //uses a central repository to serve as the single point-of-entry for all changes to the project		
-        //clone central repo -> commit changes but store locally isolated -> push local master branch at breakpoint	
-        
-        //conflicts 
-            //top of repo is behind remote counterpart
-                //If one persons commits to the central repo, then anyone else who cloned before he pushed changes wont have the latested updates, hence they wont be able to push changes and will need to pull and integrate the remote changes with her local branch 
-                    git pull --rebase origin master
-            //CONFLICT (content): Merge conflict in [some-file]
-                //find unmerged paths
-                    git status
-                //edit files then stage and rebase
-                    git add [problematicFile]
-                    git rebase
-                    //If the rebase stops
-                        git rebase --abort
-    //Git feature branch workflow
-        //all feature development should take place in a dedicated branch instead of the master branch, allows to store changes serverside
-        //start with master branch
-            git checkout master
-            git fetch origin
-            git reset --hard origin/master
-        //create branch
-            git checkout -b [branchName]
-        //after commits push feature branch to remote, -u: setup tracking branch, not can use "git push" to push new branch to central repo=
-            git push {} origin new-feature
-        //make a pull request with git GUI (for code review)
-         //if accepted merge with master branch	
-            git checkout master
-            git pull
-            git pull origin marys-feature
-            git push
-    //Gitflow Workflow
-        //suited for projects that have a scheduled release cycle
-        //uses two branches to record the history of the project. The master branch stores the official release history, and the develop branch serves as an integration branch for features.
+## Centralized Workflow
+    //uses a central repository to serve as the single point-of-entry for all changes to the project		
+    //clone central repo -> commit changes but store locally isolated -> push local master branch at breakpoint	
     
-        //create dev branch
-            git branch develop
-            git push -u origin develop
+    //conflicts 
+        //top of repo is behind remote counterpart
+            //If one persons commits to the central repo, then anyone else who cloned before he pushed changes wont have the latested updates, hence they wont be able to push changes and will need to pull and integrate the remote changes with her local branch 
+                git pull --rebase origin master
+        //CONFLICT (content): Merge conflict in [some-file]
+            //find unmerged paths
+                git status
+            //edit files then stage and rebase
+                git add [problematicFile]
+                git rebase
+                //If the rebase stops
+                    git rebase --abort
+## Git feature branch workflow
+    //all feature development should take place in a dedicated branch instead of the master branch, allows to store changes serverside
+    //start with master branch
+        git checkout master
+        git fetch origin
+        git reset --hard origin/master
+    //create branch
+        git checkout -b [branchName]
+    //after commits push feature branch to remote, -u: setup tracking branch, not can use "git push" to push new branch to central repo=
+        git push {}? origin [branchName]
+    //make a pull request with git GUI (for code review)
+     //if accepted merge with master branch	
+        git checkout master
+        git pull
+        git pull origin [branchName]
+        git push
+        git merge BranchName //or id merge conflicts
+//Gitflow Workflow
+    //suited for projects that have a scheduled release cycle
+    //uses two branches to record the history of the project. The master branch stores the official release history, and the develop branch serves as an integration branch for features.
+
+    //create dev branch
+        git branch develop
+        git push -u origin develop
 
         //feature branches use develop as their parent branch
          //create a feature branch

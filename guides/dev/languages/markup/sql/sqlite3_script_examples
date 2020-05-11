@@ -1,5 +1,3 @@
-
-
 /* syntax
 CREATE TABLE `Manga` (
 	`ID`	INTEGER,

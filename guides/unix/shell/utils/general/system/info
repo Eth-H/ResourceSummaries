@@ -5,6 +5,12 @@
     dstat //sys performance
     glances //sys performance
     iotop -mxz 15 //disk i/o
+    //network
+        ntop
+           ntopng     
+        iftop
+
+
 //disk
     iostat //i/o
 //file or file sys status
@@ -39,3 +45,38 @@
     cat /etc/os-release
     cat /etc/arch-release
     cat /etc/debian_version
+
+
+
+
+// pw hierarchy
+    comms
+        email
+        app
+        social_media
+
+    conglomerate //EG google,yahoo,norton
+    instituion
+    local
+        virtual machine
+        hardware
+        games
+    web
+        forums
+        job
+            platform
+            company
+        market
+        retail
+        file sharing 
+        code platform
+            challenges
+            guide
+            hosting
+            testing
+            events
+
+        email list
+
+    subscription service
+    gov

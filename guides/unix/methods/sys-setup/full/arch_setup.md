@@ -87,10 +87,10 @@ dhcpcd netctl vim s-nail intel-ucode
         hwclock --systohc
     //localization
         vim /etc/locale.gen
-            //uncomment relevant lang files 
+            //uncomment relevant lang files: en_GB.UTF-8 UTF-8
         locale-gen
         vim /etc/locale.conf
-            LANG=en_US.UTF-8
+            LANG=en_GB.UTF-8
         vim /etc/vconsole.conf
             KEYMAP=uk
     //network
@@ -104,7 +104,8 @@ dhcpcd netctl vim s-nail intel-ucode
         systemctl enable networkmanager
     //recreate Initramfs (normally uneccesary) 
         mkinitcpio -P
-    passwd
+    //root pw
+        passwd
     //setup boot manager
         //need mounted efi 
         pacman -S grub efiboomgr

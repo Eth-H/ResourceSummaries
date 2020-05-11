@@ -3,6 +3,7 @@
     sudo pacman -S xmlto, kmod, inetutils, bc, libelf, git
 
 #prep
+## get source, check and clean
     mkdir ~/kernelbuild
     cd ~/kernelbuild
     wget https://cdn.kernel.org/pub/linux/kernel/v5.x/linux-5.4.5.tar.xz
@@ -21,13 +22,21 @@
 
 # config
 ## using custom config
+
+### on arch linux
     zcat /proc/config.gz > .config
-#or use old config (if diff kernel version need to rename within file)
-    /usr/src/linux-headers-5.4.5-24-generic/.config > .config
-## or generated config
+### general
+    //if using an older config file
+        /usr/src/linux-headers-5.4.5-24-generic/.config > .config
+        //account for broken/new options by providing them defaults
+        make olddefconfig
+//change CONFIG_LOCALVERSION adn CONFIG_DEFAULT_HOSTNAME
+sed -i "s/.*CONFIG_DEFAULT_HOSTNAME.*/CONFIG_DEFAULT_HOSTNAME=\"minimal\"/" .config
+
+## or generate new config
     //create .config file that only enables options currently in use by current running kernel
-    //plug in all required devices before using this command
-        make localmodconfig
+        //plug in all required devices before using this command
+            make localmodconfig
     // or advanced config, using any of the offered guided wizards
         //ncurses
             make nconfig
@@ -37,14 +46,15 @@
             make gconfig
 
 # compile
-    make
-#or use parrallisation to compile
+    //use parrallisation to compile
     make -j<numCores+1>
 
 # install
     sudo su
-    make modules_install
-    cp -v arch/x86_64/boot/bzImage /boot/vmlinuz-linux54
+    //kernel modeules
+        make modules_install
+    //kernel bzImage
+        cp -v arch/x86_64/boot/bzImage /boot/vmlinuz-linux54
 ## make initial ram disk
 # use present file
     cp /etc/mkinitcpio.d/linux.preset /etc/mkinitcpio.d/linux54.preset
@@ -63,13 +73,9 @@
         ln -sf /boot/System.map-linux54 /boot/System.map
 
 
-
-
 #TODO complete patching
 #=apply git patch
 git apply file.patch
 
 #=manually
 patch -p1 < ~/anyname/0001-base-packaging.patch
-
-

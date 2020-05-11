@@ -62,8 +62,6 @@ while (i > 0){i -= 1; console.log(i)}
 		//Object.create(newPrototypeObj), newly created object that gets the param as its prototype
             let Cow = Object.create(Animal.prototype);
 						   
-						   
-						   
 //array 
 	//spread operator
 		//Insert an entire array in a certain position
@@ -190,10 +188,7 @@ while (i > 0){i -= 1; console.log(i)}
 			/(\w+)\s\1/.test("regex regex"); 
 			"regex regex".match(/(\w+)\s\1/); 
 
-						   
 
-
-						   
 //random methods
 	//Use callback functions by passing them as parameters
 	setTimeout(callbackFunction, 5000);
@@ -214,22 +209,26 @@ while (i > 0){i -= 1; console.log(i)}
 	import * as name from "moduleName";
 	import { exportList } from "./file_path"
 	import { export1 , export2 as alias2 , [...] } from "moduleName";
-	//Maths module
-import "Math";
-import defaultExport, { export } from [, [...]];
-} from "moduleName";
-	
-	//absolute value of a number
-	Math.abs 
-	//e to the power of a number
-	Math.exp 
-	//x to the power of y
-	Math.pow(x,y)
-	//removes the fraction part from a number
-	Math.floor 
-	//will give a random number x where 0<=x<1
-	Math.random() 
-
+    import defaultExport, { export } from [, [...]];
+//useful standard lib modules
+	//Maths
+        import "Math";
+        //absolute value of a number
+        Math.abs 
+        //e to the power of a number
+        Math.exp 
+        //x to the power of y
+        Math.pow(x,y)
+        //removes the fraction part from a number
+        Math.floor 
+        //will give a random number x where 0<=x<1
+        Math.random() 
+            //random val < n
+            Math.random(n)
+            // Returns a random real between 0 and n
+                Math.random()*n
+            //Returns a random integer between 0 and n
+                Math.round(Math.random()*n)
 						  
 //code examples
 	//features
