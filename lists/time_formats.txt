@@ -13,6 +13,5 @@ Javascript string date: Wed Oct 05 2011 16:48:00 GMT+0200 (CEST)
 SQL traditional datetime: 12/17/1997 07:37:16.00 PST
 German traditional datetime: 17.12.1997 07:37:16.00 PST
 
-
 rfc822
     Wed, 23 Mar 2016 23:20:00 +1300
