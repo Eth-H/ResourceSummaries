@@ -256,8 +256,9 @@ r"x" //ignore escape chars and other special chars special meaning
 
 
 # modules
-    import module1,module2 //import a whole module/file
-    from module-name import name1,name2
+    import module1,module2 //import a whole module/file as obj in separate namespaces
+    import module1 as md1 //shorten the idenfifier to the separate namespace obj
+    from module-name import name1,name2 //import modules into current namespace
     from module import * //all attributes
     import module1 as specificName
     //list of defined names

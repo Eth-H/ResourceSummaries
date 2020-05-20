@@ -53,8 +53,13 @@ considered deprecated, but widely avaliable
 ### ifconfig
     list/config network interfaces
         ifconfig eth0 192.168.2.1 netmask 255.255.255.0 up
-        ifup eth0
-        ifdown eth0
+        ifconfig ifup eth0
+        ifconfig ifdown eth0
+    bring interface up/down
+        ifconfig eth0 up
+        ifconfig eth0 down
+    give interface ip
+        ifconfig eth0 192.168.1.1
 ### iwconfig
     config wireless network interfaces
     iwconfig eth0 freq 2422000000
@@ -72,6 +77,7 @@ check open/listening ports for socket connections
     //-l: listening sockets, -p: PID and program name, -n: dont resolve names 
     //-A [addressFamilyName, aFN2, ...]: inet, inet6, ax25, netrom, ipx, ddp, x25
     //-c continuous mode
+    //-g: multi-cast group info
         netstat {}...
     //EG
         //listening tcp and udp with pid
@@ -81,29 +87,36 @@ check open/listening ports for socket connections
 
 # iproute2 pkg
 newer net-tools alt
-    //n: arp, route: netstat -r, maddr: netstat -g
-    //a: addresses, link: netstat -i, -s: ip stats (these 3 act as ifconfig)
-        ip {}...
+    //n: arp, route: netstat -r
+    //-s [cmd]: ip stats (more info)
+        ip {}..
+## addresses
+    //addr, a, address: ipv4 addrs, maddr, ma: ipv6 addrs (netstat -g)
+        ip {}
 ## interfaces
-    // all interfaces info/stats
+    // all interfaces info/stats (netstat -i)
         ip link
         ip -s link
     //specific interface info
         ip link show eth0
     //show ip addresses allocated to interfaces
-        ip address show
+        ip addr show
     //bring interfaces up/down
         ip link set eth0 up
         ip link set eth0 down
-    //add an ip address to an interface
-        ip address add 192.168.1.1/24 dev eth0
+    //add/del an ip address to an interface
+        ip addr add 192.168.1.1/24 dev eth0
+        ip addr del 192.168.1.1/24 dev eth0
     //iwconfig ethernet options
         iw
-## route
+## route 
     ip route add 192.168.2.1/23 via 10.11.12.3
     ip route delete 192.168.2.1/23
 ## arp cache
-    ip neighbour show
+    //n, neigh, neighbour
+        ip {} 
+## neighbour cache
+    ip ntables
 ## read ports, ss
     //netstat options
     //-a: all sockets, -u: udp not in listen mode (servers), -t: tcp not in LM, -x: unix pipes

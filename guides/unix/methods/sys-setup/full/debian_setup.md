@@ -6,7 +6,6 @@ https://www.debian.ohttps://www.debian.org/relhttps://www.debian.org/releases/bu
 https://www.linuxquestions.org/questions/debian-26/how-to-install-debian-using-debootstrap-4175465295/
 https://www.linux.com/news/cli-magic-installing-debian-gnulinux-using-debootstrap/
 
-
 # install without iso mtds
     hardisk install
         install from chroot

@@ -72,3 +72,10 @@ BGP (Border Gateway Protocol)
     routes between these AS instead of inside
     to leave a AS network packet sent to BG router
 
+
+arp (addr resolution protocol)
+    broadcast request certain computers maddr (via there ip)
+    prev reqs stored by the kernel as arp cache within the ARP-table
+ndp (Neighbour Discovery Protocol)
+    arp for ipv6
+    prev reqs stored by the kernel as neighbour cache within the NDP-table

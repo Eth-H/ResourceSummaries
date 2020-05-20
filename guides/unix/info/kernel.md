@@ -1,11 +1,11 @@
-linux os abstraction lvs
+# linux os abstraction lvs
     hardware: cpu, mem, disk, network ports, ...
     physical layer: machine computation (0s and 1s)
     kernel layer: talk to hardware
         process and memory management, device communication, system calls, sets up our filesystem
     user space: shell, programs, graphics, ...
 
-privilege levels 
+# privilege levels 
     kernel mode
         hardware, network
     user mode
@@ -14,7 +14,7 @@ privilege levels
         different rings of privilege control
         Ring #0: kernel, ring#3: user mode apps
 
-sys calls
+# sys calls
     provide user space kernel a way to ask for kernel to do something
     sys calls api has a fixed num services with a unique id
 
@@ -23,7 +23,7 @@ sys calls
     view sys calls made by cmd
         strace ls
 
-manage installation
+# manage installation
     can have multiple kernels for grub to boot
     install general/recommended or specific version, then any other pkgs such as linux-headers, linux-image-generic
 
@@ -32,14 +32,21 @@ manage installation
     update all pkgs (including kernel)
         sudo apt dist-upgrade
 
-kernel location
+# kernel location
     /boot/
-        vmlinux //kernel
+        vmlinux 
+            kernel
+            statically linked exe  in an obj file format
+            vmlinuz
+                bzImage
+                compressed with LZMA, bzip2 or gzip
         initrd //tmp fs used before loading kernel
         System.map //symbolic lookup table
         config //kernel config, need to compile to edit loaded modules
     can get rid of  unused kernels
-kernel modules
+        but keep an older backup
+
+# kernel modules
     code that can be on demand loaded into kernel (even when booted generally)
     
     //currently loaded
@@ -55,7 +62,7 @@ kernel modules
             options peanut_butter type=almond 
             blacklist peanut_butter
 
-kernel params
+# kernel params
     most params coinside with files in /proc/sys subdirectories
         EG
             net.ipv4.ip_forward → /proc/sys/net/ipv4/ip_forward

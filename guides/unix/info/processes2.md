@@ -52,21 +52,21 @@
             %CPU full of traffic (processes waiting to load)
             1 load avg per core
 # i/o monitoring
-    //cpu and disk useage
-        iostat (from sysstat pkg)
-            %CPU utilization
-                %user: occurred while executing at user level (application)
-                %nice: occurred while executing at the user level with nice priority.user CPU utilization with nice priorities
-                %system: occurred while executing at the system level (kernel)
-                %iowait: time that the CPU/CPUs were idle during with system outstanding disk I/O requests
-                %steal: time spent in involuntary wait by the virtual CPU or CPUs while the hypervisor was servicing another virtual processor
-                %idle: CPU or CPUs were idle and the system did not have an outstanding disk I/O request
+## cpu and disk useage
+    iostat (from sysstat pkg)
+        %CPU utilization
+            %user: occurred while executing at user level (application)
+            %nice: occurred while executing at the user level with nice priority.user CPU utilization with nice priorities
+            %system: occurred while executing at the system level (kernel)
+            %iowait: time that the CPU/CPUs were idle during with system outstanding disk I/O requests
+            %steal: time spent in involuntary wait by the virtual CPU or CPUs while the hypervisor was servicing another virtual processor
+            %idle: CPU or CPUs were idle and the system did not have an outstanding disk I/O request
 
-            tps: Indicate the num of transfers (I/O reqs, of indeterminate size) /sec issued to the device. Multiple logical reqs can be combined into a single I/O request to the device
-            kB_read/s: amount of data read from the device in kilobytes/sec
-            kB_wrtn/s -amount of data written to the device in KB/sec
-            kB_read - total num of KB read
-            kB_wrtn - total num of KB written
+        tps: Indicate the num of transfers (I/O reqs, of indeterminate size) /sec issued to the device. Multiple logical reqs can be combined into a single I/O request to the device
+        kB_read/s: amount of data read from the device in kilobytes/sec
+        kB_wrtn/s -amount of data written to the device in KB/sec
+        kB_read - total num of KB read
+        kB_wrtn - total num of KB written
 
 # memory monitoring
     vmstat

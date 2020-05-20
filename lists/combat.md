@@ -18,6 +18,12 @@
             stap low (underneath arms) and close
 
 ## moves
+    dodge
+        from front
+            sidestep back
+        swings
+            lower stance
+        
     pull head in
     pull back jab downwards
     
@@ -36,6 +42,15 @@
         posting arm
             leave arm out after jab
 # mai thai
+    block
+        roundhouse
+            raise leg
     dodge jab
         stretch out stance, lean forwards towards back leg
         hook right above arm, lean into right
+# bjj
+    arm choke
+    submission
+    mount
+# wrestling
+    body grapple
