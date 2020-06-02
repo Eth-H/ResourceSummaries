@@ -1,148 +1,80 @@
-# nani
-    % - move to matching character (default supported pairs: '()', '{}', '[]' - use <code>:h matchpairs</code> in vim for more info)
 # Change mode
     from normal mode to
         command mode- : 
         insert- any insert command (EG i)
-        visual manual/line/block- v, V, ctrl + v
+        visual- v, V, ctrl + v
         selection- gh
         operator pending- any command that leaves an operation pending (eg y, d)			
-        replace, virtual replace - R,gR
     back to normal- esc, Ctrl + [
-
 # normal mode
-## motions (cursor movement)
-can prefix any motion with a count
-    h,j,k,l - mv left/down/up/right
-    H,M,L - mv top/middle/bottom of screen
-    w,e - jump forwards to the start/end of a word
-    W,E - start/end but counts puncuation as part of the word
-    b - jump backwards to the start of a word
-    B - backwards to start but counts puncuation as part of the word
-    0,$ - jump to the start/end of the line
-### go
-    g_,^ - jump to the last/first non-blank char of the line
-    gg,G - go to the first/last line of the document
-    [num]gg, [num]G - go to specifc line number 
-### to key
-    fx,tx - jump to next/beforenext occurrence of chars x
-    Fx,Tx - jump to previous/afterprevious occurence of chars x
-    ;,, - repeat previous f, t, F or T movement in direction/backwards
-### bracket jumps
-    },{ - jump to next/prev paragraph (func/block)
-    ),( - jump to next/prev sentance
-    ],[ - jump to next/prev section, if not defined by vimscript/plugin will default to { or }
-### mv cursor
-    zz - center cursor on screen
-    <C-y>,<C-e> - move screen up/down one line (without moving cursor)
-    <C-b>,<C-f> - move back/forward one full screen
-    <C-d>,<C-u> - move/back forward 1/2 a screen
-## operators
-can prefix any operator with a count
-generally can suffix with a motion
-can suffix a visual selection to act on it
-some operators put you in operator pending mode until anouther operator or motion is typd
-### copy/cut/paste (uses the unamed (local vim) clipboard)
-    y - yank, operator pending mode
-    yy,y_ - yank (copy) a line
+    Editing
+        r - replace a single character
+        J - join line below to the current one with one space in between
+        gJ - join line below to the current one without space in between
+        gwip - reflow paragraph
+        xp - transpose two letters (delete and paste)
+        u - undo
+        Ctrl + r - redo
+        . - repeat last command
+    motions (cursor movement)
+        h,j,k,l - mv left/down/up/right
+        H,M,L: - mv top/middle/bottom of screen
+
+        w - jump forwards to the start of a word, W - jump forwards to the start of a word (words can contain punctuation)
+        e - jump forwards to the end of a word, E - jump forwards to the end of a word (words can contain punctuation)
+        b - jump backwards to the start of a word, B - jump backwards to the start of a word (words can contain punctuation)
+
+        % - move to matching character (default supported pairs: '()', '{}', '[]' - use <code>:h matchpairs</code> in vim for more info)
+        0 - jump to the start of the line, $ - jump to the end of the line
+        g_ - jump to the last non-blank character of the line, ^ - jump to the first non-blank character of the line
+        gg - go to the first line of the document, G - go to the last line of the document
+        5G - go to line 5
+        fx - jump to next occurrence of character x, tx - jump to before next occurrence of character x
+        Fx - jump to previous occurence of character x, Tx - jump to after previous occurence of character x
+        ; - repeat previous f, t, F or T movement, , - repeat previous f, t, F or T movement, backwards
+        } - jump to next paragraph (or function/block, when editing code), { - jump to previous paragraph (or function/block, when editing code)
+        zz - center cursor on screen
+        Ctrl + e - move screen down one line (without moving cursor)
+        Ctrl + y - move screen up one line (without moving cursor)
+        Ctrl + b - move back one full screen
+        Ctrl + f - move forward one full screen
+        Ctrl + d - move forward 1/2 a screen
+        Ctrl + u - move back 1/2 a screen
+        Tip Prefix a cursor movement command with a number to repeat it. For example, 4j moves down 4 lines.
+    Cut and paste (uses the unamed (local vim) clipboard)
+        yy - yank (copy) a line
         2yy - yank (copy) 2 lines
         yw - yank (copy) the characters of the word from the cursor position to the start of the next word
-    p - put (paste) the clipboard after cursor
-    P - put (paste) before cursor
-    d - delete, operator pending mode
-    dd - delete (cut) a line
+        y$ - yank (copy) to end of line
+        p - put (paste) the clipboard after cursor
+        P - put (paste) before cursor
+        dd - delete (cut) a line
         2dd - delete (cut) 2 lines
-        dw - delete (cut) the chars of the word from the cursor position to the start of the next word
-    D - delete (cut) to the end of the line
-    x - delete (cut) character
-    //use global clipboard
-        //vim compiled with +clipboard
-        "+y
-        "+p
-
-### Editing
-    r - replace a single character
-    J - join line below to the current one with one space in between
-    u,<C-r> - undo/redo
-    . - repeat last command
-    //see c in insert mode section
-    >>,<< - indent text right/left
-
-#### special
-    gJ - join line below to the current one without space in between
-    gwip - reflow paragraph
-
-## text obj cmds
-vim only, require +textobjects at compile time
-can be used in visual or operator pending modes
-### select a non-block obj
-start with a: select a obj including whitespace
-start with i: select inner obj which doesnt include whitespace
-    aw - a word
-    iw - inner word
-    aW - a WORD
-    iW - inner WORD
-    as - a sentance
-    is - inner sentance
-    ap - a paragraph
-    ip - inner paragraph
-### select between block/delms
-a variations: include the delm
-i variations: exclude the delm
-    a],a[  - a [] block
-        EG a[xxxxxxxxx]czc da] -> aczc
-    i],i[  - inner [] block
-    a),a(,ab - a () block
-    i),i(,ib - inner () block
-    a>,a<, a <> block
-    i>,i<, inner <> block
-    a},a{,aB - a {} block
-    i},i{,iB - inner {} block
-    a",a',a` - a quotes block
-    i",i',i` - inner quotes block
-    at - tag block
-        select contents between 2 matching tags
-        if on the same line but before any tag starts, select the outermost tag
-    it - tag block
-## registers
-registers are stored in ~/.viminfo, and will be loaded again next restart
-   "[register letter/symbol][operator] - operate on register
-    :reg - show registers content
-    "xy - yank into register x
-    "xp - paste contents of register x
-    <C-r>[register l/s] - access registers in insert mode
-### types
-    " - unnamed/default
-        ""p = p
-    + - global/system
-    numbered registers
-        0 - contains latest yank
-        1-10 - contains latest del, 1 = most recent
-    read only registers
-        . - last inserted (i mode) text 
-        % - current file path relative dir vim opened in
-        : - last executed cmd, good with :@
-        # - alternate file, last edited file
-        <C-^> - switch between current and alternate
-    = - last search
-    macros - macros are stored in a custom register
-        EG add a semi colon to your w macro
-            :let @W='i;' 
-
+        dw - delete (cut) the characters of the word from the cursor position to the start of the next word
+        D - delete (cut) to the end of the line
+        d$ - delete (cut) to the end of the line
+        x - delete (cut) character
+        
+        specify clipboard (make sure have up-to vim installed for global clipboard compatibility)
+            use global clipbaord
+                "+y
+                "+p
 # visual mode
 mark text
-    v,V,<C-v> - start visual mode in normal/line/block
+    v - start visual mode, mark lines, then do a command (like y-yank)
     V - start linewise visual mode
-    Ctrl + v - start visual block mode
     o - move to other end of marked area
+    Ctrl + v - start visual block mode
     O - move to other corner of block
     aw - mark a word
-    ab, aB - a block with ()/{}
-    ib,iB - inner block with ()/{}
+    ab - a block with ()
+    aB - a block with {}
+    ib - inner block with ()
+    iB - inner block with {}
     Esc - exit visual mode
 ## Visual commands
-    > - shift text right, < - shift text left, 2<, 2>
-    y,x,d - yank/del/del highlighting text
+    > - shift text right, < - shift text left, 2<, 2>, //or use . to repeat > or <
+    y - yank (copy) marked text
     d - delete marked text
     ~ - switch case	
     u - all lower case, U - all upper case
@@ -161,53 +93,29 @@ mark text
         i, I - insert: before the cursor, beginning of the line
         a, A - insert (append): after the cursor, at end of line
         o, O - append (open) a new line: below the current line, above the current line
-        c - change, operator pending
+        ea - insert (append) at the end of the word
         cc - change (replace) entire line
         C - change (replace) to the end of the line
         c$ - change (replace) to the end of the line
         ciw - change (replace) entire word
         cw - change (replace) to the end of the word
         s, - delete {} and substitute text: character, line (same as cc)
+## access registers
+    //global clipboard
+        CTRL-R *
+    //unamed clipboard
+        CTRL-R "
 		
-# Command mode (ex/vi cmd mode)
+# Command mode	
     :help keyword - open help for keyword
     :close - close current pane
     :! [commandName]... - execute cmds in shell
     # - refer to current file name
     ! tee: redirect output of vim commands
-    :source,:so - source vimscript from a file
-    :@ - run a register as if it where a vi cmd
-    vimscript keybindings
-        <C-y> - ctrl y
-        <S-y> - shift y
-## ranges
-    prefix cmds
-    1,7 - line 1 to 7
-    and/or use a cmd symbol that selects
-        % - entire file
-        +,- - offset from current line
-        'm - marks
-## format util cmds (most from ed/ex)
-all can be used as a standalone cmd with a range or combined with anouther
-    :...d - del
-    :...p - print
-    :...g - globally apply subsequent cmd to all lines matching supplied regex
-    :...v - above but lines that dont match
-    EG 
-        :.,+21g/foo/d
-        :.,$v/bar/d
-        :.,+25p
-        :% g/foo/s/bar/zzz/g - for every line containing foo substitute all bar with zzz
-    :...! - bang, apply external cmds
-        Eg :1,$!sort
 
-### replace
-    :s/old/new/g - replace all old with new throughout current line
-    :%s/old/new/g - replace all old with new throughout file
-    :%s/old/new/gc - replace all old with new throughout file with confirmations
-## read
-    :r [fileName] - read file into current file at cursor pos
-    :r ! [commandName] - read cmd into current file at cursor pos
+## insert into command file
+    :r [fileName]
+    :r ! [commandName]
 ## edit modifiable file state
     :set ma, :set noma	
 ## read/check key mappings
@@ -219,55 +127,63 @@ all can be used as a standalone cmd with a range or combined with anouther
     :w - write (save) current file/buffer
     :wa - save all
     :w !sudo tee % - write out the current file using sudo
-    :wq,:x,ZZ - write and quit
+    :wq or :x or ZZ - write (save) and quit
     :q - quit (fails if there are unsaved changes)
-    :q!,ZQ - quit and throw away unsaved changes
-    :wqa - write and quit on all tabs
-
+    :q! or ZQ - quit and throw away unsaved changes
+    :wqa - write (save) and quit on all tabs
+## Registers
+    :reg - show registers content
+    "xy - yank into register x
+    "xp - paste contents of register x
+    Tip Registers are being stored in ~/.viminfo, and will be loaded again on next restart of vim.
+    Tip Register 0 contains always the value of the last yank command.
 ## Marks
     :marks - list of marks
     ma - set current position for mark A
     `a - jump to position of mark A
     y`a - yank text to position of mark A
 
-## search
+## Search and replace
     /pattern - search for pattern, ?pattern - search backward for pattern
         //EG /\<wordToFind\>
     \vpattern - 'very magic' pattern: non-alphanumeric characters are interpreted as special regex symbols (no escaping needed)
-    n, N - repeat search in same/opposite direction
+    n - repeat search in same direction, N - repeat search in opposite direction
+    :s/old/new/g - replace all old with new throughout current line
+    :%s/old/new/g - replace all old with new throughout file
+    :%s/old/new/gc - replace all old with new throughout file with confirmations
     :noh - remove highlighting of search matches
-### Search in multiple files
-    :vimgrep /pattern/ {file} - search for pattern in multiple files
+    Search in multiple files
+        :vimgrep /pattern/ {file} - search for pattern in multiple files
         e.g.:vimgrep /foo/ **/*
-    :cn - jump to the next match
-    :cp - jump to the previous match
-    :copen - open a window containing the list of matches
-
+        :cn - jump to the next match
+        :cp - jump to the previous match
+        :copen - open a window containing the list of matches
 ## Working with multiple files
 ### move window
-    <C-w> ws - split window
-    <C-w> ww - switch windows
-    <C-w> wq - quit a window
-    <C-w> wv - split window vertically
-    <C-w> wh - move cursor to the left window (vertical split)
-    <C-w> wl - move cursor to the right window (vertical split)
-    <C-w> wj - move cursor to the window below (horizontal split)
-    <C-w> wk - move cursor to the window above (horizontal split)
-    <C-w> wn - new split with new file
+    Ctrl + ws - split window
+    Ctrl + ww - switch windows
+    Ctrl + wq - quit a window
+    Ctrl + wv - split window vertically
+    Ctrl + wh - move cursor to the left window (vertical split)
+    Ctrl + wl - move cursor to the right window (vertical split)
+    Ctrl + wj - move cursor to the window below (horizontal split)
+    Ctrl + wk - move cursor to the window above (horizontal split)
+    Ctrl + wn - new split with new file
 ### buffers
     //refer to file via its buffer number in command mode #[bufferNumber]
     :e [file] - edit a file in a new buffer
-    :sp [file], :vsp [file] - open a file in a new buffer {} split window: horizontally, vertically
     :b [bufferNum] - switch to active buffer
     :bn, bnext - go to the next buffer, :bp, :bprev - go to the previous buffer
-    :bd [bufferNum] - delete a buffer (close a file)
+    :bd [bufferNumber] - delete a buffer (close a file)
     :ls, :buffers - list all open buffers
+    :sp [file], :vsp [file] - open a file in a new buffer {} split window: horizontally, vertically
     :new, :vnew - new split with a new unamed file: horizontally, vertically
 ### Tabs
     :tabnew - open new tab
     :tabnew [file], :tabe [file] - open a file in a new tab
     Ctrl + wT - move the current split window into its own tab
-    gt, :tabnext, :tabn - move to the next tab, gT, :tabprev, :tabp - move to the previous tab xgt - move to tab number x
+    gt, :tabnext, :tabn - move to the next tab, gT, :tabprev, :tabp - move to the previous tab
+    xgt - move to tab number x
     :tabmove # - move current tab to the #th position (indexed from 0)
     :tabclose, :tabc - close the current tab and all its windows
     :tabonly, :tabo - close all tabs except for the current one
@@ -465,6 +381,7 @@ all can be used as a standalone cmd with a range or combined with anouther
     :ViewSession
     //only apply command to current tab
         :OpenTabSession, :SaveTabSession, :AppendTabSession, :CloseTabSess
+        
 
 ## Ropevim (refractor, code-assits, extra commands)
     contains lots of commands to do different things

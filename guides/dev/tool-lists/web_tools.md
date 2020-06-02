@@ -5,12 +5,21 @@ within comments items at the top are better to learn
     pkg manager
         npm yarn
 ## type checker
+    react built-in
     typescript
 ## test library
+### unit
     jest
-    react-testing-library
-    cypress
     enzyme
+    react-testing-library
+### end to end
+    cypress
+### integration testing
+    karma
+## internationalization
+    React Intl - react
+    React i18next - react
+    
 
 # code hosting
     github gitlab bitbucket
@@ -31,8 +40,12 @@ within comments items at the top are better to learn
     js
         es6
         dom manipulation
-        api fetch
-            ajax
+        api clients
+            REST
+                native fetch
+                ajax
+            graphql
+                apollo
 
 ## frontend framework
     react
@@ -62,9 +75,6 @@ within comments items at the top are better to learn
     foundation - isolated, react
     Semantic UI - isolated
 
-graphql
-    apollo
-
 ## static site generators
     next.js
     gatsbyJS
@@ -74,12 +84,20 @@ graphql
     vuepress
 
 ## SSR (server-side rendering)
+    next.js
+
+## utility libraries
+    lodash
+    moment
+    classnames
+
 
 # backend dev
 ## popular language - web frameworks
     javascript - expressjs
     python - django, flask
     java - spring boot
+        older basic frontend templating / java view tech - JSP, GWT, JSF
     c#
     php - laverial
     rust

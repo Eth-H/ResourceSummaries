@@ -2,11 +2,23 @@
     neutalise fights
         dont react to any kind of wordly provocation
         confidence in material skill helps keep calm
+# examples
+    boxer
+        Manny Pacquiao 
+        floid mayweather
+        mike tyson
+        muhammad ali
+        frazier
+        larry holmes
+        george foreman
+    bjj
+        raise gracie
+
 # boxing
 ## guard types
     https://www.youtube.com/watch?v=AJWu7TCwGTo
     philiy shell (fliod mayweather)
-    pickobo stance (mike tison)
+    pickobo stance (mike tyson)
     mexican style (naucho baristan)
     drunken boxer (prendo wilicur)
 ## opponent

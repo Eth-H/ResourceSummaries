@@ -51,6 +51,10 @@
             git remote add origin [repoUrl]
             //Check if the connection exists
                 git remote -v
+            //if externel repo has unrelated history
+                git pull origin master --allow-unrelated-histories
+                git merge origin origin/master
+                git push origin master
     //otherwise create on website then
     //clone an existing repository: commnd, url, git targetdirectoryname
         git clone [repoUrl] rootdirname

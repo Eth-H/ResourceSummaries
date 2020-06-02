@@ -1,3 +1,26 @@
 messgaging
     sms
     xmpp
+web
+    http
+    https
+    ssl/tls
+file transfer
+    ftp
+    btp
+        download parts of file from peers
+        peer discovery
+            centralised trackers
+            distributed
+                DHT PEX magnet links
+        .torrent - file containing info to connect to tracker
+
+
+remote access
+    ssh
+email
+    smtp
+    imap
+    pop3
+
+port forwarding
