@@ -68,10 +68,40 @@
     papertrail
 # cloud providers
     aws
+        aws S3 - static websites
+        aws ec2 - PaaS
     google cloud
     azure
-    heroku
-## IaaS only
+    heroku - PaaS
+    dokku
+    cloudflare - static websites
+    netlify - PaaS, static websites
+    github pages - static websites, jekyll integration
+    versel - PaaS, high nextjs compatibility
+## IaaS only - vps
     digital ocean
     linode
     vultr
+## other
+    cloudinary - image resizing
+    imgix - image resizing
+    firebase - db
+
+# human
+## plan/track/support
+    jira
+## collab software
+    confluence
+    trello
+### code host
+    github
+    gitlab
+    bitbucket
+
+distributed database/store
+    bigtable 
+    apache cassandra
+distributed fs
+    gfs - distributed
+
+apache kafka - distributed streaming platform / message broker

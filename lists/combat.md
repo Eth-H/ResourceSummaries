@@ -28,7 +28,37 @@
         create angle
             pivot step to side
             stap low (underneath arms) and close
-
+## general
+    while talking: hands out, scratch face
+    stance
+        keep moving
+            lean forward/back
+        low center of gravity
+    right
+        turn enougth to cover face
+        more damage
+            single finger
+    left hook (3)
+        after jab before right
+        throw off / score points
+    footwork
+        slow
+            going forward - mv front, slide back
+            going backwards - mv back, slide forward
+        quick
+            skip/jump
+    counter
+        hook
+            knock from inside
+        right
+            push arm down
+        front kick
+            mv in
+                encircle leg with opposing arm
+                at the same time turn in right to elbow
+        they over throw and fall forward
+            push down
+            head lock
 ## moves
     dodge
         from front

@@ -4,6 +4,9 @@ lamp stack
     organisation of files reflexs the underlying filesystem
     php, js, static html css
     MAMP, WAMB server
+mern
+    r can be any js framework
+    js apps with json
 
 domain name
 
@@ -12,4 +15,3 @@ hosting
         PaaS
     vps
         HaaS
-    

@@ -1,8 +1,9 @@
 # frameworks
-    spring
-        spring boot - web
-        spring cloud
-    hibernate - databases
+    spring - dependancy injection, inversion of control group of frameworks
+        spring boot - RAD dev of spring app
+        spring security, spring data, spring cloud, spring batch
+
+    hibernate - ORM/databases
 
 # dependancy management
     add JARS to classpath

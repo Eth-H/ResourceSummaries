@@ -1,6 +1,0 @@
-//Unshare
-	//Create isolated environment and run program, can combine different created namspaces
-		//--net: different network stack, create user namespace environment
-		//--user: create a user namespace 
-		//--pid --fork: setup PID namespace
-		unshare {} [programToRun]

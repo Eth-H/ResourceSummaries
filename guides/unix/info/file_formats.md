@@ -7,16 +7,20 @@ binary file
 obj file
     contains obj code and related data
     obj files can be statically or dynamically linked
+    types
+        Relocatable (can be combined to form a exe with other relocatable types)
+        Executable: binary code/data, cna be copied into mem
+        Shared: can load into mem and linked dynamically
 execuable/exe
     file can be run
     statically linked: contains copied static libraries internally
     dynamically linked: references external shared libraries, linking occurs while running
+
 libraries
     collections of obj files used when linking obj files
     external code that can be imported and used within a program
-    static: bundle of relocatable object files 
-    shared: bundle of globally accessible obj files in /usr/lib/*
-
+    static: bundle of relocatable object files , .a
+    shared: bundle of globally accessible obj files in /usr/lib/* (dll on win)
 
 obj code
     compiler product

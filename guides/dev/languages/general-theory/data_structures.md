@@ -2,11 +2,11 @@
     https://www.geeksforgeeks.org/graph-data-structure-and-algorithms/
     https://en.wikipedia.org/wiki/List_of_data_structures
 # surrounding
-    access
-        sequential
-            can only access elems in order stored
-        random/direct access
-            access an arbitrary element of a sequence in equal time or any datum from a population of addressable elements roughly as easily and efficiently as any other
+##access
+    sequential
+        can only access elems in order stored
+    random/direct access
+        access an arbitrary element of a sequence in equal time or any datum from a population of addressable elements roughly as easily and efficiently as any other
 
 # language specific
     string (char arr)
@@ -15,15 +15,15 @@
 # types
 
 ## linear //elems form a seq
-    array //collection of elemns each identified by index or key
-        fixed/general array
-        two dimensional arr/matrice/matrix
-        cicular buffer //store data streams
-    collection literals (lists)
-        dynamic arr / arr list //random access variable-size list
-        linked list
-            singly linked list
-            doubly linkded list
+### array //collection of elemns each identified by index or key
+    fixed/general array
+    two dimensional arr/matrice/matrix
+    cicular buffer //store data streams
+### collection literals (lists)
+    dynamic arr / arr list //random access variable-size list
+    linked list
+        singly linked list
+        doubly linkded list
 
 ## tree
     Binary search tree

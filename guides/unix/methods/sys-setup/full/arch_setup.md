@@ -108,12 +108,20 @@ dhcpcd netctl vim s-nail intel-ucode
         passwd
     //setup boot manager
         //need mounted efi 
-        pacman -S grub efiboomgr
-        pacman -S os-prober ntfs-3g
-	mkdir /boot/efi
-	mount /dev/nvme0n1p1 /boot/efi
-        grub-install --target=x86_64-efi --efi-directory=/boot/efi --bootloader-id=GRUBbootloader
-        grub-mkconfig -o /boot/grub/grub.cfg
+        pacman -S grub efibootmgr os-prober
+        pacman -S ntfs-3g
+    //install and config bootloader
+        sudo apt install grub os-prober
+        //efi
+            //make sure your efi partition is mounted
+                mkdir /boot/efi
+                mount /dev/nvme0n1p1 /boot/efi
+            sudo grub-install --target=x86_64-efi --efi-directory=/boot/efi --bootloader-id=debian-grub
+            //tool to manage efi partition
+                sudo apt install efibootmgr
+        //mbr
+            sudo grub-install --target=i386-pc /dev/sdX
+        sudo grub-mkconfig -o /boot/grub/grub.cfg
     //finish    
         exit
         unmount -R /mnt 

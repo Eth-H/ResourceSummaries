@@ -1,0 +1,8 @@
+# Unshare
+
+> run program with some namespaces unshared from parent
+
+    //--net: different network stack, create user namespace environment
+    //--user: create a user namespace 
+    //--pid --fork: setup PID namespace
+    unshare {} [programToRun]

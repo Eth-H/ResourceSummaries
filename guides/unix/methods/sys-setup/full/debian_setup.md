@@ -20,15 +20,15 @@ if using live system setup network and locale manually
     swapon /dev/hda2
     mke2fs -j -b 4096 -O dir_index /dev/hda1
     mke2fs -j -b 4096 -O dir_index /dev/hda3
-    mkdir /mnt/debinst
-    mount /dev/hda1 /mnt/debinst
-    mkdir /mnt/debinst/home
-    mount /dev/hda3 /mnt/debinst/home
+    mkdir /mnt/deb
+    mount /dev/hda1 /mnt/deb
+    mkdir /mnt/deb/home
+    mount /dev/hda3 /mnt/deb/home
 
 ## get debootstrap
 ### manual
-    mkdir /mnt/debinst/work
-    cd /mnt/debinst/work
+    mkdir /mnt/deb/work
+    cd /mnt/deb/work
     wget http://ftp.debian.org/debian/pool/main/d/debootstrap/debootstrap-udeb_0.3.3_i386.udeb
     ar -x debootstrap-udeb_0.3.3_i386.udeb
     tar zxvpf data.tar.gz
@@ -39,15 +39,14 @@ if using live system setup network and locale manually
 
 ## create base system (run debootstrap)
     sudo debootstrap 
-    --arch [amd64 | i386] \
+    --arch=[amd64 | i386] \
     --variant=minbase \
     [FLAVOR] \
     [BUILD_DIR] \
     http://ftp.uk.debian.org/debian
 
-
     sudo debootstrap \
-    --arch amd64 \
+    --arch=amd64 \
     bullseye \
     . \
     http://ftp.uk.debian.org/debian
@@ -57,26 +56,64 @@ if using live system setup network and locale manually
         sudo chmod 755 [BUILD_DIR]
 
 ## config system (mostly from chroot)
-    //gen fstab file
-        genfstab -U /mnt >> /mnt/etc/fstab
-        //debian doesnt have this, need to edit it manually
-        copy current and then add / partitions uuid from blkid
-    //initialise chroot
-        mount -t proc proc /mnt/debinst/proc
-        mount -o bind /dev /mnt/debinst/dev
-        mount -o bind /sys /mnt/debinst/sys
-        sudo mount -t proc /proc proc/
-        sudo mount --rbind /sys sys/
-        sudo mount --rbind /dev dev/
-        //mount --bind /dev/pts /mnt/debinst/dev/pts
+### gen fstab file
+    //manual
+        //get uuid of mounted parition
+            sudo blkid | grep -w UUID=
+        cp /etc/fstab /mnt/etc/fstab
+        vi /mnt/etc/fstab
+            //replace root uuid with uuid of mounted partition
+    //if arch install scripts
+        genfstab -U /mnt > /mnt/etc/fstab
+        
+### initialise chroot
+    //manual
+        mount -t proc proc /mnt/deb/proc
+        mount -o bind /dev /mnt/deb/dev
+        mount -o bind /sys /mnt/deb/sys
+        //if neccessary, but may have to restart to umount
+            sudo mount -t proc /proc proc/
+            sudo mount --rbind /sys sys/
+            sudo mount --rbind /dev dev/
+            //mount --bind /dev/pts /mnt/deb/dev/pts
         LC_ALL=C 
-        chroot /mnt/debinst /bin/bash
-    //timezone
-    //localization
-    //users
+        chroot /mnt/deb /bin/bash
+    //if arch install scripts
+        arch-chroot
+### timezone
+    ln -sf /usr/share/zoneinfo/Region/City /etc/localtime
+
+### setup locale
+if not using a server need to config and generate locales
+    dpkg-reconfigure locales
+    //or directly
+        vi /etc/locale.gen 
+        //uncomment your locale, EG
+            de_DE.UTF-8 UTF-8
+            de_DE ISO-8859-1
+            de_DE@euro ISO-8859-15
+        locale-gen
+        vi /etc/locale.conf 
+            LANG=de_DE.UTF-8
+#### keyboard
+    dpkg-reconfigure keyboard-configuration
+    //or directly
+        vi /etc/default/keyboard
+        XKBMODEL="pc105" #keyboard model
+        XKBLAYOUT="uk" #keyboard layout
+        XKBVARIANT=""
+        XKBOPTIONS="grp:alt_shift_toggle"
+        BACKSPACE="guess"
+        //change model and country layout, get options from
+            /usr/share/X11/xkb/rules/base.lst
 
 ### network
-    echo Hostname > /etc/hostname 
+    echo -e `hostname` >> /etc/hostname
+    //echo -e "127.0.0.1\tlocalhost\n127.0.1.1\t`hostname`" >> /etc/hosts
+    echo -e \ "127.0.0.1\tlocalhost\n::1\tlocalhost\n127.0.1.1\t`hostname`.localdomain `hostname`" >> /etc/hosts
+
+
+    //need to setup interfaces manually if not using network-manager
     vim /etc/network/interfaces
         ## The loopback network interface
         auto lo
@@ -96,21 +133,44 @@ if using live system setup network and locale manually
         #	gateway 192.168.0.254
 #### no DHCP
     echo -e "search domainnamennameserver 192.168.0.253nnameserver 192.168.0.254" > /etc/resolv.conf
-    echo -e "127.0.0.1tlocalhost.localdomaintHostname" > /etc/hosts
+
+### users
+    passwd
+    useradd username
+    usermod -aG sudo username
+
+### install and config bootloader
+    sudo apt install grub os-prober
+    //check if efi or mbr
+        ls /sys/firmware/efi
+    //efi
+        //make sure your efi partition is mounted
+        sudo grub-install --target=x86_64-efi --efi-directory=/boot/efi --bootloader-id=debian-grub
+        //tool to manage efi partition
+            sudo apt install efibootmgr
+    //mbr
+        sudo grub-install --target=i386-pc /dev/sdX
+    sudo grub-mkconfig -o /boot/grub/grub.cfg
 
 ### install kernel
     //ready built
       apt-cache search linux-image
-      apt-get install linux-image-2.6-686-smp
+      apt-get install linux-image-amd64
+      //apt-get install linux-image-2.6-686-smp
     //install custom deb kernel
       dpkg -i kernel.deb
       sudo apt install kernel.deb -y
 
 ### install needed packages
-    sudo apt install build-essential systemd man iproute2 wget curl
+    //if minimal image
+        sudo apt install build-essential systemd iproute2 ca-certificates
+        sudo apt install man-db wget curl linux-kernel-headers-[version]
     sudo apt install gvim vifm git ...
 
 ### clean up
     exit
-    umount /mnt/debinst/{dev,proc,home} /mnt/debinst;
+    umount /mnt/deb/{dev,proc,home} /mnt/deb; //if not rebooting
+    // unmount -R /mnt 
+
     swapoff
+    reboot

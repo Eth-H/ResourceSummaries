@@ -1,4 +1,10 @@
-# Network Interfaces
+# linux networking config concepts
+    interfaces
+        routing table enteries
+            policy routeing
+    namespaces
+
+# network interfaces
 how the kernel links up the software side of networking to the hardware side (device drivers and network)
 ## ifconfig 
     config net interfaces
@@ -50,11 +56,41 @@ how the kernel links up the software side of networking to the hardware side (de
         ip neighbour show
 
 # Network Manager
-    NetworkManager daemon to configures networks automatically
-    get network hardware information, search for conns to wireless/wired and activate
+    startup daemon, automatically find and bring up network interface, scan for wifi/wired networks and conn
+    get network hardware information
     nmapplet //on your desktop bar
     //get operational info (old)
         nm-tool 
     //control
         nmcli
         nmtui
+
+# network namspaces
+    by default only have a unnamed/default/global namespace that is directly connected to the physcial interfaces
+    having different namespaces allow for seperate/independant instances of network interfaces, routing tables, firewall rules
+    ip netns add blue
+    ip netns list
+    //assign interfaces to namespaces
+        cant assign physcial interfaces to namespaces
+        veth (virtual ethernet) interfaces come in pairs
+            can use to connect a namespace to the internet via the global namespaces that contain the physcial interfaces
+        //create pair
+            ip link add veth0 type veth peer name veth1
+        //connect global namespace to blue namespace, via sending one end to that namespace
+            ip link set veth1 netns blue
+        //run cmd in blue namespace, if namespaces setup correctly this should be the only way
+            ip netns exec blue ip link list
+        // config veth{} interfaces
+            ip addr add 10.0.0.1/24 dev veth0
+            ip link set up veth0
+            ip netns exec blue ip addr add 10.0.0.2/24 dev veth1
+            ip netns exec blue ip link set dev veth1 up
+            // add a default route inside the blue namespace
+                ip netns exec blue ip route add default via 10.0.0.1
+            //add routing to the internet
+                sudo iptables -I FORWARD -s 10.0.0.0/24 -j ACCEPT # Forward packets for IPs from inside the namespace
+                sudo iptables -t nat -A POSTROUTING -s 10.0.0.0/24 -j MASQUERADE # Use NAT for packets from the zoom network
+        //run cmd within namespace without root
+            netns-exec blue firefox
+        //directly connect physical interface to namespace, not recomended
+            ip link set dev <device> netns <namespace>

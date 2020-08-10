@@ -3,61 +3,78 @@
         on most systems path1 will be symlinked to path2
         [path1] -> [path2]
 
-    //boot
-    //kernel boot loader files
-        //contains kernel in object form
-        vmlinuz-[kernel version]x[architecture]
-        //initrd and initramfs, loads temp root file system into memory
-        //contains boot laoder execcutables
-        /boot/efi/
-        //contains boot loader configuration files
-        /boot/grub/
-            /boot/grub/grub.cfg
+## /boot
+kernel and boot loader files
+    vmlinuz-[kernel version]x[architecture] - kernel in obj form
+    initrd.[ver].img (initialising ram disk) and initramfs - loads temp root file system into memory
+    config.[ver].el5 - kernel config options
 
+    /boot/efi/ - contains boot loader execcutables
+    /boot/grub/ - contains boot loader configuration files
+        /boot/grub/grub.cfg
 
-    /home
-    //contain user home directories, can be a different partition
-        /home/$USER
-            //config files
-                ~/.config
-                ~/.ssh
-                ~/.[individualConfigFileName]
-            //shared local resources
-                ~/.local/share
-            //current user, binaries
-                ~/.local/bin
-            //local shared libraries
-                ~/.local/lib
+## /home
+//contain user home directories, can be a different partition
+    /home/$USER, $HOME, ~
+        //config files
+            ~/.config - XDG confgi
+            ~/.ssh
+            ~/.[individualConfigFileName]
+        ~/.local/share - shared local resources
+        ~/.local/bin - current user, binaries
+        ~/.local/lib - local shared libraries
+
             
-    /root	
-    //home directory for root user
+## /root	
+home dir for root user
 
-    //dev (device files) (virtual files that repersent devices)
-        //references to drives
-            /dev/sdax /dev/sdbx
-        //virtual consoles
-            //the controlling terminal
-                /dev/tty
-            //reference to specific virtual consoles
-                /dev/tty[virtualConsoleNumber]
-        //pseudo-devices (device nodes that dont correspond to physical devices)
-    /sys
-    //info about system
-        mostly hardware or low level system software info
+## dev (device files) (virtual files that repersent devices)
+    references to drives
+        ./sdax ./sdbx ./nvme0n1px
+    virtual consoles/terminals
+        ./tty - the controlling terminal
+        ./tty[virtualConsoleNumber, 0-63] - ref to specific virtual consoles
+        ./ttyS[virtualConsoleNumber, 0-31] - serial port terminals
+        ./console - terminal used in runlevel 1
+        pseudo terminals
+            ./pts/
+    pseudo-devices (device nodes that dont correspond to physical devices)
+        ./random ./urandom - gen random chars
+        ./null - gen infinite null bytes
+        ./zero - gen infinite zeros
+        ./loop[0-7] - useful to mount stuff
+    ./char/ - legacy char file locations (symlinks now)
+    ./block/ - legacy blk device location (symlinks now)
+    ./ppp - communicates with GPS/GPRS enabled hardware file to send data
 
-    /bin
+
+
+
+
+## /sys
+info about system
+    mostly hardware or low level system software info
+
+## /bin
     //essentional binaries, most gnu utils/cmds
     //generally /bin binaries are needed earily in the boot process or are more important
-        /bin -> /usr/bin
+    /bin -> /usr/bin
     /sbin
-    //essentional special/system binaries, generally root/only
+        essentional special/system binaries, generally root/only
         /sbin -> /usr/sbin
 
-    /lib
-    //contains shared libraries for binaries
-
-    /lib64
-    //contains shared libraries for binaries
+## library folders
+    shared libraries for binaries, including kernel modules
+    //essentian
+    /lib - essentional, normally for /bin or /sbin binaries
+        multi arch folders
+            /lib/x86_64-linux-gnu - binaries compiled for amd64 architecture
+        ./firmware - hardware firmware code
+        ./modprobe.d - config dir for modprobe cmd
+        ./modules - kernel modules, subdirs for each kernel
+        ./hdparm - SATA/IDE params
+    /lib64 /lib32 - alternate format essentional libs for 64 and 32 bit archs
+    /libx32 - format for x32 archs
         
     //contains mounted paritions
         /media
@@ -65,10 +82,10 @@
         /mnt
             //tmp mounts
 
-    /proc (processess)
-    //info about currently running proccesses
-    //virtual file system, each numbered directory repersents a PID and contain a command that occ
-        //some proc files
+## /proc (processess)
+    info about currently running proccesses as viewed by kernel
+    virtual file system, each numbered directory repersents a PID and contain a command that occ
+    EG subdirs
         /proc/meminfo - system memory
         /proc/cmdline – Kernel command line information.
         /proc/console – Information about current consoles including tty.
@@ -96,57 +113,55 @@
                 net - network config
                 vm - use of kernels virtual mem
 
-    /run
-    //info about running sys since last boot
-    //storage of transient state files (these contain run-time information that may or may not need to be written early in the boot process and which does not require preserving across reboots)
-        //distribtuion specifc files, some distros mount partitions here
-            /run/media
-        // /run predecesor (didnt allow earily writing into the boot process), generally now symlinks to /run
-            /var/run
-            
+## /run
+    info about running sys since last boot
+    storage of transient state files (these contain run-time information that may or may not need to be written early in the boot process and which does not require preserving across reboots)
+        /run/media - distro specifc files, some distros mount partitions here
+        /var/run - /run predecesor (didnt allow earily writing into the boot process), generally now symlinks to /run
 
-    /tmp
-        //temporay files, these are cleany up in a certain amount of time
+## /tmp
+    temporay files, these are cleany up in a certain amount of time
 
-    /etc
-    //core system global configeration files, EG grub, ufw	
+## /etc
+    core system global configeration files, EG grub, ufw	
         /etc/default
-        //Contains items to be automounted on boot 
-        /etc/fstab
+        /etc/fstab - contains items to be automounted on boot 
         //system infomation
             //multi-platform
                /etc/os-release
-            //debian based, debian:, ubuntu:, mint:
-                /etc/{}-release
-            //arch based
-                /etc/arch-release	
+            /etc/{}-release - debian, ubuntu, mint based
+            /etc/arch-release - arch based
+        /etc/inittab - initrd config
 
-    /usr (unix system resources)
+## /usr (unix system resources)
+files for all/multi users
     //multi user config files
         /usr/share
             /usr/share/doc
         //data
         //libraries
+    symlinked binaries - /bin, /sbin
+    /usr/local/bin - local binaries, can put user defined binaries here
+    
+## /var
+info subject to quick change over the course of system operation
+system logging, user tracking, caches
+    variables
+        /var/cache - application cache
+        /var/lib - contains dynamic data libraries and files
 
-        /usr/bin
-        //local binaries, can put user defined binaries here
-            /usr/local/bin
-    /var
-    //info subject to quick change over the course of system operation
-    //system logging, user tracking, caches
-        //variables
-        //application cache
-            /var/cache
-        //contains dynamic data libraries and files
-            /var/lib 
+    /var/lock
+        contains lock files created by programs to indicate that they are using a particular file or device
+    /var/log - contains log files
+    /var/run 
+        contains PIDs and other system information that is valid until the system is booted again
+    /var/spool - contains mail, news, printer queues
 
-    /var/lock (contains lock files created by programs to indicate that they are using a particular file or device), /var/log (contains log files), /var/run (contains PIDs and other system information that is valid until the system is booted again) and /var/spool (contains mail, news and printer queues). 
+## /opt
+    optional application software packages
 
-    /opt
-    //Optional application software packages.
-
-    /srv
-    //site-specific data which are served by the system
+## /srv
+    site-specific data which are served by the system
 
 
 # types
@@ -168,8 +183,7 @@
     HFS+ 
         Macintosh fs
 
-
-disk anatomy
+# disk anatomy
     subdivide disk into multiple blk devices
     partition table
         one per disk, tells sys how disk is partitioned
@@ -193,7 +207,8 @@ disk anatomy
             each file/dir has a unique entry in the inode table which contains file metadata
         data blocks 
             actual data for the files/dirs
-disk partitioning
+# operation
+## disk partitioning
     fdisk - basic cli partitioning tool, it doesn't support GPT
     gdisk - fdisk, only supports GPT
     gparted - GUI version of parted
@@ -204,9 +219,9 @@ disk partitioning
         mkpart primary 123 4567
         //num, new start, new end
         resize 2 1245 3456
-make fs
+## make fs
     sudo mkfs -t ext4 /dev/sdb2
-mount
+## mount
     sudo mount -t ext4 /dev/sdb2 /mydrive
     sudo mount UUID=130b882f-7d79-436d-a096-1e594c92bb76 /mydrive
 
@@ -216,7 +231,7 @@ mount
         df -h
     //read current dir disk useage
         du -h
-/etc/fstab
+## /etc/fstab
     auto mount fs at starup
     fields
         UUID - device identifier
@@ -225,7 +240,7 @@ mount
         options - other mount options
         dump - used by the dump utility to decide when to make a backup, default to 0
         pass - used by fsck to decide what order fs's should be checked, 0 = not checked
-swap
+## swap
     allocate virtual mem to sys when out of RAM
     //initialize swap areas (needs blank partition), enable the swap device, disable
         mkswap /dev/sdb2  
@@ -237,7 +252,7 @@ swap
 check/repair damaged fs
     sudo fsck /dev/sda
 
-inodes
+## inodes
     inode (index node) is an entry in inode table, one per file (dir is also a file)
     contains file metadata/context
     metadata
@@ -256,12 +271,12 @@ inodes
         ls -i
         stat
 
-symlinks (symbolic/soft links)
+## symlinks (symbolic/soft links)
     creates new file thats inode metadata points to anouther files inode
     shortcut link to file via path
     ln -s myfile myfilelink
     some filesystems will store these inline for quicker access time if they <60 bytes
-hardlink
+## hardlink
     shares a files inode (doesnt create a new file, but gives it anouther name/path)
         cant be refered across fs's
         can edit either file to reflect changes

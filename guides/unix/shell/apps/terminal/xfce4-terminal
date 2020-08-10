@@ -1,8 +1,0 @@
-//xfce4
-    //none: open new terminal window, -e: [commandName]: open new terminal windows and execute command, --tab: open new tab, to run command in new tab pass it afterwards
-        xfce4-terminal {}?...
-        //EG
-            xfce4-terminal --geometry 80x40 -e mocp --tab -e mc
-//Exit shell, 
-    //none: Leave the shell, [integer, 0 or 1-255]: change the scripts exit return status (instead of leaving it to the last command), EG exit 0 
-        exit {}?

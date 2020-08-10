@@ -1,0 +1,10 @@
+## open multiple files
+- in buffers
+
+    vim [file1] [file2]...
+- in horizontal splits
+
+    vim -o [file1] [file2]...
+- in vertical splits
+
+    vim -O [file1] [file2]...

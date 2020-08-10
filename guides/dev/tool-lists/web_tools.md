@@ -37,6 +37,8 @@ within comments items at the top are better to learn
         box model
         css grid
         flex box
+        sass - optional
+            scss
     js
         es6
         dom manipulation
@@ -63,7 +65,8 @@ within comments items at the top are better to learn
 ### routing
     react router
 
-### css framework
+### css
+#### framework
     reactstrap - react
     Material UI - react
     tailwind css - react
@@ -74,6 +77,9 @@ within comments items at the top are better to learn
 
     foundation - isolated, react
     Semantic UI - isolated
+#### other - optional
+    classnames - isolated, toggle classnames
+    css-modules - isolated, locally scoped class names by default
 
 ## static site generators
     next.js

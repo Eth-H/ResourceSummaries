@@ -51,6 +51,7 @@
             import { sayHello, sayHello2 } from './lib'; //use destructoring to import multiple items
 
 ### implement specifications
+    build process to get nodejs code to run in the browser
 #### module loader
     interpret/load module written in a certain module format
     runs at runtime
@@ -65,9 +66,28 @@
         load bundle in browser
     EG browsersify (commonjs), webpack (amd, commonjs, ES6 modules)
 ### transpiler
+    used to transform one language into anouther
     convert certain js module format into anouther
-    mainly for compatibility, allows newer js formats to work with older browsers
-    EG Babel (ES6 module format to ES5 module format)
+    generally you have a newer modified version of js with more features, but its incompatible with browsers
+        EG 
+            Babel (ES6 module (ECMAscript6) format to ES5 module format)
+                allows import x from y instead of require, ...
+            typescript
+                js with optional static typing
+            css versions
+                sass, less
+### minification
+    optional step
+    remove unnecessary chars
+        whitespace chars, new line chars, comments, and sometimes block delimiters ({})
+### task runner
+    automates different parts of the build process
+        minifying code, optimizing images, running tests, ...
+    grunt
+    gulp
+    npm scripting capabilities
+        add scripts in node.js for npm run x
+
 
 # links
 https://2019.stateofjs.com/data-layer/

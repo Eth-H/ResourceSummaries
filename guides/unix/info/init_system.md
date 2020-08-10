@@ -112,6 +112,7 @@ start/stop essentional processes
         WantedBy=multi-user.target
 ## cmds
 //List units
+    systemctl
     systemctl list-units
 //View status of unit
     systemctl status networking.service

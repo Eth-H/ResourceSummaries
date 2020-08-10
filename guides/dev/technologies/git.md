@@ -1,3 +1,7 @@
+# links
+    https://www.atlassian.com/git/tutorials/rewriting-history/git-rebase
+    https://www.atlassian.com/git/tutorials/merging-vs-rebasing
+
 "//"
 "" instructions
 "->" Process
@@ -6,121 +10,288 @@
 
 # git concepts
 ## how it works
-    //Git is the version control system that runs locally on your PC, GitHub.com is a hosting website that saves files. To go past saving files a link between the local repo and online GitHub repo needs to be established
-    //Git to GitHub: A repositary is created (a file system is marked as a repositary) -> you set files to be tracked (changes to these files are saved by git) -> Established local repo to online repo connection 
-    // -> Tracked files are staged to be pushed (commited) -> staged pushed up to the remote repositary 
-    //GitHub to Git: Establish online repo to local repo connection -> pull repositary down locally -> changes to current files are tracked and new files added are tracked -> commit changes -> push changes
-    //Cloning a repo: This means to pull someone elses repo down locally, you can do this to copy remote repositaries to edit it locally as your own, though you would need permission to push chanegs to the original 
+    Git is the version control system that runs locally on your PC, GitHub.com is a hosting website that saves files. To go past saving files a link between the local repo and online GitHub repo needs to be established
+    Git to GitHub: A repo is created (a file system is marked as a repo) -> you set files to be tracked (changes to these files are saved by git) -> Established local repo to online repo connection 
+     -> Tracked files are staged to be pushed (commited) -> staged pushed up to the remote repo 
+    GitHub to Git: Establish online repo to local repo connection -> pull repo down locally -> changes to current files are tracked and new files added are tracked -> commit changes -> push changes
+    Cloning a repo: This means to pull someone elses repo down locally, you can do this to copy remote repositaries to edit it locally as your own, though you would need permission to push chanegs to the original 
     
 ## basic workflow
-    //Starting a repositary
-        //Create online GitHub preositary at Github.com -> Create local repositary {I1} -> Connect local to online repositary {I2}
-        // -> Add files to tracking and commit changes (get them ready to be pushed) {I3} -> push changes to the online repo {I4}  
-    //Maintaining a repositary
-        //Commit changes for tracked files {I5}  -> Pushing commited files {I4}
-        //Pull changes down locally {I6}
-    //pull request someone elses repo
-        fork -> clone -> create branch -> commit changes -> go to original repo and hit pull req
-          
+    //create own repo
+        create github repo -> clone -> add files to tracking/staging and commit changes -> push changes 
+                      //or -> init -> connect to remote -> add/commit/push
         
+    //pull request someone elses repo
+        fork -> clone -> create branch feature branch -> add files to tracking and commit changes -> push your fork via your branch -> go to original repo and hit pull req (from your branch)
 
+# to rm
+//local repo
+    //Turn on view hidden files for windows 10 OS
+        //Open File Explorer from the taskbar.
+        //Select View > Options > Change folder and search options.
+        //Select the View tab and, in Advanced settings, select Show hidden files, folders, and drives and OK.
+    //Then delete the .git folder
+        
 ## configure account (for current machine)
-    git config --global --list
     git config --global user.name "Firstname Lastname"
     git config --global user.email username@email.com
-    //or
+    git config --global core.editor Vim
+    //edit all
     git config --global --edit
+    //check
+    git config --global --list
+    //alias
+        git config --global alias.co checkout
+        git config --global alias.br branch
+        git config --global alias.ci commit
+        git config --global alias.st status
 
-## setup repo
-    //if not cloning
-        mkdir projroot && cd projroot
-        //Create/initilise local repositary
-            git init
-        //Add all files in repositary to tracking (so they can be commited), or stage updates for existing files
-            git add .
-        //Add initial files
-            git add LICENSE
-            git add README
-            //Listed files are not tracked by git
-                echo node_modules > .gitignore
-        //Commit all tracked files
-            git commit -m "initial commit"
-        //or when creating 
-         to the repositary ("-m" gives the commit comment)
-        //Connect repo to a remote one
-            git remote add origin [repoUrl]
-            //Check if the connection exists
-                git remote -v
-            //if externel repo has unrelated history
-                git pull origin master --allow-unrelated-histories
-                git merge origin origin/master
-                git push origin master
-    //otherwise create on website then
+        //Add all files in repo to tracking (so they can be commited), or stage updates for existing files
+        //Listed files are not tracked by git
+        //Check if the connection exists
+            git remote -v
     //clone an existing repository: commnd, url, git targetdirectoryname
         git clone [repoUrl] rootdirname
 
-
-## Pushing to GitHub.com
-        //moving files locally to online repo, origin: default name of remote connections
+## quick setup
+    mkdir projroot && cd projroot
+    git init
+    git add .
+    git add LICENSE
+    git add README
+    echo node_modules > .gitignore
+    git commit -m "initial commit"
+    git remote add origin [repoUrl]
+        //if externel repo has unrelated history
+            git pull origin master --allow-unrelated-histories
+            git merge origin origin/master
             git push origin master
-            //If you run into problems
-                git push origin master --allow-unrelated-histories
-                git push origin master -f
-            //Push wthout origin link
-                git push https://[username]@github.com/[github repository] [local branch name]:[remote branch name]
 
-## Commit files:  command, optional commit message, ignore staging area (no git add)
-    //Stage files to be pushed up to the actual repositary
+## commit files
+stage files to be pushed up to the actual repo
     git commit 
-    git commit -m Fix this thing
+    //optional commit message
+    git commit -m "Fix this thing"
+    //ignore staging area (no git add)
     git commit -a 
 
-## Pull Repositories
-    //Pull online GitHub repositary to locally
-        git pull [repoUrl] 
-    //Pull repositary and commit history, then integrate with local commits (needed if top of repo is behind remote counterpart)
+## remote
+    //list
+        git remote -v
+    //add
+        git remote add [repo]
+        git fetch
+    //rm conn
+        git remote rm
+    //rename
+        git remote rename
+    //show additional info
+        git remote info
+    //change remote
+        git remtoe set-url
+
+### pushing updates
+moving files locally to online repo, origin: default name of remote connections
+    git push [remote] [branch]
+    //fix conflict problems
+        git push origin master --allow-unrelated-histories
+        git push origin master -f
+    //Push wthout origin link
+        git push https://[username]@github.com/[github repository] [local branch name]:[remote branch name]
+
+### pull repositories
+pull online github repo locally
+    git pull [repoUrl]
+    git pull [remote] [branch]
+    //pull repo and commit history, then integrate with local commits (needed if top of repo is behind remote counterpart)
         git pull --rebase origin master
-    
-## Delete git repo
-    //local repo
-        //Turn on view hidden files for windows 10 OS
-            //Open File Explorer from the taskbar.
-            //Select View > Options > Change folder and search options.
-            //Select the View tab and, in Advanced settings, select Show hidden files, folders, and drives and OK.
-        //Then delete the .git folder
+#### fetch 
+get branches and tags
+    git fetch
+    //fetch all the branches simultaneously
+        git fetch -all
+    //synchronize the local repository
+        git fetch origin
 
 //connect to repo via ssh
-        ssh user@host git init --bare /path/to/repo.git
-		
-# other cmds
-    //Check status:
-        git status
-    //get differences between git and current files
-        git diff
-    //ignore files  
-		//- [Blank lines are or staring with "#" are ignored, start with / to ignore recursivity, end with / to avoid a directory, negate a patturn by starting wioth an exclamation mark]
-			vim .gitignore
-                *.[oa]
-                *~
-            
-    //Remove files: Command, untrack but keep file, delte all .log files in the log/ directory, removes all files ending with ~, untrack directory
-        //del file from filesystem but no git index
-            rm 'PROJECTS.md'
-        // untrack but keep file/dir, or untrack deleted file
-            git rm --cached README
-            git rm --cached -r .
-            //untrack .gitignore  files
-                git rm --cached `git ls-files -i --exclude-from=.gitignore`
-                //or
-                git ls-files -i --exclude-from=.gitignore | xargs git rm --cache
-        //untrack and del
-            git rm log/\*.log
-            git rm \*~S
+    ssh user@host git init --bare /path/to/repo.git
 
-    //See old version:
+## commit history
+    //summary of recent commits, head status
+        git log
+        git log -oneline
+        //last 2
+            git log -2
+    //modified files
+        git log -stat
+        //with location
+            git log -p
+    //diff introduced in each commit, last 2 commits
+        git log -p -2
+    git log --diff-filter=D --summary
+    //modification of each line of a file and who
+        git blame [file]
+
+### undo stuff
+    //discard local chnages in cwd
+    git reset --hard HEAD
+    //discard changes in a file
+    git checkout HEAD [file]
+    //reverse commit
+    git revert [commit]
+
+## track changes
+    //track changes that havent been changed
+        git diff
+    //track the changes that have staged but not committed:
+        git diff --staged
+    //track the changes after committing a file:
+        git diff HEAD
+    //track the changes between two commits
+        git diff Git Diff Branches:
+        git diff < branch 2>
+    //status of pwd and staging area
+        git status
+    //show objs
+        git show
+
+## branching
+    //list all branches, without/with remote
+        git branch --list
+        git branch -a
+    //list current branch
+        git branch
+    //del locally/remote
+        git branch -d [branchName]?
+        git push origin -delete [branchName]?
+    //mv
+        git branch -m
+
+### checkout
+update files in the working tree to match a index version or specific tree
+    //create branch and switch, dont use if branch already exists
+        git checkout -b [branchName]
+    //switch branch
+        git checkout [branchName]
+    //merging (merge branch to active branch)
+        git merge [develop] --no-ff
+    //commit to remote branch
+        git push origin -u 'branchName'
+### stash
+switch branches without committing the current branch
+    stash current changes
+        git stash
+    saving stashes with a message
+        git stash save ""
+    check the stored stashes
+        git stash list
+    re-apply the changes that you just stashed
+        git stash apply
+    track the stashes and their changes
+        git stash show
+    re-apply the previous commits
+        git stash pop
+    delete a most recent stash from the queue
+        git stash drop
+    delete all the available stashes at once
+        git stash clear
+    stash work on a separate branch
+        git stash branch 
+
+### cherry pick
+    //apply changes from a specifc commit
+        git cherry-pick
+
+## merging
+integrate changes of one branch into anouther
+creates merge commit in featureBranch that ties together histories of both branches
+adv/disadv: does not change existing branches, adds extraneous upstream commit that pollutes history
+
+    merge branches or a specified commit
+        git merge featureBranch upstreamToMergeBranch
+        #or
+        git checkout featureBranch
+        git merge upstreamToMergeBranch
+
+### rebase
+integrate changes of one branch into anouther
+mvs featureBranch to begin at the tip of the upstream branch
+EG rebase featureBranch onto upstreamBranch
+    saves featureBranch commits to buffer, copies upsteamBranch into its place
+    then rewrites copied upstreamBranchs history with brand new commits for each commit in the featureBranch
+adv/disadv: clear and linear history (easy to navigate), loses merge commit context (cant see where upstream changes incorporated into feature)
+golden rule: never rebase public upstreamBranch onto featureBranch (cant rewrite history of a public branch)
+
+    apply a sequence of commits from distinct branches into a final commit
+        git chechout featureBranch
+        git rebase upstreamToMergeBranch
+        #or
+        git rebase featureBranch upstreamToMergeBranch
+    continue/abort rebasing process after merge failure
+        git rebase -continue
+        git rebase --skip
+    interactive rebase: allow edit, rewrite, reorder, ..., on existing commits
+        git rebase -i
+    cleanup feature branch, allows to code without isolated commits and clean up later, EG re-write the last 3 commits
+        git checkout feature
+        git rebase -i HEAD~3
+
+## ignore files
+    // line start comment: "#", start with / to ignore recursivity, end with / to avoid a directory, negate a patturn by starting with an exclamation mark
+    vim .gitignore
+        *.[oa]
+        *~
+## undo
+### revert
+undo the changes
+    git revert [targetCommit]?
+### reset
+reset the changes
+    git reset -hard
+    git reset -soft:
+    git reset --mixed
+
+## rm files
+    //from fs and git (untrack)
+        git rm [fn]?
+    //just from git
+        git rm --cached [fn]?
+    //untrack .gitignore  files
+        git rm --cached `git ls-files -i --exclude-from=.gitignore`
+        //or
+        git ls-files -i --exclude-from=.gitignore | xargs git rm --cache
+    //untrack and del
+        git rm log/\*.log
+        git rm \*~S
+# other cmds
+
         -git show "file"
 
 # problems
+## contribute to open source repo
+//fork repo on github
+git clone https://github.com/YOUR_USERNAME/GitMe.git and cd GitMe
+git checkout -b username-feature
+//make changes
+git add .
+git commit -m "cmt msg"
+git push -u origin username-feature
+//make pull request
+
+## forked a repo and need to get new changes from upstream repo
+- add the original repo as upstream remote and fetch refs
+git remote add upstream https://github.com/user/forked-repo
+git fetch upstream
+
+- fetch+merge like a git pull
+git merge upstream/master master
+- or, replay your local work on top of the fetched branch, like a "git pull --rebase"
+- make sure you are in the branch you want to rebase if you dont specify a 2nd branch
+git rebase upstream/master
+
+- update fork
+git push -f origin master
+
 
 ## want a file deleted in a previous commit
     //find commit
@@ -131,7 +302,13 @@
         git log --diff-filter=D --summary
 
     //revert to older commit with file
-        git checkout [commitId]
+        git checkout [commitId] 
+
+## reverse file to last commit
+    git log path/to/file
+    git log -p path/to/file
+    //use commit with wanted version of file
+    git checkout <commit> path/to/file
 
 ## Head is checked out problem
     //Create new branch and re-attach HEAD to it
@@ -255,3 +432,8 @@
         //push branches to forked repo
             git push origin feature-branch
     
+
+rebasing
+    process of mving/combining a seq of commits to a new base commit
+        change a branches base to anouter commit, so its as if you branched the new commit (so your history is clean)
+        use: master branch progressed past your feature branch
