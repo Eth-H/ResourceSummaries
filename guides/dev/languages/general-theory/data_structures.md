@@ -1,12 +1,21 @@
 # links
     https://www.geeksforgeeks.org/graph-data-structure-and-algorithms/
     https://en.wikipedia.org/wiki/List_of_data_structures
+
 # surrounding
 ##access
     sequential
         can only access elems in order stored
     random/direct access
         access an arbitrary element of a sequence in equal time or any datum from a population of addressable elements roughly as easily and efficiently as any other
+
+## specification
+    map
+        dictionary problem solutons
+            hash table
+            search tree //tree ds, locate different keys within a set
+                binary search tree
+                self balancing - any st can be, as opposed to a unbalanced
 
 # language specific
     string (char arr)
@@ -23,41 +32,52 @@
     dynamic arr / arr list //random access variable-size list
     linked list
         singly linked list
-        doubly linkded list
+        doubly linked list
+        circular linked list
 
 ## tree
-    Binary search tree
+    binary tree
+        binary search tree
+            self balancing / height balanced
+                AVL Trees
+                red-black trees
+        fenwick tree / binary indexed tree 
     n-ary tree
     self balancing
-        //auto balance to stop overloading on one branch (losing O(log n))
-        B-tree
-            of order m
-                requirements
-                    every node at most m children
-                    non-leaf node with k children contains k-1 keys
-                    root at least 2 children if not leaf node
-                    non-leaf nodes (except root) has >= m/2 children
-                    all leaves appear in same lv
-                inserting val
-                    compare to vals in tree put inbetween less and more than vals
-                    if new val makes num vals in node > m
-                        node split into two nodes, left has vals < median val and right >
-                            median val is promoted to parent node
-                    if root node too many nodes then new root node created with med val
-
-
-        AVL Trees
-    Red Black Trees
+        search tree
+            //auto balance to stop overloading on one branch (losing O(log n))
+            B-tree
+                of order m
+                    requirements
+                        every node at most m children
+                        non-leaf node with k children contains k-1 keys
+                        root at least 2 children if not leaf node
+                        non-leaf nodes (except root) has >= m/2 children
+                        all leaves appear in same lv
+                    inserting val
+                        compare to vals in tree put inbetween less and more than vals
+                        if new val makes num vals in node > m
+                            node split into two nodes, left has vals < median val and right >
+                                median val is promoted to parent node
+                        if root node too many nodes then new root node created with med val
+                B+-tree
     2-3 tree
-    Binary Heaps
+    binary heaps
     prefix trees (trie)
+    segment/statistic tree
 
-## hash based
+## map
     hash list //list of hashes of data blocks in a file
     hash map/table //map key to value, implements dict
 
-## heap
-    binary heap
+## queue
+    double-ended priority queue (DEPQ) //priority queue and deque
+    heap //priority queue
+        binary heap
+
+## priority queue
+    heap - tree based
+    unordered array
 
 ## graphs
     Adjacency list
@@ -73,15 +93,20 @@
 
 # abstract data types 
 //model for data type, defined by the behaviour from users point of view
-    list/seq //countable num of ordered values
-    set //can only store unique values
-    Queues //FIFO
-    Stacks //LIFO
-    Tuple //finite ordered list of elements
-    n-tuple //list of n (>0) elements
-    Trees
-    dict/associative array //collection of key value pairs, each key different
-    graph // math undirected/directed graph, set of vertices/nodes & set of unordered/ordered pairs for them
+    container/collection
+        list/seq //countable num of ordered values
+            set //can only store unique values
+                multiset //set generalisation with no dups
+            queues //fifo
+                prioriry queue
+                deque / double ended queue
+            stacks //lifo
+            tuple //finite ordered list of elements
+                n-tuple //list of n (>0) elements
+        trees //generalised digraph
+        map/dict/associativearray //collection of key value pairs, each key different
+            multimap //map generalisation where >1 val may be associated with and returned for a given key
+        graph // math undirected/directed graph, set of vertices/nodes & set of unordered/ordered pairs for them
         //pairs known as edges/links/lines (undirected) or arrows (directed)
         //vertices part of graph structure or external entities with int indicies or refs
 

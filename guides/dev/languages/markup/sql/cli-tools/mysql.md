@@ -1,6 +1,8 @@
-https://www.cs.kent.ac.uk/systems/cgi-bin/mysql.pl
-
-mysql -u [username] -p -h dragon.kent.ac.uk [tableName]
+//get a shell in db
+mysql -u [username] -p -h [serverName] [dbName]
+    mysql -u eh -p -h sqlserver.ac.uk ehDb 
+//run sql script
+source ./x.sql
 
 # cmds
 //Will show the names of all tables in your database.

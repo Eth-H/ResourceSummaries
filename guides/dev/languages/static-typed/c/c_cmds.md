@@ -12,7 +12,7 @@ compile for linux
         gcc -o [fileName] fileName.c
     //Specify processor arcitechure
         gcc -m32 -o [fileName] fileName.c
-    //pass a lib at runtime, EG ncurses	
+    //pass a lib at runtime, EG ncurses
         gcc -o [fileName] fileName.c -lncurses
 ## MinGW cross-complier
 compile for windows
@@ -22,5 +22,3 @@ compile for windows
         i686-w64-mingw32-gcc -o main32.exe main.c
     //create 64-bit Windows
         x86_64-w64-mingw32-gcc -o main64.exe main.c
-
-

@@ -75,3 +75,8 @@ linking: collecting and combining multiple object files in order to create a sin
             gcc -o addDemo addDemo.o -lheymath
     //list linked shared libs
         ldd [exe]
+
+## other gcc flags
+-Wall -Wextra -Werror -O2 //verbose err options
+-std=c99  //c/c++ lang standard
+-pedantic //stick to iso c/c++ standard

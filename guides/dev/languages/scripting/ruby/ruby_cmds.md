@@ -4,12 +4,18 @@ may or maynot work
     sudo apt install ruby
     //do not install gems with sudo (future problems)
     gem install bundler 
-## normal install  for user
+## normal install for user
     sudo apt install ruby --user
     gem install bundler
     //add bundler under home dir to path
-## or with rbenv
-stops most problems
+## install pkgs with user
+this will install pkgs under user rather than system wide
+    sudo apt install ruby
+    gem install --user-install bundler
+    bundle config set path $HOME/.gem/
+
+## rbenv
+have multiple ruby installs, stops most problems
     git clone https://github.com/rbenv/rbenv.git ~/.rbenv
     echo 'export PATH="$HOME/.rbenv/bin:$PATH"' >> ~/.bashrc
     echo 'eval "$(rbenv init -)"' >> ~/.bashrc
@@ -27,11 +33,14 @@ stops most problems
     rbenv rehash
     //can which ruby versions gems under
     ~/.rbenv/versions/<ruby-version>/lib/ruby/gems/..
-// gem
-    //install packages globally
-    sudo gem install bundler
-//bundler package manager
-#use
+
+# gem pkg manager
+    //env vars
+        gem env
+    // list
+        gem list
+
+# bundler local pkg manager
     //install packages locally
     //install from Gemfile
         bundle install

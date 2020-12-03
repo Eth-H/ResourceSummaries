@@ -5,10 +5,15 @@
 # data types
 Numbers,String,List,Tuple,Dictionary
     type(var)
+None 
+    //compare to none
+    "x" is None
 ## cast
     int()
     str()
     float()
+    bool()
+        0, "", [], {}, () evaluate to false
 # decision
     if expression 1:   
         # block of statements   
@@ -17,6 +22,8 @@ Numbers,String,List,Tuple,Dictionary
         # block of statements   
     else:   
         # block of statements  
+    //use like ? ternary operator
+        "yay!" if 0 > 1 else "nay!"
 # iteration
 ## for
     //based off for each
@@ -25,6 +32,10 @@ Numbers,String,List,Tuple,Dictionary
     //typical counting loop
     for i in range(10):
         # do
+    //get index and item
+        for i, value in enumerate(animals):
+            print(i, value)
+
 ## while
     while expression:  
         statements  
@@ -40,13 +51,24 @@ Numbers,String,List,Tuple,Dictionary
             print(i)  
             break
         else: print("for loop completely exhausted, since there is no break."); 
+## iterable
+obj that knows how to create a iterator
+state is saved while traversing
+    our_iterable = {"a": 2, "b": 2}
+    our_iterator = iter(our_iterable)
+    next(our_iterator)
 
 
 ## basic data structures 
 ### tuple
 //immutable
     tuple=(true,1,2,'d')
-    tuple1(20,)
+    tuple1(20,) //must have comma if one item, otherwise int
+    //unpack tuples into vars
+        a, b, c = (1, 2, 3); d, e, f = 4, 5, 6 
+        //extended unpacking
+        a, *b, c = (1, 2, 3, 4)
+
 ### lists
     list = [1, 2, 5, 4, 3]; list2=[1,2,3]
     list[-1] //access indexes from reverse end
@@ -55,6 +77,15 @@ Numbers,String,List,Tuple,Dictionary
     //slice
         for i in list[1:-1]:
             print(i)
+        li = [1,2,4,3]
+            li[1:3]   # Return list from index 1 to 3 => [2, 4]
+            li[2:]    # Return list starting from index 2 => [4, 3]
+            li[:3]    # Return list from beginning until index 3  => [1, 2, 4]
+            li[::2]   # Return list selecting every second entry => [1, 4]
+            li[::-1]  # Return list in reverse order => [3, 4, 2, 1]
+        # Make a one layer deep copy using slices
+        li2 = li[:]
+
 #### funcs
     cmp(list1, list2)
     len(list)
@@ -74,6 +105,7 @@ Numbers,String,List,Tuple,Dictionary
     reverse()
     sort(key=int, reverse=True)
 ### set
+contents must be immutable
 //unordered (no index), no duplciates
     set1 = {a,b}
     set2 = set([a, b])
@@ -96,6 +128,8 @@ Numbers,String,List,Tuple,Dictionary
     Issuperset(....) this set contains anouther set
     //applicable mtds from list
         pop() remove(item)
+// make a one layer deep copy
+    filled_set = some_set.copy()
 
 ### dictionary
     dict={'name':'charlie','id':100,'dept':'it'}
@@ -104,8 +138,16 @@ Numbers,String,List,Tuple,Dictionary
     dict.items() //key-val pairs as a tuple
     dict.has_key(key)
         dict.update(dict2)
-    dict.get(key); dict[key]
+    dict[key]
+        dict.get(key); //avoid KeyError for non-existing keys
+        dict.get(key, backUpKey); //get default if missing keys
     del dict[key]
+//keys must be immutable
+    invalid_dict = {[1,2,3]: "123"}  # => Raises a TypeError: unhashable type: 'list'
+    valid_dict = {(1,2,3):[1,2,3]}   # Values can be of any type, however.
+// Check for existence of keys in a dictionary with "in"
+    "one" in filled_dict  # => True
+
 
 ### array
 contiguous mem locations
@@ -126,6 +168,10 @@ str = "abcde"
 r"x" //ignore escape chars and other special chars special meaning
 ## formatting
     print("int %d\n float %f\n str %s"%(Integer,Float,String));
+    name = 10
+    print(f"She said her name is {name}.")
+    print("She said her name is {}.".format(name))
+
 ## mtds
     str.mtd(args...)
     //case
@@ -175,26 +221,56 @@ r"x" //ignore escape chars and other special chars special meaning
     func(a,b,c="C"): 
         print(a+b+c)
     func(a,b) //if dont pass default val used
+    func(a,b,c)
     //variable num args
     func(*args):
         print(len(args))
-    func(a,b,c)
+    //variable num key args
+    func(**kwargs):
+    func(big="foot", loch="ness")
+
+    //expand tuples and kwargs
+        args = (1, 2, 3, 4)
+        kwargs = {"a": 3, "b": 4}
+        all_the_args(*args)            # equivalent to all_the_args(1, 2, 3, 4)
+        all_the_args(**kwargs)         # equivalent to all_the_args(a=3, b=4)
+        all_the_args(*args, **kwargs)  # equivalent to all_the_args(1, 2, 3, 4, a=3, b=4)
+
+    //set a global scope
+        def set_global_x(num):
+            global x 
+
+    //first class func
+        def create_adder(x):
+            def adder(y):
+                return x + y
+            return adder
+        add_10 = create_adder(10)
+        add_10(3)   # => 13
+
 
 ## lambda 
     python doesnt have lambda arrow syntax
     lambda args : expression
     can pass to functional interface mtds
+    //anonymous
+        (lambda x: x > 2)(3)                  # => True
+        (lambda x, y: x ** 2 + y ** 2)(2, 1)  # => 5
+
+### built in higher order funcs / functional mtds
     List = {1,2,3,4,10,123,22}  
     list(filter(lambda x:(x%3 == 0),List))
     list(map(lambda x:x*3,List))
        
-## functional methods
     result = map(func, list)
     numbers = (1, 2, 3, 4)
     result = map(lambda x: x + x, numbers)
 
-    ## list comprehensions
-    [func(x) for x in "iterable" if x==5]
+### list/dict/set comprehensions
+    [add_10(i) for i in [1, 2, 3]] //map
+    [x for x in "iterable" if x==5] //filter
+    {x for x in 'abcddeef' if x not in 'abc'}  # => {'d', 'e', 'f'}
+    {x: x**2 for x in range(5)}  # => {0: 0, 1: 1, 2: 4, 3: 9, 4: 16}
 
 # files
     file = open(fileName, accessMode)
@@ -258,8 +334,8 @@ r"x" //ignore escape chars and other special chars special meaning
 # modules
     import module1,module2 //import a whole module/file as obj in separate namespaces
     import module1 as md1 //shorten the idenfifier to the separate namespace obj
-    from module-name import name1,name2 //import modules into current namespace
-    from module import * //all attributes
+    from module-name import name1,name2 //import specific module names into current namespace
+    from module import * //above for all attributes
     import module1 as specificName
     //list of defined names
     dir(module)
@@ -528,7 +604,8 @@ manipulate python runtime env
     if __name__ == '__main__':  
         fire.Fire(Python)   
 
-# magic mtds
+# magic/dunder/special mtds/attributes
+attributes used by python that live in user controlled namespaces
 built-in classes define magic mtds
     __init__(self)
         called by newly instialised class after __new__
@@ -546,6 +623,62 @@ built-in classes define magic mtds
     _nonzero_ //bool val of obj
     __name__
     __main__
+
+# class
+    class Human:
+        # class attribute
+        species = "H. sapiens"
+    # constructor
+    def __init__(self, name):
+        self.name = name
+        self._age = 0
+    # instance mtd, take cls instance as param (need to create one to pass)
+    def say(self, msg):
+        print("{name}: {message}".format(name=self.name, message=msg))
+
+    # class method, shared among all instances
+    # called with the calling class as the first argument
+    @classmethod
+    def get_num_legs(human):
+        return human.legNum
+    #Human.get_num_legs() #or Human.get_num_legs(Human)
+
+    # static mtd, called without a class or instance reference
+    @staticmethod
+    def grunt():
+        return "*grunt*"
+
+    # getter, though little use
+    @property
+    def age(self):
+        return self._age
+
+    # setter
+    @age.setter
+    def age(self, age):
+        self._age = age
+
+    # deller
+    @age.deleter
+    def age(self):
+        del self._age
+
+# class inheritance
+    class Superhero(Human):
+        species = 'Superhuman'
+    //parent contructor auto inherited with its params
+    def __init__(self, name, movie=False, superpowers=["super strength", "bulletproofing"]):
+        # add additional class attributes:
+        self.fictional = True
+        self.movie = movie
+        # be aware of mutable default values, since defaults are shared
+        self.superpowers = superpowers
+
+        # call parents overriden mtds
+        super().__init__(name)
+    sup = Superhero(name="Tick")
+    print(Superhero.__mro__) //get class inheritance chain
+    print(sup.get_species()) //calls parent mtd with own class attribute
 
 # decorators
 inject/modify code in funcs/classes

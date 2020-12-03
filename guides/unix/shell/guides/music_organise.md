@@ -9,14 +9,15 @@
     directory: pathToMusicDir
     library: pathToDbFile
     plugins: a b c
-    //replace items in imported files, noramlly truncate spaces
+    //replace items in imported files, normally truncate spaces
     replace:
         'regex': _
     import: //options with beet import
-        write: yes/no //metadata written
-        copy: yes/no //cp files into lib dir
+        write: yes/no //metadata written, default
+        autotag: yes/no //tag files with musicbrainz, default
+        copy: yes/no //cp files into lib dir, default
         move: yes/no //mv files into lib dir, override copy
-        link: yes/no //sym link files in lib dir
+        link: yes/no //sym link files in lib dir, override copy
         resume: yes/no/ask //resume interrupted
     incremental: yes/no //if skipped dirs are recorded
     group_albums: yes/no //groups mported tracks into albums based on the dirs they reside in

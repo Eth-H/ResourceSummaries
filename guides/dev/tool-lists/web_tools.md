@@ -54,6 +54,7 @@ within comments items at the top are better to learn
     angular
     vue
     ember
+    ant design
 
 ### data layers
     redux - react, angular
@@ -64,6 +65,9 @@ within comments items at the top are better to learn
 
 ### routing
     react router
+
+### data visualisation framework
+    antvis
 
 ### css
 #### framework
@@ -77,9 +81,14 @@ within comments items at the top are better to learn
 
     foundation - isolated, react
     Semantic UI - isolated
+
+#### css in js
+    css-modules - isolated, locally scoped class names by default
+    styled components - isolated
+
 #### other - optional
     classnames - isolated, toggle classnames
-    css-modules - isolated, locally scoped class names by default
+
 
 ## static site generators
     next.js
@@ -99,9 +108,15 @@ within comments items at the top are better to learn
 
 
 # backend dev
+## server protocols
+### asgi - async wsgi, python
+    bare metal asgi
+    uvicorn - asgi server
+    starlette - asgi toolkit
+
 ## popular language - web frameworks
     javascript - expressjs
-    python - django, flask
+    python - django, flask, fastapi (no inbuilt dev server)
     java - spring boot
         older basic frontend templating / java view tech - JSP, GWT, JSF
     c#

@@ -31,6 +31,9 @@ secure conection to server
         scp -r dir username@domain.com:/folder/dir
     //Copy remote file to local PC 
         scp username@domain.com:/folder/file.txt file.txt
+    //files system mount
+        sshfs username@server.domain.com:/home/username /mnt/server
+        fusermount -uz server
 
 # https tools
 ## curl 

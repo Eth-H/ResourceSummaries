@@ -1,6 +1,8 @@
 # links
+    https://www.atlassian.com/git/tutorials/comparing-workflows
     https://www.atlassian.com/git/tutorials/rewriting-history/git-rebase
     https://www.atlassian.com/git/tutorials/merging-vs-rebasing
+    https://www.atlassian.com/git/tutorials/resetting-checking-out-and-reverting
 
 "//"
 "" instructions
@@ -15,44 +17,60 @@
      -> Tracked files are staged to be pushed (commited) -> staged pushed up to the remote repo 
     GitHub to Git: Establish online repo to local repo connection -> pull repo down locally -> changes to current files are tracked and new files added are tracked -> commit changes -> push changes
     Cloning a repo: This means to pull someone elses repo down locally, you can do this to copy remote repositaries to edit it locally as your own, though you would need permission to push chanegs to the original 
+
+## components/elements
+    git repo: comprised .git and working tree
+    .git dir: configs,logs,branches,head,...
+    working tree: dirs and files in working dir (pwd)
+    index: stageing area in .git, separates working tree from git repo
+    commit: snapshot of changes to the working tree
+    branch: pointer to the last commit, updates with new commits
+    tag: mark on specific history point, mark releases
+    HEAD: pointer to current branch, only 1 active HEAD
+    head: pointer to any commit, can have multiple
+    stages:
+        modified: workind dir changes but not includeded in .git db
+        staged: marks file for commit
+        commited: files commited to .git db
+
+## terms
+    conflict:
+        top of repo is behind remote counterpart
+        if one persons commits to the central repo, then anyone else who cloned before he pushed changes wont have the latest updates, hence they wont be able to push changes and will need to pull and integrate the remote changes with ther local branch
+
+## git state
+    git has 3 ways to manage its state
+    the working dir (local filesystem)
+    staged snapshots (commits)
+    commit history
     
+
 ## basic workflow
     //create own repo
         create github repo -> clone -> add files to tracking/staging and commit changes -> push changes 
                       //or -> init -> connect to remote -> add/commit/push
         
     //pull request someone elses repo
-        fork -> clone -> create branch feature branch -> add files to tracking and commit changes -> push your fork via your branch -> go to original repo and hit pull req (from your branch)
+        fork -> clone -> create feature branch -> add files to tracking and commit changes -> push feature branch to fork -> go to original repo and hit pull req (from your branch)
 
-# to rm
-//local repo
-    //Turn on view hidden files for windows 10 OS
-        //Open File Explorer from the taskbar.
-        //Select View > Options > Change folder and search options.
-        //Select the View tab and, in Advanced settings, select Show hidden files, folders, and drives and OK.
-    //Then delete the .git folder
-        
 ## configure account (for current machine)
     git config --global user.name "Firstname Lastname"
     git config --global user.email username@email.com
     git config --global core.editor Vim
+    git config --global user.signingkey [keyID]
+    git config --global grep.lineNumber true
     //edit all
     git config --global --edit
     //check
     git config --global --list
     //alias
-        git config --global alias.co checkout
-        git config --global alias.br branch
-        git config --global alias.ci commit
         git config --global alias.st status
-
-        //Add all files in repo to tracking (so they can be commited), or stage updates for existing files
-        //Listed files are not tracked by git
-        //Check if the connection exists
-            git remote -v
-    //clone an existing repository: commnd, url, git targetdirectoryname
-        git clone [repoUrl] rootdirname
-
+        git config --global alias.ci commit
+        git config --global alias.br branch
+        git config --global alias.co checkout
+        git config --global alias.df diff
+        git config --global alias.lg "log -p"
+        git config --global alias.g "grep --break --heading --line-number"
 ## quick setup
     mkdir projroot && cd projroot
     git init
@@ -67,13 +85,27 @@
             git merge origin origin/master
             git push origin master
 
+## clone
+    git clone [repoUrl] rootdirname
+- shallow clone - faster cloning that pulls only latest snapshot
+
+    git clone --depth 1 https://github.com/adambard/learnxinyminutes-docs.git
+
+- clone only a specific branch
+
+    git clone -b master-cn https://github.com/adambard/learnxinyminutes-docs.git --single-branch
+
 ## commit files
 stage files to be pushed up to the actual repo
+    //add files to staging area for commit
+    git add .
     git commit 
     //optional commit message
     git commit -m "Fix this thing"
     //ignore staging area (no git add)
     git commit -a 
+    //change last commit
+    git commit --amend -m "Correct message"
 
 ## remote
     //list
@@ -88,7 +120,7 @@ stage files to be pushed up to the actual repo
     //show additional info
         git remote info
     //change remote
-        git remtoe set-url
+        git remote set-url
 
 ### pushing updates
 moving files locally to online repo, origin: default name of remote connections
@@ -107,97 +139,134 @@ pull online github repo locally
         git pull --rebase origin master
 #### fetch 
 get branches and tags
-    git fetch
-    //fetch all the branches simultaneously
-        git fetch -all
-    //synchronize the local repository
-        git fetch origin
+```sh
+git fetch
 
-//connect to repo via ssh
+#fetch all the branches simultaneously
+git fetch -all
+#synchronize the local repository
+git fetch origin
+```
+
+#connect to repo via ssh
     ssh user@host git init --bare /path/to/repo.git
 
 ## commit history
-    //summary of recent commits, head status
-        git log
-        git log -oneline
-        //last 2
-            git log -2
-    //modified files
-        git log -stat
-        //with location
-            git log -p
-    //diff introduced in each commit, last 2 commits
-        git log -p -2
-    git log --diff-filter=D --summary
-    //modification of each line of a file and who
-        git blame [file]
+summary of recent commits, head status
+```sh
+# all commits
+git log
+    #last 2 commits
+        git log -2
+    # with path
+    git log -p -2
+
+# just commit msg and ref
+git log -oneline
+# Show merge commits only
+git log --merges
+# Show all commits represented by an ASCII graph
+git log --graph
+
+#modified files
+git log -stat
+    #with location
+    git log -p
+git log --diff-filter=D --summary
+
+
+#modification of each line of a file and who
+git blame [file]
+```
 
 ### undo stuff
-    //discard local chnages in cwd
+```sh
+    #discard local chnages in cwd
     git reset --hard HEAD
-    //discard changes in a file
+    #discard changes in a file
     git checkout HEAD [file]
-    //reverse commit
+    #reverse commit
     git revert [commit]
+```
 
 ## track changes
-    //track changes that havent been changed
-        git diff
-    //track the changes that have staged but not committed:
-        git diff --staged
-    //track the changes after committing a file:
-        git diff HEAD
-    //track the changes between two commits
-        git diff Git Diff Branches:
-        git diff < branch 2>
-    //status of pwd and staging area
-        git status
-    //show objs
-        git show
+```sh
+#diff between working dir and index
+    git diff
+#diff between index and last commit
+    git diff --cached
+    #or
+    git diff --staged
+#diff between cwd and last commit
+    git diff HEAD
+#track the changes between two commits
+    git diff Git Diff Branches:
+    git diff < branch 2>
+#status of pwd and staging area
+    git status
+#show objs
+    git show
+```
 
 ## branching
-    //list all branches, without/with remote
-        git branch --list
-        git branch -a
-    //list current branch
-        git branch
-    //del locally/remote
-        git branch -d [branchName]?
-        git push origin -delete [branchName]?
-    //mv
-        git branch -m
+```sh
+#list all branches, without/with remote
+git branch --list
+git branch -a
+#list current branch
+git branch
+#del locally/remote
+git branch -d [branchName]?
+git push origin -delete [branchName]?
+#mv/rename
+git branch -m [oldBranchName]? [newBranchName]
+```
 
 ### checkout
-update files in the working tree to match a index version or specific tree
-    //create branch and switch, dont use if branch already exists
-        git checkout -b [branchName]
-    //switch branch
-        git checkout [branchName]
-    //merging (merge branch to active branch)
-        git merge [develop] --no-ff
-    //commit to remote branch
-        git push origin -u 'branchName'
+mv head ref pointer to a specified commit
+    update files in the working tree to match a index version or specific tree
+    change contents of file to a specified commit
+    change branch: update index and files in working tree, point HEAD at branch
+```sh
+#create branch and switch, dont use if branch already exists
+git checkout -b [branchName]
+#switch branch
+git checkout [branchName]
+#merging (merge branch to active branch)
+git merge [develop] --no-ff
+#commit to remote branch
+git push origin -u 'branchName'
+```
 ### stash
 switch branches without committing the current branch
-    stash current changes
-        git stash
-    saving stashes with a message
-        git stash save ""
-    check the stored stashes
-        git stash list
-    re-apply the changes that you just stashed
-        git stash apply
-    track the stashes and their changes
-        git stash show
-    re-apply the previous commits
-        git stash pop
-    delete a most recent stash from the queue
-        git stash drop
-    delete all the available stashes at once
-        git stash clear
-    stash work on a separate branch
-        git stash branch 
+save dirty cwd state as a stack of reapplyable unfinished changes
+```sh
+#stash current changes
+git stash
+#saving stashes with a message
+git stash save ""
+#check the stored stashes
+git stash list
+#re-apply the changes that you just stashed
+git stash apply
+#track the stashes and their changes
+git stash show
+#re-apply the previous commits
+git stash pop
+#delete a most recent stash from the queue
+git stash drop
+#delete all the available stashes at once
+git stash clear
+#stash work on a separate branch
+git stash branch 
 
+#EG use
+    #dirty cwd, need to pull changes
+    git stash
+    git pull
+    git stash list
+    git stash pop
+```
 ### cherry pick
     //apply changes from a specifc commit
         git cherry-pick
@@ -206,13 +275,13 @@ switch branches without committing the current branch
 integrate changes of one branch into anouther
 creates merge commit in featureBranch that ties together histories of both branches
 adv/disadv: does not change existing branches, adds extraneous upstream commit that pollutes history
-
-    merge branches or a specified commit
-        git merge featureBranch upstreamToMergeBranch
-        #or
-        git checkout featureBranch
-        git merge upstreamToMergeBranch
-
+```sh
+#merge branches or a specified commit
+git merge featureBranch upstreamToMergeBranch
+#or
+git checkout featureBranch
+git merge upstreamToMergeBranch
+```
 ### rebase
 integrate changes of one branch into anouther
 mvs featureBranch to begin at the tip of the upstream branch
@@ -221,20 +290,24 @@ EG rebase featureBranch onto upstreamBranch
     then rewrites copied upstreamBranchs history with brand new commits for each commit in the featureBranch
 adv/disadv: clear and linear history (easy to navigate), loses merge commit context (cant see where upstream changes incorporated into feature)
 golden rule: never rebase public upstreamBranch onto featureBranch (cant rewrite history of a public branch)
+```sh
+#apply a sequence of commits from distinct branches into a final commit
+git chechout featureBranch
+git rebase upstreamToMergeBranch
+#or
+git rebase featureBranch upstreamToMergeBranch
 
-    apply a sequence of commits from distinct branches into a final commit
-        git chechout featureBranch
-        git rebase upstreamToMergeBranch
-        #or
-        git rebase featureBranch upstreamToMergeBranch
-    continue/abort rebasing process after merge failure
-        git rebase -continue
-        git rebase --skip
-    interactive rebase: allow edit, rewrite, reorder, ..., on existing commits
-        git rebase -i
-    cleanup feature branch, allows to code without isolated commits and clean up later, EG re-write the last 3 commits
-        git checkout feature
-        git rebase -i HEAD~3
+#continue/abort rebasing process after merge failure
+git rebase -continue
+git rebase --skip
+
+#interactive rebase: allow edit, rewrite, reorder, ..., on existing commits
+git rebase -i
+
+#cleanup feature branch, allows to code without isolated commits and clean up later, EG re-write the last 3 commits
+git checkout feature
+git rebase -i HEAD~3
+```
 
 ## ignore files
     // line start comment: "#", start with / to ignore recursivity, end with / to avoid a directory, negate a patturn by starting with an exclamation mark
@@ -242,30 +315,86 @@ golden rule: never rebase public upstreamBranch onto featureBranch (cant rewrite
         *.[oa]
         *~
 ## undo
+
+### clean
+    remove untracked files from working tree
+    git clean
+
 ### revert
-undo the changes
+undo a commit, via adding a new commit that undos the old one
     git revert [targetCommit]?
+
 ### reset
-reset the changes
-    git reset -hard
-    git reset -soft:
-    git reset --mixed
+reset current HEAD to specific state. Can undo merges,pulls,commits,adds,...
+```sh
+#reset staging area to latest commit, leave cwd
+git reset
+git reset 31f2bb1
 
-## rm files
-    //from fs and git (untrack)
-        git rm [fn]?
-    //just from git
-        git rm --cached [fn]?
-    //untrack .gitignore  files
-        git rm --cached `git ls-files -i --exclude-from=.gitignore`
-        //or
-        git ls-files -i --exclude-from=.gitignore | xargs git rm --cache
-    //untrack and del
-        git rm log/\*.log
-        git rm \*~S
+#above but overwrite cwd (to match), will delete commits
+git reset -hard
+git reset -hard 31f2bb1
+
+
+
+git reset -soft:
+git reset --mixed
+```
+### reflog
+list git cmds over tiem period, default 90 days
+can reverse with git reset
+```sh
+git reflog
+git reset -hard 31f2bb1
+```
+
+
+## mv/rm files
+```sh
+git mv HelloWorld.c HelloNewWorld.c
+#force overwrite
+git mv -f myFile existingFile
+
+#from fs and git (untrack)
+git rm [fn]?
+
+#just from git
+git rm --cached [fn]?
+
+#untrack .gitignore  files
+git rm --cached `git ls-files -i --exclude-from=.gitignore`
+#or
+git ls-files -i --exclude-from=.gitignore | xargs git rm --cache
+
+#untrack and del
+git rm log/\*.log
+git rm \*~S
+```
+
+## tags
+```sh
+# ls
+git tag
+#create
+git tag -a v2.0 -m 'my version 2.0'
+#tagger info, commit tag date, annottion msg, commit info
+git show v2.0
+#push a single/lots tag to remote
+git push origin v2.0
+git push origin --tags
+```
+
+## grep
+```sh
+# search for "variablename" in all java files
+git grep 'variableName' -- '\*.java'
+
+# search for a line that contains "arraylistname" and, "add" or "remove"
+git grep -e 'arrayListName' --and \( -e add -e remove \)
+```
+
 # other cmds
-
-        -git show "file"
+    git show "file"
 
 # problems
 ## contribute to open source repo
@@ -337,25 +466,28 @@ git push -f origin master
     git commit -m "Removed folder from repository"
     git push origin master
     
-# Git workflow in industry
-## Centralized Workflow
-    //uses a central repository to serve as the single point-of-entry for all changes to the project		
-    //clone central repo -> commit changes but store locally isolated -> push local master branch at breakpoint	
-    
-    //conflicts 
-        //top of repo is behind remote counterpart
-            //If one persons commits to the central repo, then anyone else who cloned before he pushed changes wont have the latested updates, hence they wont be able to push changes and will need to pull and integrate the remote changes with her local branch 
-                git pull --rebase origin master
-        //CONFLICT (content): Merge conflict in [some-file]
+# git workflow in industry
+## centralized workflow
+    uses a central repository to serve as the single point-of-entry for all changes to the project		
+    process: clone central repo -> commit changes but store locally isolated -> push local master branch at breakpoint	
+    conflicts 
+        since history is all focused on one branch, rebasing new commits on top of remote changes is a good idea
+            git pull --rebase origin master
+            //this rebases the local master branch ontop of the origin/master branch
+        if conflicts while rebasing
+            //conflict (content): merge conflict in [some-file]
             //find unmerged paths
                 git status
             //edit files then stage and rebase
                 git add [problematicFile]
-                git rebase
-                //If the rebase stops
+                git rebase --continue
+                //If the rebasing goes wrong can go back to start
                     git rebase --abort
-## Git feature branch workflow
-    //all feature development should take place in a dedicated branch instead of the master branch, allows to store changes serverside
+## git feature branch workflow
+    still uses one central repo, but features developed in their own branches
+    if each dev works on their own branch, this allows changes to be stored serverside
+    process: clone central repo -> create feature branch -> push feature branch as remote tracking branch -> when done create pull req to merge feature branch into the master/dev branch
+
     //start with master branch
         git checkout master
         git fetch origin
@@ -363,17 +495,17 @@ git push -f origin master
     //create branch
         git checkout -b [branchName]
     //after commits push feature branch to remote, -u: setup tracking branch, not can use "git push" to push new branch to central repo=
-        git push {}? origin [branchName]
+        git push -u origin [branchName]
     //make a pull request with git GUI (for code review)
-     //if accepted merge with master branch	
+        //if accepted merge with master branch	
         git checkout master
         git pull
         git pull origin [branchName]
         git push
         git merge BranchName //or id merge conflicts
-//Gitflow Workflow
-    //suited for projects that have a scheduled release cycle
-    //uses two branches to record the history of the project. The master branch stores the official release history, and the develop branch serves as an integration branch for features.
+## gitflow workflow
+    suited for projects that have a scheduled release cycle
+    uses two branches to record the history of the project. The master branch stores the official release history, and the develop branch serves as an integration branch for features.
 
     //create dev branch
         git branch develop
@@ -412,25 +544,12 @@ git push -f origin master
             git flow hotfix start hotfix_branch
             git flow hotfix finish hotfix_branch
     
-    //Forking Workflow
-        //gives every developer their own forked server-side repository
-        //generally similar to gitflow with the dev's forked repo acting as develop repo
-        //generally the developers forked repo is called origin and the official repo is called upstream
-        //dev forks official server-side repo (creating a server-side-copy) -> forked server-side copy is cloned locally -> git remote path for official repo addeded for local clone -> new local feature branch created -> branch pushed to forked repo 
-        // -> dev opens a pull request from the new branch to the official repo -> if approved the branch is mereged in the official repo
-        
-        //fork the official repo
-            //ssh into server -> use git clone to copy to target location for server-side-copy
-        //clone forked repo
-            git clone https://user@bitbucket.org/user/repo.git
-        //add remotes (forked remote is already added via clone)
-            git remote add upstream https://bitbucket.org/maintainer/repo
-            //if you want users to enter a password
-                git remote add upstream https://user@bitbucket.org/maintainer/repo.git
-        //git pull upstream master		
-            //pull changes made to the official repo	
-        //push branches to forked repo
-            git push origin feature-branch
+## forking workflow
+    gives every developer their own forked server-side repository
+    generally similar to gitflow with the dev's forked repo acting as develop repo
+    generally the developers forked repo is called origin and the official repo is called upstream
+    only proj lead/maintainer can authorise pull reqs
+    fork repo -> locally clone -> git remote path for official repo addeded for local clone -> new local feature branch created -> branch pushed to forked repo -> open a pull request from the forks new branch to the official repo -> if approved the branch is merged in the official repo
     
 
 rebasing

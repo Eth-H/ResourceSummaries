@@ -1,3 +1,21 @@
+# material art list
+    grapell
+        wrestle
+        judo
+    pactical/ against weapons
+        krav maga
+        russian systema
+    bare handed
+        traditional karate
+    ground
+        bjj
+    allround
+        boxing
+        kick boxing
+    non-aggression
+        akido
+
+
 # principles
     neutalise fights
         dont react to any kind of wordly provocation
@@ -13,6 +31,8 @@
         george foreman
     bjj
         raise gracie
+    muay thai
+        ali - samart
 
 # boxing
 ## guard types

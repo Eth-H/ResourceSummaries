@@ -414,3 +414,25 @@
     I am in main
     I am in func
 
+
+# c reverse str
+    void str_reverse(char *str_in)
+    {
+      char tmp;
+      size_t ii = 0;
+      size_t len = strlen(str_in); // `strlen()` is part of the c standard library
+                                   // NOTE: length returned by `strlen` DOESN'T include the
+                                   //       terminating NULL byte ('\0')
+      for (ii = 0; ii < len / 2; ii++) { // in C99 you can directly declare type of `ii` here
+        tmp = str_in[ii];
+        str_in[ii] = str_in[len - ii - 1]; // ii-th char from end
+        str_in[len - ii - 1] = tmp;
+      }
+    }
+# c change > 1 val without return by using pointers
+    void swapTwoNumbers(int *a, int *b)
+    {
+        int temp = *a;
+        *a = *b;
+        *b = temp;
+    }

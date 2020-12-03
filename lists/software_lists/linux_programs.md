@@ -45,6 +45,8 @@
     p7zip-full
     zip unzip gzip
     imagemagick-6.q16
+    poppler-utils
+        pdfunite, ...
     gnupg
     gnupg-agent
     pass

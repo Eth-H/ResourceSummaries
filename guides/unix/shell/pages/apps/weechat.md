@@ -1,17 +1,16 @@
 # setup
     sudo apt install weechat-curses
-    weechat
-    //get vim keybindings
-        /script install vimode.py
-        //if keybindings err run
-            /vimode bind_keys
-        //if using tmux/screen
-            tmux set-option escape-time 0 //script
-            set -sg escape-time 0 //.tmux.conf
-        //config
-            /fset weechat.bar.input.items -> s -> "mode_indicator+[input_prompt]+(away),[input_search], [input_paste],input_text,[vi_buffer]" 
-            /fset weechat.bar.status.items -> s -> "[time],[buffer_last_number],[buffer_plugin],buffer_number+:+buffer_name+(buffer_modes)+{buffer_nicklist_count}+buffer_zoom+buffer_filter,scroll,[lag],[hotlist],completion,cmd_completion"
-            /set plugins.var.python.vimode.search_vim on
+- get vim keybindings
+    /script install vimode.py
+    - if keybindings err run
+        /vimode bind_keys
+    - if using tmux/screen
+        tmux set-option escape-time 0 //script
+        set -sg escape-time 0 //.tmux.conf
+    - config
+        /fset weechat.bar.input.items -> s -> "mode_indicator+[input_prompt]+(away),[input_search], [input_paste],input_text,[vi_buffer]" 
+        /fset weechat.bar.status.items -> s -> "[time],[buffer_last_number],[buffer_plugin],buffer_number+:+buffer_name+(buffer_modes)+{buffer_nicklist_count}+buffer_zoom+buffer_filter,scroll,[lag],[hotlist],completion,cmd_completion"
+        /set plugins.var.python.vimode.search_vim on
 
 # terms
     server: irc server
@@ -19,51 +18,53 @@
     nickserv: serverside software pernament nick that identifies you
     each chat is a buffer
     each split within a buffer is a window
+
 # guide, setup freenode server
-    //tmp add server and conn, prob disabled
-        /connect chat.freenode.net
-    //perm add server
-        /server add freenode chat.freenode.net
-        /connect freenode
-    //server specific setup
-        /set irc.server.freenode.nicks 
-        /set irc.server.freenode.username "My user name"
-        /set irc.server.freenode.realname "My real name"
-        //autojoin server or channel
-            /set irc.server.freenode.autoconnect on
-            /set irc.server.freenode.autojoin "#channel1,#channel2"
-        //ssl, if server supports
-            /set irc.server.freenode.addresses "chat.freenode.net/6697"
-            /set irc.server.freenode.ssl on
-        //sasl identification, freenode, some servers neccessary
-            //register nickname with 
-                /msg NickServ REGISTER <password> <email>
-                //check email and run register confimation cmd
-            //mention account on next login, if not set in config
-                /connect chat.freenode.net 6667 <nick>:<password>
-            //set registered sasl acc for a server
-                /set irc.server.freenode.sasl_mechanism PLAIN
-                /set irc.server.freenode.sasl_username <nickname>
-                /set irc.server.freenode.sasl_password <password>
-                /save
+- tmp add server and conn, prob disabled
+    /connect chat.freenode.net
+- perm add server
+    /server add freenode chat.freenode.net
+    /connect freenode
+- server specific setup
+    /set irc.server.freenode.nicks 
+    /set irc.server.freenode.username "My user name"
+    /set irc.server.freenode.realname "My real name"
+    - autojoin server or channel
+        /set irc.server.freenode.autoconnect on
+        /set irc.server.freenode.autojoin "#channel1,#channel2"
+    - ssl, if server supports
+        /set irc.server.freenode.addresses "chat.freenode.net/6697"
+        /set irc.server.freenode.ssl on
+    - sasl identification, freenode, some servers neccessary
+        - register nickname with 
+            /msg NickServ REGISTER <password> <email>
+            //check email and run register confimation cmd
+        - mention account on next login, if not set in config
+            /connect chat.freenode.net 6667 <nick>:<password>
+        - set registered sasl acc for a server
+            /set irc.server.freenode.sasl_mechanism PLAIN
+            /set irc.server.freenode.sasl_username <nickname>
+            /set irc.server.freenode.sasl_password <password>
+            /save
 # cmds
     /nick nickname
     /join #ubuntu,#kde
-    //mv open channel
+    - mv open channel
         alt arrow
-    //pm in channel
+    - pm in channel
         nickname: msg
-    //pm direct
+    - pm direct
         /query nickname
         /close
 
     /set config.option.value
     /fset weechat.*
+
 # keys
-    //scroll bar
-        F9 F10
-    //scroll users
-        F11 F12
+- scroll bar
+    F9 F10
+- scroll users
+    F11 F12
 
 # vi mode cmds
     all /cmds
@@ -81,8 +82,6 @@
     :nmap, :nmap {lhs} {rhs}
         <Up>, <Down>, <Left>, <Right>, <C-...> and <M-...>
     :nunmap {lhs} //rm mapping
-
-
 
 
 

@@ -1,64 +1,76 @@
-# virtualenv
-	mkdir ./venv
-	//--python=/usr/bin/python3.6 --system-site-packages: inherit system packages
-        virtualenv ./venv {}...
-	cd ./venv
-	source bin/activate
-	deactivate
-	//Export list of dependancies 
-	pip freeze > requirements.txt
 # pip
-//install, unlock, lock
-pip {}
-pip -U //upgrade all pkgs
-pip install --upgrade pkg //upgrade a pkgs
-pip install --user --upgrade pkg //upgrade a pkg installed for a specifc user
-pip list --outdated
+- install, unlock, lock
+
+    pip {}
+    pip -U //upgrade all pkgs
+    pip install --upgrade pkg //upgrade a pkgs
+    pip install --user --upgrade pkg //upgrade a pkg installed for a specifc user
+    pip install -r requirements.txt
+    pip list --outdated
+
+# virtualenv
+container for python pkgs
+install python pkgs locally within a project
+use in conjunction with pip
+	mkdir venv
+    #specific py version
+    virtualenv ./venv --python=[pathToPythonExe]
+    #inherit system packages
+    virtualenv ./venv --system-site-packages
+
+	source venv/bin/activate
+	deactivate
 
 # pipenv
 ## install
+- will install to ~/.local/bin, may need to add this dir to path
+
     pip install --user pipenv
-    //temporarily add to path
-        export PATH="$PATH:/home/emera/.local/bin"
-    //add to path pernemantly
-        cd /usr/bin
-        sudo ln -s ~/.local/bin/pipenv
+
 ## use
-    //setup a project/VE
-        //Create pipfile and VE
-            //--three: system py 3, --two: system py 2, --python [interpretorPath or specificVersion]:         
-                pipenv {}
-        //--run [commmandName]: run command in VE --shell: spawn shell in VE, generally use to initialise VE
-            pipenv {}
-        //EG initilise VE and chose python version
-            pipenv --python 3.6 --shell
+- create pipfile and VE
+
+    pipenv --python [2|3]
+    pipenv --python [pathToPythonExe]
+    #can also use any other pipenv cmd to initialise
+
+- run command in VE 
+    pipenv --run [cmd]
+- spawn shell in VE
+    pipenv --shell [cmd]
+
+    - exit virtual environment (need to close current shell session)
+
+        exit
+## install stuff
+    pipenv install [pkg]
+- install a requirements .txt
+    pipenv install -r requirements.txt
+- install dev and default pipfile packages            
+    pipenv install -d requirements.txt
+- use system pip
+    pipenv install --system
+
+## uninstall
+
+    pipenv uninstall [pkg]
+    pipenv uninstall --all
+    pipenv uninstall --all-dev
         
-    //workflow
-        cd myproject
-        //       
-            //none: If pip file exists install from it, converts requirements.txt if it exists
-             //-r [path/to/requirements.txt]: Specify path, --dev: Install dev and default Pipfile packages            
-            //[packageName]: Install package into local VE, create Pipfile if it doesnt exist
-             //--system: Use system pip, accepts intialise VE params
-            pipenv install {} {}
-        //
-            //pipenv install parameters, --all:, --all-dev:
-            pipenv uninstall {}
+- upgrade packages
+    - all pkg
+    pipenv update {}
+    - specifc pkg
+    pipenv update --outdated [pkgName]
+- dependancy graph
+    pipenv graph
 
-        
-        //Exit virtual environment (need to close current shell session)
-            exit
-    //Upgrade packages
-        //none: all pkg, --outdated:, [pkgName]:,
-        pipenv update {}
+- locate
+    //--venv: VE, --py: interpretor, --where: project
+    pipenv {}
 
-    //Dependancy graph
-        pipenv graph
-
-    //Locate
-        //--venv: VE, --py: interpretor, --where: project
-        pipenv {}
-    //Instal package from git
-        [vcs_type]+[scheme]://[location]/[user_or_organization]/[repository]@[branch_or_tag]#[package_name]
-    //warnings
-        //even if a packagefails to install, it may be added to pipfile and cause errors
+## other
+- Instal package from git
+    [vcs_type]+[scheme]://[location]/[user_or_organization]/[repository]@[branch_or_tag]#[package_name]
+- warnings
+    - even if a packagefails to install, it may be added to pipfile and cause errors

@@ -1,11 +1,13 @@
-//setup
-    //neomutt wizard quick setup
-        sudo apt install neomutt isync msmtp
-        git clone https://github.com/LukeSmithxyz/mutt-wizard
-        cd mutt-wizard
-        sudo make install
+# setup
 
-//mutt wizard commands
+    sudo apt install neomutt isync msmtp
+    git clone https://github.com/LukeSmithxyz/mutt-wizard
+    cd mutt-wizard
+    sudo make install
+
+# mutt wizard cmds
+mutt wizard quick setup
+
     mw add -- add a new email account
     mw ls -- list existing accounts
     mw pass -- revise an account's password

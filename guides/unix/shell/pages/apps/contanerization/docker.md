@@ -1,6 +1,11 @@
 //Start daemon
     service docker start
 # setup
+    //install
+        sudo apt install docker-ce
+        sudo usermod -aG docker $USER
+        sudo systemctl enable --now docker
+
     //login to dockerhub
         docker login --username $dockerId
 

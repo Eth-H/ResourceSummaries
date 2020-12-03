@@ -1,4 +1,5 @@
-//note: throughout use can redirect (>) or pipe (|) outputs rather than using -o
+note: throughout use can redirect (>) or pipe (|) outputs rather than using -o
+
 # setup	
     sudo apt-get install gnupg
 # manage keys
@@ -8,50 +9,63 @@
         gpg --gen-key //older gpg, 
         gpg --full-generate-key //get all options with a newer gpg (instead of defaults)
 ## list keys
-    //--list-keys: list keys, --list-public-key: list public keys, --list-secret-keys: list private keys
-        gpg {} [specificKeyIDorName]?
+- list keys, list public keys, list private keys
+    gpg --list-keys  [keyID|keyUID]?
+    gpg --list-public-key  [keyID|keyUID]?
+    gpg --list-secret-keys  [keyID|keyUID]?
+- list with signitures
+    gpg --list-sigs  [keyID|keyUID]?
+
 ## export keys
 give public key to someone else
-    //export public key (raw data is converted to armoured ASCII) for others
-        gpg --armor --export Tutonics > publicKey.asc
+- export public key (raw data is converted to armoured ASCII) for others
+    gpg --armor --export Tutonics > publicKey.asc
 ## import a friends pub key 
     gpg --import friendsPublicKey.asc
-    //validate imported key
-        //enter gpg cli
-            gpg --edit-key [keyName]
-        //display finger print
-            fpr
-        //once verified sign using sign
-            sign
-        //double check its signed
-            check
-        // optionally can trust a signiture if you know the owner, enter 5 (I trust ultimately)
-            trust
-        //exit cli
-            q, CTRL + d
+    
+- validate imported key by edit
+    - enter gpg cli
+        gpg --edit-key [keyName]
+    - display finger print
+        fpr
+    - once verified sign using sign
+        sign
+    - double check its signed
+        check
+    - optionally can trust a signiture if you know the owner, enter 5 (I trust ultimately)
+        trust
+    - exit cli
+        q, CTRL + d
+
 ## move your private key	
-    //export private key
-        gpg --export-secret-keys [key-id] > privateKey
-    //import private key on other machine	
-        gpg --import privateKey	
-        //use a keyserver
-            //store key on KS
-                gpg --keyserver [KSname] --send-keys [key-id]
-            //recevie key
-                gpg --keyserver [KSname] --recv-keys [key-id]
+- export private key
+    gpg --export-secret-keys [key-id] > privateKey
+- import private key on other machine	
+    gpg --import privateKey	
+    
+## use a keyserver
+- store key on KS
+    gpg --keyserver [KSname] --send-keys [key-id]
+- recevie key
+    gpg --keyserver [KSname] --recv-keys [key-id]
+- search for key
+    gpg --keyserver [KSname] --search-keys [key-id]
+
 ## revocate key		
-    //Create revocation cert using private key
-        gpg --output [revocationCertName].asc --gen-revoke [key-id]
-    //Use revocation cert
-        gpg --import [revocationCertName].asc
-        gpg --keyserver [KSname] --send-keys [key-id]
+- create revocation cert using private key
+    gpg --output [revocationCertName].asc --gen-revoke [key-id]
+- use revocation cert
+    gpg --import [revocationCertName].asc
+    gpg --keyserver [KSname] --send-keys [key-id]
 
 # asymmetric encryption
-    //encrypt with pub key, decrypt with private key
-    //encrypt file
-        gpg -o [encryptedFileName].gpg -e -r [key-id] [filename]	
-    //decrypt, the passphrase for the private key is needed
-        gpg -o [decryptedFileName] -d [encryptedFileName].gpg
+encrypt with pub key, decrypt with private key
+- encrypt file
+    gpg -o [encryptedFileName].gpg -e -r [key-id] [filename]	
+- encrypt for email, sign/encrypt/armour
+    gpg -se -a -r [key-id] [filename] > [filename].asc
+- decrypt, the passphrase for the private key is needed
+    gpg -o [decryptedFileName] -d [encryptedFileName].gpg
         
 ## Digital signitures (to identify tampering)
 ### desc
@@ -111,6 +125,32 @@ give public key to someone else
 ## links
 https://linuxconfig.org/how-to-verify-an-authenticity-of-downloaded-debian-iso-images
 https://www.debian.org/CD/verify
-https://keyring.debian.org/
+
 https://superuser.com/questions/622541/what-does-dd-conv-sync-noerror-do
 https://medium.com/@tbeach/use-unix-dd-command-to-os-bootable-on-usb-drive-6671945d95a6
+https://gist.github.com/F21/b0e8c62c49dfab267ff1d0c6af39ab84
+https://blog.tinned-software.net/create-gnupg-key-with-sub-keys-to-sign-encrypt-authenticate/
+https://www.g-loaded.eu/2010/11/01/change-expiration-date-gpg-key/
+https://security.stackexchange.com/questions/29851/how-many-openpgp-keys-should-i-make
+https://riseup.net/en/gpg-best-practices
+
+signing
+    https://carouth.com/articles/signing-pgp-keys/
+    https://gist.github.com/F21/b0e8c62c49dfab267ff1d0c6af39ab84
+    https://www.cryptnet.net/fdp/crypto/keysigning_party/en/keysigning_party.html
+    https://wiki.debian.org/caff
+
+find keys
+    http://biglumber.com
+
+check validity
+    http://openpgp.quelltextlich.at/slip.html
+keyservers
+    keys.openpgp.org
+    keys.gnupg.net
+    pgp.mit.edu
+    keyserver.ubuntu.com
+    keyring.debian.org
+
+https://www.insana.net
+http://biglumber.com/x/web?qs=Giuseppe+Insana
